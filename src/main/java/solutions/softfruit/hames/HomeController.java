@@ -6,6 +6,7 @@ import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +20,8 @@ public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
+	@Autowired
+	private CustomerDao customerDao;
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
@@ -32,6 +35,19 @@ public class HomeController {
 		String formattedDate = dateFormat.format(date);
 		
 		model.addAttribute("serverTime", formattedDate );
+		
+		return "home";
+	}
+	
+	@RequestMapping(value="/createCustomer", method=RequestMethod.GET)
+	public String createCustomer(){
+		Customer customer = new Customer();
+		customer.setId(1);
+		customer.setName("Afil Ansari");
+		customer.setPrice(2.0);
+		
+		customerDao.insert(customer);
+		
 		
 		return "home";
 	}
