@@ -21,7 +21,7 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<context:component-scan base-package="solutions.softfruit.hames" />
+	<context:component-scan base-package="solutions.softfruit.hames,hames" />
 	
 	<beans:import resource="database-context.xml" />
 	

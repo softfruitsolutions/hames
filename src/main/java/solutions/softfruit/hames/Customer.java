@@ -1,13 +1,11 @@
 package solutions.softfruit.hames;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
 @Entity
-@Table(name="customer")
+@Table(name="Customer")
 public class Customer {
 	
 	@Id

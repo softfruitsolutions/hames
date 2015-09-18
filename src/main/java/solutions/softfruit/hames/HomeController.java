@@ -1,5 +1,7 @@
 package solutions.softfruit.hames;
 
+import hames.dao.CustomerDao;
+
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -42,7 +44,7 @@ public class HomeController {
 	@RequestMapping(value="/createCustomer", method=RequestMethod.GET)
 	public String createCustomer(){
 		Customer customer = new Customer();
-		customer.setId(1);
+		customer.setId(6);
 		customer.setName("Afil Ansari");
 		customer.setPrice(2.0);
 		
