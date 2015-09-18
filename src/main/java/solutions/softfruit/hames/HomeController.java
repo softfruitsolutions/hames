@@ -1,6 +1,6 @@
 package solutions.softfruit.hames;
 
-import hames.dao.CustomerDao;
+import hames.service.CustomerService;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -23,7 +23,7 @@ public class HomeController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	@Autowired
-	private CustomerDao customerDao;
+	private CustomerService customerService;
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
@@ -38,20 +38,13 @@ public class HomeController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "home";
+		return "index";
 	}
 	
 	@RequestMapping(value="/createCustomer", method=RequestMethod.GET)
 	public String createCustomer(){
-		Customer customer = new Customer();
-		customer.setId(6);
-		customer.setName("Afil Ansari");
-		customer.setPrice(2.0);
 		
-		customerDao.insert(customer);
-		
-		
-		return "home";
+		return "party.customer";
 	}
 	
 }

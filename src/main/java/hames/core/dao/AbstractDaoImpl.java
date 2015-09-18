@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
+@Transactional
 public class AbstractDaoImpl implements AbstractDao {
 
 	@Autowired
@@ -21,7 +22,6 @@ public class AbstractDaoImpl implements AbstractDao {
 		return getSession().getTransaction();
 	}
 	
-	@Transactional
 	public <T> void insert(T t){
 		getSession().beginTransaction();
 		try{
@@ -29,7 +29,6 @@ public class AbstractDaoImpl implements AbstractDao {
 			getTransaction().commit();
 		}catch(Exception ex){
 			getTransaction().rollback();
-			System.err.println(ex);
 		}finally{
 			getSession().close();
 		}
