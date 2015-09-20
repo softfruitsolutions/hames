@@ -8,6 +8,12 @@
 				<span class="text">Dashboard</span> <span class="menu-hover"></span>
 			</a>
 		</li>
+		<li class='<c:if test="${menu=='order'}">active</c:if>'>
+			<a href="orderview"> 
+				<span class="menu-icon"> <i class="fa fa-inbox fa-lg"></i></span>
+				<span class="text">Order</span> <span class="menu-hover"></span>
+			</a>
+		</li>
 		<li class='<c:if test="${menu=='customer'}">active</c:if>'>
 			<a href="customerview"> 
 				<span class="menu-icon"> <i class="fa fa-user fa-lg"></i></span>

@@ -1,5 +1,6 @@
 package hames.view;
 
+import hames.core.bean.ModelUtil;
 import hames.core.view.AbstractView;
 import hames.service.CustomerService;
 
@@ -28,10 +29,13 @@ public class CustomerView extends AbstractView {
 	}
 	
 	@RequestMapping(value = "/customerview", method = RequestMethod.GET)
-	public String home(Model model) {
+	@Override
+	public String view(Model model) {
+		ModelUtil.removeMessages();
 		model.addAttribute("menu", "customer");
-		return getTitleDefinition();
+		ModelUtil.addSuccess("Successfully Messages bundled loaded",model);
+		ModelUtil.addMessages(model);
+		return super.view(model);
 	}
-	
 	
 }

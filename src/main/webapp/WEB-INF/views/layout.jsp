@@ -5,7 +5,7 @@
   
 <head>
     <meta charset="utf-8">
-    <title>Hames | Softfruit Solutions</title>
+    <title><tiles:insertAttribute name="title" /></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -30,7 +30,11 @@
 	<link href="resources/endless/css/endless-skin.css" rel="stylesheet">
 	
   </head>
-	
+	<style type="text/css">
+		.form-group{
+			margin-bottom:5px !important;
+		}
+	</style>
 	
   <body class="">
 	<div id="wrapper" class="preload">
@@ -283,6 +287,10 @@
 					 <li class="active">Dashboard</li>	 
 				</ul>
 			</div><!-- /breadcrumb-->
+			<br />
+			<div class="col-xs-12">
+				<jsp:include page="/WEB-INF/views/alertMessages.jsp" />
+			</div>
 			<tiles:insertAttribute name="body" />
 		</div><!-- /main-container -->
 		<!-- Footer
