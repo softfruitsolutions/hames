@@ -1,4 +1,4 @@
-package solutions.softfruit.hames;
+package hames.view;
 
 import hames.service.CustomerService;
 
@@ -39,12 +39,6 @@ public class HomeController {
 		model.addAttribute("serverTime", formattedDate );
 		
 		return "index";
-	}
-	
-	@RequestMapping(value="/createCustomer", method=RequestMethod.GET)
-	public String createCustomer(){
-		
-		return "party.customer";
 	}
 	
 }

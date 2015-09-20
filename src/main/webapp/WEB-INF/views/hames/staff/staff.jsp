@@ -1,6 +1,6 @@
 <div class="col-md-12">
 	<h3 class="headline m-top-md">
-		Customer
+		Staff
 		<span class="line"></span>
 	</h3>
 	<ul class="tab-bar grey-tab">
@@ -21,6 +21,7 @@
 			</a>
 		</li>
 	</ul>
+	
 	<div class="row">
 		<div class="col-md-12 col-sm-12">
 			<div class="tab-content">
@@ -64,6 +65,28 @@
 										</div>
 									</div>
 								</div>
+								<hr />
+								<div class="row">
+									<div class="col-md-3">
+										<div class="form-group">
+											<label class="control-label">Role</label>
+											<input class="form-control input-sm" type="text" placeholder="No Role Configured" disabled>
+										</div>
+									</div>
+									<div class="col-md-3">
+										<div class="form-group">
+											<label class="control-label">State/City</label>
+											<input class="form-control input-sm" type="text" placeholder="State/City">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label class="control-label">Country</label>
+											<input class="form-control input-sm" type="text" placeholder="Country">
+										</div>
+									</div>
+								</div>
+								<hr />
 								<div class="row">
 									<div class="col-md-3">
 										<div class="form-group">
@@ -74,13 +97,19 @@
 									<div class="col-md-3">
 										<div class="form-group">
 											<label class="control-label">Mobile No</label>
-											<input class="form-control input-sm" type="text" placeholder="Mobile No">
+											<div class="input-group">
+												<span class="input-group-addon"><i class="fa fa-mobile-phone fa-lg"></i></span>
+												<input class="form-control input-sm" type="text" placeholder="Mobile No" maxlength="10">
+											</div>
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label class="control-label">E-mail ID</label>
-											<input class="form-control input-sm" type="text" placeholder="Email Address">
+											<div class="input-group">
+												<span class="input-group-addon">@</span>
+												<input class="form-control input-sm" type="text" placeholder="Email Address">
+											</div>
 										</div>
 									</div>
 								</div>
@@ -102,13 +131,11 @@
 									<jsp:include page="/WEB-INF/views/hames/audit.jsp" />
 								</div>
 							</form>
+							</div>
 						</div>
 					</div>	
 				</div><!-- /tab2 -->
 			</div><!-- /tab-content -->
 		</div><!-- /.col -->
 	</div><!-- /.row -->			
-	
 </div>
-
-	

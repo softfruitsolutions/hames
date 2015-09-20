@@ -283,12 +283,6 @@
 					 <li class="active">Dashboard</li>	 
 				</ul>
 			</div><!-- /breadcrumb-->
-			<div class="main-header clearfix">
-				<div class="page-title">
-					<h3 class="no-margin">Dashboard</h3>
-					<span>Welcome back Mr.John Doe</span>
-				</div><!-- /page-title -->
-			</div><!-- /main-header -->
 			<tiles:insertAttribute name="body" />
 		</div><!-- /main-container -->
 		<!-- Footer

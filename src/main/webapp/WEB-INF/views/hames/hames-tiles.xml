@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN" "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
   
 <tiles-definitions> 
 	<definition name="index" extends="base.definition">  
         <put-attribute name="title" value="Hames - Softfruit" />  
         <put-attribute name="body" value="/WEB-INF/views/hames/index.jsp" />  
     </definition>  
- 	<definition name="party.customer" extends="base.definition">  
+ 	<definition name="customer" extends="base.definition">  
         <put-attribute name="title" value="Customer | Hames - Softfruit" />  
         <put-attribute name="body" value="/WEB-INF/views/hames/party/customer.jsp" />  
     </definition>  
+    <definition name="staff" extends="base.definition">  
+        <put-attribute name="title" value="Staff | Hames - Softfruit" />  
+        <put-attribute name="body" value="/WEB-INF/views/hames/staff/staff.jsp" />  
+    </definition>
+    <definition name="staff.role" extends="base.definition">  
+        <put-attribute name="title" value="Staff Role| Hames - Softfruit" />  
+        <put-attribute name="body" value="/WEB-INF/views/hames/staff/staffRole.jsp" />  
+    </definition>
 </tiles-definitions>  

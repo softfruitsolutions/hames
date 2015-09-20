@@ -38,7 +38,7 @@
         </beans:property>  
     </beans:bean>  
 	
-	<context:component-scan base-package="solutions.softfruit.hames,hames" />
+	<context:component-scan base-package="hames" />
 	
 	<beans:import resource="database-context.xml" />
 	
