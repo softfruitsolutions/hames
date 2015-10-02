@@ -24,18 +24,17 @@ public class CustomerView extends AbstractView {
 	private CustomerService customerService;
 	
 	@Override
-	public String getTitleDefinition() {
+	public String getTitleDefinition(Model model) {
 		return "customer";
 	}
 	
 	@RequestMapping(value = "/customerview", method = RequestMethod.GET)
-	@Override
 	public String view(Model model) {
 		ModelUtil.removeMessages();
 		model.addAttribute("menu", "customer");
-		ModelUtil.addSuccess("Successfully Messages bundled loaded",model);
+		ModelUtil.addSuccess("Successfully Messages bundled loaded");
 		ModelUtil.addMessages(model);
-		return super.view(model);
+		return getTitleDefinition(model);
 	}
 	
 }

@@ -22,10 +22,10 @@ public class AbstractDaoImpl implements AbstractDao {
 		return getSession().getTransaction();
 	}
 	
-	public <T> void insert(T t){
+	public <T> void saveOrUpdate(T t){
 		getSession().beginTransaction();
 		try{
-			getSession().save(t);
+			getSession().saveOrUpdate(t);
 			getTransaction().commit();
 		}catch(Exception ex){
 			getTransaction().rollback();

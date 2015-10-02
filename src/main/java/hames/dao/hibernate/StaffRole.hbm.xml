@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC  "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="hames.bean" default-access="field">
+
+    <class name="StaffRole" table="staff_role">
+        <id name="roleId" column="id">
+            <generator class="native"/>
+        </id>
+
+        <property name="roleName" column="role_name" />
+        <property name="roleDescription" column="role_description" />
+        
+        <property name="dateCreated" column="date_created" />
+        <property name="dateModified" column="date_modified" />
+        
+        <property name="staffCreated" column="staff_created" />
+        <property name="staffModified" column="staff_modified" />
+        
+    </class>
+
+</hibernate-mapping>

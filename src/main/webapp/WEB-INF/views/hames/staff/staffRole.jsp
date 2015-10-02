@@ -1,3 +1,11 @@
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+
+<script type="text/javascript">
+	function save(){
+		$('#staffRole').serialize();
+		$('#staffRole').submit();
+	}
+</script>
 <div class="col-md-12">
 	<h3 class="headline m-top-md">
 		Staff Role
@@ -8,29 +16,32 @@
 		<div class="row">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					Role
+					<a class="btn btn-success" onclick="save()"><i class="fa fa-save"></i> Save</a>
+					<a class="btn btn-danger"><i class="fa fa-trash-o"></i> Delete</a>
 				</div>
 				<div class="panel-body">
-					<div class="row">
-						<div class="col-md-4">
-							<div class="form-group">
-								<label class="control-label">Role ID</label>
-								<input class="form-control input-sm" type="text" placeholder="Role ID" disabled>
+					<form:form modelAttribute="staffRole" method="POST" action="staffrolesave">
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group">
+									<form:label path="roleId" cssClass="control-label">Role ID</form:label>
+									<form:input path="roleId" cssClass="form-control input-sm" placeholder="Role ID" />								 	
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<form:label path="roleName" cssClass="control-label">Role Name</form:label>
+									<form:input path="roleName" cssClass="form-control input-sm" placeholder="Role Name"/>								 	
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<form:label path="roleDescription" cssClass="control-label">Role Description</form:label>
+									<form:textarea path="roleDescription" cssClass="form-control input-sm" placeholder="Role Description"/>								 	
+								</div>
 							</div>
 						</div>
-						<div class="col-md-4">
-							<div class="form-group">
-								<label class="control-label">Role Name</label>
-								<input class="form-control input-sm" type="text" placeholder="Role Name">
-							</div>
-						</div>
-						<div class="col-md-4">
-							<div class="form-group">
-								<label class="control-label">Role Description</label>
-								<textarea class="form-control input-sm" placeholder="Role Description"></textarea>
-							</div>
-						</div>
-					</div>
+					</form:form>
 				</div>
 			</div>
 			

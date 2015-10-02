@@ -1,8 +1,8 @@
 package hames.bean;
 
-import hames.core.bean.Audit;
+import hames.core.bean.BaseBean;
 
-public class StaffRole extends Audit {
+public class StaffRole extends BaseBean {
 
 	private Integer roleId;
 	private String roleName;
@@ -27,6 +27,10 @@ public class StaffRole extends Audit {
 		this.roleDescription = roleDescription;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "StaffRole [roleId=" + roleId + ", roleName=" + roleName
+				+ ", roleDescription=" + roleDescription + "]";
+	}
 	
 }

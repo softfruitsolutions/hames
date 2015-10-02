@@ -22,11 +22,16 @@
 	  <!-- Hibernate Session Factory -->
 	  <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 	    <property name="dataSource" ref="dataSource"/>
-	    <property name="packagesToScan">
+	    <property name="mappingLocations">
+            <list>
+                <value>classpath:hames/dao/hibernate/*.hbm.xml</value>
+            </list>
+        </property>
+	    <!-- <property name="packagesToScan">
 	      <array>
 	        <value>solutions.softfruit.hames</value>
 	      </array>
-	    </property>
+	    </property> -->
 	    <property name="hibernateProperties">
             <props>
                 <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
