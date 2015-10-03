@@ -5,10 +5,10 @@ import hames.core.bean.ModelUtil;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-@Component
+@Controller
 public class HamesInterceptorAdapter extends HandlerInterceptorAdapter{
 
 	@Override

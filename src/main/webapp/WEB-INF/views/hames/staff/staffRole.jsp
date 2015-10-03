@@ -6,6 +6,10 @@
 		$('#staffRole').serialize();
 		$('#staffRole').submit();
 	}
+	
+	function view(id){
+		window.location.href = "staffroleview?id="+id;
+	}
 </script>
 <div class="col-md-12">
 	<h3 class="headline m-top-md">
@@ -17,7 +21,16 @@
 		<div class="row">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<a class="btn btn-success" onclick="save()"><i class="fa fa-save"></i> Save</a>
+					<a class="btn btn-info" href="staffroleview"><i class="fa fa-asterisk"></i> New</a>
+					<a class="btn btn-success" onclick="save()">
+						<i class="fa fa-save"></i>
+						<c:if test="${staffRole.roleId == null }" >
+							Save
+						</c:if>
+						<c:if test="${staffRole.roleId > 0 }" >
+							Update
+						</c:if>
+					</a>
 					<a class="btn btn-danger"><i class="fa fa-trash-o"></i> Delete</a>
 				</div>
 				<div class="panel-body">
@@ -52,7 +65,7 @@
 					Available Roles
 				</div>
 				<div class="panel-body">
-					<table class="table table-striped" id="responsiveTable">
+					<table class="table table-striped table-hover" id="responsiveTable">
 						<thead>
 							<tr>
 								<th>Role ID</th>
@@ -62,9 +75,9 @@
 						</thead>
 						<tbody>
 							<c:forEach items="${staffRoles}" var="role">
-								<tr>
+								<tr onclick="view(${role.roleId})">
 									<td>${role.roleId }</td>
-									<td>${role.roleName }</td>
+									<td><a href="<c:url value='staffroleview?id=${role.roleId }'>${role.roleName }</c:url>">${role.roleName }</a></td>
 									<td>${role.roleDescription }</td>
 								</tr>
 							</c:forEach>
@@ -72,12 +85,6 @@
 					</table>
 				</div>
 			</div>
-		</div>
-	</div>
-	
-	<div class="col-md-12">
-		<div class="row">
-			
 		</div>
 	</div>
 </div>
