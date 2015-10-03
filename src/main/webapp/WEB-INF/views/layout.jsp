@@ -295,7 +295,7 @@
 		</div><!-- /main-container -->
 		<!-- Footer
 		================================================== -->
-		<footer>
+		<!-- <footer>
 			<div class="row">
 				<div class="col-sm-6">
 					<span class="footer-brand">
@@ -304,9 +304,9 @@
 					<p class="no-margin">
 						&copy; 2015 <strong>Softfruit Solutions</strong>. ALL Rights Reserved. 
 					</p>
-				</div><!-- /.col -->
-			</div><!-- /.row-->
-		</footer>
+				</div>/.col
+			</div>/.row
+		</footer> -->
 		
 	<a href="#" id="scroll-to-top" class="hidden-print"><i class="fa fa-chevron-up"></i></a>
 	

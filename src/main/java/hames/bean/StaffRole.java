@@ -4,14 +4,15 @@ import hames.core.bean.BaseBean;
 
 public class StaffRole extends BaseBean {
 
-	private Integer roleId;
+	private Long roleId;
 	private String roleName;
 	private String roleDescription;
 	
-	public Integer getRoleId() {
+	
+	public Long getRoleId() {
 		return roleId;
 	}
-	public void setRoleId(Integer roleId) {
+	public void setRoleId(Long roleId) {
 		this.roleId = roleId;
 	}
 	public String getRoleName() {

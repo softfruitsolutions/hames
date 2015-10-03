@@ -1,5 +1,7 @@
 package hames.core.service;
 
+import java.util.List;
+
 import hames.core.bean.ModelUtil;
 import hames.core.dao.AbstractDaoImpl;
 
@@ -21,8 +23,7 @@ public abstract class AbstractServiceImpl extends AbstractDaoImpl implements Abs
 
 	@Override
 	public <T> void update(T t) {
-		// TODO Auto-generated method stub
-		
+		saveOrUpdate(t);
 	}
 
 	@Override
@@ -36,5 +37,15 @@ public abstract class AbstractServiceImpl extends AbstractDaoImpl implements Abs
 				ModelUtil.addError(oe.getDefaultMessage());
 			}
 		}
+	}
+	
+	@Override
+	public <T> List<T> findAll() {
+		return super.findAll(getEntityClass());
+	}
+	
+	@Override
+	public <T> T findOne(Long id) {
+		return super.findOne(getEntityClass(), id);
 	}
 }

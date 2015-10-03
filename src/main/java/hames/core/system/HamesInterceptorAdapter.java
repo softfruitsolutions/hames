@@ -1,4 +1,4 @@
-package hames.core.view;
+package hames.core.system;
 
 import hames.core.bean.ModelUtil;
 
@@ -6,17 +6,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-public abstract class AbstractView extends HandlerInterceptorAdapter {
-
-	public abstract String getTitleDefinition(Model model);
-	
-	public void activeMenu(Model model,String menuName){
-		model.addAttribute("menu", menuName);
-	}
+@Component
+public class HamesInterceptorAdapter extends HandlerInterceptorAdapter{
 
 	@Override
 	public boolean preHandle(HttpServletRequest request,
