@@ -31,7 +31,6 @@
 							Update
 						</c:if>
 					</a>
-					<a class="btn btn-danger"><i class="fa fa-trash-o"></i> Delete</a>
 				</div>
 				<div class="panel-body">
 					<form:form modelAttribute="staffRole" method="POST" action="staffrolesave">

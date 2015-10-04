@@ -2,6 +2,7 @@ package hames.core.dao;
 
 import java.util.List;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -31,6 +32,7 @@ public class AbstractDaoImpl implements AbstractDao {
 			getTransaction().commit();
 		}catch(Exception ex){
 			getTransaction().rollback();
+			throw new HibernateException(ex);
 		}finally{
 			getSession().close();
 		}

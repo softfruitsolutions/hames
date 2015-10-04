@@ -3,15 +3,15 @@
 
 <script type="text/javascript">
 	function save(){
-		$('#staff').serialize();
-		$('#staff').submit();
+		$('#customer').serialize();
+		$('#customer').submit();
 	}
 	
 	function view(id){
 		if(id == null){
-			window.location.href = "staffview";
+			window.location.href = "customerview";
 		}else{
-			window.location.href = "staffview?id="+id;	
+			window.location.href = "customerview?id="+id;	
 		}
 		
 	}
@@ -26,12 +26,12 @@
 		<div class="col-md-12 col-sm-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<a class="btn btn-info" href="staffview"><i class="fa fa-asterisk"></i> New</a>
+					<a class="btn btn-info" href="customerview"><i class="fa fa-asterisk"></i> New</a>
 					<a class="btn btn-success" onclick="save()"><i class="fa fa-save"></i> Save</a>
 <!-- 					<a class="btn btn-danger"><i class="fa fa-trash-o"></i> Delete</a>
  -->				</div>
 				<div class="panel-body">
-					<form:form modelAttribute="customer" method="POST" action="staffsave">
+					<form:form modelAttribute="customer" method="POST" action="customersave">
 						<div class="row">
 							<div class="col-md-4">
 								<div class="form-group">

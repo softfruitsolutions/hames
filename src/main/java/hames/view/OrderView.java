@@ -20,7 +20,7 @@ public class OrderView extends AbstractView{
 	public String view(Model model){
 		ModelUtil.removeMessages();
 		model.addAttribute("menu", "order");
-		return getTitleDefinition();
+		return getTitleDefinition(model);
 	}
 
 }

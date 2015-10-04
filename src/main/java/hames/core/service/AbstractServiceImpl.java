@@ -5,6 +5,7 @@ import java.util.List;
 import hames.core.bean.ModelUtil;
 import hames.core.dao.AbstractDaoImpl;
 
+import org.hibernate.HibernateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,12 @@ public abstract class AbstractServiceImpl extends AbstractDaoImpl implements Abs
 
 	@Override
 	public <T> void save(T t) {
-		saveOrUpdate(t);
+		try{
+			saveOrUpdate(t);
+		}catch(HibernateException e){
+			throw new HibernateException(e);
+		}
+		
 	}
 
 	@Override

@@ -1,16 +1,20 @@
 package hames.view;
 
 import hames.bean.Customer;
+import hames.bean.Staff;
 import hames.core.bean.ModelUtil;
 import hames.core.view.AbstractView;
 import hames.enums.CustomerStatusEnum;
 import hames.service.CustomerService;
 
+import org.hibernate.HibernateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -51,4 +55,26 @@ public class CustomerView extends AbstractView {
 		return getTitleDefinition(model);
 	}
 	
+	@RequestMapping("/customersave")
+	public String save(Model model,@ModelAttribute Customer customer,BindingResult result){
+		
+		logger.debug("Saving Customer : {} ",customer.toString());
+		customerService.validate(result, customer);
+		if(result.hasErrors()){
+			return view(model,customer.getCustomerId());
+		}
+		
+		try{
+			customerService.save(customer);
+			logger.debug("Customer saved successfully");
+			ModelUtil.addSuccess("Customer saved successfully");	
+		}catch(HibernateException e){
+			logger.error(e.getMessage());
+			ModelUtil.addError(e.getMessage());
+		}
+		
+		ModelUtil.addMessages(model);
+		
+		return view(model,null);
+	}
 }
