@@ -3,6 +3,7 @@ package hames.view;
 import hames.bean.StaffRole;
 import hames.core.bean.ModelUtil;
 import hames.core.view.AbstractView;
+import hames.enums.StaffRoleStatusEnum;
 import hames.service.StaffRoleService;
 
 import org.slf4j.Logger;
@@ -18,8 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class StaffRoleView extends AbstractView{
 
-	
-	
 	private static final Logger logger = LoggerFactory.getLogger(StaffRoleView.class);
 
 	@Autowired
@@ -40,6 +39,7 @@ public class StaffRoleView extends AbstractView{
 		
 		if(id == null || id == 0){
 			staffRole = new StaffRole();
+			staffRole.setStatus(StaffRoleStatusEnum.ACTIVE_STAFFROLE.getValue());
 		}else{
 			staffRole = staffRoleService.findOne(id);
 		}

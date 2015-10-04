@@ -2,14 +2,12 @@ package hames.bean;
 
 import hames.core.bean.BaseBean;
 
-public class Staff extends BaseBean {
-	
-	private Long staffId;
+public class Customer extends BaseBean {
+
+	private Long customerId;
 	private String firstName;
 	private String middleName;
 	private String lastName;
-	private String city;
-	private String country;
 	private String phoneNumber;
 	private String mobileNumber;
 	private String emailId;
@@ -17,13 +15,11 @@ public class Staff extends BaseBean {
 	private String temporaryAddress;
 	private Integer status;
 	
-	private Long roleId;
-
-	public Long getStaffId() {
-		return staffId;
+	public Long getCustomerId() {
+		return customerId;
 	}
-	public void setStaffId(Long staffId) {
-		this.staffId = staffId;
+	public void setCustomerId(Long customerId) {
+		this.customerId = customerId;
 	}
 	public String getFirstName() {
 		return firstName;
@@ -42,18 +38,6 @@ public class Staff extends BaseBean {
 	}
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
-	}
-	public String getCity() {
-		return city;
-	}
-	public void setCity(String city) {
-		this.city = city;
-	}
-	public String getCountry() {
-		return country;
-	}
-	public void setCountry(String country) {
-		this.country = country;
 	}
 	public String getPhoneNumber() {
 		return phoneNumber;
@@ -79,12 +63,6 @@ public class Staff extends BaseBean {
 	public void setPermanentAddress(String permanentAddress) {
 		this.permanentAddress = permanentAddress;
 	}
-	public Long getRoleId() {
-		return roleId;
-	}
-	public void setRoleId(Long roleId) {
-		this.roleId = roleId;
-	}
 	public String getTemporaryAddress() {
 		return temporaryAddress;
 	}
@@ -99,14 +77,12 @@ public class Staff extends BaseBean {
 	}
 	@Override
 	public String toString() {
-		return "Staff [staffId=" + staffId + ", firstName=" + firstName
-				+ ", middleName=" + middleName + ", lastName=" + lastName
-				+ ", city=" + city + ", country=" + country + ", phoneNumber="
-				+ phoneNumber + ", mobileNumber=" + mobileNumber + ", emailId="
-				+ emailId + ", permanentAddress=" + permanentAddress
-				+ ", temporaryAddress=" + temporaryAddress + ", status="
-				+ status + ", roleId=" + roleId + "]";
+		return "Customer [customerId=" + customerId + ", firstName="
+				+ firstName + ", middleName=" + middleName + ", lastName="
+				+ lastName + ", phoneNumber=" + phoneNumber + ", mobileNumber="
+				+ mobileNumber + ", emailId=" + emailId + ", permanentAddress="
+				+ permanentAddress + ", temporaryAddress=" + temporaryAddress
+				+ ", status=" + status + "]";
 	}
-	
 	
 }

@@ -55,6 +55,7 @@
 								</div>
 							</div>
 						</div>
+						<form:hidden path="status" placeholder="status" />
 						<jsp:include page="/WEB-INF/views/hames/audit.jsp" />
 					</form:form>
 				</div>
