@@ -35,7 +35,10 @@
 			margin-bottom:5px !important;
 		}
 	</style>
-	
+	<script type="text/javascript">
+		$('.datepicker').datepicker();
+
+	</script>
   <body class="">
 	<div id="wrapper" class="preload">
 		<div id="top-nav" class="fixed skin-3">

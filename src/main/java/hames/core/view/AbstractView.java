@@ -1,28 +1,28 @@
 package hames.core.view;
 
-import hames.core.bean.ModelUtil;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.stereotype.Component;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 
-public abstract class AbstractView extends HandlerInterceptorAdapter {
+@Controller
+public abstract class AbstractView {
 
 	public abstract String getTitleDefinition(Model model);
+	
+	@InitBinder
+	private void dateBinder(WebDataBinder binder) {
+	    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");
+	    CustomDateEditor editor = new CustomDateEditor(dateFormat, true);
+	    binder.registerCustomEditor(Date.class, editor);
+	}
 	
 	public void activeMenu(Model model,String menuName){
 		model.addAttribute("menu", menuName);
 	}
 
-	@Override
-	public boolean preHandle(HttpServletRequest request,
-			HttpServletResponse response, Object handler) throws Exception {
-		ModelUtil.removeMessages();
-		return super.preHandle(request, response, handler);
-	}
-	
 }
