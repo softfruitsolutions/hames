@@ -8,8 +8,9 @@
             <generator class="native"/>
         </id>
 
-        <property name="roleName" column="role_name" />
+        <property name="roleName" column="role_name" not-null="true"/>
         <property name="roleDescription" column="role_description" />
+        <property name="status" column="status" />
         
         <property name="dateCreated" column="date_created" />
         <property name="dateModified" column="date_modified" />

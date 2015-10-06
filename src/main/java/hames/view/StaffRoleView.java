@@ -3,6 +3,7 @@ package hames.view;
 import hames.bean.StaffRole;
 import hames.core.bean.ModelUtil;
 import hames.core.view.AbstractView;
+import hames.enums.StaffRoleStatusEnum;
 import hames.service.StaffRoleService;
 
 import org.slf4j.Logger;
@@ -30,25 +31,31 @@ public class StaffRoleView extends AbstractView{
 	}
 	
 	@RequestMapping("/staffroleview")
-	public String view(Model model, @RequestParam(value="id",required=false) Integer id){
+	public String view(Model model, @RequestParam(value="id",required=false) Long id){
 		
 		activeMenu(model, "staffrole");
 		
+		StaffRole staffRole = null;
+		
 		if(id == null || id == 0){
-			model.addAttribute("staffRole", new StaffRole());
+			staffRole = new StaffRole();
+			staffRole.setStatus(StaffRoleStatusEnum.ACTIVE_STAFFROLE.getValue());
+		}else{
+			staffRole = staffRoleService.findOne(id);
 		}
 		
+		model.addAttribute("staffRole", staffRole);
+		model.addAttribute("staffRoles", staffRoleService.findAll());
 		return getTitleDefinition(model);
 	}
 
 	@RequestMapping("/staffrolesave")
 	public String save(Model model,@ModelAttribute StaffRole staffRole,BindingResult result){
 		
-		ModelUtil.removeMessages();
 		logger.debug("Saving Staff Role : {} ",staffRole.toString());
 		staffRoleService.validate(result, staffRole);
 		if(result.hasErrors()){
-			return getTitleDefinition(model);
+			return view(model,staffRole.getRoleId());
 		}
 		
 		staffRoleService.save(staffRole);

@@ -42,4 +42,8 @@
 	
 	<beans:import resource="database-context.xml" />
 	
+	<interceptors>
+		<beans:bean class="hames.core.system.HamesInterceptorAdapter" />
+	</interceptors>
+	
 </beans:beans>

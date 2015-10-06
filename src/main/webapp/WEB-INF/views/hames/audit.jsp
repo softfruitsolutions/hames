@@ -1,10 +1,10 @@
 <div class="panel panel-default">
-	<div class="panel-heading">
+	<!-- <div class="panel-heading">
 		Auditable Details
 		<ul class="tool-bar">
 			<li><a href="#auditable" data-toggle="collapse" class=""><i class="fa fa-arrows-v"></i></a></li>
 		</ul>
-	</div>
+	</div> -->
 	<div class='panel-body collapse in' id="auditable">
 		<div class="row">
 			<div class="col-md-3">

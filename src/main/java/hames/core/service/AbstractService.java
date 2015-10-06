@@ -1,5 +1,7 @@
 package hames.core.service;
 
+import java.util.List;
+
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
@@ -20,6 +22,19 @@ public interface AbstractService extends AbstractDao{
 	public <T> void update(T t);
 	
 	/**
+	 * Find one
+	 * @param id
+	 * @return T
+	 */
+	public <T> T findOne(Long id);
+	
+	/**
+	 * Find all of an entity class
+	 * @return
+	 */
+	public <T> List<T> findAll();
+	
+	/**
 	 * Validate a Validator
 	 * @param result
 	 */
@@ -30,5 +45,10 @@ public interface AbstractService extends AbstractDao{
 	 * @return
 	 */
 	public abstract Validator getValidator();
-	
+
+	/**
+	 * Get Entity Class
+	 * @return
+	 */
+	public Class<?> getEntityClass();
 }
