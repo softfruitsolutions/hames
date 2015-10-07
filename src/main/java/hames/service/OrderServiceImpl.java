@@ -5,13 +5,14 @@ import org.springframework.validation.Validator;
 
 import hames.bean.Order;
 import hames.core.service.AbstractServiceImpl;
+import hames.validator.OrderValidator;
 
 @Service
 public class OrderServiceImpl extends AbstractServiceImpl implements OrderService{
 
 	@Override
 	public Validator getValidator() {
-		return null;
+		return new OrderValidator();
 	}
 
 	@Override

@@ -1,8 +1,8 @@
 package hames.bean;
 
-import java.util.Date;
-
 import hames.core.bean.BaseBean;
+
+import org.joda.time.DateTime;
 
 public class Order extends BaseBean{
 
@@ -30,8 +30,8 @@ public class Order extends BaseBean{
 	private String other;
 	private String remarks;
 	private Integer orderStatus;
-	private Date deliveryDate;
-	private Date createdDate;
+	private DateTime deliveryDate;
+	private DateTime createdDate;
 
 	public Long getOrderId() {
 		return orderId;
@@ -217,20 +217,20 @@ public class Order extends BaseBean{
 		this.remarks = remarks;
 	}
 
-	public Date getCreatedDate() {
-		return createdDate;
-	}
-	
-	public Date getDeliveryDate() {
+	public DateTime getDeliveryDate() {
 		return deliveryDate;
 	}
 
-	public void setCreatedDate(Date createdDate) {
-		this.createdDate = createdDate;
+	public void setDeliveryDate(DateTime deliveryDate) {
+		this.deliveryDate = deliveryDate;
 	}
 
-	public void setDeliveryDate(Date deliveryDate) {
-		this.deliveryDate = deliveryDate;
+	public DateTime getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(DateTime createdDate) {
+		this.createdDate = createdDate;
 	}
 
 	public Integer getOrderStatus() {

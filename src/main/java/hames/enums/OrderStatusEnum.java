@@ -17,4 +17,13 @@ public enum OrderStatusEnum {
 	public int getValue() {
 		return value;
 	}
+	
+	public static OrderStatusEnum findEnum(int value){
+		for (OrderStatusEnum status : OrderStatusEnum.values()) {
+			if(status.getValue() == value){
+				return status;
+			}
+		}
+		return null;
+	}
 }

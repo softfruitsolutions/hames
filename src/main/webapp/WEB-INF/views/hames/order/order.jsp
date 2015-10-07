@@ -1,7 +1,16 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@taglib prefix="joda" uri="http://www.joda.org/joda/time/tags" %>
+
 
 <script type="text/javascript">
+
+	$(function(){
+		$('#createdDate').mask("99/99/9999");
+		$('#deliveryDate').mask("99/99/9999");
+	});
+	
 	function save(){
 		$('#order').serialize();
 		$('#order').submit();
@@ -14,6 +23,7 @@
 			window.location.href = "orderview?id="+id;	
 		}
 	}
+	
 </script>
 
 <div class="col-md-12">
@@ -23,7 +33,7 @@
 	</h3>
 	<div class="panel panel-default no-margin">
 		<div class="panel-heading">
-			<a class="btn btn-success"><i class="fa fa-save"></i> Create Order</a>
+			<a class="btn btn-success" onclick="save()"><i class="fa fa-save"></i> Create Order</a>
 			<div class="pull-right">
 				<a class="btn btn-warning">
 					<c:if test="${order.orderStatus == 40}">
@@ -69,14 +79,13 @@
 						<div class="form-group">
 							<label for="createdDate" class="col-lg-4 control-label">Created Date</label>
 							<div class="col-lg-8">
-								<%-- <input type="date" value="${order.createdDate }" class="form-control input-sm"/> --%>
-								<form:input path="createdDate" type="text" class="form-control input-sm"/>
-							</div><!-- /.col -->
+								<form:input path="createdDate" cssClass="form-control input-sm"  type="text"/>
+							</div>
 						</div><!-- /form-group -->
 						<div class="form-group">
 							<label for="deliveryDate" class="col-lg-4 control-label">Delivery Date</label>
 							<div class="col-lg-8">
-								<form:input path="deliveryDate" type="date" class="form-control input-sm"/>
+								<form:input path="deliveryDate" cssClass="form-control input-sm"  type="text"/>
 							</div><!-- /.col -->
 						</div><!-- /form-group -->
 					</div>

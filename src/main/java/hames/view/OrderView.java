@@ -1,40 +1,37 @@
 package hames.view;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import hames.bean.Order;
+import hames.core.bean.ModelUtil;
 import hames.core.view.AbstractView;
 import hames.enums.OrderStatusEnum;
 import hames.service.CustomerService;
 import hames.service.OrderService;
 
+import org.joda.time.DateTime;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class OrderView extends AbstractView{
+	
+	private static final Logger logger = LoggerFactory.getLogger(OrderView.class);
 
 	@Autowired
 	private OrderService orderService;
 	@Autowired
 	private CustomerService customerService;
 	
-	@InitBinder
-	private void dateBinder(WebDataBinder binder) {
-	    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");
-	    CustomDateEditor editor = new CustomDateEditor(dateFormat, true);
-	    binder.registerCustomEditor(Date.class, editor);
-	}
 	
 	@Override
 	public String getTitleDefinition(Model model) {
+		ModelUtil.addMessages(model);
 		return "order";
 	}
 	
@@ -48,7 +45,7 @@ public class OrderView extends AbstractView{
 		if(id == null || id == 0){
 			if(!model.containsAttribute("order")){
 				order = new Order();
-				order.setCreatedDate(new Date());
+				order.setCreatedDate(new DateTime());
 				order.setOrderStatus(OrderStatusEnum.DRAFT.getValue());
 				model.addAttribute("order", order);
 			}
@@ -61,4 +58,14 @@ public class OrderView extends AbstractView{
 		return getTitleDefinition(model);
 	}
 
+	@RequestMapping("/ordersave")
+	public String save(Model model,@ModelAttribute Order order,BindingResult result){
+		
+		logger.debug("Saving Order : {} ",order.toString());
+		orderService.validate(result, order);
+		if(result.hasErrors()){
+			return view(model,order.getOrderId());
+		}
+		return view(model,null);
+	}
 }

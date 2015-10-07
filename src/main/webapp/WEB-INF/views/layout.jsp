@@ -10,6 +10,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+	<!-- Jquery -->
+	<script src="resources/endless/js/jquery.min.js" type="text/javascript" ></script>
+	
     <!-- Bootstrap core CSS -->
     <link href="resources/endless/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	
@@ -35,10 +38,6 @@
 			margin-bottom:5px !important;
 		}
 	</style>
-	<script type="text/javascript">
-		$('.datepicker').datepicker();
-
-	</script>
   <body class="">
 	<div id="wrapper" class="preload">
 		<div id="top-nav" class="fixed skin-3">
@@ -318,8 +317,7 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
 	
-	<!-- Jquery -->
-	<script src="resources/endless/js/jquery-1.10.2.min.js"></script>
+	
 
 	<!-- Bootstrap -->
     <script src="resources/endless/bootstrap/js/bootstrap.js"></script>
@@ -328,15 +326,11 @@
 	<script src='resources/endless/js/jquery.flot.min.js'></script>
    
 	<!-- Morris -->
-	<script src='resources/endless/js/rapheal.min.js'></script>	
 	<script src='resources/endless/js/morris.min.js'></script>	
 	
 	<!-- Colorbox -->
 	<script src='resources/endless/js/jquery.colorbox.min.js'></script>	
 
-	<!-- Sparkline -->
-	<script src='resources/endless/js/jquery.sparkline.min.js'></script>
-	
 	<!-- Pace -->
 	<script src='resources/endless/js/uncompressed/pace.js'></script>
 	
@@ -355,6 +349,10 @@
 	<!-- Endless -->
 	<script src="resources/endless/js/endless/endless_dashboard.js"></script>
 	<script src="resources/endless/js/endless/endless.js"></script>
+	
+	<!-- Masked Input -->
+	<script src="resources/endless/js/jquery.maskedinput.min.js" type="text/javascript"></script>
+	
 	
   </body>
 
