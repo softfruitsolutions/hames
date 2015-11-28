@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC  "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="hames.bean" default-access="field">
+	<class name="Order" table="orders">
+		<id name="orderId" column="id">
+            <generator class="native"/>
+        </id>
+        
+        <property name="jobNo" column="job_no" not-null="true" />
+        <property name="customerId" column="customer_id" not-null="true"/>
+        <property name="jobName" column="job_name" />
+        <property name="jobDescription" column="job_description" />
+        <property name="paper" column="paper" />
+        <property name="proof" column="proof" />
+        <property name="film" column="film" />
+        <property name="colors" column="colors" />
+        <property name="screenPrinting" column="screen_printing" />
+        <property name="plate" column="plate" />
+		<property name="printingQuantity" column="printing_quantity" />
+        <property name="printingSize" column="printing_size" />
+        <property name="printingPaper" column="printing_paper" />
+        <property name="printingInk" column="printing_ink" />
+        <property name="printingColors" column="printing_colors" />
+        <property name="quantity" column="quantity" />
+        <property name="printing" column="printing" />
+        <property name="numbering" column="numbering" />
+        <property name="stiching" column="stiching" />
+        <property name="binding" column="binding" />
+        <property name="other" column="other" />
+        <property name="remarks" column="remarks" />
+        <property name="orderStatus" column="order_status" />
+        
+        <property name="staffCreated" column="staff_created" />
+        <property name="staffModified" column="staff_modified" />
+        
+	</class>
+</hibernate-mapping>

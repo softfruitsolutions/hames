@@ -7,6 +7,7 @@ import hames.enums.OrderStatusEnum;
 import hames.service.CustomerService;
 import hames.service.OrderService;
 
+import org.hibernate.HibernateException;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -66,6 +67,17 @@ public class OrderView extends AbstractView{
 		if(result.hasErrors()){
 			return view(model,order.getOrderId());
 		}
+		
+		try{
+			orderService.save(order);
+			logger.debug("Order created");
+			ModelUtil.addSuccess("Order created successfully");	
+		}catch(HibernateException e){
+			logger.error(e.getMessage());
+			ModelUtil.addError(e.getMessage());
+		}
+		
+		ModelUtil.addMessages(model);
 		return view(model,null);
 	}
 }

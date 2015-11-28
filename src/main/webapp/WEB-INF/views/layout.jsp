@@ -42,7 +42,7 @@
 	<div id="wrapper" class="preload">
 		<div id="top-nav" class="fixed skin-3">
 			<a href="#" class="brand">
-				<span>Endless</span>
+				<span>HAMES</span>
 				<span class="text-toggle"> Admin</span>
 			</a><!-- /brand -->					
 			<button type="button" class="navbar-toggle pull-left" id="sidebarToggle">

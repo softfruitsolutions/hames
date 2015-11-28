@@ -24,6 +24,14 @@
 		}
 	}
 	
+	function calculate(){
+		var totalAmount = $('#totalAmount').val();
+		var paymentAmount = $('#paymentAmount').val();
+		var balance = totalAmount - paymentAmount;
+		console.log(balance);
+		$('#balance').val(balance);
+	}
+	
 </script>
 
 <div class="col-md-12">
@@ -33,7 +41,7 @@
 	</h3>
 	<div class="panel panel-default no-margin">
 		<div class="panel-heading">
-			<a class="btn btn-success" onclick="save()"><i class="fa fa-save"></i> Create Order</a>
+			<a href="#payment" class="btn btn-success" data-toggle="modal"><i class="fa fa-save"></i> Process</a>
 			<div class="pull-right">
 				<a class="btn btn-warning">
 					<c:if test="${order.orderStatus == 40}">
@@ -44,8 +52,9 @@
 		</div>
 		<div class="panel-body">
 			<form:form modelAttribute="order" method="POST" action="ordersave">
+				<form:hidden path="orderStatus"/>
 				<div class="row">
-					<div class="col-xs-4">
+					<div class="col-xs-8">
 						<div class="form-group">
 							<label for="jobId" class="col-lg-3 control-label">Job No</label>
 							<div class="col-lg-9">
@@ -64,8 +73,6 @@
 								<form:textarea path="jobDescription" cssClass="form-control input-sm" placeholder="Job Description" />
 							</div><!-- /.col -->
 						</div><!-- /form-group -->
-					</div>
-					<div class="col-xs-4">
 						<div class="form-group">
 							<label for="customerName" class="col-lg-3 control-label">Customer</label>
 							<div class="col-lg-9">
@@ -92,7 +99,7 @@
 				</div>
 				<hr />
 				<div class="row">
-					<div class="col-xs-4">
+					<div class="col-xs-6">
 						<div class="form-group">
 							<label for="colors" class="col-lg-3 control-label">Colors</label>
 							<div class="col-lg-9">
@@ -105,22 +112,20 @@
 								<form:input path="proof" class="form-control input-sm" placeholder="Proof"/>
 							</div><!-- /.col -->
 						</div><!-- /form-group -->
-					</div>
-					<div class="col-xs-4">
 						<div class="form-group">
-							<label for="screenPrinting" class="col-lg-4 control-label">Screen Printing</label>
-							<div class="col-lg-8">
+							<label for="screenPrinting" class="col-lg-3 control-label">Screen Printing</label>
+							<div class="col-lg-9">
 								<form:input path="screenPrinting" class="form-control input-sm" placeholder="Screen Printing"/>
 							</div><!-- /.col -->
 						</div><!-- /form-group -->
+					</div>
+					<div class="col-xs-6">
 						<div class="form-group">
-							<label for="film" class="col-lg-4 control-label">Film</label>
-							<div class="col-lg-8">
+							<label for="film" class="col-lg-3 control-label">Film</label>
+							<div class="col-lg-9">
 								<form:input path="film" class="form-control input-sm" placeholder="Film"/>
 							</div><!-- /.col -->
 						</div><!-- /form-group -->
-					</div>
-					<div class="col-xs-4">
 						<div class="form-group">
 							<label for="colors" class="col-lg-3 control-label">Paper</label>
 							<div class="col-lg-9">
@@ -219,7 +224,54 @@
 						</div><!-- /form-group -->
 					</div>
 				</div>
+				<div class="row no-margin">
+					<jsp:include page="/WEB-INF/views/hames/audit.jsp" />
+				</div>
 			</form:form>
 		</div>
 	</div>
 </div>
+
+<div class="modal fade in" id="payment" aria-hidden="false">
+	<div class="modal-dialog">
+ 		<div class="modal-content">
+   			<div class="modal-header">
+     			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h4>Payment</h4>
+ 			</div>
+	    	<div class="modal-body">
+	    		<div class="row">
+		    		<div class="col-xs-6">
+		    			<div class="form-group">
+							<label class="control-label">Balance</label>
+							<input type="text" class="form-control input-sm" id="balance" style="font-size: 16px;font-weight: bold;" readonly="readonly">
+						</div>
+		    		</div>
+		    		<div class="col-xs-6">
+						<div class="form-group">
+							<label class="control-label">Total Amount</label>
+							<input type="text" class="form-control input-sm" id="totalAmount" onblur="calculate()">
+							<%-- <form:textarea path="permanentAddress" cssClass="form-control input-sm" placeholder="Permanent Address"/> --%>								 	
+						</div>
+						<div class="form-group">
+							<label class="control-label">Payment</label>
+							<input type="text" class="form-control input-sm" id="paymentAmount" onblur="calculate()" >
+							<%-- <form:textarea path="permanentAddress" cssClass="form-control input-sm" placeholder="Permanent Address"/> --%>								 	
+						</div>
+					</div>
+				</div>
+				<hr />
+				<div class="row">
+					<div class="col-xs-6">
+					</div>
+					<div class="col-xs-6">
+						<div class="form-group text-right">
+							<a href="#" class="btn btn-success" onclick="save()"><i class="fa fa-save"></i> Create Order</a>
+						</div>
+					</div>
+				</div>
+		    </div>
+	  	</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div>
+
