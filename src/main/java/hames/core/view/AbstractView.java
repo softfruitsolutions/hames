@@ -1,16 +1,21 @@
 package hames.core.view;
 
-import hames.core.bean.ModelUtil;
+import hames.core.system.DatePropertyEditor;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.stereotype.Component;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+import org.springframework.beans.PropertyAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.DefaultBindingErrorProcessor;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 
-public abstract class AbstractView extends HandlerInterceptorAdapter {
+@Controller
+public abstract class AbstractView {
 
 	public abstract String getTitleDefinition(Model model);
 	
@@ -18,11 +23,21 @@ public abstract class AbstractView extends HandlerInterceptorAdapter {
 		model.addAttribute("menu", menuName);
 	}
 
-	@Override
-	public boolean preHandle(HttpServletRequest request,
-			HttpServletResponse response, Object handler) throws Exception {
-		ModelUtil.removeMessages();
-		return super.preHandle(request, response, handler);
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern("dd/MM/yyyy");
+	    binder.registerCustomEditor(DateTime.class, new DatePropertyEditor(dateTimeFormatter));
+	    
+	    binder.setBindingErrorProcessor(new DefaultBindingErrorProcessor() {
+	        @Override
+	        public void processPropertyAccessException(PropertyAccessException ex, BindingResult bindingResult) {
+	            String propertyName = ex.getPropertyName();
+	            Object value = ex.getValue();
+	            bindingResult.addError(new FieldError(bindingResult.getObjectName(), propertyName, value, true,
+	            new String[] { "moderation.field.error" }, new Object[] { propertyName, value },
+	            "Invalid value for " + propertyName + "(" + value + ")"));
+	        }
+	    });
 	}
-	
+		 
 }
