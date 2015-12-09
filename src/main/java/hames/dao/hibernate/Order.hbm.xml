@@ -30,6 +30,8 @@
         <property name="other" column="other" />
         <property name="remarks" column="remarks" />
         <property name="orderStatus" column="order_status" />
+        <property name="orderDate" column="order_date" />
+        <property name="deliveryDate" column="delivery_date" />
         
         <property name="staffCreated" column="staff_created" />
         <property name="staffModified" column="staff_modified" />
