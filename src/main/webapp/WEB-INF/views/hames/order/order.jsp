@@ -7,7 +7,7 @@
 <script type="text/javascript">
 
 	$(function(){
-		$('#createdDate').mask("99/99/9999");
+		$('#orderDate').mask("99/99/9999");
 		$('#deliveryDate').mask("99/99/9999");
 	});
 	
@@ -84,9 +84,9 @@
 					</div>
 					<div class="col-xs-4">
 						<div class="form-group">
-							<label for="createdDate" class="col-lg-4 control-label">Created Date</label>
+							<label for="createdDate" class="col-lg-4 control-label">Order Date</label>
 							<div class="col-lg-8">
-								<form:input path="createdDate" cssClass="form-control input-sm"  type="text"/>
+								<form:input path="orderDate" cssClass="form-control input-sm"  type="text"/>
 							</div>
 						</div><!-- /form-group -->
 						<div class="form-group">

@@ -31,7 +31,7 @@ public class Order extends BaseBean{
 	private String remarks;
 	private Integer orderStatus;
 	private DateTime deliveryDate;
-	private DateTime createdDate;
+	private DateTime orderDate;
 
 	public Long getOrderId() {
 		return orderId;
@@ -225,12 +225,12 @@ public class Order extends BaseBean{
 		this.deliveryDate = deliveryDate;
 	}
 
-	public DateTime getCreatedDate() {
-		return createdDate;
+	public DateTime getOrderDate() {
+		return orderDate;
 	}
 
-	public void setCreatedDate(DateTime createdDate) {
-		this.createdDate = createdDate;
+	public void setOrderDate(DateTime createdDate) {
+		this.orderDate = createdDate;
 	}
 
 	public Integer getOrderStatus() {
@@ -256,7 +256,7 @@ public class Order extends BaseBean{
 				+ stiching + ", binding=" + binding + ", other=" + other
 				+ ", remarks=" + remarks + ", orderStatus=" + orderStatus
 				+ ", deliveryDate=" + deliveryDate + ", createdDate="
-				+ createdDate + "]";
+				+ orderDate + "]";
 	}
 		
 }

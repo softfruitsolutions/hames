@@ -46,7 +46,7 @@ public class OrderView extends AbstractView{
 		if(id == null || id == 0){
 			if(!model.containsAttribute("order")){
 				order = new Order();
-				order.setCreatedDate(new DateTime());
+				order.setOrderDate(new DateTime());
 				order.setOrderStatus(OrderStatusEnum.DRAFT.getValue());
 				model.addAttribute("order", order);
 			}
