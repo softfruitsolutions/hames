@@ -24,8 +24,8 @@ public class OrderValidator implements Validator{
 			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "customerId", "","Customer Required");
 		}
 		
-		if(order.getCreatedDate() == null || order.getCreatedDate().isBeforeNow()){
-			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "createdDate", "","Invalid Order creation date");
+		if(order.getOrderDate() == null || order.getOrderDate().isBeforeNow()){
+			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "orderDate", "","Invalid Order creation date");
 		}
 		
 		if(order.getDeliveryDate() == null){

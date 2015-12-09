@@ -33,6 +33,15 @@
         <property name="orderDate" column="order_date" />
         <property name="deliveryDate" column="delivery_date" />
         
+        <!-- 
+        	Payment
+         -->
+        <list name="payments" cascade="all" lazy="true">
+        	<key column="order_id" />
+        	<list-index></list-index>
+        	<one-to-many class="hames.bean.Payment"/>
+        </list>
+        <property name="totalAmount" column="total_Amount" />
         <property name="staffCreated" column="staff_created" />
         <property name="staffModified" column="staff_modified" />
         

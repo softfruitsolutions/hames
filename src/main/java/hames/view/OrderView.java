@@ -1,6 +1,7 @@
 package hames.view;
 
 import hames.bean.Order;
+import hames.bean.Payment;
 import hames.core.bean.ModelUtil;
 import hames.core.view.AbstractView;
 import hames.enums.OrderStatusEnum;
@@ -48,6 +49,9 @@ public class OrderView extends AbstractView{
 				order = new Order();
 				order.setOrderDate(new DateTime());
 				order.setOrderStatus(OrderStatusEnum.DRAFT.getValue());
+				
+				//Adding Payment to Order
+				order.addPayments(new Payment());
 				model.addAttribute("order", order);
 			}
 		}else{

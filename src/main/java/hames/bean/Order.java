@@ -2,6 +2,12 @@ package hames.bean;
 
 import hames.core.bean.BaseBean;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.Transient;
+
 import org.joda.time.DateTime;
 
 public class Order extends BaseBean{
@@ -32,7 +38,16 @@ public class Order extends BaseBean{
 	private Integer orderStatus;
 	private DateTime deliveryDate;
 	private DateTime orderDate;
-
+	
+	/**
+	 * Amount
+	 * @return
+	 */
+	private List<Payment> payments;
+	private BigDecimal totalAmount;
+	@Transient
+	private BigDecimal balanceDue;
+	
 	public Long getOrderId() {
 		return orderId;
 	}
@@ -241,6 +256,39 @@ public class Order extends BaseBean{
 		this.orderStatus = orderStatus;
 	}
 
+	public List<Payment> getPayments() {
+		return payments;
+	}
+
+	public void setPayments(List<Payment> payments) {
+		this.payments = payments;
+	}
+
+	public BigDecimal getTotalAmount() {
+		return totalAmount;
+	}
+
+	public void setTotalAmount(BigDecimal totalAmount) {
+		this.totalAmount = totalAmount;
+	}
+
+	public BigDecimal getBalanceDue() {
+		return balanceDue;
+	}
+
+	public void setBalanceDue(BigDecimal balanceDue) {
+		this.balanceDue = balanceDue;
+	}
+	
+	public void addPayments(Payment payment){
+		if(payments == null){
+			payments = new ArrayList<Payment>();
+			payments.add(payment);
+		}else{
+			payments.add(payment);
+		}
+	}
+
 	@Override
 	public String toString() {
 		return "Order [orderId=" + orderId + ", jobNo=" + jobNo
@@ -255,8 +303,9 @@ public class Order extends BaseBean{
 				+ printing + ", numbering=" + numbering + ", stiching="
 				+ stiching + ", binding=" + binding + ", other=" + other
 				+ ", remarks=" + remarks + ", orderStatus=" + orderStatus
-				+ ", deliveryDate=" + deliveryDate + ", createdDate="
-				+ orderDate + "]";
+				+ ", deliveryDate=" + deliveryDate + ", orderDate=" + orderDate
+				+ ", payments=" + payments + ", totalAmount=" + totalAmount
+				+ ", balanceDue=" + balanceDue + "]";
 	}
 		
 }
