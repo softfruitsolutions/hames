@@ -7,8 +7,7 @@
             <generator class="native"/>
         </id>
         
-<!--         <many-to-one name="orderId" class="hames.bean.Order" column="order_id" not-null="true" unique="true" ></many-to-one>
- -->        <property name="paymentAmount" column="payment_amount" not-null="true"  type="java.math.BigDecimal" />
+       <property name="paymentAmount" column="payment_amount" not-null="true"  type="java.math.BigDecimal" />
         
 	</class>
 </hibernate-mapping>

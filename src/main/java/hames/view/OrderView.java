@@ -33,7 +33,6 @@ public class OrderView extends AbstractView{
 	
 	@Override
 	public String getTitleDefinition(Model model) {
-		ModelUtil.addMessages(model);
 		return "order";
 	}
 	
@@ -67,6 +66,8 @@ public class OrderView extends AbstractView{
 	public String save(Model model,@ModelAttribute Order order,BindingResult result){
 		
 		logger.debug("Saving Order : {} ",order.toString());
+		
+		logger.debug(result.getModel().toString());
 		orderService.validate(result, order);
 		if(result.hasErrors()){
 			return view(model,order.getOrderId());
@@ -81,7 +82,6 @@ public class OrderView extends AbstractView{
 			ModelUtil.addError(e.getMessage());
 		}
 		
-		ModelUtil.addMessages(model);
 		return view(model,null);
 	}
 }

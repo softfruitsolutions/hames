@@ -1,7 +1,6 @@
 package hames.view;
 
 import hames.bean.Customer;
-import hames.bean.Staff;
 import hames.core.bean.ModelUtil;
 import hames.core.view.AbstractView;
 import hames.enums.CustomerStatusEnum;
@@ -31,7 +30,6 @@ public class CustomerView extends AbstractView {
 	
 	@Override
 	public String getTitleDefinition(Model model) {
-		ModelUtil.addMessages(model);
 		return "customer";
 	}
 	
@@ -59,10 +57,10 @@ public class CustomerView extends AbstractView {
 	public String save(Model model,@ModelAttribute Customer customer,BindingResult result){
 		
 		logger.debug("Saving Customer : {} ",customer.toString());
-		customerService.validate(result, customer);
+		/*customerService.validate(result, customer);
 		if(result.hasErrors()){
 			return view(model,customer.getCustomerId());
-		}
+		}*/
 		
 		try{
 			customerService.save(customer);
@@ -72,8 +70,6 @@ public class CustomerView extends AbstractView {
 			logger.error(e.getMessage());
 			ModelUtil.addError(e.getMessage());
 		}
-		
-		ModelUtil.addMessages(model);
 		
 		return view(model,null);
 	}

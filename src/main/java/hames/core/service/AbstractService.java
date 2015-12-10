@@ -1,11 +1,10 @@
 package hames.core.service;
 
+import hames.core.dao.AbstractDao;
+
 import java.util.List;
 
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
-
-import hames.core.dao.AbstractDao;
 
 public interface AbstractService extends AbstractDao{
 
@@ -38,7 +37,7 @@ public interface AbstractService extends AbstractDao{
 	 * Validate a Validator
 	 * @param result
 	 */
-	public abstract <T> void validate(BindingResult result,T t);
+	public abstract <T> Boolean validate(T t);
 	
 	/**
 	 * Get Validator

@@ -26,7 +26,6 @@ public class StaffRoleView extends AbstractView{
 	
 	@Override
 	public String getTitleDefinition(Model model) {
-		ModelUtil.addMessages(model);
 		return "staff.role";
 	}
 	
@@ -61,7 +60,6 @@ public class StaffRoleView extends AbstractView{
 		staffRoleService.save(staffRole);
 		logger.debug("Staff Role saved successfully");
 		ModelUtil.addSuccess("Staff Role saved successfully");
-		ModelUtil.addMessages(model);
 		
 		return view(model,null);
 	}
