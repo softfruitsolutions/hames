@@ -2,6 +2,7 @@ package hames.view;
 
 import hames.bean.Order;
 import hames.bean.Payment;
+import hames.bean.exception.ValidationException;
 import hames.core.bean.ModelUtil;
 import hames.core.view.AbstractView;
 import hames.enums.OrderStatusEnum;
@@ -65,21 +66,14 @@ public class OrderView extends AbstractView{
 	@RequestMapping("/ordersave")
 	public String save(Model model,@ModelAttribute Order order,BindingResult result){
 		
-		logger.debug("Saving Order : {} ",order.toString());
-		
-		logger.debug(result.getModel().toString());
-		orderService.validate(result, order);
-		if(result.hasErrors()){
-			return view(model,order.getOrderId());
-		}
-		
 		try{
 			orderService.save(order);
-			logger.debug("Order created");
 			ModelUtil.addSuccess("Order created successfully");	
 		}catch(HibernateException e){
 			logger.error(e.getMessage());
 			ModelUtil.addError(e.getMessage());
+		}catch (ValidationException e) {
+			logger.error("Validation errors are present");
 		}
 		
 		return view(model,null);

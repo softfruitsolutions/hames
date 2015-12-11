@@ -35,17 +35,6 @@ public class HamesInterceptorAdapter extends HandlerInterceptorAdapter{
 		 */
 		ModelUtil.addMessages(modelAndView);
 		
-		/**
-		 * BindingResult : Adding error messages to model
-		 */
-		/*BindingResult result = BindingResultUtils.getBindingResult(modelAndView.getModelMap(), modelAndView.getViewName());
-		if(result.hasErrors()){
-			for(ObjectError oe : result.getAllErrors()){
-				logger.debug("Error : {} ",oe.getDefaultMessage());
-				ModelUtil.addError(oe.getDefaultMessage());
-			}
-		}*/
-		
 		super.postHandle(request, response, handler, modelAndView);
 	}
 }

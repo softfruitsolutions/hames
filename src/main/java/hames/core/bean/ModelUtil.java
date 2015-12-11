@@ -19,8 +19,15 @@ public class ModelUtil {
 	}
 	
 	public static void addMessages(ModelAndView modelView) {
-		modelView.getModel().put("successMessages", successMessages);
-		modelView.getModel().put("errorMessages", errorMessages);
+		if(errorMessages != null && !errorMessages.isEmpty()){
+			modelView.getModel().put("errorMessages", errorMessages);
+			return;
+		}
+		
+		if(successMessages != null && !successMessages.isEmpty()){
+			modelView.getModel().put("successMessages", successMessages);	
+		}
+		
 	}
 	
 	public static void removeMessages(){

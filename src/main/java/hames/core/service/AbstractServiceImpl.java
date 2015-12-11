@@ -1,5 +1,6 @@
 package hames.core.service;
 
+import hames.bean.exception.ValidationException;
 import hames.core.bean.ModelUtil;
 import hames.core.dao.AbstractDaoImpl;
 
@@ -23,9 +24,10 @@ public abstract class AbstractServiceImpl extends AbstractDaoImpl implements Abs
 	public <T> void save(T t) {
 		try{
 			logger.debug("Validating object : {}",getEntityClass());
-			if(validate(t)){
-				saveOrUpdate(t);
-			}
+			validate(t);
+			logger.debug("Saving object : {}",t.toString());
+			saveOrUpdate(t);
+			logger.debug("{} saved successfully",t.getClass().getSimpleName());
 		}catch(HibernateException e){
 			throw new HibernateException(e);
 		}
@@ -35,13 +37,14 @@ public abstract class AbstractServiceImpl extends AbstractDaoImpl implements Abs
 	@Override
 	public <T> void update(T t) {
 		logger.debug("Validating object : {}",getEntityClass());
-		if(validate(t)){
-			saveOrUpdate(t);
-		}
+		validate(t);
+		logger.debug("Saving object : {}",t.toString());
+		saveOrUpdate(t);
+		logger.debug("{} saved successfully",t.getClass().getSimpleName());
 	}
 
 	@Override
-	public <T> Boolean validate(T t) {
+	public <T> void validate(T t) {
 		logger.debug("Validating {} class",t.getClass());
 		Map<String, String> errorMap = new HashMap<String, String>();
 		MapBindingResult errors = new MapBindingResult(errorMap, getEntityClass().getName());
@@ -51,9 +54,10 @@ public abstract class AbstractServiceImpl extends AbstractDaoImpl implements Abs
 				logger.debug("Error : {} ",oe.getDefaultMessage());
 				ModelUtil.addError(oe.getDefaultMessage());
 			}
-			return Boolean.FALSE;
+			
+			throw new ValidationException();
 		}
-		return Boolean.TRUE;
+		
 	}
 	
 	@Override
@@ -65,4 +69,5 @@ public abstract class AbstractServiceImpl extends AbstractDaoImpl implements Abs
 	public <T> T findOne(Long id) {
 		return super.findOne(getEntityClass(), id);
 	}
+	
 }

@@ -37,7 +37,7 @@ public interface AbstractService extends AbstractDao{
 	 * Validate a Validator
 	 * @param result
 	 */
-	public abstract <T> Boolean validate(T t);
+	public abstract <T> void validate(T t);
 	
 	/**
 	 * Get Validator
