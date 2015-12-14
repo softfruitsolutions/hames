@@ -16,6 +16,13 @@
 	</properties>
 	<dependencies>
 	
+		<!-- Jasper Reports  -->
+		<dependency>
+	        <groupId>net.sf.jasperreports</groupId>
+	        <artifactId>jasperreports</artifactId>
+	        <version>5.2.0</version>
+	    </dependency>
+	    
 		<!-- JSP Tags  -->
 		<dependency>
 		    <groupId>joda-time</groupId>
