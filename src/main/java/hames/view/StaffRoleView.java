@@ -53,7 +53,7 @@ public class StaffRoleView extends AbstractView{
 	public String save(Model model,@ModelAttribute StaffRole staffRole,BindingResult result){
 		
 		try{
-			staffRoleService.save(staffRole);
+			staffRoleService.validateAndSave(staffRole);
 			ModelUtil.addSuccess("Staff Role saved successfully");
 		}catch(ValidationException e){
 			logger.debug("Validation errors are present");

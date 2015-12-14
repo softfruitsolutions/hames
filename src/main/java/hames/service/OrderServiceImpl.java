@@ -1,7 +1,9 @@
 package hames.service;
 
 import hames.bean.Order;
+import hames.bean.exception.OrderException;
 import hames.core.service.AbstractServiceImpl;
+import hames.enums.OrderStatusEnum;
 import hames.validator.OrderValidator;
 
 import org.slf4j.Logger;
@@ -25,6 +27,27 @@ public class OrderServiceImpl extends AbstractServiceImpl implements OrderServic
 		return Order.class;
 	}
 
+	@Override
+	public void processOrder(Order order) {
+		if(order.getOrderStatus() == OrderStatusEnum.DRAFT.getValue()){
+			/**
+			 * Order Creation
+			 */
+			order.setOrderStatus(OrderStatusEnum.CREATED.getValue());
+			validateAndSave(order);
+		}else{
+			logger.debug("Cannot process an order with status {}. Operation Aborted.!",order.getOrderStatus());
+			throw new OrderException("Order can't be processed");
+		}
+		
+	}
 
+	@Override
+	public void updateOrder(Order order) {
+		
+		
+	}
+
+	
 
 }

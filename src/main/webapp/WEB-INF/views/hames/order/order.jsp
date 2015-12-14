@@ -42,7 +42,7 @@
 	<div class="panel panel-default no-margin">
 		<div class="panel-heading">
 			<a href="#payment" class="btn btn-success" data-toggle="modal"><i class="fa fa-save"></i> Process</a>
-			<div class="pull-right">
+			<div class="pull-right" id="statusDiv">
 				<a class="btn btn-warning">
 					<c:if test="${order.orderStatus == 40}">
 						DRAFT

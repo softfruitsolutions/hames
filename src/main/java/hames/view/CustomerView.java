@@ -57,7 +57,7 @@ public class CustomerView extends AbstractView {
 	public String save(Model model,@ModelAttribute Customer customer){
 		
 		try{
-			customerService.save(customer);
+			customerService.validateAndSave(customer);
 			ModelUtil.addSuccess("Customer saved successfully");	
 		}catch(HibernateException e){
 			logger.error(e.getMessage());

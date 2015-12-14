@@ -32,9 +32,9 @@ public class StaffServiceImpl extends AbstractServiceImpl implements StaffServic
 	}
 	
 	@Override
-	public <T> void save(T t) {
+	public <T> void validateAndSave(T t) {
 		Staff staff = (Staff) t;
-		super.save(staff);
+		super.validateAndSave(staff);
 	}
 	
 	@Override

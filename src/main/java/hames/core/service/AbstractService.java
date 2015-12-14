@@ -9,16 +9,22 @@ import org.springframework.validation.Validator;
 public interface AbstractService extends AbstractDao{
 
 	/**
-	 * Save Entity
+	 * Validate and Save Entity
 	 * @param t extends class
 	 */
-	public <T> void save(T t);
+	public <T> void validateAndSave(T t);
 	
 	/**
-	 * Update Entity
+	 * Validate and Update Entity
 	 * @param t extends class
 	 */
-	public <T> void update(T t);
+	public <T> void validateAndUpdate(T t);
+	
+	/**
+	 * Save Entity
+	 * @param t
+	 */
+	public <T> void save(T t);
 	
 	/**
 	 * Find one

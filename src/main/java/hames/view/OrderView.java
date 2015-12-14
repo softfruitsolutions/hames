@@ -67,7 +67,7 @@ public class OrderView extends AbstractView{
 	public String save(Model model,@ModelAttribute Order order,BindingResult result){
 		
 		try{
-			orderService.save(order);
+			orderService.processOrder(order);
 			ModelUtil.addSuccess("Order created successfully");	
 		}catch(HibernateException e){
 			logger.error(e.getMessage());

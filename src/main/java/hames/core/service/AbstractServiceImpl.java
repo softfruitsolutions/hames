@@ -23,6 +23,17 @@ public abstract class AbstractServiceImpl extends AbstractDaoImpl implements Abs
 	@Override
 	public <T> void save(T t) {
 		try{
+			logger.debug("Saving object : {}",t.toString());
+			saveOrUpdate(t);
+			logger.debug("{} saved successfully",t.getClass().getSimpleName());
+		}catch(HibernateException e){
+			throw new HibernateException(e);
+		}
+	}
+	
+	@Override
+	public <T> void validateAndSave(T t) {
+		try{
 			logger.debug("Validating object : {}",getEntityClass());
 			validate(t);
 			logger.debug("Saving object : {}",t.toString());
@@ -35,7 +46,7 @@ public abstract class AbstractServiceImpl extends AbstractDaoImpl implements Abs
 	}
 
 	@Override
-	public <T> void update(T t) {
+	public <T> void validateAndUpdate(T t) {
 		logger.debug("Validating object : {}",getEntityClass());
 		validate(t);
 		logger.debug("Saving object : {}",t.toString());

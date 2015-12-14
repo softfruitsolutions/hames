@@ -56,7 +56,7 @@ public class StaffView extends AbstractView{
 	public String save(Model model,@ModelAttribute Staff staff,BindingResult result){
 		
 		try{
-			staffService.save(staff);
+			staffService.validateAndSave(staff);
 			ModelUtil.addSuccess("Staff saved successfully");
 		}catch(ValidationException e){
 			logger.debug("Validation errors present");
