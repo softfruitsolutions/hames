@@ -3,7 +3,6 @@ package hames.validator;
 import hames.bean.StaffRole;
 
 import org.springframework.validation.Errors;
-import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 public class StaffRoleValidator implements Validator {
@@ -15,7 +14,10 @@ public class StaffRoleValidator implements Validator {
 
 	@Override
 	public void validate(Object obj, Errors errors) {
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "roleName", "","Role Name Required");
+		StaffRole role = (StaffRole) obj;
+		if(role.getRoleName() == null || role.getRoleName().isEmpty()){
+			errors.rejectValue("roleName", "", "Role Name Required");
+		}
 	}
 
 }

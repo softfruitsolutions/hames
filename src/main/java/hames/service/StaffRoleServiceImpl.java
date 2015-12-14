@@ -1,16 +1,14 @@
 package hames.service;
 
 import hames.bean.StaffRole;
+import hames.core.bean.ModelUtil;
 import hames.core.service.AbstractServiceImpl;
 import hames.enums.StaffRoleStatusEnum;
-import hames.enums.StaffStatusEnum;
 import hames.validator.StaffRoleValidator;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.validation.Validator;
 
 @Service
@@ -29,14 +27,14 @@ public class StaffRoleServiceImpl extends AbstractServiceImpl implements StaffRo
 	}
 	
 	@Override
-	public <T> void validate(BindingResult result, T t) {
+	public <T> void validate(T t) {
 	
 		StaffRole role = (StaffRole) t;
 		if(role.getStatus() == null || StaffRoleStatusEnum.findEnum(role.getStatus()) == null){
 			logger.debug("Staff Role status is null");
-			result.addError(new ObjectError("status", "Staff Role status required"));
+			ModelUtil.addError("Staff Role status is null");
 		}
-		super.validate(result, role);
+		super.validate(role);
 	}
 
 }

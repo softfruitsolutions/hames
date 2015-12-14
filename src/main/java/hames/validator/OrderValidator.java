@@ -4,7 +4,6 @@ import hames.bean.Order;
 import hames.enums.OrderStatusEnum;
 
 import org.springframework.validation.Errors;
-import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 public class OrderValidator implements Validator{
@@ -17,23 +16,34 @@ public class OrderValidator implements Validator{
 	@Override
 	public void validate(Object obj, Errors errors) {
 		Order order = (Order) obj;
-		
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "jobName", "","Job Name Required");
-		
-		if(order.getCustomerId() < -1){
-			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "customerId", "","Customer Required");
+
+		if(order.getJobName() == null || order.getJobName().isEmpty()){
+			errors.rejectValue("jobName", "","Job Name Required");
 		}
 		
-		if(order.getCreatedDate() == null || order.getCreatedDate().isBeforeNow()){
-			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "createdDate", "","Invalid Order creation date");
+		if(order.getCustomerId() < -1){
+			errors.rejectValue("customerId", "", "Customer Required");
+		}
+		
+		if(order.getOrderDate() == null){
+			errors.rejectValue("orderDate", "","Order Date Required");
 		}
 		
 		if(order.getDeliveryDate() == null){
-			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "deliveryDate", "","Delivery Date Required");
+			errors.rejectValue("deliveryDate", "","Delivery Date Required");
+			return;
+		}
+		
+		if(order.getDeliveryDate().isBefore(order.getOrderDate())){
+			errors.rejectValue("deliveryDate", "","Delivery date must be after Order Date");
 		}
 		
 		if(order.getOrderStatus() == null || OrderStatusEnum.findEnum(order.getOrderStatus()) == null){
-			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "orderStatus", "", "Invalid Order status");
+			errors.rejectValue("orderStatus", "", "Invalid Order status");
+		}
+		
+		if(order.getTotalAmount() == null){
+			errors.rejectValue("totalAmount", "", "Total Amount Required");
 		}
 		
 	}

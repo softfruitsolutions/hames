@@ -3,7 +3,7 @@ package hames.core.bean;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.ui.Model;
+import org.springframework.web.servlet.ModelAndView;
 
 public class ModelUtil {
 	
@@ -18,9 +18,16 @@ public class ModelUtil {
 		errorMessages.add(msg);
 	}
 	
-	public static void addMessages(Model model) {
-		model.addAttribute("successMessages", successMessages);
-		model.addAttribute("errorMessages", errorMessages);
+	public static void addMessages(ModelAndView modelView) {
+		if(errorMessages != null && !errorMessages.isEmpty()){
+			modelView.getModel().put("errorMessages", errorMessages);
+			return;
+		}
+		
+		if(successMessages != null && !successMessages.isEmpty()){
+			modelView.getModel().put("successMessages", successMessages);	
+		}
+		
 	}
 	
 	public static void removeMessages(){

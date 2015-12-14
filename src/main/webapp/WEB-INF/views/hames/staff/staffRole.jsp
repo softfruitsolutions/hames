@@ -38,7 +38,7 @@
 							<div class="col-md-4">
 								<div class="form-group">
 									<form:label path="roleId" cssClass="control-label">Role ID</form:label>
-									<form:input path="roleId" cssClass="form-control input-sm" placeholder="Role ID" />								 	
+									<form:input path="roleId" cssClass="form-control input-sm" placeholder="Role ID" readonly="true"/>								 	
 								</div>
 							</div>
 							<div class="col-md-4">

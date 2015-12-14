@@ -1,6 +1,7 @@
 package hames.view;
 
 import hames.bean.Staff;
+import hames.bean.exception.ValidationException;
 import hames.core.bean.ModelUtil;
 import hames.core.view.AbstractView;
 import hames.enums.StaffStatusEnum;
@@ -28,7 +29,6 @@ public class StaffView extends AbstractView{
 	private StaffRoleService staffRoleService;
 	
 	public String getTitleDefinition(Model model){
-		ModelUtil.addMessages(model);
 		return "staff";
 	}
 	
@@ -55,16 +55,12 @@ public class StaffView extends AbstractView{
 	@RequestMapping("/staffsave")
 	public String save(Model model,@ModelAttribute Staff staff,BindingResult result){
 		
-		logger.debug("Saving Staff : {} ",staff.toString());
-		staffService.validate(result, staff);
-		if(result.hasErrors()){
-			return view(model,staff.getStaffId());
+		try{
+			staffService.validateAndSave(staff);
+			ModelUtil.addSuccess("Staff saved successfully");
+		}catch(ValidationException e){
+			logger.debug("Validation errors present");
 		}
-		
-		staffService.save(staff);
-		logger.debug("Staff saved successfully");
-		ModelUtil.addSuccess("Staff saved successfully");
-		ModelUtil.addMessages(model);
 		
 		return view(model,null);
 	}

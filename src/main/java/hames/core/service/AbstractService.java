@@ -1,25 +1,30 @@
 package hames.core.service;
 
+import hames.core.dao.AbstractDao;
+
 import java.util.List;
 
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
-
-import hames.core.dao.AbstractDao;
 
 public interface AbstractService extends AbstractDao{
 
 	/**
-	 * Save Entity
+	 * Validate and Save Entity
 	 * @param t extends class
 	 */
-	public <T> void save(T t);
+	public <T> void validateAndSave(T t);
 	
 	/**
-	 * Update Entity
+	 * Validate and Update Entity
 	 * @param t extends class
 	 */
-	public <T> void update(T t);
+	public <T> void validateAndUpdate(T t);
+	
+	/**
+	 * Save Entity
+	 * @param t
+	 */
+	public <T> void save(T t);
 	
 	/**
 	 * Find one
@@ -38,7 +43,7 @@ public interface AbstractService extends AbstractDao{
 	 * Validate a Validator
 	 * @param result
 	 */
-	public abstract <T> void validate(BindingResult result,T t);
+	public abstract <T> void validate(T t);
 	
 	/**
 	 * Get Validator

@@ -42,7 +42,7 @@
 	<div class="panel panel-default no-margin">
 		<div class="panel-heading">
 			<a href="#payment" class="btn btn-success" data-toggle="modal"><i class="fa fa-save"></i> Process</a>
-			<div class="pull-right">
+			<div class="pull-right" id="statusDiv">
 				<a class="btn btn-warning">
 					<c:if test="${order.orderStatus == 40}">
 						DRAFT
@@ -227,7 +227,7 @@
 				<div class="row no-margin">
 					<jsp:include page="/WEB-INF/views/hames/audit.jsp" />
 				</div>
-			</form:form>
+			
 		</div>
 	</div>
 </div>
@@ -243,22 +243,23 @@
 	    		<div class="row">
 		    		<div class="col-xs-6">
 		    			<div class="form-group">
+							<label class="control-label">Total Amount</label>
+							<form:input path="totalAmount" class="form-control input-sm" placeholder="" />
+						</div>
+		    			<div class="form-group">
 							<label class="control-label">Balance</label>
 							<input type="text" class="form-control input-sm" id="balance" style="font-size: 16px;font-weight: bold;" readonly="readonly">
 						</div>
 		    		</div>
 		    		<div class="col-xs-6">
 						<div class="form-group">
-							<label class="control-label">Total Amount</label>
-							<input type="text" class="form-control input-sm" id="totalAmount" onblur="calculate()">
-							<%-- <form:textarea path="permanentAddress" cssClass="form-control input-sm" placeholder="Permanent Address"/> --%>								 	
-						</div>
-						<div class="form-group">
 							<label class="control-label">Payment</label>
-							<input type="text" class="form-control input-sm" id="paymentAmount" onblur="calculate()" >
-							<%-- <form:textarea path="permanentAddress" cssClass="form-control input-sm" placeholder="Permanent Address"/> --%>								 	
+							<c:forEach items="${order.payments}" var="payment" varStatus="pStatus">
+								<form:input path="payments[${pStatus.index}].paymentAmount" class="form-control input-sm" placeholder=""/>
+							</c:forEach>
 						</div>
 					</div>
+					</form:form>
 				</div>
 				<hr />
 				<div class="row">
@@ -274,4 +275,6 @@
 	  	</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
 </div>
+
+
 

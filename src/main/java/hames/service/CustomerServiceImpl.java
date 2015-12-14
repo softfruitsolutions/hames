@@ -1,17 +1,15 @@
 package hames.service;
 
+import hames.bean.Customer;
+import hames.core.bean.ModelUtil;
+import hames.core.service.AbstractServiceImpl;
+import hames.enums.CustomerStatusEnum;
+import hames.validator.CustomerValidator;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.validation.Validator;
-
-import hames.bean.Customer;
-import hames.core.service.AbstractServiceImpl;
-import hames.enums.CustomerStatusEnum;
-import hames.enums.StaffStatusEnum;
-import hames.validator.CustomerValidator;
 
 @Service
 public class CustomerServiceImpl extends AbstractServiceImpl implements CustomerService{
@@ -29,14 +27,13 @@ public class CustomerServiceImpl extends AbstractServiceImpl implements Customer
 	}
 
 	@Override
-	public <T> void validate(BindingResult result, T t) {
+	public <T> void validate(T t) {
 		Customer customer = (Customer) t;
 		if(customer.getStatus() == null || CustomerStatusEnum.findEnum(customer.getStatus()) == null){
 			logger.debug("Customer status is null");
-			result.addError(new ObjectError("status", "Customer status required"));
+			ModelUtil.addError("Customer Status Required");
 		}
-
-		super.validate(result, t);
+		super.validate(t);
 	}
 
 }

@@ -3,7 +3,6 @@ package hames.validator;
 import hames.bean.Customer;
 
 import org.springframework.validation.Errors;
-import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 public class CustomerValidator implements Validator{
@@ -15,8 +14,14 @@ public class CustomerValidator implements Validator{
 
 	@Override
 	public void validate(Object obj, Errors errors) {
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "firstName", "","First Name Required");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "lastName", "","Last Name Required");
+		Customer customer = (Customer) obj;
+		if(customer.getFirstName() == null || customer.getFirstName().isEmpty()){
+			errors.rejectValue("firstName", "", "First Name Required");
+		}
+		
+		if(customer.getLastName() == null || customer.getLastName().isEmpty()){
+			errors.rejectValue("lastName", "", "Last Name Required");
+		}
 
 	}
 
