@@ -3,10 +3,16 @@ package hames.view;
 import hames.bean.Staff;
 import hames.bean.exception.ValidationException;
 import hames.core.bean.ModelUtil;
+import hames.core.system.ReportEngine;
 import hames.core.view.AbstractView;
 import hames.enums.StaffStatusEnum;
 import hames.service.StaffRoleService;
 import hames.service.StaffService;
+
+import java.util.List;
+
+import net.sf.jasperreports.engine.JRDataSource;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -63,5 +69,13 @@ public class StaffView extends AbstractView{
 		}
 		
 		return view(model,null);
+	}
+	
+	@RequestMapping("/staffReport")
+	public void downloadReport(){
+		
+		List<Staff> staffs = staffService.findAll();
+		JRDataSource dataSource = new JRBeanCollectionDataSource(staffs);
+		ReportEngine.buildReport(dataSource, "staff.jrxml", null);
 	}
 }
