@@ -14,9 +14,10 @@
 	  <!-- Datasource -->
 	  <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"	destroy-method="close">
 		<property name="driverClassName" value="org.postgresql.Driver" />
-		<property name="url" value="jdbc:postgresql://localhost:5000/hames" />
+		<!-- <property name="url" value="jdbc:postgresql://localhost:5000/hames" /> -->
+		<property name="url" value="jdbc:postgresql://localhost:5432/hames" />
 		<property name="username" value="postgres" />
-		<property name="password" value="naji" />
+		<property name="password" value="12345" />
 	  </bean>
 	
 	  <!-- Hibernate Session Factory -->
