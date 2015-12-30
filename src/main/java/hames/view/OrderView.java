@@ -4,11 +4,17 @@ import hames.bean.Order;
 import hames.bean.Payment;
 import hames.bean.exception.ValidationException;
 import hames.core.bean.ModelUtil;
+import hames.core.system.ReportEngine;
 import hames.core.view.AbstractView;
 import hames.enums.OrderStatusEnum;
 import hames.service.CustomerService;
 import hames.service.OrderService;
+import net.sf.jasperreports.engine.JRDataSource;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
+import java.util.List;
+
+import org.apache.tiles.request.Request;
 import org.hibernate.HibernateException;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
@@ -20,6 +26,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+/*import antlr.collections.List;*/
 
 @Controller
 public class OrderView extends AbstractView{
@@ -77,5 +85,13 @@ public class OrderView extends AbstractView{
 		}
 		
 		return view(model,null);
+	}
+	
+	@RequestMapping("/orderReport")
+	public void downloadReport(){
+		
+		List<Order> orders = orderService.findAll();
+		JRDataSource dataSource = new JRBeanCollectionDataSource(orders);
+		ReportEngine.buildReport(dataSource, "order.jrxml", null);
 	}
 }
