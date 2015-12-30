@@ -38,7 +38,7 @@ public class Order extends BaseBean{
 	private Integer orderStatus;
 	private DateTime deliveryDate;
 	private DateTime orderDate;
-	
+	private String advancePayement;
 	/**
 	 * Amount
 	 * @return
@@ -288,7 +288,13 @@ public class Order extends BaseBean{
 			payments.add(payment);
 		}
 	}
+	public void setAdvance(String advnce){
+		this.advancePayement=advnce;
+	}
 
+	public String getAdvance(){
+		return advancePayement;
+	}
 	@Override
 	public String toString() {
 		return "Order [orderId=" + orderId + ", jobNo=" + jobNo

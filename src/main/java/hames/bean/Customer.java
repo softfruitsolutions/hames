@@ -15,6 +15,9 @@ public class Customer extends BaseBean {
 	private String temporaryAddress;
 	private Integer status;
 	
+	public Customer(){
+		
+	}
 	public Long getCustomerId() {
 		return customerId;
 	}

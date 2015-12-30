@@ -14,6 +14,18 @@
 				<span class="text">Order</span> <span class="menu-hover"></span>
 			</a>
 		</li>
+		<li class='<c:if test="${menu=='servicebill'}">active</c:if>'>
+			<a href="servicebill"> 
+				<span class="menu-icon"> <i class="fa fa-inbox fa-lg"></i></span>
+				<span class="text">Billing</span> <span class="menu-hover"></span>
+			</a>
+		</li>
+		<li class='<c:if test="${menu=='expensesheet'}">active</c:if>'>
+			<a href="expensesheet"> 
+				<span class="menu-icon"> <i class="fa fa-inbox fa-lg"></i></span>
+				<span class="text">Expense Sheet</span> <span class="menu-hover"></span>
+			</a>
+		</li>
 		<li class='<c:if test="${menu=='customer'}">active</c:if>'>
 			<a href="customerview"> 
 				<span class="menu-icon"> <i class="fa fa-user fa-lg"></i></span>
@@ -21,10 +33,15 @@
 			</a>
 		</li>
 		<li class='openable<c:if test="${menu=='staff' || menu=='staffrole'}"> active</c:if>'>
-			<a href="staffview"> 
+			<a href="stafflistview"> 
 				<span class="menu-icon"> <i class="fa fa-group fa-lg"></i></span>
 				<span class="text">Staff</span><span class="menu-hover"></span>
 			</a>
+			<ul class="submenu">
+				<li class='<c:if test="${menu=='newstaff'}">active</c:if>'>
+					<a href="staffview"><span class="submenu-label"><i class="fa fa-sitemap"></i> New staff</span></a>
+				</li>
+			</ul>
 			<ul class="submenu">
 				<li class='<c:if test="${menu=='staffrole'}">active</c:if>'>
 					<a href="staffroleview"><span class="submenu-label"><i class="fa fa-sitemap"></i> Role</span></a>

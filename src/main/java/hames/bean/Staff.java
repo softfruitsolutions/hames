@@ -19,6 +19,7 @@ public class Staff extends BaseBean {
 	
 	private Long roleId;
 
+	
 	public Long getStaffId() {
 		return staffId;
 	}

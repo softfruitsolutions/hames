@@ -23,4 +23,16 @@
         <put-attribute name="title" value="Order | Hames - Softfruit" />  
         <put-attribute name="body" value="/WEB-INF/views/hames/order/order.jsp" />  
     </definition>
+    <definition name="stafflistview" extends="base.definition">  
+        <put-attribute name="title" value="Staffs | Hames - Softfruit" />  
+        <put-attribute name="body" value="/WEB-INF/views/hames/staff/stafflistview.jsp" />  
+    </definition>
+    <definition name="servicebill" extends="base.definition">  
+        <put-attribute name="title" value="Servicebill | Hames - Softfruit" />  
+        <put-attribute name="body" value="/WEB-INF/views/hames/servicebill.jsp" />  
+    </definition>
+    <definition name="expensesheet" extends="base.definition">  
+        <put-attribute name="title" value="Expense Sheet | Hames - Softfruit" />  
+        <put-attribute name="body" value="/WEB-INF/views/hames/expensesheet.jsp" />  
+    </definition>
 </tiles-definitions>  
