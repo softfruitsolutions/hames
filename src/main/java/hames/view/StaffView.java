@@ -72,8 +72,7 @@ public class StaffView extends AbstractView{
 	}
 	
 	@RequestMapping("/staffReport")
-	public void downloadReport(){
-		
+	public void downloadOrderReport(){
 		List<Staff> staffs = staffService.findAll();
 		JRDataSource dataSource = new JRBeanCollectionDataSource(staffs);
 		ReportEngine.buildReport(dataSource, "staff.jrxml", null);
