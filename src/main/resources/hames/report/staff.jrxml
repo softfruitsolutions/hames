@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
-<!-- 2015-12-29T16:09:55 -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="staff" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" isIgnorePagination="true" uuid="05171834-7110-4582-a17d-233a599acf32">
+<!-- 2015-12-30T14:58:53 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="staff" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryNewPage="true" whenResourceMissingType="Empty" isIgnorePagination="true" uuid="05171834-7110-4582-a17d-233a599acf32">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<queryString>
 		<![CDATA[]]>
@@ -27,7 +27,7 @@
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="30" splitType="Stretch">
+		<band height="15" splitType="Stretch">
 			<rectangle>
 				<reportElement x="0" y="0" width="555" height="15" backcolor="#000000" uuid="3298267d-2ded-4a95-9e75-ea95dea199cd">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
@@ -49,7 +49,7 @@
 				<text><![CDATA[Staff Name]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="290" y="5" width="110" height="14" forecolor="#FFFFFF" uuid="2792501b-ce1a-4e9f-8826-282291d90d6c"/>
+				<reportElement x="241" y="1" width="110" height="14" forecolor="#FFFFFF" uuid="2792501b-ce1a-4e9f-8826-282291d90d6c"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Tahoma" size="10" isBold="true"/>
 				</textElement>
@@ -69,7 +69,7 @@
 				<textFieldExpression><![CDATA[$F{firstName}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="290" y="0" width="90" height="15" uuid="9ccd78f7-e1ce-49d0-86b4-20b2dd7db33e"/>
+				<reportElement x="240" y="0" width="90" height="15" uuid="9ccd78f7-e1ce-49d0-86b4-20b2dd7db33e"/>
 				<textFieldExpression><![CDATA[$F{country}]]></textFieldExpression>
 			</textField>
 		</band>

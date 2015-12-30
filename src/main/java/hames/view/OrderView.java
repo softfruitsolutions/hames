@@ -14,6 +14,7 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 import java.util.List;
 
+import org.apache.tiles.request.Request;
 import org.hibernate.HibernateException;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
@@ -92,6 +93,5 @@ public class OrderView extends AbstractView{
 		List<Order> orders = orderService.findAll();
 		JRDataSource dataSource = new JRBeanCollectionDataSource(orders);
 		ReportEngine.buildReport(dataSource, "order.jrxml", null);
-		
 	}
 }

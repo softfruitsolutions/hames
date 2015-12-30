@@ -76,6 +76,9 @@ public class ReportEngine {
 	
 	public static void main(String[] args) {
 		JRDataSource source = new JREmptyDataSource();
-		ReportEngine.buildReport(source, "staff.jrxml", null);
+		/*ReportEngine.buildReport(source, "staff.jrxml", null);*/
+		ReportEngine.buildReport(source, "jrxmlFileName" , null);
 	}
+	
+
 }
