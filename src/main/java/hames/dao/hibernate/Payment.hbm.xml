@@ -4,7 +4,7 @@
 <hibernate-mapping package="hames.bean" default-access="field">
 	<class name="Payment" table="payment">
 		<id name="paymentId" column="payment_id">
-            <generator class="native"/>
+            <generator class="identity"/>
         </id>
         
        <property name="paymentAmount" column="payment_amount" not-null="true"  type="java.math.BigDecimal" />

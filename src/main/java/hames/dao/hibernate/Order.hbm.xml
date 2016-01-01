@@ -4,7 +4,7 @@
 <hibernate-mapping package="hames.bean" default-access="field">
 	<class name="Order" table="orders">
 		<id name="orderId" column="id">
-            <generator class="native"/>
+            <generator class="identity"/>
         </id>
         
         <property name="jobNo" column="job_no" not-null="true" />

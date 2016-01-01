@@ -5,7 +5,7 @@
 
     <class name="StaffRole" table="staff_role">
         <id name="roleId" column="id">
-            <generator class="native"/>
+            <generator class="identity"/>
         </id>
 
         <property name="roleName" column="role_name" not-null="true"/>
