@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.sf.jasperreports.engine.JRDataSource;
-import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -72,10 +71,5 @@ public class ReportEngine {
 		
 	    logger.debug("Successful printing Jasper Report");
 
-	}
-	
-	public static void main(String[] args) {
-		JRDataSource source = new JREmptyDataSource();
-		ReportEngine.buildReport(source, "staff.jrxml", null);
 	}
 }

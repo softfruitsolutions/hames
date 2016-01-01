@@ -21,7 +21,7 @@ public class OrderValidator implements Validator{
 			errors.rejectValue("jobName", "","Job Name Required");
 		}
 		
-		if(order.getCustomerId() < -1){
+		if(order.getCustomerId()==null || order.getCustomerId() < -1){
 			errors.rejectValue("customerId", "", "Customer Required");
 		}
 		

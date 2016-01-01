@@ -1,13 +1,13 @@
 package hames.core.bean;
 
-import java.util.Date;
+import org.joda.time.DateTime;
 
 public class BaseBean {
 
 	private Integer staffCreated;
 	private Integer staffModified;
-	private Date dateCreated;
-	private Date dateModified;
+	private DateTime dateCreated;
+	private DateTime dateModified;
 
 	public Integer getStaffCreated() {
 		return staffCreated;
@@ -21,18 +21,19 @@ public class BaseBean {
 	public void setStaffModified(Integer staffModified) {
 		this.staffModified = staffModified;
 	}
-	public Date getDateCreated() {
+	public DateTime getDateCreated() {
 		return dateCreated;
 	}
-	public void setDateCreated(Date dateCreated) {
+	public void setDateCreated(DateTime dateCreated) {
 		this.dateCreated = dateCreated;
 	}
-	public Date getDateModified() {
+	public DateTime getDateModified() {
 		return dateModified;
 	}
-	public void setDateModified(Date dateModified) {
+	public void setDateModified(DateTime dateModified) {
 		this.dateModified = dateModified;
 	}
+	
 	
 	
 }

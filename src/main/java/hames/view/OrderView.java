@@ -2,6 +2,7 @@ package hames.view;
 
 import hames.bean.Order;
 import hames.bean.Payment;
+import hames.bean.exception.OrderException;
 import hames.bean.exception.ValidationException;
 import hames.core.bean.ModelUtil;
 import hames.core.view.AbstractView;
@@ -16,7 +17,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -51,7 +51,10 @@ public class OrderView extends AbstractView{
 				order.setOrderStatus(OrderStatusEnum.DRAFT.getValue());
 				
 				//Adding Payment to Order
-				order.addPayments(new Payment());
+				Payment payment = new Payment();
+				payment.setPaymentDate(new DateTime());
+				order.addPayments(payment);
+				
 				model.addAttribute("order", order);
 			}
 		}else{
@@ -64,7 +67,7 @@ public class OrderView extends AbstractView{
 	}
 
 	@RequestMapping("/ordersave")
-	public String save(Model model,@ModelAttribute Order order,BindingResult result){
+	public String save(Model model,@ModelAttribute Order order){
 		
 		try{
 			orderService.processOrder(order);
@@ -74,6 +77,9 @@ public class OrderView extends AbstractView{
 			ModelUtil.addError(e.getMessage());
 		}catch (ValidationException e) {
 			logger.error("Validation errors are present");
+		}catch (OrderException e) {
+			logger.error(e.getMessage());
+			ModelUtil.addError(e.getMessage());
 		}
 		
 		return view(model,null);
