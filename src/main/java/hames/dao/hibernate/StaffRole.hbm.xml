@@ -12,8 +12,8 @@
         <property name="roleDescription" column="role_description" />
         <property name="status" column="status" />
         
-        <property name="dateCreated" column="date_created" />
-        <property name="dateModified" column="date_modified" />
+        <property name="dateCreated" column="date_created" type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime"/>
+        <property name="dateModified" column="date_modified" type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime"/>
         
         <property name="staffCreated" column="staff_created" />
         <property name="staffModified" column="staff_modified" />

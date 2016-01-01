@@ -6,6 +6,7 @@ import hames.core.service.AbstractServiceImpl;
 import hames.enums.OrderStatusEnum;
 import hames.validator.OrderValidator;
 
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -34,6 +35,12 @@ public class OrderServiceImpl extends AbstractServiceImpl implements OrderServic
 			 * Order Creation
 			 */
 			order.setOrderStatus(OrderStatusEnum.CREATED.getValue());
+			
+			/**
+			 * Setting Auditable details
+			 */
+			order.setDateCreated(new DateTime());
+			order.setDateModified(new DateTime());
 			validateAndSave(order);
 		}else{
 			logger.debug("Cannot process an order with status {}. Operation Aborted.!",order.getOrderStatus());

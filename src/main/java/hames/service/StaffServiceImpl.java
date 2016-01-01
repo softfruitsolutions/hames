@@ -7,6 +7,7 @@ import hames.core.service.AbstractServiceImpl;
 import hames.enums.StaffStatusEnum;
 import hames.validator.StaffValidator;
 
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,11 @@ public class StaffServiceImpl extends AbstractServiceImpl implements StaffServic
 	@Override
 	public <T> void validateAndSave(T t) {
 		Staff staff = (Staff) t;
+		
+		//Setting Auditable details
+		staff.setDateCreated(new DateTime());
+		staff.setDateModified(new DateTime());
+		
 		super.validateAndSave(staff);
 	}
 	

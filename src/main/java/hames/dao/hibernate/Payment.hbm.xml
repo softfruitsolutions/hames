@@ -8,6 +8,7 @@
         </id>
         
        <property name="paymentAmount" column="payment_amount" not-null="true"  type="java.math.BigDecimal" />
+       <property name="paymentDate" column="payment_date" type="org.jadira.usertype.dateandtime.joda.PersistentDateTime"/>
         
 	</class>
 </hibernate-mapping>

@@ -6,6 +6,7 @@ import hames.core.service.AbstractServiceImpl;
 import hames.enums.StaffRoleStatusEnum;
 import hames.validator.StaffRoleValidator;
 
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,9 @@ public class StaffRoleServiceImpl extends AbstractServiceImpl implements StaffRo
 	public <T> void validate(T t) {
 	
 		StaffRole role = (StaffRole) t;
+		role.setDateCreated(new DateTime());
+		role.setDateModified(new DateTime());
+		
 		if(role.getStatus() == null || StaffRoleStatusEnum.findEnum(role.getStatus()) == null){
 			logger.debug("Staff Role status is null");
 			ModelUtil.addError("Staff Role status is null");

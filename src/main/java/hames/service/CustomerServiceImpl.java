@@ -6,6 +6,7 @@ import hames.core.service.AbstractServiceImpl;
 import hames.enums.CustomerStatusEnum;
 import hames.validator.CustomerValidator;
 
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,11 @@ public class CustomerServiceImpl extends AbstractServiceImpl implements Customer
 	@Override
 	public <T> void validate(T t) {
 		Customer customer = (Customer) t;
+		
+		//Setting Auditable details
+		customer.setDateCreated(new DateTime());
+		customer.setDateModified(new DateTime());
+		
 		if(customer.getStatus() == null || CustomerStatusEnum.findEnum(customer.getStatus()) == null){
 			logger.debug("Customer status is null");
 			ModelUtil.addError("Customer Status Required");

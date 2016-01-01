@@ -256,6 +256,7 @@
 							<label class="control-label">Payment</label>
 							<c:forEach items="${order.payments}" var="payment" varStatus="pStatus">
 								<form:input path="payments[${pStatus.index}].paymentAmount" class="form-control input-sm" placeholder=""/>
+								<form:hidden path="payments[${pStatus.index}].paymentDate" />
 							</c:forEach>
 						</div>
 					</div>
