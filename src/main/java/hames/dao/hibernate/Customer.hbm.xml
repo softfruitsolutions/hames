@@ -5,7 +5,7 @@
 
     <class name="Customer" table="customer">
         <id name="customerId" column="id">
-            <generator class="native"/>
+            <generator class="identity"/>
         </id>
 
         <property name="firstName" column="first_name" not-null="true"/>
