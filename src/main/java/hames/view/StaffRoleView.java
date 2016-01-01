@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,7 +30,12 @@ public class StaffRoleView extends AbstractView{
 	}
 	
 	@RequestMapping("/staffroleview")
-	public String view(Model model, @RequestParam(value="id",required=false) Long id){
+	public String view(Model model){
+		return "staff.role.list";
+	}
+	
+	@RequestMapping("/staffrole")
+	public String create(Model model, @RequestParam(value="id",required=false) Long id){
 		
 		activeMenu(model, "staffrole");
 		
@@ -50,7 +54,7 @@ public class StaffRoleView extends AbstractView{
 	}
 
 	@RequestMapping("/staffrolesave")
-	public String save(Model model,@ModelAttribute StaffRole staffRole,BindingResult result){
+	public String save(Model model,@ModelAttribute StaffRole staffRole){
 		
 		try{
 			staffRoleService.validateAndSave(staffRole);
@@ -59,6 +63,6 @@ public class StaffRoleView extends AbstractView{
 			logger.debug("Validation errors are present");
 		}
 		
-		return view(model,null);
+		return create(model,null);
 	}
 }
