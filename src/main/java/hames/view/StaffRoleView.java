@@ -31,6 +31,7 @@ public class StaffRoleView extends AbstractView{
 	
 	@RequestMapping("/staffroleview")
 	public String view(Model model){
+		model.addAttribute("staffRoles", staffRoleService.findAll());
 		return "staff.role.list";
 	}
 	
@@ -49,7 +50,6 @@ public class StaffRoleView extends AbstractView{
 		}
 		
 		model.addAttribute("staffRole", staffRole);
-		model.addAttribute("staffRoles", staffRoleService.findAll());
 		return getTitleDefinition(model);
 	}
 
@@ -63,6 +63,6 @@ public class StaffRoleView extends AbstractView{
 			logger.debug("Validation errors are present");
 		}
 		
-		return create(model,null);
+		return "redirect:staffroleview";
 	}
 }
