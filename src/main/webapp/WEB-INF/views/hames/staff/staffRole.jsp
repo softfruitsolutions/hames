@@ -21,16 +21,21 @@
 		<div class="row">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<a class="btn btn-info" href="staffroleview"><i class="fa fa-asterisk"></i> New</a>
-					<a class="btn btn-success" onclick="save()">
-						<i class="fa fa-save"></i>
-						<c:if test="${staffRole.roleId == null }" >
-							Save
-						</c:if>
-						<c:if test="${staffRole.roleId > 0 }" >
-							Update
-						</c:if>
-					</a>
+					<div class="btn-toolbar no-margin">
+						<div class="btn-group">
+							<a class="btn btn-info" href="staffroleview" title="Back to Available Roles"><i class="fa fa-reply"></i></a>
+							<a class="btn btn-info" href="staffrole" title="Refresh"><i class="fa fa-refresh"></i></a>
+							<a class="btn btn-success" onclick="save()">
+								<i class="fa fa-save"></i>
+								<c:if test="${staffRole.roleId == null }" >
+									Save
+								</c:if>
+								<c:if test="${staffRole.roleId > 0 }" >
+									Update
+								</c:if>
+							</a>
+						</div>
+					</div>
 				</div>
 				<div class="panel-body">
 					<form:form modelAttribute="staffRole" method="POST" action="staffrolesave">
@@ -57,32 +62,6 @@
 						<form:hidden path="status" placeholder="status" />
 						<jsp:include page="/WEB-INF/views/hames/audit.jsp" />
 					</form:form>
-				</div>
-			</div>
-			
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					Available Roles
-				</div>
-				<div class="panel-body">
-					<table class="table table-striped table-hover" id="responsiveTable">
-						<thead>
-							<tr>
-								<th>Role ID</th>
-								<th>Role Name</th>
-								<th>Role Description</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach items="${staffRoles}" var="role">
-								<tr onclick="view(${role.roleId})">
-									<td>${role.roleId }</td>
-									<td><a href="<c:url value='staffroleview?id=${role.roleId }'>${role.roleName }</c:url>">${role.roleName }</a></td>
-									<td>${role.roleDescription }</td>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
 				</div>
 			</div>
 		</div>
