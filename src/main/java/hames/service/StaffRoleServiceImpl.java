@@ -28,12 +28,22 @@ public class StaffRoleServiceImpl extends AbstractServiceImpl implements StaffRo
 	}
 	
 	@Override
+	public <T> void save(T t) {
+		StaffRole role = (StaffRole) t;
+		if(role.getRoleId() == null || role.getRoleId() < -1){
+			role.setDateCreated(new DateTime());
+			role.setDateModified(new DateTime());	
+		}else{
+			role.setDateModified(new DateTime());
+		}
+		
+		super.save(t);
+	}
+	
+	@Override
 	public <T> void validate(T t) {
 	
 		StaffRole role = (StaffRole) t;
-		role.setDateCreated(new DateTime());
-		role.setDateModified(new DateTime());
-		
 		if(role.getStatus() == null || StaffRoleStatusEnum.findEnum(role.getStatus()) == null){
 			logger.debug("Staff Role status is null");
 			ModelUtil.addError("Staff Role status is null");

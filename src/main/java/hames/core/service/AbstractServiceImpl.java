@@ -3,6 +3,8 @@ package hames.core.service;
 import hames.bean.exception.ValidationException;
 import hames.core.bean.ModelUtil;
 import hames.core.dao.AbstractDaoImpl;
+import hames.core.util.DatatableRequest;
+import hames.core.util.DatatableResponse;
 
 import java.util.HashMap;
 import java.util.List;
@@ -23,19 +25,10 @@ public abstract class AbstractServiceImpl extends AbstractDaoImpl implements Abs
 	@Override
 	public <T> void save(T t) {
 		try{
-			logger.debug("Saving object : {}",t.toString());
-			saveOrUpdate(t);
-			logger.debug("{} saved successfully",t.getClass().getSimpleName());
-		}catch(HibernateException e){
-			throw new HibernateException(e);
-		}
-	}
-	
-	@Override
-	public <T> void validateAndSave(T t) {
-		try{
-			logger.debug("Validating object : {}",getEntityClass());
-			validate(t);
+			if(getValidator() != null){
+				logger.debug("Validating object : {}",getEntityClass());
+				validate(t);
+			}
 			logger.debug("Saving object : {}",t.toString());
 			saveOrUpdate(t);
 			logger.debug("{} saved successfully",t.getClass().getSimpleName());
@@ -79,6 +72,19 @@ public abstract class AbstractServiceImpl extends AbstractDaoImpl implements Abs
 	@Override
 	public <T> T findOne(Long id) {
 		return super.findOne(getEntityClass(), id);
+	}
+	
+	@Override
+	public DatatableResponse getDataTable(DatatableRequest datatableRequest,Class clazz) {
+		DatatableResponse response = null;
+		
+		if(clazz == null){
+			response = buildDatatable(datatableRequest, getEntityClass());
+		}else {
+			response = buildDatatable(datatableRequest, clazz);
+		}
+		
+		return response;
 	}
 	
 }

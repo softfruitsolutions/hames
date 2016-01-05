@@ -353,6 +353,8 @@
 	<!-- Masked Input -->
 	<script src="resources/endless/js/jquery.maskedinput.min.js" type="text/javascript"></script>
 	
+	<!-- DataTable JQuery  -->
+	<script src="resources/endless/js/jquery.dataTables.min.js" type="text/javascript"></script>
 	
   </body>
 
