@@ -33,14 +33,14 @@ public class StaffServiceImpl extends AbstractServiceImpl implements StaffServic
 	}
 	
 	@Override
-	public <T> void validateAndSave(T t) {
+	public <T> void save(T t) {
 		Staff staff = (Staff) t;
 		
 		//Setting Auditable details
 		staff.setDateCreated(new DateTime());
 		staff.setDateModified(new DateTime());
 		
-		super.validateAndSave(staff);
+		super.save(staff);
 	}
 	
 	@Override

@@ -7,10 +7,12 @@
         <put-attribute name="title" value="Hames - Softfruit" />  
         <put-attribute name="body" value="/WEB-INF/views/hames/index.jsp" />  
     </definition>  
+    
  	<definition name="customer" extends="base.definition">  
         <put-attribute name="title" value="Customer | Hames - Softfruit" />  
         <put-attribute name="body" value="/WEB-INF/views/hames/party/customer.jsp" />  
     </definition>  
+    
     <definition name="staff" extends="base.definition">  
         <put-attribute name="title" value="Staff | Hames - Softfruit" />  
         <put-attribute name="body" value="/WEB-INF/views/hames/staff/staff.jsp" />  

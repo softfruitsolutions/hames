@@ -1,5 +1,8 @@
 package hames.core.dao;
 
+import hames.core.util.DatatableRequest;
+import hames.core.util.DatatableResponse;
+
 import java.util.List;
 
 public interface AbstractDao {
@@ -21,4 +24,10 @@ public interface AbstractDao {
 	 * @return
 	 */
 	public <T> List<T> findAll(Class<?> clazz);
+	
+	/**
+	 * Build Datatable
+	 * @return DatatableResponse 
+	 */
+	public DatatableResponse buildDatatable(DatatableRequest datatableRequest,Class clazz);
 }

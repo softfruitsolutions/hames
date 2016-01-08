@@ -41,7 +41,7 @@ public class OrderServiceImpl extends AbstractServiceImpl implements OrderServic
 			 */
 			order.setDateCreated(new DateTime());
 			order.setDateModified(new DateTime());
-			validateAndSave(order);
+			save(order);
 		}else{
 			logger.debug("Cannot process an order with status {}. Operation Aborted.!",order.getOrderStatus());
 			throw new OrderException("Order can't be processed");

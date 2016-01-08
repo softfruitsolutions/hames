@@ -3,6 +3,8 @@ package hames.view;
 import hames.bean.StaffRole;
 import hames.bean.exception.ValidationException;
 import hames.core.bean.ModelUtil;
+import hames.core.util.DatatableRequest;
+import hames.core.util.DatatableResponse;
 import hames.core.view.AbstractView;
 import hames.enums.StaffRoleStatusEnum;
 import hames.service.StaffRoleService;
@@ -13,8 +15,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class StaffRoleView extends AbstractView{
@@ -57,7 +61,7 @@ public class StaffRoleView extends AbstractView{
 	public String save(Model model,@ModelAttribute StaffRole staffRole){
 		
 		try{
-			staffRoleService.validateAndSave(staffRole);
+			staffRoleService.save(staffRole);
 			ModelUtil.addSuccess("Staff Role saved successfully");
 		}catch(ValidationException e){
 			logger.debug("Validation errors are present");
@@ -65,4 +69,16 @@ public class StaffRoleView extends AbstractView{
 		
 		return "redirect:staffroleview";
 	}
+	
+	@RequestMapping("/staffroledatatable")
+	public @ResponseBody DatatableResponse viewDatatable(@ModelAttribute DatatableRequest datatableRequest){
+		System.out.println(datatableRequest.toString());
+		return staffRoleService.getDataTable(datatableRequest, null);
+	}
+	
+	@RequestMapping("/datatable")
+	public String datatable(Model model){
+		return "home";
+	}
+	
 }
