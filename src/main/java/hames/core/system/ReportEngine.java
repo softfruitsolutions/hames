@@ -5,26 +5,33 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
 import net.sf.jasperreports.engine.JRDataSource;
+import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.JasperRunManager;
 import net.sf.jasperreports.view.JasperViewer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ReportEngine {
 
 	private static final Logger logger = LoggerFactory.getLogger(ReportEngine.class);
 	
 	private static final String REPORT_LOCATION = "/hames/report/";
 	
-	private static InputStream getInputStream(String jrxmlFileName){
+	private InputStream getInputStream(String jrxmlFileName){
 		InputStream inputStream = null;
 		
 		try{
@@ -38,7 +45,7 @@ public class ReportEngine {
 		return inputStream;
 	}
 
-	public static void buildReport(JRDataSource dataSource, String jrxmlFileName, Map<String, Object> parameters){
+	public byte[] buildReport(JRDataSource dataSource, String jrxmlFileName, Map<String, Object> parameters){
 		
 		/**
 		 * Compile JRXML File
@@ -53,7 +60,6 @@ public class ReportEngine {
 		
 		if(parameters == null || parameters.isEmpty()){
 			parameters = new HashMap<String, Object>();
-			parameters.put("Title", "Hello World");
 		}
 		
 		/**
@@ -67,9 +73,30 @@ public class ReportEngine {
 			e.printStackTrace();
 		}
 		
-		JasperViewer.viewReport(jasperPrint);
+		byte[] report = null;
+		try {
+			 report = JasperExportManager.exportReportToPdf(jasperPrint);
+		} catch (JRException e) {
+			logger.error("Error building report to bytes format. Compilation Error");
+			e.printStackTrace();
+		}
 		
-	    logger.debug("Successful printing Jasper Report");
-
+		return report;
 	}
+	
+	public byte[] renderReport(HttpServletResponse response, JRDataSource dataSource, String jrxmlFileName, Map<String, Object> parameters){
+		byte[] content = buildReport(dataSource, jrxmlFileName, parameters);
+	    try {
+	    	response.setContentType("application/pdf");
+		    response.setContentLength(content.length);
+		    response.setHeader("Content-Disposition",  "inline;filename=report.pdf");
+			response.getOutputStream().write(content, 0, content.length);
+		} catch (IOException e) {
+			logger.debug("Error writing content to response OutputStream.");
+			e.printStackTrace();
+		}
+	    
+	    return content;
+	}
+
 }

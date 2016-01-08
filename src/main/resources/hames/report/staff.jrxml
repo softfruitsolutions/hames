@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
-<!-- 2015-12-26T15:04:32 -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="staff" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" isIgnorePagination="true" uuid="05171834-7110-4582-a17d-233a599acf32">
+<!-- 2016-01-08T21:43:52 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="staff" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Error" isIgnorePagination="true" uuid="05171834-7110-4582-a17d-233a599acf32">
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -49,15 +49,14 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="15" splitType="Stretch">
+		<band height="28" splitType="Stretch">
 			<textField>
-				<reportElement x="70" y="0" width="170" height="15" uuid="4f84f13e-b948-453f-bd27-e30d04e83f93">
-					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-				</reportElement>
-				<textElement>
-					<font fontName="Tahoma"/>
-				</textElement>
+				<reportElement x="70" y="3" width="100" height="17" uuid="26a23a79-79ce-4af6-934d-73d7b37e9bd0"/>
 				<textFieldExpression><![CDATA[$F{firstName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="170" y="5" width="100" height="15" uuid="ec88c31e-67b7-4718-b8ea-4efdab6afba0"/>
+				<textFieldExpression><![CDATA[$F{middleName}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

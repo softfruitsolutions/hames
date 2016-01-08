@@ -28,7 +28,7 @@
 				<div class="panel-heading">
 					<a class="btn btn-info" href="staffview"><i class="fa fa-asterisk"></i> New</a>
 					<a class="btn btn-success" onclick="save()"><i class="fa fa-save"></i> Save</a>
-					<a class="btn btn-info" href="staffReport"><i class="fa fa-print-o"></i> Print</a>
+					<a class="btn btn-info" target="_blank" href="staffReport"><i class="fa fa-print-o"></i> Print</a>
 				</div>
 				<div class="panel-body">
 					<form:form modelAttribute="staff" method="POST" action="staffsave">

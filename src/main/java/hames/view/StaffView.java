@@ -11,7 +11,10 @@ import hames.service.StaffService;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import net.sf.jasperreports.engine.JRDataSource;
+import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 import org.slf4j.Logger;
@@ -33,6 +36,8 @@ public class StaffView extends AbstractView{
 	private StaffService staffService;
 	@Autowired
 	private StaffRoleService staffRoleService;
+	@Autowired
+	private ReportEngine reportEngine;
 	
 	public String getTitleDefinition(Model model){
 		return "staff";
@@ -72,10 +77,13 @@ public class StaffView extends AbstractView{
 	}
 	
 	@RequestMapping("/staffReport")
-	public void downloadReport(){
+	public void downloadReport(Model model,HttpServletResponse response){
 		
+		logger.debug("Building Staff Report");
 		List<Staff> staffs = staffService.findAll();
 		JRDataSource dataSource = new JRBeanCollectionDataSource(staffs);
-		ReportEngine.buildReport(dataSource, "staff.jrxml", null);
+		byte[] report = reportEngine.renderReport(response,dataSource, "staff.jrxml", null);
+		logger.debug("Staff Report rendered succesfully");
+		
 	}
 }
