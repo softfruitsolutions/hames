@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- Apache Shiro Security  -->
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+	    <property name="securityManager" ref="securityManager"/>
+	    <property name="loginUrl" value="/login"/>
+	    <property name="successUrl" value="/dashboard"/>
+	    <property name="unauthorizedUrl" value="/unauthorized"/>
+	    <property name="filterChainDefinitions">
+	        <value>
+	        	/resources/** = anon
+	            /** = authc
+	        </value>
+	    </property>
+	</bean>
+	
+	<!-- Security Manager  -->
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+	    <property name="realm" ref="hamesRealm"/>
+	</bean>
+	
+	<!-- Realm Configuration  -->
+	<bean id="hamesRealm" class="com.hames.auth.HamesRealm" />
+	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+		
+	<!-- Shiro Annotations  -->
+	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor"/>
+	<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+	    <property name="securityManager" ref="securityManager"/>
+	</bean>	
+	
+</beans>
