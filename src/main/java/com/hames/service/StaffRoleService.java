@@ -35,4 +35,10 @@ public interface StaffRoleService{
 	 */
 	public List<StaffRole> getAllStaffRoles(); 
 	
+	/**
+	 * Get Active Staff Roles
+	 * @return
+	 */
+	public List<StaffRole> getActiveStaffRoles();
+	
 }

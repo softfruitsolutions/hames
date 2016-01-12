@@ -77,4 +77,9 @@ public class StaffRoleServiceImpl extends GenericService implements StaffRoleSer
 		return staffRoleDao.findAllStaffRoles();
 	}
 
+	@Override
+	public List<StaffRole> getActiveStaffRoles() {
+		return staffRoleDao.findActiveStaffRoles();
+	}
+
 }

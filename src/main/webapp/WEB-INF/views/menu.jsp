@@ -20,17 +20,17 @@
 				<span class="text">Customer</span><span class="menu-hover"></span>
 			</a>
 		</li>
-		<li class='openable <c:if test="${menu=='staff' || menu=='staffrole'}"> active</c:if> '>
+		<li class='openable'> <!-- <c:if test="${menu=='staff' || menu=='staffrole'}"> active</c:if>  -->
 			<a href='#'> 
 				<span class="menu-icon"> <i class="fa fa-group fa-lg"></i></span>
 				<span class="text">Staffing</span><span class="menu-hover"></span>
 			</a>
 			<ul class="submenu">
 				<li class='<c:if test="${menu=='staff'}">active</c:if>'>
-					<a href='<c:url value="/staffrole/view" />'><span class="submenu-label"><i class="fa fa-user"></i> Staff</span></a>
+					<a href='<c:url value="/staff/list" />'><span class="submenu-label"><i class="fa fa-user"></i> Staff</span></a>
 				</li>
 				<li class='<c:if test="${menu=='staffrole'}">active</c:if>'>
-					<a href='<c:url value="/staffrole/view" />'><span class="submenu-label"><i class="fa fa-sitemap"></i> Role</span></a>
+					<a href='<c:url value="/staffrole/list" />'><span class="submenu-label"><i class="fa fa-sitemap"></i> Role</span></a>
 				</li>
 			</ul>
 		</li>

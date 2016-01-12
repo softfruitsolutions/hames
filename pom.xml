@@ -3,8 +3,8 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.hames</groupId>
-	<artifactId>auth</artifactId>
-	<name>hames</name>
+	<artifactId>hames</artifactId>
+	<name>hames-softfruit</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
@@ -15,6 +15,13 @@
 	</properties>
 	<dependencies>
 		
+		<!-- Jasper Reports  -->
+		<!-- <dependency>
+	        <groupId>net.sf.jasperreports</groupId>
+	        <artifactId>jasperreports</artifactId>
+	        <version>5.2.0</version>
+	    </dependency> -->
+	    
 		<!-- Jackson JSON  -->
 		<dependency>
 		    <groupId>com.fasterxml.jackson.core</groupId>

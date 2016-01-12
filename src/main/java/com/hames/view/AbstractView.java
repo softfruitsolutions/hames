@@ -17,8 +17,6 @@ import com.hames.system.DatePropertyEditor;
 @Controller
 public abstract class AbstractView {
 
-	public abstract String getTitleDefinition(Model model);
-	
 	public void activeMenu(Model model,String menuName){
 		model.addAttribute("menu", menuName);
 	}

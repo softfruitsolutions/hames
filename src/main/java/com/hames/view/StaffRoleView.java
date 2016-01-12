@@ -28,11 +28,6 @@ public class StaffRoleView extends AbstractView{
 	@Autowired
 	private StaffRoleService staffRoleService;
 	
-	@Override
-	public String getTitleDefinition(Model model) {
-		return "staff.role";
-	}
-	
 	@RequestMapping("/list")
 	public String view(Model model){
 		return "staff.role.list";
@@ -56,7 +51,7 @@ public class StaffRoleView extends AbstractView{
 		model.addAttribute("staffRole", staffRole);
 		model.addAttribute("staffRoleStatus", StaffRoleStatusEnum.values());
 		
-		return getTitleDefinition(model);
+		return "staff.role";
 	}
 
 	@RequestMapping(value="/save", method=RequestMethod.POST)

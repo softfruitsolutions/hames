@@ -33,4 +33,10 @@ public interface StaffRoleDao{
 	 * @return
 	 */
 	DatatableResponse buildDatatable(DatatableRequest request);
+	
+	/**
+	 * Find Active Staff Roles
+	 * @return
+	 */
+	List<StaffRole> findActiveStaffRoles();
 }
