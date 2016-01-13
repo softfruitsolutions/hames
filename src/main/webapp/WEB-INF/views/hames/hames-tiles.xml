@@ -27,5 +27,14 @@
         <put-attribute name="title" value="Staff | Hames - Softfruit" />  
         <put-attribute name="body" value="/WEB-INF/views/hames/staff/staffList.jsp" />  
     </definition>
+    
+    <definition name="customer" extends="base.definition">  
+        <put-attribute name="title" value="Customer | Hames - Softfruit" />  
+        <put-attribute name="body" value="/WEB-INF/views/hames/party/customer.jsp" />  
+    </definition>  
+    <definition name="customer.list" extends="base.definition">  
+        <put-attribute name="title" value="Customer | Hames - Softfruit" />  
+        <put-attribute name="body" value="/WEB-INF/views/hames/party/customerList.jsp" />  
+    </definition>  
  	
 </tiles-definitions>  

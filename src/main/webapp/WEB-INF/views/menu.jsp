@@ -15,7 +15,7 @@
 			</a>
 		</li>
 		<li class='<c:if test="${menu=='customer'}">active</c:if>'>
-			<a href="customerview"> 
+			<a href="<c:url value="/customer/list" />"> 
 				<span class="menu-icon"> <i class="fa fa-user fa-lg"></i></span>
 				<span class="text">Customer</span><span class="menu-hover"></span>
 			</a>

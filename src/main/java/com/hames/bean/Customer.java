@@ -1,9 +1,12 @@
 package com.hames.bean;
 
+import org.springframework.data.annotation.Id;
+
 import com.hames.enums.CustomerStatusEnum;
 
 public class Customer extends BaseBean {
 
+	@Id
 	private String customerId;
 	private String firstName;
 	private String middleName;
