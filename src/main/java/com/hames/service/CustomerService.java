@@ -2,24 +2,24 @@ package com.hames.service;
 
 import java.util.List;
 
-import com.hames.bean.Staff;
+import com.hames.bean.Customer;
 import com.hames.util.DatatableRequest;
 import com.hames.util.DatatableResponse;
 
-public interface StaffService{
+public interface CustomerService{
 
 	/**
-	 * Save Staff
-	 * @param staff
+	 * Save Customer
+	 * @param customer
 	 */
-	public void saveStaff(Staff staff);
+	public void saveCustomer(Customer customer);
 	
 	/**
-	 * Get A Staff
-	 * @param staffId
+	 * Get A Customer
+	 * @param customerId
 	 * @return
 	 */
-	public Staff getStaffById(String staffId);
+	public Customer getCustomerById(String customerId);
 	
 	/**
 	 * Get DataTable 
@@ -29,8 +29,8 @@ public interface StaffService{
 	public DatatableResponse getDatatable(DatatableRequest request);
 	
 	/**
-	 * Get All Staffs 
+	 * Get All Customers 
 	 * @return
 	 */
-	public List<Staff> getAllStaffs(); 
+	public List<Customer> getAllCustomers(); 
 }

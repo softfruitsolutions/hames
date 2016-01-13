@@ -41,7 +41,6 @@ public class StaffRoleDaoImpl extends GenericDao implements StaffRoleDao {
 	@Override
 	public void save(StaffRole staffRole) {
 		if(!hamesDataStore.exists(staffRole.getRoleId(),COLLECTION_NAME)){
-			
 			staffRole.setRoleId(UUID.randomUUID().toString());	
 		}
 		hamesDataStore.save(staffRole,COLLECTION_NAME);
