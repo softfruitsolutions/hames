@@ -21,24 +21,27 @@
 	<div class="row">
 		<div class="col-md-12 col-sm-12">
 			<div class="panel panel-default">
-				<div class="btn-toolbar no-margin">
-					<div class="btn-group">
-						<a class="btn btn-info" href="${customerListUrl}" title="Back to Available Customer's"><i class="fa fa-reply"></i></a>
-						<a class="btn btn-info" href="${customerViewUrl}" title="Refresh"><i class="fa fa-refresh"></i></a>
-						<a class="btn btn-success" onclick="save()">
-							<i class="fa fa-save"></i>
-							<c:if test="${customer.customerId == null }" >
-								Save
-							</c:if>
-							<c:if test="${customer.customerId != null}" >
-								Update
-							</c:if>
-						</a>
+				<div class="panel-heading">
+					<div class="btn-toolbar no-margin">
+						<div class="btn-group">
+							<a class="btn btn-info" href="${customerListUrl}" title="Back to Available Customer's"><i class="fa fa-reply"></i></a>
+							<a class="btn btn-info" href="${customerViewUrl}" title="Refresh"><i class="fa fa-refresh"></i></a>
+							<a class="btn btn-success" onclick="save()">
+								<i class="fa fa-save"></i>
+								<c:if test="${customer.partyId == null }" >
+									Save
+								</c:if>
+								<c:if test="${customer.partyId != null}" >
+									Update
+								</c:if>
+							</a>
+						</div>
 					</div>
 				</div>
 				<div class="panel-body">
 					<form:form modelAttribute="customer" method="POST" action="save">
-						<form:hidden path="customerId"/>
+						<form:hidden path="partyId"/>
+						<form:hidden path="partyType"/>
 						<div class="row">
 							<div class="col-md-4">
 								<div class="form-group">

@@ -1,13 +1,7 @@
 package com.hames.bean;
 
-import org.springframework.data.annotation.Id;
+public class Customer extends Party {
 
-import com.hames.enums.CustomerStatusEnum;
-
-public class Customer extends BaseBean {
-
-	@Id
-	private String customerId;
 	private String firstName;
 	private String middleName;
 	private String lastName;
@@ -16,14 +10,8 @@ public class Customer extends BaseBean {
 	private String emailId;
 	private String permanentAddress;
 	private String temporaryAddress;
-	private CustomerStatusEnum status;
 	
-	public String getCustomerId() {
-		return customerId;
-	}
-	public void setCustomerId(String customerId) {
-		this.customerId = customerId;
-	}
+	
 	public String getFirstName() {
 		return firstName;
 	}
@@ -72,20 +60,12 @@ public class Customer extends BaseBean {
 	public void setTemporaryAddress(String temporaryAddress) {
 		this.temporaryAddress = temporaryAddress;
 	}
-	public CustomerStatusEnum getStatus() {
-		return status;
-	}
-	public void setStatus(CustomerStatusEnum status) {
-		this.status = status;
-	}
 	@Override
 	public String toString() {
-		return "Customer [customerId=" + customerId + ", firstName="
-				+ firstName + ", middleName=" + middleName + ", lastName="
-				+ lastName + ", phoneNumber=" + phoneNumber + ", mobileNumber="
-				+ mobileNumber + ", emailId=" + emailId + ", permanentAddress="
-				+ permanentAddress + ", temporaryAddress=" + temporaryAddress
-				+ ", status=" + status + "]";
+		return "Customer [firstName=" + firstName + ", middleName="
+				+ middleName + ", lastName=" + lastName + ", phoneNumber="
+				+ phoneNumber + ", mobileNumber=" + mobileNumber + ", emailId="
+				+ emailId + ", permanentAddress=" + permanentAddress
+				+ ", temporaryAddress=" + temporaryAddress + "]";
 	}
-	
 }

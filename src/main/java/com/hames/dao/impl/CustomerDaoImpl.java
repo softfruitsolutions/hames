@@ -18,7 +18,7 @@ import com.hames.util.DatatableResponse;
 @Repository
 public class CustomerDaoImpl extends GenericDao implements CustomerDao{
 
-	private static final String COLLECTION_NAME = "customer";
+	private static final String COLLECTION_NAME = "party";
 	
 	@Autowired
 	private HamesDataStore hamesDataStore;
@@ -37,8 +37,8 @@ public class CustomerDaoImpl extends GenericDao implements CustomerDao{
 
 	@Override
 	public void save(Customer customer) {
-		if(!hamesDataStore.exists(customer.getCustomerId(),COLLECTION_NAME)){
-			customer.setCustomerId(UUID.randomUUID().toString());
+		if(!hamesDataStore.exists(customer.getPartyId(),COLLECTION_NAME)){
+			customer.setPartyId(UUID.randomUUID().toString());
 		}
 		hamesDataStore.save(customer,COLLECTION_NAME);
 	}

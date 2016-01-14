@@ -1,13 +1,13 @@
 package com.hames.enums;
 
-public enum CustomerStatusEnum {
+public enum PartyStatusEnum {
 	
 	ACTIVE_CUSTOMER("Active Customer"),
 	INACTIVE_CUSTOMER("Inactive Customer");
 	
 	private String text;
 	
-	private CustomerStatusEnum(String text) {
+	private PartyStatusEnum(String text) {
 		this.text = text;
 	}
 

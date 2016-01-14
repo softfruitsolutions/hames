@@ -51,7 +51,7 @@ public class CustomerServiceImpl extends GenericService implements CustomerServi
 		/**
 		 * Setting Audit details
 		 */
-		if(customer.getCustomerId() == null || customer.getCustomerId().isEmpty()){
+		if(customer.getPartyId() == null || customer.getPartyId().isEmpty()){
 			customer.setDateCreated(new DateTime());
 			customer.setDateModified(new DateTime());	
 		}else{

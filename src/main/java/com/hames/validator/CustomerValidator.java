@@ -24,7 +24,11 @@ public class CustomerValidator implements Validator{
 		}
 
 		if(customer.getStatus() == null){
-			errors.rejectValue("status", "Customer Staff Required");
+			errors.rejectValue("status", "","Customer Status Required");
+		}
+		
+		if(customer.getPartyType() == null){
+			errors.rejectValue("partyType", "","Invalid Party Type ");
 		}
 	}
 
