@@ -16,11 +16,25 @@
 	<dependencies>
 		
 		<!-- Jasper Reports  -->
-		<!-- <dependency>
+		<dependency>
 	        <groupId>net.sf.jasperreports</groupId>
 	        <artifactId>jasperreports</artifactId>
 	        <version>5.2.0</version>
-	    </dependency> -->
+	        <exclusions>
+		    	<exclusion>
+		    		<groupId>com.fasterxml.jackson.core</groupId>
+		    		<artifactId>jackson-core</artifactId>
+		    	</exclusion>
+		    	<exclusion>
+		    		<groupId>com.fasterxml.jackson.core</groupId>
+		    		<artifactId>jackson-databind</artifactId>
+		    	</exclusion>
+		    	<exclusion>
+		    		<groupId>com.fasterxml.jackson.core</groupId>
+		    		<artifactId>jackson-annotations</artifactId>
+		    	</exclusion>
+		    </exclusions>
+	    </dependency>
 	    
 		<!-- Jackson JSON  -->
 		<dependency>

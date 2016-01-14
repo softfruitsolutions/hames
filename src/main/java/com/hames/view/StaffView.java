@@ -1,5 +1,12 @@
 package com.hames.view;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
+
+import net.sf.jasperreports.engine.JRDataSource;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +25,7 @@ import com.hames.exception.StaffRoleException;
 import com.hames.exception.ValidationException;
 import com.hames.service.StaffRoleService;
 import com.hames.service.StaffService;
+import com.hames.system.ReportEngine;
 import com.hames.util.DatatableRequest;
 import com.hames.util.DatatableResponse;
 import com.hames.util.ModelUtil;
@@ -32,8 +40,8 @@ public class StaffView extends AbstractView{
 	private StaffService staffService;
 	@Autowired
 	private StaffRoleService staffRoleService;
-	//@Autowired
-	//private ReportEngine reportEngine;
+	@Autowired
+	private ReportEngine reportEngine;
 	
 	@RequestMapping("/list")
 	public String list(Model model){
@@ -81,16 +89,16 @@ public class StaffView extends AbstractView{
 		return list(model);
 	}
 	
-	/*@RequestMapping("/report")
+	@RequestMapping("/report")
 	public void downloadReport(Model model,HttpServletResponse response){
 		
 		logger.debug("Building Staff Report");
 		List<Staff> staffs = staffService.getAllStaffs();
-		//JRDataSource dataSource = new JRBeanCollectionDataSource(staffs);
-		//reportEngine.renderReport(response,dataSource, "staff.jrxml", null);
+		JRDataSource dataSource = new JRBeanCollectionDataSource(staffs);
+		reportEngine.renderReport(response,dataSource, "staff.jrxml", null);
 		logger.debug("Staff Report rendered succesfully");
 		
-	}*/
+	}
 	
 	@RequestMapping("/datatable")
 	public @ResponseBody DatatableResponse viewDatatable(@ModelAttribute DatatableRequest datatableRequest){

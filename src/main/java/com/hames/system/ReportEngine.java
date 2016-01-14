@@ -1,4 +1,4 @@
-/*package com.hames.system;
+package com.hames.system;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -6,6 +6,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
+
+import net.sf.jasperreports.engine.JRDataSource;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +26,7 @@ public class ReportEngine {
 
 	private static final Logger logger = LoggerFactory.getLogger(ReportEngine.class);
 	
-	private static final String REPORT_LOCATION = "/hames/report/";
+	private static final String REPORT_LOCATION = "/com/hames/report/";
 	
 	private InputStream getInputStream(String jrxmlFileName){
 		InputStream inputStream = null;
@@ -36,9 +44,9 @@ public class ReportEngine {
 
 	public byte[] buildReport(JRDataSource dataSource, String jrxmlFileName, Map<String, Object> parameters){
 		
-		*//**
+		/**
 		 * Compile JRXML File
-		 *//*
+		 */
 		JasperReport jasperReport = null;
 		try {
 			jasperReport = JasperCompileManager.compileReport(getInputStream(jrxmlFileName));
@@ -51,9 +59,9 @@ public class ReportEngine {
 			parameters = new HashMap<String, Object>();
 		}
 		
-		*//**
+		/*
 		 * Creating Jasper Print
-		 *//*
+		 */
 		JasperPrint jasperPrint = null; 
 		try {
 			jasperPrint = JasperFillManager.fillReport(jasperReport, parameters,dataSource);
@@ -89,4 +97,3 @@ public class ReportEngine {
 	}
 
 }
-*/
