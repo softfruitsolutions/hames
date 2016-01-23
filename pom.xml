@@ -15,6 +15,13 @@
 	</properties>
 	<dependencies>
 		
+		<!-- Apache Commons -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.4</version>
+		</dependency>
+		
 		<!-- Jasper Reports  -->
 		<dependency>
 	        <groupId>net.sf.jasperreports</groupId>

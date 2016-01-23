@@ -1,11 +1,11 @@
 package com.hames.enums;
 
-public enum PartyTypeEnum {
+public enum PartyType {
 
 	SUPPLIER("Supplier"),
 	CUSTOMER("Customer");
 	
-	private PartyTypeEnum(String text) {
+	private PartyType(String text) {
 		this.text = text;
 	}
 

@@ -1,6 +1,6 @@
 package com.hames.enums;
 
-public enum SaleOrderStatusEnum {
+public enum SaleOrderStatus {
 	
 	DRAFT("Draft"),
 	CREATED("Created"),
@@ -13,7 +13,7 @@ public enum SaleOrderStatusEnum {
 	
 	private String value;
 	
-	private SaleOrderStatusEnum(String value) {
+	private SaleOrderStatus(String value) {
 		this.value = value;
 	}
 	

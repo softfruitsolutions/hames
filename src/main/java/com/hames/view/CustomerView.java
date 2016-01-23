@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hames.bean.Customer;
-import com.hames.enums.PartyStatusEnum;
-import com.hames.enums.PartyTypeEnum;
+import com.hames.enums.PartyStatus;
+import com.hames.enums.PartyType;
 import com.hames.exception.ValidationException;
 import com.hames.service.CustomerService;
 import com.hames.util.ModelUtil;
@@ -43,7 +43,7 @@ public class CustomerView extends AbstractView {
 		if(id == null || id.isEmpty()){
 			if(!model.containsAttribute("customer")){
 				customer = new Customer();
-				customer.setPartyType(PartyTypeEnum.CUSTOMER);
+				customer.setPartyType(PartyType.CUSTOMER);
 				model.addAttribute("customer", customer);
 			}
 		}else{
@@ -51,7 +51,7 @@ public class CustomerView extends AbstractView {
 			model.addAttribute("customer", customer);
 		}
 		
-		model.addAttribute("customerStatus", PartyStatusEnum.values());
+		model.addAttribute("customerStatus", PartyStatus.values());
 		
 		return "customer";
 	}

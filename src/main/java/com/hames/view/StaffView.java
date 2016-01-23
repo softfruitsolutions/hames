@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hames.bean.Staff;
-import com.hames.enums.StaffStatusEnum;
+import com.hames.enums.StaffStatus;
 import com.hames.exception.StaffRoleException;
 import com.hames.exception.ValidationException;
 import com.hames.service.StaffRoleService;
@@ -57,7 +57,7 @@ public class StaffView extends AbstractView{
 		if(id == null || id.isEmpty()){
 			if(!model.containsAttribute("staff")){
 				staff = new Staff();
-				staff.setStatus(StaffStatusEnum.ACTIVE_STAFF);
+				staff.setStatus(StaffStatus.ACTIVE_STAFF);
 				model.addAttribute("staff", staff);
 			}
 		}else{
@@ -66,7 +66,7 @@ public class StaffView extends AbstractView{
 		}
 		
 		model.addAttribute("staffRoles", staffRoleService.getActiveStaffRoles());
-		model.addAttribute("staffStatus", StaffStatusEnum.values());
+		model.addAttribute("staffStatus", StaffStatus.values());
 		
 		return "staff.view";
 	}
