@@ -1,13 +1,13 @@
 package com.hames.enums;
 
-public enum StaffRoleStatusEnum {
+public enum StaffRoleStatus {
 
 	ACTIVE_STAFFROLE("Active"),
 	INACTIVE_STAFFROLE("Inactive");
 	
 	private String value;
 	
-	private StaffRoleStatusEnum(String value) {
+	private StaffRoleStatus(String value) {
 		this.value = value;
 	}
 

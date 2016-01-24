@@ -2,15 +2,15 @@ package com.hames.bean;
 
 import org.springframework.data.annotation.Id;
 
-import com.hames.enums.PartyStatusEnum;
-import com.hames.enums.PartyTypeEnum;
+import com.hames.enums.PartyStatus;
+import com.hames.enums.PartyType;
 
 public class Party extends BaseBean{
 
 	@Id
 	private String partyId;
-	private PartyTypeEnum partyType;
-	private PartyStatusEnum status;
+	private PartyType partyType;
+	private PartyStatus status;
 	
 	public String getPartyId() {
 		return partyId;
@@ -18,16 +18,16 @@ public class Party extends BaseBean{
 	public void setPartyId(String partyId) {
 		this.partyId = partyId;
 	}
-	public PartyTypeEnum getPartyType() {
+	public PartyType getPartyType() {
 		return partyType;
 	}
-	public void setPartyType(PartyTypeEnum partyType) {
+	public void setPartyType(PartyType partyType) {
 		this.partyType = partyType;
 	}
-	public PartyStatusEnum getStatus() {
+	public PartyStatus getStatus() {
 		return status;
 	}
-	public void setStatus(PartyStatusEnum status) {
+	public void setStatus(PartyStatus status) {
 		this.status = status;
 	}
 	@Override

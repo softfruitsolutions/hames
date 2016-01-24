@@ -1,6 +1,6 @@
 package com.hames.bean;
 
-import com.hames.enums.SaleOrderStatusEnum;
+import com.hames.enums.SaleOrderStatus;
 
 public class SaleOrder extends Order{
 
@@ -25,7 +25,7 @@ public class SaleOrder extends Order{
 	private String binding;
 	private String other;
 	private String remarks;
-	private SaleOrderStatusEnum saleOrderStatus;
+	private SaleOrderStatus saleOrderStatus;
 	
 	public String getJobNo() {
 		return jobNo;
@@ -153,10 +153,10 @@ public class SaleOrder extends Order{
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
 	}
-	public SaleOrderStatusEnum getSaleOrderStatus() {
+	public SaleOrderStatus getSaleOrderStatus() {
 		return saleOrderStatus;
 	}
-	public void setSaleOrderStatus(SaleOrderStatusEnum saleOrderStatus) {
+	public void setSaleOrderStatus(SaleOrderStatus saleOrderStatus) {
 		this.saleOrderStatus = saleOrderStatus;
 	}
 	

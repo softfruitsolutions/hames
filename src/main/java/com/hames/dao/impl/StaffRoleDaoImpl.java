@@ -14,7 +14,7 @@ import com.hames.bean.StaffRole;
 import com.hames.dao.StaffRoleDao;
 import com.hames.db.GenericDao;
 import com.hames.db.HamesDataStore;
-import com.hames.enums.StaffRoleStatusEnum;
+import com.hames.enums.StaffRoleStatus;
 import com.hames.util.DatatableRequest;
 import com.hames.util.DatatableResponse;
 
@@ -69,7 +69,7 @@ public class StaffRoleDaoImpl extends GenericDao implements StaffRoleDao {
 	@Override
 	public List<StaffRole> findActiveStaffRoles() {
 		Query query = new Query();
-		query.addCriteria(Criteria.where("status").is(StaffRoleStatusEnum.ACTIVE_STAFFROLE));
+		query.addCriteria(Criteria.where("status").is(StaffRoleStatus.ACTIVE_STAFFROLE));
 		return (List<StaffRole>) hamesDataStore.find(query, getEntityClass(),COLLECTION_NAME);
 	}
 

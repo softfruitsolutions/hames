@@ -47,4 +47,22 @@ public abstract class GenericService{
 		}
 	}
 	
+	public <T> void validate(T t,Validator validator,Class<T> clazz){
+		logger.debug("Validating {} class",t.getClass());
+		Map<String, String> errorMap = new HashMap<String, String>();
+		MapBindingResult errors = new MapBindingResult(errorMap, clazz.getName());
+		
+		if(getValidator() != null){
+			validator.validate(t, errors);
+			if(errors.hasErrors()){
+				for(ObjectError oe : errors.getAllErrors()){
+					logger.debug("Error : {} ",oe.getDefaultMessage());
+					ModelUtil.addError(oe.getDefaultMessage());
+				}
+				
+				throw new ValidationException();
+			}
+		}
+	}
+	
 }

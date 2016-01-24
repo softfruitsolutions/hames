@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hames.bean.StaffRole;
-import com.hames.enums.StaffRoleStatusEnum;
+import com.hames.enums.StaffRoleStatus;
 import com.hames.exception.ValidationException;
 import com.hames.service.StaffRoleService;
 import com.hames.util.DatatableRequest;
@@ -42,14 +42,14 @@ public class StaffRoleView extends AbstractView{
 		
 		if(id == null || id.isEmpty()){
 			staffRole = new StaffRole();
-			staffRole.setStatus(StaffRoleStatusEnum.ACTIVE_STAFFROLE);
+			staffRole.setStatus(StaffRoleStatus.ACTIVE_STAFFROLE);
 		}else{
 			staffRole = staffRoleService.getStaffRoleById(id);
 			System.err.println(staffRole.getDateCreated());
 		}
 		
 		model.addAttribute("staffRole", staffRole);
-		model.addAttribute("staffRoleStatus", StaffRoleStatusEnum.values());
+		model.addAttribute("staffRoleStatus", StaffRoleStatus.values());
 		
 		return "staff.role";
 	}

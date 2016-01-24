@@ -2,7 +2,7 @@ package com.hames.bean;
 
 import org.springframework.data.annotation.Id;
 
-import com.hames.enums.StaffRoleStatusEnum;
+import com.hames.enums.StaffRoleStatus;
 
 public class StaffRole extends BaseBean {
 
@@ -10,7 +10,7 @@ public class StaffRole extends BaseBean {
 	private String roleId;
 	private String roleName;
 	private String roleDescription;
-	private StaffRoleStatusEnum status;
+	private StaffRoleStatus status;
 	
 	public String getRoleId() {
 		return roleId;
@@ -30,10 +30,10 @@ public class StaffRole extends BaseBean {
 	public void setRoleDescription(String roleDescription) {
 		this.roleDescription = roleDescription;
 	}
-	public StaffRoleStatusEnum getStatus() {
+	public StaffRoleStatus getStatus() {
 		return status;
 	}
-	public void setStatus(StaffRoleStatusEnum status) {
+	public void setStatus(StaffRoleStatus status) {
 		this.status = status;
 	}
 	

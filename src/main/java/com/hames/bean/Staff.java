@@ -2,7 +2,7 @@ package com.hames.bean;
 
 import org.springframework.data.annotation.Id;
 
-import com.hames.enums.StaffStatusEnum;
+import com.hames.enums.StaffStatus;
 
 public class Staff extends BaseBean {
 	
@@ -18,7 +18,7 @@ public class Staff extends BaseBean {
 	private String emailId;
 	private String permanentAddress;
 	private String temporaryAddress;
-	private StaffStatusEnum status;
+	private StaffStatus status;
 	
 	private String roleId;
 
@@ -94,10 +94,10 @@ public class Staff extends BaseBean {
 	public void setTemporaryAddress(String temporaryAddress) {
 		this.temporaryAddress = temporaryAddress;
 	}
-	public StaffStatusEnum getStatus() {
+	public StaffStatus getStatus() {
 		return status;
 	}
-	public void setStatus(StaffStatusEnum status) {
+	public void setStatus(StaffStatus status) {
 		this.status = status;
 	}
 	@Override
