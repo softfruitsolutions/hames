@@ -11,6 +11,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+	<!-- HAMES -->
+	<script src='<c:url value="/resources/hames/util/js/datetime-util.js" />' type="text/javascript"></script>
+	
 	<!-- Jquery -->
 	<script src='<c:url value="/resources/endless/js/jquery.min.js" />' type="text/javascript"></script>
 	

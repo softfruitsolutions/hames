@@ -12,6 +12,8 @@ import com.hames.dao.OrderDao;
 import com.hames.exception.ValidationException;
 import com.hames.service.GenericService;
 import com.hames.service.OrderService;
+import com.hames.util.DatatableRequest;
+import com.hames.util.DatatableResponse;
 
 @Repository
 public class OrderServiceImpl extends GenericService implements OrderService{
@@ -57,6 +59,11 @@ public class OrderServiceImpl extends GenericService implements OrderService{
 		logger.debug("Saving entity : {},{}",order.getClass(),order.toString());
 		orderDao.save(order);
 		logger.debug("{} entity saved successfully",order.getOrderType().getValue());
+	}
+
+	@Override
+	public DatatableResponse getDatatable(DatatableRequest request) {
+		return orderDao.buildDatatable(request);
 	}
 
 }
