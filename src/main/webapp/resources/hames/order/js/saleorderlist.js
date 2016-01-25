@@ -33,7 +33,8 @@ $(function() {
 	                        "mData": 'orderId',
 	                        "bSortable": false,
 	                        "mRender": function(data, type, full) {
-	                            return statusButtonHTML(full);
+	                        	var row = "<a href='view?id="+data+"'>view</a>";
+	                            return row;
 	                        },
 	                    },	  
            			  ],
@@ -43,7 +44,7 @@ $(function() {
     });
 });
 
-function statusButtonHTML(data){
+/*function statusButtonHTML(data){
 	var row = '<div class="btn-group">';
 		row += '<button class="btn btn-default btn-xs">Status</button>';
 		row += '<button data-toggle="dropdown" class="btn btn-default dropdown-toggle btn-xs"><span class="caret"></span></button>';
@@ -75,3 +76,4 @@ function updateOrderStatus(orderId,jobNo,orderStatus){
 	
 	
 }
+*/

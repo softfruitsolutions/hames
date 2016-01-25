@@ -15,12 +15,12 @@
 			</a>
 			<ul class="submenu">
 				<li class='<c:if test="${menu=='viewsaleorder'}">active</c:if>'>
-					<a href='<c:url value="/saleorder/view" />'><span class="submenu-label"><i class="fa fa-inbox fa-lg"></i> View Sale Order</span></a>
+					<a href='<c:url value="/saleorder/list" />'><span class="submenu-label"><i class="fa fa-inbox fa-lg"></i> View Sale Order</span></a>
 				</li>
 			</ul>
 			<ul class="submenu">
 				<li class='<c:if test="${menu=='createsaleorder'}">active</c:if>'>
-					<a href='<c:url value="/saleorder/create" />'><span class="submenu-label"><i class="fa fa-inbox fa-lg"></i> Create Sale Order</span></a>
+					<a href='<c:url value="/saleorder/view" />'><span class="submenu-label"><i class="fa fa-inbox fa-lg"></i> Create Sale Order</span></a>
 				</li>
 			</ul>
 		</li>

@@ -11,6 +11,13 @@ public interface OrderService {
 	 * @param order
 	 */
 	public void saveOrder(Order order);
+
+	/**
+	 * Get Order By Id
+	 * @param orderId
+	 * @return
+	 */
+	public <T> T getOrderById(String orderId);
 	
 	/**
 	 * Get DataTable 

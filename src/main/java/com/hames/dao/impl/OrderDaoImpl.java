@@ -53,4 +53,10 @@ public class OrderDaoImpl extends GenericDao implements OrderDao {
 		return hamesDataStore.exists(orderId, COLLECTION_NAME);
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public <T> T findByOrderId(String orderId) {
+		return (T) hamesDataStore.findById(orderId, getEntityClass());
+	}
+
 }

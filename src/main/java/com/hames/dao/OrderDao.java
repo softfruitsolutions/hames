@@ -25,4 +25,11 @@ public interface OrderDao {
 	 * @return
 	 */
 	boolean orderExists(String orderId);
+	
+	/**
+	 * Find Order By ID
+	 * @param orderId
+	 * @return
+	 */
+	<T> T findByOrderId(String orderId);
 }

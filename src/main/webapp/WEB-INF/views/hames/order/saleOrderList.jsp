@@ -38,27 +38,3 @@
 	</div>
 </div>
 
-<div class="modal fade in" id="updateStatusModal" aria-hidden="false">
-	<div class="modal-dialog">
- 		<div class="modal-content">
-   			<div class="modal-header">
-     			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-				<h4>Update</h4>
- 			</div>
-	    	<div class="modal-body">
-	    		<div id="bodyContent">
-	    		</div>
-		    	<hr />
-				<div class="row">
-					<div class="col-xs-6">
-					</div>
-					<div class="col-xs-6">
-						<div class="form-group text-right">
-							<a id="statusUpdateButton" href="${saleOrderUpdateStatusUrl}" class="btn btn-success btn-sm" ><i class="fa fa-save"></i> Update Status</a>
-						</div>
-					</div>
-				</div>
-			</div>
-	    </div>
-	 </div>
-</div>

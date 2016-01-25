@@ -2,6 +2,7 @@ package com.hames.bean;
 
 import org.joda.time.DateTime;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 
 import com.hames.enums.OrderType;
 
@@ -15,6 +16,9 @@ public class Order extends BaseBean{
 	private OrderType orderType;
 	
 	private Payment payment; 
+	
+	@Transient
+	private Party party;
 	
 	public String getOrderId() {
 		return orderId;
@@ -51,6 +55,12 @@ public class Order extends BaseBean{
 	}
 	public void setPayment(Payment payment) {
 		this.payment = payment;
+	}
+	public Party getParty() {
+		return party;
+	}
+	public void setParty(Party party) {
+		this.party = party;
 	}
 	@Override
 	public String toString() {

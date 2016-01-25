@@ -37,13 +37,13 @@ public class SaleOrderView extends AbstractView{
 	@Autowired
 	private CustomerService customerService;
 	
-	@RequestMapping("/view")
+	@RequestMapping("/list")
 	public String view(Model model){
 		model.addAttribute("menu", "viewsaleorder");
 		return "sale.order.list";
 	}
 	
-	@RequestMapping("/create")
+	@RequestMapping("/view")
 	public String create(Model model, @RequestParam(value="id",required=false) String id){
 		
 		model.addAttribute("menu", "createsaleorder");
@@ -69,8 +69,9 @@ public class SaleOrderView extends AbstractView{
 				model.addAttribute("saleOrder", saleOrder);
 			}
 		}else{
-			//order = orderService.findOne(id);
+			saleOrder = saleOrderService.getOrderById(id);
 			model.addAttribute("saleOrder", saleOrder);
+			return "sale.order.service";
 		}
 		
 		model.addAttribute("customers", customerService.getAllCustomers());
