@@ -28,7 +28,7 @@
 
 <div class="col-md-12">
 	<h3 class="headline m-top-md">
-		Order
+		Sale Order
 		<span class="line"></span>
 	</h3>
 	<div class="panel panel-default no-margin">

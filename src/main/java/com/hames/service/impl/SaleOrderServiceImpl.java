@@ -2,6 +2,7 @@ package com.hames.service.impl;
 
 import java.math.BigDecimal;
 
+import org.apache.commons.lang3.EnumUtils;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +24,8 @@ import com.hames.exception.PaymentException;
 import com.hames.exception.ValidationException;
 import com.hames.service.SaleOrderService;
 import com.hames.util.BigDecimalUtil;
+import com.hames.util.DatatableRequest;
+import com.hames.util.DatatableResponse;
 import com.hames.validator.PaymentValidator;
 import com.hames.validator.SaleOrderValidator;
 
@@ -149,6 +152,28 @@ public class SaleOrderServiceImpl extends OrderServiceImpl implements SaleOrderS
 			saleOrder.setSaleOrderStatus(SaleOrderStatus.CREATED);
 		}
 	}
-	
-	
+
+	@Override
+	public void updateOrderStatus(String orderId,SaleOrderStatus saleOrderStatus) {
+		logger.debug("Updating Sale Order status for Order ID : {}",orderId);
+		logger.debug("Checking whether Order exists");
+		Boolean orderExists = saleOrderDao.orderExists(orderId);
+		if(!orderExists){
+			logger.error("Sale Order doesn't exists. Please contact Administrator");
+			throw new OrderException("Sale Order doesn't exists");
+		}
+		
+		if(EnumUtils.isValidEnum(SaleOrderStatus.class, saleOrderStatus.getValue())){
+			logger.debug("Fetching sale order with id :{}",orderId);
+			SaleOrder saleOrder = saleOrderDao.findByOrderId(orderId);
+			logger.debug("Setting status to sale order");
+			saleOrder.setSaleOrderStatus(saleOrderStatus);
+			saleOrderDao.save(saleOrder);
+			logger.debug("Sale order status updated successfully");
+		}else{
+			logger.error("Invalid Sale Order Status. Opeartion Aborted..!");
+			throw new OrderException("Invalid Sale order status.");
+		}
+	}
+
 }

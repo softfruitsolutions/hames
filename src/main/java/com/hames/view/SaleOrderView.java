@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hames.bean.Payment;
 import com.hames.bean.PaymentItems;
@@ -21,6 +22,8 @@ import com.hames.exception.PaymentException;
 import com.hames.exception.ValidationException;
 import com.hames.service.CustomerService;
 import com.hames.service.SaleOrderService;
+import com.hames.util.DatatableRequest;
+import com.hames.util.DatatableResponse;
 import com.hames.util.ModelUtil;
 
 @Controller
@@ -34,11 +37,16 @@ public class SaleOrderView extends AbstractView{
 	@Autowired
 	private CustomerService customerService;
 	
+	@RequestMapping("/list")
+	public String view(Model model){
+		model.addAttribute("menu", "viewsaleorder");
+		return "sale.order.list";
+	}
 	
 	@RequestMapping("/view")
-	public String view(Model model, @RequestParam(value="id",required=false) String id){
+	public String create(Model model, @RequestParam(value="id",required=false) String id){
 		
-		model.addAttribute("menu", "saleorder");
+		model.addAttribute("menu", "createsaleorder");
 		
 		SaleOrder saleOrder = null;
 		if(id == null || id.isEmpty()){
@@ -61,8 +69,9 @@ public class SaleOrderView extends AbstractView{
 				model.addAttribute("saleOrder", saleOrder);
 			}
 		}else{
-			//order = orderService.findOne(id);
+			saleOrder = saleOrderService.getOrderById(id);
 			model.addAttribute("saleOrder", saleOrder);
+			return "sale.order.service";
 		}
 		
 		model.addAttribute("customers", customerService.getAllCustomers());
@@ -77,14 +86,39 @@ public class SaleOrderView extends AbstractView{
 			ModelUtil.addSuccess("Sale Order created successfully");	
 		}catch (ValidationException e) {
 			logger.error("Validation errors are present");
+			return create(model,null);
 		}catch (OrderException e) {
 			logger.error(e.getMessage());
 			ModelUtil.addError(e.getMessage());
+			return create(model,null);
 		}catch (PaymentException e) {
 			logger.error(e.getMessage());
 			ModelUtil.addError(e.getMessage());
+			return create(model,null);
 		}
 		
-		return view(model,null);
+		return view(model);
 	}
+	
+	@RequestMapping("/datatable")
+	public @ResponseBody DatatableResponse viewDatatable(@ModelAttribute DatatableRequest datatableRequest){
+		return saleOrderService.getDatatable(datatableRequest);
+	}
+	
+	@RequestMapping("/updatestatus")
+	public String updateOrderStatus(Model model,@RequestParam(value="orderId")String orderId,
+								  				@RequestParam(value="saleorderStatus")SaleOrderStatus saleOrderStatus,
+								  				@RequestParam(value="jobNo")String jobNo){
+		try{
+			saleOrderService.updateOrderStatus(orderId, saleOrderStatus);
+			logger.debug("Sale Order Status updated successfully");
+			ModelUtil.addSuccess(jobNo+" status updated to "+saleOrderStatus);
+		}catch(OrderException e){
+			logger.debug(e.getMessage());
+			ModelUtil.addError(e.getMessage());
+		}
+		
+		return view(model);
+	}
+	
 }

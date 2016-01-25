@@ -8,14 +8,19 @@
 				<span class="text">Dashboard</span> <span class="menu-hover"></span>
 			</a>
 		</li>
-		<li class='openable'> <!-- <c:if test="${menu=='staff' || menu=='staffrole'}"> active</c:if>  -->
+		<li class='openable'>
 			<a href='#'> 
 				<span class="menu-icon"> <i class="fa fa-inbox fa-lg"></i></span>
 				<span class="text">Order</span><span class="menu-hover"></span>
 			</a>
 			<ul class="submenu">
-				<li class='<c:if test="${menu=='saleorder'}">active</c:if>'>
-					<a href='<c:url value="/saleorder/view" />'><span class="submenu-label"><i class="fa fa-inbox fa-lg"></i> Sale Order</span></a>
+				<li class='<c:if test="${menu=='viewsaleorder'}">active</c:if>'>
+					<a href='<c:url value="/saleorder/list" />'><span class="submenu-label"><i class="fa fa-inbox fa-lg"></i> View Sale Order</span></a>
+				</li>
+			</ul>
+			<ul class="submenu">
+				<li class='<c:if test="${menu=='createsaleorder'}">active</c:if>'>
+					<a href='<c:url value="/saleorder/view" />'><span class="submenu-label"><i class="fa fa-inbox fa-lg"></i> Create Sale Order</span></a>
 				</li>
 			</ul>
 		</li>

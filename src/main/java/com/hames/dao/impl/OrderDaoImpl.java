@@ -10,6 +10,8 @@ import com.hames.bean.Order;
 import com.hames.dao.OrderDao;
 import com.hames.db.GenericDao;
 import com.hames.db.HamesDataStore;
+import com.hames.util.DatatableRequest;
+import com.hames.util.DatatableResponse;
 
 public class OrderDaoImpl extends GenericDao implements OrderDao {
 
@@ -36,6 +38,25 @@ public class OrderDaoImpl extends GenericDao implements OrderDao {
 			order.setOrderId(UUID.randomUUID().toString());
 		}
 		hamesDataStore.save(order,COLLECTION_NAME);
+	}
+
+	@Override
+	public DatatableResponse buildDatatable(DatatableRequest request) {
+		request.setClazz(getEntityClass());
+		request.setMongoCollectionName(COLLECTION_NAME);
+		
+		return hamesDataStore.getDatatablePagedResult(request);
+	}
+
+	@Override
+	public boolean orderExists(String orderId) {
+		return hamesDataStore.exists(orderId, COLLECTION_NAME);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <T> T findByOrderId(String orderId) {
+		return (T) hamesDataStore.findById(orderId, getEntityClass());
 	}
 
 }

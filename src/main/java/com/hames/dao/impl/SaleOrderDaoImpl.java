@@ -23,4 +23,9 @@ public class SaleOrderDaoImpl extends OrderDaoImpl implements SaleOrderDao{
 		return hamesDataStore.exists(query, COLLECTION_NAME);
 	}
 
+	@Override
+	public SaleOrder findByOrderId(String orderId) {
+		return (SaleOrder) hamesDataStore.findById(orderId, getEntityClass(),COLLECTION_NAME);
+	}
+
 }

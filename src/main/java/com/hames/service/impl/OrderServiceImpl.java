@@ -7,11 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.validation.Validator;
 
+import com.hames.bean.Customer;
 import com.hames.bean.Order;
+import com.hames.dao.CustomerDao;
 import com.hames.dao.OrderDao;
 import com.hames.exception.ValidationException;
 import com.hames.service.GenericService;
 import com.hames.service.OrderService;
+import com.hames.util.DatatableRequest;
+import com.hames.util.DatatableResponse;
 
 @Repository
 public class OrderServiceImpl extends GenericService implements OrderService{
@@ -20,6 +24,8 @@ public class OrderServiceImpl extends GenericService implements OrderService{
 	
 	@Autowired
 	private OrderDao orderDao;
+	@Autowired
+	private CustomerDao customerDao;
 
 	@Override
 	public Validator getValidator() {
@@ -57,6 +63,25 @@ public class OrderServiceImpl extends GenericService implements OrderService{
 		logger.debug("Saving entity : {},{}",order.getClass(),order.toString());
 		orderDao.save(order);
 		logger.debug("{} entity saved successfully",order.getOrderType().getValue());
+	}
+
+	@Override
+	public DatatableResponse getDatatable(DatatableRequest request) {
+		return orderDao.buildDatatable(request);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <T> T getOrderById(String orderId) {
+		Order order = orderDao.findByOrderId(orderId);
+		/* 
+		 * Setting Party to Object
+		 * TODO
+		 */
+		Customer customer = customerDao.findByCustomerId(order.getPartyId());
+		order.setParty(customer);
+		
+		return (T) order;
 	}
 
 }
