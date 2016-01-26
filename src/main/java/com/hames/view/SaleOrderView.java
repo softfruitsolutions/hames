@@ -38,13 +38,13 @@ public class SaleOrderView extends AbstractView{
 	private CustomerService customerService;
 	
 	@RequestMapping("/list")
-	public String view(Model model){
+	public String list(Model model){
 		model.addAttribute("menu", "viewsaleorder");
 		return "sale.order.list";
 	}
 	
 	@RequestMapping("/view")
-	public String create(Model model, @RequestParam(value="id",required=false) String id){
+	public String view(Model model, @RequestParam(value="id",required=false) String id){
 		
 		model.addAttribute("menu", "createsaleorder");
 		
@@ -70,6 +70,11 @@ public class SaleOrderView extends AbstractView{
 			}
 		}else{
 			saleOrder = saleOrderService.getOrderById(id);
+			
+			PaymentItems paymentItem = new PaymentItems();
+			paymentItem.setPaymentDate(new DateTime());
+			saleOrder.getPayment().addPaymentItems(paymentItem);
+			
 			model.addAttribute("saleOrder", saleOrder);
 			return "sale.order.service";
 		}
@@ -83,21 +88,21 @@ public class SaleOrderView extends AbstractView{
 		
 		try{
 			saleOrderService.saveOrder(order);
-			ModelUtil.addSuccess("Sale Order created successfully");	
+			ModelUtil.addSuccess("Sale Order saved successfully");	
 		}catch (ValidationException e) {
 			logger.error("Validation errors are present");
-			return create(model,null);
+			return view(model,order.getOrderId());
 		}catch (OrderException e) {
 			logger.error(e.getMessage());
 			ModelUtil.addError(e.getMessage());
-			return create(model,null);
+			return view(model,order.getOrderId());
 		}catch (PaymentException e) {
 			logger.error(e.getMessage());
 			ModelUtil.addError(e.getMessage());
-			return create(model,null);
+			return view(model,order.getOrderId());
 		}
 		
-		return view(model);
+		return list(model);
 	}
 	
 	@RequestMapping("/datatable")
@@ -118,7 +123,7 @@ public class SaleOrderView extends AbstractView{
 			ModelUtil.addError(e.getMessage());
 		}
 		
-		return view(model);
+		return list(model);
 	}
 	
 }

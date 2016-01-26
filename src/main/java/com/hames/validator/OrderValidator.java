@@ -1,6 +1,5 @@
 package com.hames.validator;
 
-import org.apache.commons.lang3.EnumUtils;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
@@ -36,7 +35,7 @@ public class OrderValidator implements Validator{
 			errors.rejectValue("deliveryDate", "","Delivery date must be after Order Date");
 		}
 		
-		if(order.getOrderType() == null || EnumUtils.isValidEnum(OrderType.class, order.getOrderType().getValue())){
+		if(order.getOrderType() == null || !OrderType.isValidEnum(order.getOrderType())){
 			errors.rejectValue("orderType","","Order Type Required");
 		}
 	}

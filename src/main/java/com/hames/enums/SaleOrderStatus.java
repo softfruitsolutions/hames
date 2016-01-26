@@ -21,4 +21,13 @@ public enum SaleOrderStatus {
 		return value;
 	}
 	
+	public static Boolean isValidEnum(SaleOrderStatus saleOrderStatus){
+		for (SaleOrderStatus orderStatus : SaleOrderStatus.values()) {
+			if(orderStatus.equals(saleOrderStatus)){
+				return true;
+			}
+		}
+		return false;
+	}
+	
 }

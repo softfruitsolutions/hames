@@ -14,4 +14,13 @@ public enum OrderType {
 	public String getValue() {
 		return value;
 	}
+	
+	public static Boolean isValidEnum(OrderType orderType){
+		for (OrderType ot : OrderType.values()) {
+			if(orderType.equals(ot)){
+				return true;
+			}
+		}
+		return false;
+	}
 }
