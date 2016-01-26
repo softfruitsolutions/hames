@@ -52,6 +52,7 @@ public class CustomerDaoImpl extends GenericDao implements CustomerDao{
 	public DatatableResponse buildDatatable(DatatableRequest request) {
 		request.setClazz(getEntityClass());
 		request.setMongoCollectionName(COLLECTION_NAME);
+		
 		return hamesDataStore.getDatatablePagedResult(request);
 	}
 
