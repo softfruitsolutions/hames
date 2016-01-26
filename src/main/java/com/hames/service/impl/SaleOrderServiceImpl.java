@@ -1,6 +1,7 @@
 package com.hames.service.impl;
 
 import java.math.BigDecimal;
+import java.util.Iterator;
 
 import org.apache.commons.lang3.EnumUtils;
 import org.joda.time.DateTime;
@@ -24,8 +25,6 @@ import com.hames.exception.PaymentException;
 import com.hames.exception.ValidationException;
 import com.hames.service.SaleOrderService;
 import com.hames.util.BigDecimalUtil;
-import com.hames.util.DatatableRequest;
-import com.hames.util.DatatableResponse;
 import com.hames.validator.PaymentValidator;
 import com.hames.validator.SaleOrderValidator;
 
@@ -59,11 +58,13 @@ public class SaleOrderServiceImpl extends OrderServiceImpl implements SaleOrderS
 			logger.debug("Validation exceptions are present");
 			throw new ValidationException();
 		}
+
+		if(saleOrder.getOrderId() == null || saleOrder.getOrderId().isEmpty()){
+			createOrder(saleOrder);
+		}else{
+			updateOrder(saleOrder);
+		}
 		
-		/**
-		 * Creating Order
-		 */
-		createOrder(saleOrder);
 		
 		super.saveOrder(order);
 	}
@@ -72,85 +73,118 @@ public class SaleOrderServiceImpl extends OrderServiceImpl implements SaleOrderS
 		
 		if(saleOrder.getSaleOrderStatus() == SaleOrderStatus.DRAFT){
 			
-			/**
-			 * Checking Order Job No already exists
-			 */
+			// Checking Order Job No already exists
 			Boolean isJobNoExists = saleOrderDao.isJobNoExists(saleOrder.getJobNo());
 			if(isJobNoExists){
 				throw new OrderException("Job No already exists");
 			}
 			
-			/**
-			 * Setting Payment Details
-			 */
-			Payment payment = saleOrder.getPayment();
-			if(payment != null){
-				BigDecimal amountPaid = new BigDecimal(0);
+			// Process Payment 
+			processPayment(saleOrder);
+			
+			// Setting Sale Order Status to created
+			saleOrder.setSaleOrderStatus(SaleOrderStatus.CREATED);
+		}
+	}
+
+	public void updateOrder(SaleOrder saleOrder){
+		
+		SaleOrder so = saleOrderDao.findByOrderId(saleOrder.getOrderId());
+		if(so == null){
+			logger.error("Sale Order doesn't exists. Please contact Administrator");
+			throw new OrderException("Sale Order doesn't exists");
+		}
+		
+		/**
+		 * Checking Status
+		 */
+		if(so.getSaleOrderStatus() == SaleOrderStatus.DELIVERED){
+			if(saleOrder.getSaleOrderStatus() != so.getSaleOrderStatus()){
+				logger.debug("Order already delivered. Operation Aborted.");
+				throw new OrderException("Order already delivered can't change the status.!");
+			}
+		}
+		
+		//Process Payment
+		processPayment(saleOrder);
+	}
+	
+	public void processPayment(SaleOrder saleOrder){
+		
+		/**
+		 * Setting Payment Details
+		 */
+		Payment payment = saleOrder.getPayment();
+		if(payment != null && payment.getPaymentStatus() != PaymentStatus.PAID){
+			BigDecimal amountPaid = new BigDecimal(0);
+			
+			if(payment.getPaymentItems() != null){
+				Iterator<PaymentItems> piIterator = payment.getPaymentItems().iterator();
 				
-				if(payment.getPaymentItems() != null){
-					for (PaymentItems item : payment.getPaymentItems()) {
+				while(piIterator.hasNext()){
+					PaymentItems item = piIterator.next();
+					if(item.getPaymentAmount() != null && BigDecimalUtil.isGreaterThan(item.getPaymentAmount(), BigDecimal.ZERO)){
 						
-						if(item.getPaymentAmount() != null && BigDecimalUtil.isGreaterThan(item.getPaymentAmount(), BigDecimal.ZERO)){
-							//Adding Paid Amount
-							amountPaid = amountPaid.add(item.getPaymentAmount());
-							
-							//Setting Payment Item
+						//Adding Paid Amount
+						amountPaid = amountPaid.add(item.getPaymentAmount());
+						
+						//Setting Payment Item
+						if(item.getPaymentDate() == null){
 							item.setPaymentDate(new DateTime());
-							item.setPaymentType(PaymentItemType.CASH);
-							item.setPaymentItemStatus(PaymentItemStatus.ACTIVE_PAYMENT_ITEM);
+						}
+						item.setPaymentType(PaymentItemType.CASH);
+						item.setPaymentItemStatus(PaymentItemStatus.ACTIVE_PAYMENT_ITEM);
+						if(item.getDescription() == null || item.getDescription().isEmpty()){
 							item.setDescription("An amount of "+item.getPaymentAmount()+" is paid to the Sale Order.");
 						}
+					}else if(item.getPaymentAmount() ==  null){
+						piIterator.remove();
 					}
-					
 				}
-				
-				/**
-				 * Calculating Balance Due
-				 */
-				BigDecimal balanceDue = new BigDecimal(0);			//balanceDue = totalAmount - amountPaid - discount
-				balanceDue = balanceDue.add(payment.getTotalAmount());
-				if(BigDecimalUtil.isGreaterThan(payment.getDiscountAmount(), BigDecimal.ZERO)){
-					balanceDue = balanceDue.subtract(payment.getDiscountAmount());
-				}
-				
-				if(BigDecimalUtil.isGreaterThan(amountPaid, balanceDue)){
-					throw new PaymentException("Payment Amount can't be greater than balance due.");
-				}
-				if(BigDecimalUtil.isGreaterThan(amountPaid, BigDecimal.ZERO)){
-					balanceDue = balanceDue.subtract(amountPaid);
-				}
-				
-				payment.setBalanceDue(balanceDue);
-				payment.setAmountPaid(amountPaid);
-			
-				
-				/**
-				 * Setting Payment Status
-				 */
-				if(BigDecimalUtil.isEqual(payment.getAmountPaid(),BigDecimal.ZERO)){
-					payment.setPaymentStatus(PaymentStatus.PENDING);
-				}else if(BigDecimalUtil.isEqual(payment.getBalanceDue(), BigDecimal.ZERO)){
-					payment.setPaymentStatus(PaymentStatus.PAID);
-				}else if(BigDecimalUtil.isGreaterThan(payment.getAmountPaid(), BigDecimal.ZERO)){
-					payment.setPaymentStatus(PaymentStatus.PARTIALLY_PAID);
-				}
-				
-				/**
-				 * Checking Payment Item exists
-				 */
-				if(BigDecimalUtil.isEqual(payment.getAmountPaid(),BigDecimal.ZERO)){
-					payment.setPaymentItems(null);
-				}
-				saleOrder.setPayment(payment);
-			}else{
-				throw new OrderException("Order Payment Required");
 			}
 			
 			/**
-			 * Setting Sale Order Status to created
+			 * Calculating Balance Due
 			 */
-			saleOrder.setSaleOrderStatus(SaleOrderStatus.CREATED);
+			BigDecimal balanceDue = new BigDecimal(0);			//balanceDue = totalAmount - amountPaid - discount
+			balanceDue = balanceDue.add(payment.getTotalAmount());
+			if(BigDecimalUtil.isGreaterThan(payment.getDiscountAmount(), BigDecimal.ZERO)){
+				balanceDue = balanceDue.subtract(payment.getDiscountAmount());
+			}
+			
+			if(BigDecimalUtil.isGreaterThan(amountPaid, balanceDue)){
+				throw new PaymentException("Payment Amount can't be greater than balance due.");
+			}
+			if(BigDecimalUtil.isGreaterThan(amountPaid, BigDecimal.ZERO)){
+				balanceDue = balanceDue.subtract(amountPaid);
+			}
+			
+			payment.setBalanceDue(balanceDue);
+			payment.setAmountPaid(amountPaid);
+		
+			
+			/**
+			 * Setting Payment Status
+			 */
+			if(BigDecimalUtil.isEqual(payment.getAmountPaid(),BigDecimal.ZERO)){
+				payment.setPaymentStatus(PaymentStatus.PENDING);
+			}else if(BigDecimalUtil.isEqual(payment.getBalanceDue(), BigDecimal.ZERO)){
+				payment.setPaymentStatus(PaymentStatus.PAID);
+			}else if(BigDecimalUtil.isGreaterThan(payment.getAmountPaid(), BigDecimal.ZERO)){
+				payment.setPaymentStatus(PaymentStatus.PARTIALLY_PAID);
+			}
+			
+			/**
+			 * Checking Payment Item exists
+			 */
+			if(BigDecimalUtil.isEqual(payment.getAmountPaid(),BigDecimal.ZERO)){
+				payment.setPaymentItems(null);
+			}
+			saleOrder.setPayment(payment);
+		}else{
+			throw new OrderException("Order Payment Required");
 		}
+		
 	}
 
 	@Override
