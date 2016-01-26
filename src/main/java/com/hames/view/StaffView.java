@@ -21,9 +21,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hames.bean.Staff;
 import com.hames.enums.StaffStatus;
-import com.hames.exception.StaffRoleException;
+import com.hames.exception.RolePermissionException;
 import com.hames.exception.ValidationException;
-import com.hames.service.StaffRoleService;
+import com.hames.service.RolePermissionService;
 import com.hames.service.StaffService;
 import com.hames.system.ReportEngine;
 import com.hames.util.DatatableRequest;
@@ -39,7 +39,7 @@ public class StaffView extends AbstractView{
 	@Autowired
 	private StaffService staffService;
 	@Autowired
-	private StaffRoleService staffRoleService;
+	private RolePermissionService staffRoleService;
 	@Autowired
 	private ReportEngine reportEngine;
 	
@@ -65,7 +65,7 @@ public class StaffView extends AbstractView{
 			model.addAttribute("staff", staff);
 		}
 		
-		model.addAttribute("staffRoles", staffRoleService.getActiveStaffRoles());
+		model.addAttribute("staffRoles", staffRoleService.getActiveRolePermissions());
 		model.addAttribute("staffStatus", StaffStatus.values());
 		
 		return "staff.view";
@@ -80,7 +80,7 @@ public class StaffView extends AbstractView{
 		}catch(ValidationException e){
 			logger.debug("Validation errors present");
 			return view(model,null);
-		}catch (StaffRoleException e) {
+		}catch (RolePermissionException e) {
 			logger.debug(e.getMessage());
 			ModelUtil.addError(e.getMessage());
 			return view(model,null);

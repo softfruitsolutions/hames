@@ -10,13 +10,13 @@
         <put-attribute name="body" value="/WEB-INF/views/hames/index.jsp" />  
     </definition>  
     
-    <definition name="staff.role" extends="base.definition">  
-        <put-attribute name="title" value="Staff Role | Hames - Softfruit" />  
-        <put-attribute name="body" value="/WEB-INF/views/hames/staff/staffRole.jsp" />  
+    <definition name="system.role" extends="base.definition">  
+        <put-attribute name="title" value="Role | Hames - Softfruit" />  
+        <put-attribute name="body" value="/WEB-INF/views/hames/system/rolePermission.jsp" />  
     </definition>
-    <definition name="staff.role.list" extends="base.definition">  
-        <put-attribute name="title" value="Staff Role | Hames - Softfruit" />  
-        <put-attribute name="body" value="/WEB-INF/views/hames/staff/staffRoleList.jsp" />  
+    <definition name="system.role.list" extends="base.definition">  
+        <put-attribute name="title" value="Role | Hames - Softfruit" />  
+        <put-attribute name="body" value="/WEB-INF/views/hames/system/rolePermissionList.jsp" />  
     </definition>
     
     <definition name="staff.view" extends="base.definition">  

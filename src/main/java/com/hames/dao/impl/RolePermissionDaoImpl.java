@@ -10,18 +10,18 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
-import com.hames.bean.StaffRole;
-import com.hames.dao.StaffRoleDao;
+import com.hames.bean.RolePermission;
+import com.hames.dao.RolePermissionDao;
 import com.hames.db.GenericDao;
 import com.hames.db.HamesDataStore;
-import com.hames.enums.StaffRoleStatus;
+import com.hames.enums.RolePermissionStatus;
 import com.hames.util.DatatableRequest;
 import com.hames.util.DatatableResponse;
 
 @Repository
-public class StaffRoleDaoImpl extends GenericDao implements StaffRoleDao {
+public class RolePermissionDaoImpl extends GenericDao implements RolePermissionDao {
 
-	private static final String COLLECTION_NAME = "staff_role";
+	private static final String COLLECTION_NAME = "role_permission";
 	
 	@Autowired
 	private HamesDataStore hamesDataStore;
@@ -35,20 +35,20 @@ public class StaffRoleDaoImpl extends GenericDao implements StaffRoleDao {
 	
 	@Override
 	public Class<?> getEntityClass() {
-		return StaffRole.class;
+		return RolePermission.class;
 	}
 	
 	@Override
-	public void save(StaffRole staffRole) {
-		if(!hamesDataStore.exists(staffRole.getRoleId(),COLLECTION_NAME)){
-			staffRole.setRoleId(UUID.randomUUID().toString());	
+	public void save(RolePermission rolePermission) {
+		if(!hamesDataStore.exists(rolePermission.getRoleId(),COLLECTION_NAME)){
+			rolePermission.setRoleId(UUID.randomUUID().toString());	
 		}
-		hamesDataStore.save(staffRole,COLLECTION_NAME);
+		hamesDataStore.save(rolePermission,COLLECTION_NAME);
 	}
 	
 	@Override
-	public StaffRole findByStaffRoleId(String roleId) {
-		return (StaffRole) hamesDataStore.findById(roleId,getEntityClass(),COLLECTION_NAME);
+	public RolePermission findByRoleId(String roleId) {
+		return (RolePermission) hamesDataStore.findById(roleId,getEntityClass(),COLLECTION_NAME);
 	}
 
 	@Override
@@ -61,16 +61,16 @@ public class StaffRoleDaoImpl extends GenericDao implements StaffRoleDao {
 	
 	@Override
 	@SuppressWarnings("unchecked")
-	public List<StaffRole> findAllStaffRoles() {
-		return (List<StaffRole>) hamesDataStore.findAll(getEntityClass(),COLLECTION_NAME);
+	public List<RolePermission> findAllRolePermissions() {
+		return (List<RolePermission>) hamesDataStore.findAll(getEntityClass(),COLLECTION_NAME);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<StaffRole> findActiveStaffRoles() {
+	public List<RolePermission> findActiveRolePermissions() {
 		Query query = new Query();
-		query.addCriteria(Criteria.where("status").is(StaffRoleStatus.ACTIVE_STAFFROLE));
-		return (List<StaffRole>) hamesDataStore.find(query, getEntityClass(),COLLECTION_NAME);
+		query.addCriteria(Criteria.where("status").is(RolePermissionStatus.ACTIVE_ROLE));
+		return (List<RolePermission>) hamesDataStore.find(query, getEntityClass(),COLLECTION_NAME);
 	}
 
 	

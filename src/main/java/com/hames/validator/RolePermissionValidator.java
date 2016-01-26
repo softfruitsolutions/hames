@@ -3,18 +3,18 @@ package com.hames.validator;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import com.hames.bean.StaffRole;
+import com.hames.bean.RolePermission;
 
-public class StaffRoleValidator implements Validator {
+public class RolePermissionValidator implements Validator {
 
 	@Override
 	public boolean supports(Class<?> arg0) {
-		return StaffRole.class.equals(arg0);
+		return RolePermission.class.equals(arg0);
 	}
 
 	@Override
 	public void validate(Object obj, Errors errors) {
-		StaffRole role = (StaffRole) obj;
+		RolePermission role = (RolePermission) obj;
 		if(role.getRoleName() == null || role.getRoleName().isEmpty()){
 			errors.rejectValue("roleName", "", "Role Name Required");
 		}

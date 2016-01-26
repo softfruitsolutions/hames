@@ -40,7 +40,7 @@
 					<a href='<c:url value="/staff/list" />'><span class="submenu-label"><i class="fa fa-user"></i> Staff</span></a>
 				</li>
 				<li class='<c:if test="${menu=='staffrole'}">active</c:if>'>
-					<a href='<c:url value="/staffrole/list" />'><span class="submenu-label"><i class="fa fa-sitemap"></i> Role</span></a>
+					<a href='<c:url value="/role/list" />'><span class="submenu-label"><i class="fa fa-sitemap"></i> Role</span></a>
 				</li>
 			</ul>
 		</li>

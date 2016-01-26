@@ -2,15 +2,15 @@ package com.hames.bean;
 
 import org.springframework.data.annotation.Id;
 
-import com.hames.enums.StaffRoleStatus;
+import com.hames.enums.RolePermissionStatus;
 
-public class StaffRole extends BaseBean {
+public class RolePermission extends BaseBean {
 
 	@Id
 	private String roleId;
 	private String roleName;
 	private String roleDescription;
-	private StaffRoleStatus status;
+	private RolePermissionStatus status;
 	
 	public String getRoleId() {
 		return roleId;
@@ -30,10 +30,10 @@ public class StaffRole extends BaseBean {
 	public void setRoleDescription(String roleDescription) {
 		this.roleDescription = roleDescription;
 	}
-	public StaffRoleStatus getStatus() {
+	public RolePermissionStatus getStatus() {
 		return status;
 	}
-	public void setStatus(StaffRoleStatus status) {
+	public void setStatus(RolePermissionStatus status) {
 		this.status = status;
 	}
 	

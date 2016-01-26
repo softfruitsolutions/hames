@@ -11,58 +11,57 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.hames.bean.StaffRole;
-import com.hames.enums.StaffRoleStatus;
+import com.hames.bean.RolePermission;
+import com.hames.enums.RolePermissionStatus;
 import com.hames.exception.ValidationException;
-import com.hames.service.StaffRoleService;
+import com.hames.service.RolePermissionService;
 import com.hames.util.DatatableRequest;
 import com.hames.util.DatatableResponse;
 import com.hames.util.ModelUtil;
 
 @Controller
-@RequestMapping("/staffrole")
-public class StaffRoleView extends AbstractView{
+@RequestMapping("/role")
+public class RolePermissionView extends AbstractView{
 
-	private static final Logger logger = LoggerFactory.getLogger(StaffRoleView.class);
+	private static final Logger logger = LoggerFactory.getLogger(RolePermissionView.class);
 
 	@Autowired
-	private StaffRoleService staffRoleService;
+	private RolePermissionService rolePermissionService;
 	
 	@RequestMapping("/list")
 	public String view(Model model){
-		return "staff.role.list";
+		return "system.role.list";
 	}
 	
 	@RequestMapping("/view")
 	public String view(Model model, @RequestParam(value="id",required=false) String id){
 		
-		activeMenu(model, "staffrole");
+		activeMenu(model, "rolepermission");
 		
-		StaffRole staffRole = null;
+		RolePermission rolePermission = null;
 		
 		if(id == null || id.isEmpty()){
-			staffRole = new StaffRole();
-			staffRole.setStatus(StaffRoleStatus.ACTIVE_STAFFROLE);
+			rolePermission = new RolePermission();
+			rolePermission.setStatus(RolePermissionStatus.ACTIVE_ROLE);
 		}else{
-			staffRole = staffRoleService.getStaffRoleById(id);
-			System.err.println(staffRole.getDateCreated());
+			rolePermission = rolePermissionService.getRoleById(id);
 		}
 		
-		model.addAttribute("staffRole", staffRole);
-		model.addAttribute("staffRoleStatus", StaffRoleStatus.values());
+		model.addAttribute("rolePermission", rolePermission);
+		model.addAttribute("rolePermissionStatus", RolePermissionStatus.values());
 		
-		return "staff.role";
+		return "system.role";
 	}
 
 	@RequestMapping(value="/save", method=RequestMethod.POST)
-	public String save(Model model,@ModelAttribute StaffRole staffRole){
+	public String save(Model model,@ModelAttribute RolePermission rolePermission){
 		
 		try{
-			staffRoleService.saveStaffRole(staffRole);
-			ModelUtil.addSuccess("Staff Role saved successfully");
+			rolePermissionService.saveRolePermission(rolePermission);
+			ModelUtil.addSuccess("Role saved successfully");
 		}catch(ValidationException e){
 			logger.debug("Validation errors are present");
-			return view(model, staffRole.getRoleId());
+			return view(model, rolePermission.getRoleId());
 		}
 		
 		return view(model);
@@ -70,7 +69,7 @@ public class StaffRoleView extends AbstractView{
 	
 	@RequestMapping("/datatable")
 	public @ResponseBody DatatableResponse viewDatatable(@ModelAttribute DatatableRequest datatableRequest){
-		return staffRoleService.getDatatable(datatableRequest);
+		return rolePermissionService.getDatatable(datatableRequest);
 	}
 	
 }
