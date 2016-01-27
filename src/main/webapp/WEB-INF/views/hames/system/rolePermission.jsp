@@ -1,5 +1,6 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="/WEB-INF/views/hames/tld/functions.tld" %>
 
 <!-- URL's  -->
 <c:url value="/role/list" var="roleListUrl" />
@@ -72,7 +73,7 @@
 							<c:forEach items="${permissions }" var="p" varStatus="pStatus">
 								<div class="checkbox">
 									<label class="label-checkbox">
-										<input type="checkbox" id="permission${pStatus}" name="permissions" value="${p.permission}">
+										<input type="checkbox" id="permission${pStatus.index}" name="permissions" value="${p.permission}" <c:if test="${fn:contains(rolePermission.permissions,p.permission) }">checked="checked"</c:if>>
 										<span class="custom-checkbox"></span>
 										<c:out value="${p.text}" />
 									</label>
