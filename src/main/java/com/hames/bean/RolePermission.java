@@ -1,5 +1,7 @@
 package com.hames.bean;
 
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
 
 import com.hames.enums.RolePermissionStatus;
@@ -11,6 +13,7 @@ public class RolePermission extends BaseBean {
 	private String roleName;
 	private String roleDescription;
 	private RolePermissionStatus status;
+	private List<String> permissions;
 	
 	public String getRoleId() {
 		return roleId;
@@ -36,12 +39,17 @@ public class RolePermission extends BaseBean {
 	public void setStatus(RolePermissionStatus status) {
 		this.status = status;
 	}
-	
+	public List<String> getPermissions() {
+		return permissions;
+	}
+	public void setPermissions(List<String> permissions) {
+		this.permissions = permissions;
+	}
 	@Override
 	public String toString() {
-		return "StaffRole [roleId=" + roleId + ", roleName=" + roleName
+		return "RolePermission [roleId=" + roleId + ", roleName=" + roleName
 				+ ", roleDescription=" + roleDescription + ", status=" + status
-				+ "]";
+				+ ", permissions=" + permissions + "]";
 	}
 	
 }

@@ -15,6 +15,7 @@ import com.hames.bean.RolePermission;
 import com.hames.enums.RolePermissionStatus;
 import com.hames.exception.ValidationException;
 import com.hames.service.RolePermissionService;
+import com.hames.system.Permission;
 import com.hames.util.DatatableRequest;
 import com.hames.util.DatatableResponse;
 import com.hames.util.ModelUtil;
@@ -49,6 +50,7 @@ public class RolePermissionView extends AbstractView{
 		
 		model.addAttribute("rolePermission", rolePermission);
 		model.addAttribute("rolePermissionStatus", RolePermissionStatus.values());
+		model.addAttribute("permissions", Permission.values());
 		
 		return "system.role";
 	}

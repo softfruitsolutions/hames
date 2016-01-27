@@ -64,6 +64,21 @@
 							</div>
 							
 						</div>
+						<h5 class="headline">
+							Permissions
+							<span class="line"></span>
+						</h5>
+						<div class="row">
+							<c:forEach items="${permissions }" var="p" varStatus="pStatus">
+								<div class="checkbox">
+									<label class="label-checkbox">
+										<input type="checkbox" id="permission${pStatus}" name="permissions" value="${p.permission}">
+										<span class="custom-checkbox"></span>
+										<c:out value="${p.text}" />
+									</label>
+								</div>
+							</c:forEach>
+						</div>
 						<form:hidden path="status" placeholder="status" />
 						<jsp:include page="/WEB-INF/views/hames/audit.jsp" />
 					</form:form>
