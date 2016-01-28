@@ -12,7 +12,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 
-import com.hames.system.DatePropertyEditor;
+import com.hames.system.functions.DatePropertyEditor;
 
 @Controller
 public abstract class AbstractView {

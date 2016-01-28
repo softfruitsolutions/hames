@@ -15,7 +15,7 @@ import com.hames.bean.RolePermission;
 import com.hames.enums.RolePermissionStatus;
 import com.hames.exception.ValidationException;
 import com.hames.service.RolePermissionService;
-import com.hames.system.Permission;
+import com.hames.system.auth.Permission;
 import com.hames.util.DatatableRequest;
 import com.hames.util.DatatableResponse;
 import com.hames.util.ModelUtil;

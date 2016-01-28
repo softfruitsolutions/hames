@@ -1,4 +1,4 @@
-package com.hames.system;
+package com.hames.system.auth;
 
 public enum Permission {
 	

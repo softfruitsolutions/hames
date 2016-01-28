@@ -3,13 +3,17 @@
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
   
 <tiles-definitions>
-	<definition name="login" template="/WEB-INF/views/hames/auth/login.jsp" />
+	<definition name="login" template="/WEB-INF/views/hames/system/auth/login.jsp" />
 	 
 	<definition name="index" extends="base.definition">  
         <put-attribute name="title" value="Hames - Softfruit" />  
         <put-attribute name="body" value="/WEB-INF/views/hames/index.jsp" />  
     </definition>  
     
+    <definition name="system.auth.useraccount" extends="base.definition">  
+        <put-attribute name="title" value="User Account| Hames - Softfruit" />  
+        <put-attribute name="body" value="/WEB-INF/views/hames/system/auth/userAccount.jsp" />  
+    </definition>
     <definition name="system.role" extends="base.definition">  
         <put-attribute name="title" value="Role | Hames - Softfruit" />  
         <put-attribute name="body" value="/WEB-INF/views/hames/system/rolePermission.jsp" />  

@@ -299,16 +299,7 @@
 						</table>
 					</div>
 				</div>
-				<h5 class="headline">
-					Payments
-					<span class="line"></span>
-				</h5>
-				
-					<div class="col-xs-6">
-						
-					</div>
-				</div>
-		</div>
+		 </div>
 	</div>
 </div>
 
