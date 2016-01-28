@@ -73,6 +73,11 @@ public class RolePermissionDaoImpl extends GenericDao implements RolePermissionD
 		return (List<RolePermission>) hamesDataStore.find(query, getEntityClass(),COLLECTION_NAME);
 	}
 
+	@Override
+	public boolean isRolePermissionExists(String roleId) {
+		return hamesDataStore.exists(roleId, COLLECTION_NAME);
+	}
+
 	
 	
 }

@@ -11,7 +11,7 @@
     </definition>  
     
     <definition name="system.auth.useraccount" extends="base.definition">  
-        <put-attribute name="title" value="User Account| Hames - Softfruit" />  
+        <put-attribute name="title" value="User Account | Hames - Softfruit" />  
         <put-attribute name="body" value="/WEB-INF/views/hames/system/auth/userAccount.jsp" />  
     </definition>
     <definition name="system.role" extends="base.definition">  

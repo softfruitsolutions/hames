@@ -1,8 +1,12 @@
 package com.hames.dao.impl;
 
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
 import com.hames.dao.UserAccountDao;
@@ -33,6 +37,26 @@ public class UserAccountDaoImpl extends GenericDao implements UserAccountDao {
 	@Override
 	public void save(UserAccount userAccount) {
 		hamesDataStore.save(userAccount,COLLECTION_NAME);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<UserAccount> getUserAccounts() {
+		return (List<UserAccount>) hamesDataStore.findAll(getEntityClass(), COLLECTION_NAME);
+	}
+
+	@Override
+	public boolean isUsernameExists(String username) {
+		Query query = new Query();
+		query.addCriteria(Criteria.where("username").is(username));
+		return hamesDataStore.exists(query, COLLECTION_NAME);
+	}
+
+	@Override
+	public boolean checkUserAccountExistsForStaff(String staffId) {
+		Query query = new Query();
+		query.addCriteria(Criteria.where("staffId").is(staffId));
+		return hamesDataStore.exists(query, COLLECTION_NAME);
 	}
 
 }

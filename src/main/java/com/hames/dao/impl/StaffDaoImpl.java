@@ -6,12 +6,15 @@ import java.util.UUID;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
 import com.hames.bean.Staff;
 import com.hames.dao.StaffDao;
 import com.hames.db.GenericDao;
 import com.hames.db.HamesDataStore;
+import com.hames.enums.StaffStatus;
 import com.hames.util.DatatableRequest;
 import com.hames.util.DatatableResponse;
 
@@ -60,6 +63,19 @@ public class StaffDaoImpl extends GenericDao implements StaffDao {
 	@Override
 	public List<Staff> findAllStaffs() {
 		return (List<Staff>) hamesDataStore.findAll(getEntityClass(),COLLECTION_NAME);
+	}
+
+	@Override
+	public boolean isStaffExists(String staffId) {
+		return hamesDataStore.exists(staffId, COLLECTION_NAME);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Staff> findAllActiveStaffs() {
+		Query query = new Query();
+		query.addCriteria(Criteria.where("status").is(StaffStatus.ACTIVE_STAFF));
+		return (List<Staff>) hamesDataStore.find(query, getEntityClass(), COLLECTION_NAME);
 	}
 
 }

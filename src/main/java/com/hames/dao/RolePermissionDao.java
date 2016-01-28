@@ -39,4 +39,11 @@ public interface RolePermissionDao{
 	 * @return
 	 */
 	List<RolePermission> findActiveRolePermissions();
+	
+	/**
+	 * Is role permission exists
+	 * @param roleId
+	 * @return
+	 */
+	boolean isRolePermissionExists(String roleId);
 }

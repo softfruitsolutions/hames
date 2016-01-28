@@ -87,49 +87,15 @@ public class StaffServiceImpl extends GenericService implements StaffService {
 	public List<Staff> getAllStaffs() {
 		return staffDao.findAllStaffs();
 	}
-	
-	/*@Override
-	public Validator getValidator() {
-		return new StaffValidator();
+
+	@Override
+	public boolean isStaffExists(String staffId) {
+		return staffDao.isStaffExists(staffId);
 	}
 
 	@Override
-	public Class<?> getEntityClass() {
-		return Staff.class;
+	public List<Staff> getAllActiveStaffs() {
+		return staffDao.findAllActiveStaffs();
 	}
 	
-	@Override
-	public <T> void save(T t) {
-		Staff staff = (Staff) t;
-		
-		//Setting Auditable details
-		staff.setDateCreated(new DateTime());
-		staff.setDateModified(new DateTime());
-		
-		super.save(staff);
-	}
-	
-	@Override
-	public <T> void validate(T t) {
-		
-		Staff staff = (Staff) t;
-		if(staff.getRoleId() == null || staff.getRoleId() <= 0){
-			logger.debug("Staff Role required");
-			ModelUtil.addError("Staff Role Required");
-		}
-		
-		StaffRole staffRole = staffRoleService.findOne(staff.getRoleId());
-		if(staffRole == null){
-			logger.debug("Staff Role doesn't exists");
-			ModelUtil.addError("Invalid Staff Role");
-		}
-		
-		if(staff.getStatus() == null || StaffStatusEnum.findEnum(staff.getStatus()) == null){
-			logger.debug("Staff status is null");
-			ModelUtil.addError("Staff status required");
-		}
-
-		super.validate(t);
-	}
-*/
 }
