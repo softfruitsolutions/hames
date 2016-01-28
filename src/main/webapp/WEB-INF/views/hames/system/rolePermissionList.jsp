@@ -1,8 +1,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!-- URL's -->
-<c:url value="/staffrole/view" var="staffRoleViewUrl" />
-<c:url value="/staffrole/datatable" var="staffRoleDatatableUrl" />
+<c:url value="/role/view" var="roleViewUrl" />
+<c:url value="/role/datatable" var="roleDatatableUrl" />
 
 <script type="text/javascript">
 
@@ -11,7 +11,7 @@ $(function() {
 		"bProcessing" : true,
 		"bServerSide" : true,
 		"bPaginate": true,
-        "sAjaxSource": '${staffRoleDatatableUrl}',
+        "sAjaxSource": '${roleDatatableUrl}',
         "fnServerParams": function ( aoData ) {
             aoData.push({ "name": "sortField", "value": "roleId"});
         },
@@ -23,8 +23,8 @@ $(function() {
 	                        "mData": 'roleId',
 	                        "bSortable": false,
 	                        "mRender": function(data, type, full) {
-	                            return '<a href="${staffRoleViewUrl}?id='+data+'" title="Edit"><i class="fa fa-pencil"></i></a> &nbsp'+
-	                            	   '<a href="${staffRoleViewUrl}?id='+data+'" title="Edit"><i class="fa fa-trash-o red"></i></a>';
+	                            return '<a href="${roleViewUrl}?id='+data+'" title="Edit"><i class="fa fa-pencil"></i></a> &nbsp'+
+	                            	   '<a href="${roleViewUrl}?id='+data+'" title="Edit"><i class="fa fa-trash-o red"></i></a>';
 	                        },
 	                    },	       
            			  ],
@@ -36,15 +36,15 @@ $(function() {
 </script>
 <div class="col-md-12">
 	<h3 class="headline m-top-md">
-		Staff Role
+		Role Permission
 		<span class="line"></span>
 	</h3>
 	
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			Available Staff Roles
+			Available Roles
 			<span class="pull-right">
-				<a class="btn btn-xs btn-info" href="${staffRoleViewUrl }" title="Create Staff Role"><i class="fa fa-edit"></i> Create Staff Role</a>
+				<a class="btn btn-xs btn-info" href="${roleViewUrl }" title="Create Role Permission"><i class="fa fa-edit"></i> Create Role</a>
 			</span>
 			<br/>
 		</div>

@@ -59,7 +59,7 @@ public class StaffDaoImpl extends GenericDao implements StaffDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Staff> findAllStaffs() {
-		return (List<Staff>) hamesDataStore.findAll(getEntityClass());
+		return (List<Staff>) hamesDataStore.findAll(getEntityClass(),COLLECTION_NAME);
 	}
 
 }

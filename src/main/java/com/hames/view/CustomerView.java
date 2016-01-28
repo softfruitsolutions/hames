@@ -9,12 +9,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hames.bean.Customer;
 import com.hames.enums.PartyStatus;
 import com.hames.enums.PartyType;
 import com.hames.exception.ValidationException;
 import com.hames.service.CustomerService;
+import com.hames.util.DatatableRequest;
+import com.hames.util.DatatableResponse;
 import com.hames.util.ModelUtil;
 
 /**
@@ -68,5 +71,10 @@ public class CustomerView extends AbstractView {
 		}
 		
 		return list(model);
+	}
+	
+	@RequestMapping("/datatable")
+	public @ResponseBody DatatableResponse viewDatatable(@ModelAttribute DatatableRequest datatableRequest){
+		return customerService.getDatatable(datatableRequest);
 	}
 }

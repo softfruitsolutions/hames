@@ -10,12 +10,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.Validator;
 
 import com.hames.bean.Staff;
-import com.hames.bean.StaffRole;
+import com.hames.bean.RolePermission;
 import com.hames.dao.StaffDao;
-import com.hames.exception.StaffRoleException;
+import com.hames.exception.RolePermissionException;
 import com.hames.exception.ValidationException;
 import com.hames.service.GenericService;
-import com.hames.service.StaffRoleService;
+import com.hames.service.RolePermissionService;
 import com.hames.service.StaffService;
 import com.hames.util.DatatableRequest;
 import com.hames.util.DatatableResponse;
@@ -29,7 +29,7 @@ public class StaffServiceImpl extends GenericService implements StaffService {
 	@Autowired
 	private StaffDao staffDao;
 	@Autowired
-	private StaffRoleService staffRoleService;
+	private RolePermissionService staffRoleService;
 
 	@Override
 	public Validator getValidator() {
@@ -49,10 +49,10 @@ public class StaffServiceImpl extends GenericService implements StaffService {
 		 */
 		try{
 			validate(staff);
-			StaffRole staffRole = staffRoleService.getStaffRoleById(staff.getRoleId());
+			RolePermission staffRole = staffRoleService.getRoleById(staff.getRoleId());
 			if(staffRole == null){
 				logger.debug("Staff Role doesn't exists.");
-				throw new StaffRoleException("Invalid Staff Role.");
+				throw new RolePermissionException("Invalid Staff Role.");
 			}
 		}catch(ValidationException e){
 			throw new ValidationException();
