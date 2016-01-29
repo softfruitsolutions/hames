@@ -4,6 +4,7 @@
   
 <tiles-definitions>
 	<definition name="login" template="/WEB-INF/views/hames/system/auth/login.jsp" />
+	<definition name="error.403" template="/WEB-INF/views/hames/system/error/error403.jsp" />
 	 
 	<definition name="index" extends="base.definition">  
         <put-attribute name="title" value="Hames - Softfruit" />  

@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 
 <div class="main-menu">
 	<ul>
@@ -25,17 +26,21 @@
 				<span class="text">Customer</span><span class="menu-hover"></span>
 			</a>
 		</li>
+		<shiro:hasPermission name="staff:view">
 		<li class='openable'> <!-- <c:if test="${menu=='staff' || menu=='staffrole'}"> active</c:if>  -->
 			<a href='#'> 
 				<span class="menu-icon"> <i class="fa fa-group fa-lg"></i></span>
 				<span class="text">Staffing</span><span class="menu-hover"></span>
 			</a>
+			<shiro:hasPermission name="staff:view">
 			<ul class="submenu">
 				<li class='<c:if test="${menu=='staff'}">active</c:if>'>
 					<a href='<c:url value="/staff/list" />'><span class="submenu-label"><i class="fa fa-user"></i> Staff</span></a>
 				</li>
 			</ul>
+			</shiro:hasPermission>
 		</li>
+		</shiro:hasPermission>
 		
 		<li class='openable'> <!-- <c:if test="${menu=='staff' || menu=='staffrole'}"> active</c:if>  -->
 			<a href='#'> 

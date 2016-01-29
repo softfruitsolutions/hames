@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hames.bean.Staff;
+import com.hames.bean.UserUtil;
 import com.hames.enums.StaffStatus;
 import com.hames.exception.RolePermissionException;
 import com.hames.exception.ValidationException;
@@ -45,12 +46,22 @@ public class StaffView extends AbstractView{
 	
 	@RequestMapping("/list")
 	public String list(Model model){
+		
+		if(!UserUtil.hasPermission("staff:view")){
+			return "error.403";
+		}
+		
 		activeMenu(model, "staff");
 		return "staff.list";
 	}
 	
 	@RequestMapping("/view")
 	public String view(Model model, @RequestParam(value="id",required=false) String id){
+		
+		if(!UserUtil.hasPermission("staff:view")){
+			return "error.403";
+		}
+		
 		activeMenu(model, "staff");
 		
 		Staff staff = null;
@@ -73,6 +84,10 @@ public class StaffView extends AbstractView{
 	
 	@RequestMapping(value="/save", method=RequestMethod.POST)
 	public String save(Model model,@ModelAttribute Staff staff,BindingResult result){
+		
+		if(!UserUtil.hasPermissions("staff:view","staff:create")){
+			return "error.403";
+		}
 		
 		try{
 			staffService.saveStaff(staff);
