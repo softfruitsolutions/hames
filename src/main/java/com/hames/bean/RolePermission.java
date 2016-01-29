@@ -1,6 +1,6 @@
 package com.hames.bean;
 
-import java.util.List;
+import java.util.Set;
 
 import org.springframework.data.annotation.Id;
 
@@ -13,7 +13,7 @@ public class RolePermission extends BaseBean {
 	private String roleName;
 	private String roleDescription;
 	private RolePermissionStatus status;
-	private List<String> permissions;
+	private Set<String> permissions;
 	
 	public String getRoleId() {
 		return roleId;
@@ -39,10 +39,10 @@ public class RolePermission extends BaseBean {
 	public void setStatus(RolePermissionStatus status) {
 		this.status = status;
 	}
-	public List<String> getPermissions() {
+	public Set<String> getPermissions() {
 		return permissions;
 	}
-	public void setPermissions(List<String> permissions) {
+	public void setPermissions(Set<String> permissions) {
 		this.permissions = permissions;
 	}
 	@Override
