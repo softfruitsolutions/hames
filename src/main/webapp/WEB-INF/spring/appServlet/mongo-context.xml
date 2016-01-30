@@ -9,8 +9,8 @@
  
     <!-- Factory bean that creates the Mongo instance -->
 	<bean id="mongo" class="org.springframework.data.mongodb.core.MongoFactoryBean">
-		<property name="host" value="$OPENSHIFT_MONGODB_DB_HOST" />
-		<property name="port" value="$OPENSHIFT_MONGODB_DB_PORT" />
+		<property name="host" value="127.0.0.1" />
+		<property name="port" value="27017" />
 	</bean>
 	
 	<bean id="hamesDataStore" class="com.hames.db.HamesDataStore">

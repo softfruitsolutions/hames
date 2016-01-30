@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.authentication.UserCredentials;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -26,6 +27,10 @@ public class HamesDataStore extends MongoTemplate{
 	
 	public HamesDataStore(Mongo mongo, String databaseName) {
 		super(mongo, databaseName);
+	}
+	
+	public HamesDataStore(Mongo mongo, String databaseName,UserCredentials userCredentials) {
+		super(mongo, databaseName, userCredentials);
 	}
 
 	public boolean exists(String id,String collectionName){
