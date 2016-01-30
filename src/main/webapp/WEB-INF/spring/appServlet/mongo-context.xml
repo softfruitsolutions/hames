@@ -1,16 +1,22 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<bean id="userCredentials" class="org.springframework.data.authentication.UserCredentials">
+	    <constructor-arg name="username" value="admin" />
+	    <constructor-arg name="password" value="HV7eArq4a4hl" />
+	</bean>
  
     <!-- Factory bean that creates the Mongo instance -->
 	<bean id="mongo" class="org.springframework.data.mongodb.core.MongoFactoryBean">
-		<property name="host" value="localhost" />
-		<property name="port" value="27017" />
+		<property name="host" value="$OPENSHIFT_MONGODB_DB_HOST" />
+		<property name="port" value="$OPENSHIFT_MONGODB_DB_PORT" />
 	</bean>
 	
 	<bean id="hamesDataStore" class="com.hames.db.HamesDataStore">
 		<constructor-arg name="mongo" ref="mongo" />
-		<constructor-arg name="databaseName" value="hames" />
+		<constructor-arg name="databaseName" value="softfruit" />
+		<constructor-arg name="userCredentials" ref="userCredentials" />
 	</bean>
 	
 	<!-- Use this post processor to translate any MongoExceptions thrown in @Repository annotated classes -->
