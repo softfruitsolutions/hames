@@ -32,7 +32,7 @@ public class AuthController {
 	@RequestMapping(value = "/dashboard")
 	public String dashboard(Model model) {
 		model.addAttribute("staffUtil",UserUtil.staff);
-		return "index";
+		return "dashboard";
 	}
 	
 	@RequestMapping(value = "/logout")
