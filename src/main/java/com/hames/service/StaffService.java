@@ -33,4 +33,16 @@ public interface StaffService{
 	 * @return
 	 */
 	public List<Staff> getAllStaffs(); 
+	
+	/**
+	 * Is Exists
+	 * @return boolean
+	 */
+	public boolean isStaffExists(String staffId);
+	
+	/**
+	 * Get All Active Staffs
+	 * @return
+	 */
+	public List<Staff> getAllActiveStaffs();
 }

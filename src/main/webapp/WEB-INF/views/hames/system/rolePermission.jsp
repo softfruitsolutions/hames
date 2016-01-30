@@ -73,7 +73,12 @@
 							<c:forEach items="${permissions }" var="p" varStatus="pStatus">
 								<div class="checkbox">
 									<label class="label-checkbox">
-										<input type="checkbox" id="permission${pStatus.index}" name="permissions" value="${p.permission}" <c:if test="${fn:contains(rolePermission.permissions,p.permission) }">checked="checked"</c:if>>
+										<c:if test="${rolePermission.permissions == null}">
+											<input type="checkbox" id="permission${pStatus.index}" name="permissions" value="${p.permission}">
+										</c:if>
+										<c:if test="${rolePermission.permissions != null}">
+											<input type="checkbox" id="permission${pStatus.index}" name="permissions" value="${p.permission}" <c:if test="${fn:contains(rolePermission.permissions,p.permission) }">checked="checked"</c:if>>
+										</c:if>
 										<span class="custom-checkbox"></span>
 										<c:out value="${p.text}" />
 									</label>

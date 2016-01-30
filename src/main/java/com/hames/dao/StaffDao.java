@@ -34,4 +34,16 @@ public interface StaffDao {
 	 */
 	List<Staff> findAllStaffs();
 	
+	/**
+	 * Is Staff Exists
+	 * @return
+	 */
+	boolean isStaffExists(String staffId);
+	
+	/**
+	 * Find All Active Staffs
+	 * @return
+	 */
+	List<Staff> findAllActiveStaffs();
+	
 }

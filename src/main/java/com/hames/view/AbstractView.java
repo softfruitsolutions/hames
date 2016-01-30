@@ -12,6 +12,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 
+import com.hames.bean.UserUtil;
 import com.hames.system.functions.DatePropertyEditor;
 
 @Controller
@@ -19,6 +20,8 @@ public abstract class AbstractView {
 
 	public void activeMenu(Model model,String menuName){
 		model.addAttribute("menu", menuName);
+		System.out.println(UserUtil.staff);
+		model.addAttribute("staffUtil", UserUtil.staff);
 	}
 
 	@InitBinder

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,12 +46,15 @@ public class StaffView extends AbstractView{
 	
 	@RequestMapping("/list")
 	public String list(Model model){
+		
 		activeMenu(model, "staff");
 		return "staff.list";
 	}
 	
 	@RequestMapping("/view")
+	@RequiresPermissions("staff:view")
 	public String view(Model model, @RequestParam(value="id",required=false) String id){
+		
 		activeMenu(model, "staff");
 		
 		Staff staff = null;

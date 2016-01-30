@@ -41,4 +41,10 @@ public interface RolePermissionService{
 	 */
 	public List<RolePermission> getActiveRolePermissions();
 	
+	/**
+	 * Is Role Permission Exists
+	 * @param roleId
+	 * @return
+	 */
+	public boolean isRolePermissionExists(String roleId);
 }

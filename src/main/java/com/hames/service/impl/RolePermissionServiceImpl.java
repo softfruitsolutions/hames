@@ -82,4 +82,9 @@ public class RolePermissionServiceImpl extends GenericService implements RolePer
 		return rolePermissionDao.findActiveRolePermissions();
 	}
 
+	@Override
+	public boolean isRolePermissionExists(String roleId) {
+		return rolePermissionDao.isRolePermissionExists(roleId);
+	}
+
 }

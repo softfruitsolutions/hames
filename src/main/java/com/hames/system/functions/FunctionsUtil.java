@@ -1,6 +1,6 @@
 package com.hames.system.functions;
 
-import java.util.List;
+import java.util.Set;
 
 public class FunctionsUtil {
 
@@ -10,8 +10,8 @@ public class FunctionsUtil {
 	 * @param obj
 	 * @return
 	 */
-	public static boolean contains(List list, Object obj){
-		if(list.contains(obj)){
+	public static boolean contains(Set set, Object obj){
+		if(set.contains(obj)){
 			return true;
 		}
 		
