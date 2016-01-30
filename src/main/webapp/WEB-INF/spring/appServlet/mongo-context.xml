@@ -4,18 +4,20 @@
 	
 	<bean id="userCredentials" class="org.springframework.data.authentication.UserCredentials">
 	    <constructor-arg name="username" value="admin" />
-	    <constructor-arg name="password" value="HV7eArq4a4hl" />
-	</bean>
- 
-    <!-- Factory bean that creates the Mongo instance -->
-	<bean id="mongo" class="org.springframework.data.mongodb.core.MongoFactoryBean">
-		<property name="host" value="127.0.0.1" />
-		<property name="port" value="27017" />
+	    <constructor-arg name="password" value="soft#123!" />
 	</bean>
 	
+	<bean id="mongoUri" class="com.mongodb.MongoURI">
+		  <constructor-arg value="mongodb://admin:HV7eArq4a4hl@127.2.126.130:27017/hames"/>
+	</bean>
+
+	<bean class="com.mongodb.Mongo" id="mongo">
+	    <constructor-arg ref="mongoUri" />
+	</bean>
+ 
 	<bean id="hamesDataStore" class="com.hames.db.HamesDataStore">
 		<constructor-arg name="mongo" ref="mongo" />
-		<constructor-arg name="databaseName" value="softfruit" />
+		<constructor-arg name="databaseName" value="hames" />
 		<constructor-arg name="userCredentials" ref="userCredentials" />
 	</bean>
 	
