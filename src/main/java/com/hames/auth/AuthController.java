@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.hames.bean.UserUtil;
+
 /**
  * Handles requests for the application home page.
  */
@@ -14,7 +16,7 @@ public class AuthController {
 	@RequestMapping(value = "/")
 	public String home(Model model) {
 		if(SecurityUtils.getSubject().isAuthenticated()){
-			return dashboard();
+			return dashboard(model);
 		}
 		return "login";
 	}
@@ -28,17 +30,23 @@ public class AuthController {
 	}
 	
 	@RequestMapping(value = "/dashboard")
-	public String dashboard() {
+	public String dashboard(Model model) {
+		model.addAttribute("staffUtil",UserUtil.staff);
 		return "index";
 	}
 	
 	@RequestMapping(value = "/logout")
-	public String logout() {
+	public String logout(Model model) {
 		if(SecurityUtils.getSubject().isAuthenticated()){
 			SecurityUtils.getSubject().logout();
 			return "redirect:/";
 		}
-		return dashboard();
+		return dashboard(model);
 	}
 	
+	
+	@RequestMapping(value="/unauthorized")
+	public String unAuthorized(){
+		return "error.403";
+	}
 }

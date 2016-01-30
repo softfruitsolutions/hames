@@ -16,6 +16,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 
+import com.hames.bean.Staff;
+import com.hames.bean.UserUtil;
 import com.hames.db.HamesDataStore;
 import com.hames.system.auth.UserAccount;
 import com.mongodb.MongoException;
@@ -24,6 +26,7 @@ public class HamesRealm extends AuthorizingRealm {
 
 	private static final Logger logger = LoggerFactory.getLogger(HamesRealm.class);
 	private static final String USER_ACCOUNT_COLLECTION_NAME = "user_account";
+	private static final String STAFF_COLLECTION_NAME = "staff";
 
 	private HamesDataStore hamesDataStore;
 	public void setHamesDataStore(HamesDataStore hamesDataStore) {
@@ -72,6 +75,8 @@ public class HamesRealm extends AuthorizingRealm {
 			throw new IncorrectCredentialsException("Oops. Incorrect Password. Please try again");
 		}
 		
+		UserUtil.staff = getStaff(userAccount.getStaffId());
+		
 		return new SimpleAuthenticationInfo(upToken.getUsername(),upToken.getPassword(),getName());
 	}
 	
@@ -91,4 +96,14 @@ public class HamesRealm extends AuthorizingRealm {
 		}
 	}
 
+	private Staff getStaff(String staffId){
+		try{
+			Query query = new Query();
+			query.addCriteria(Criteria.where("staffId").is(staffId));
+			return hamesDataStore.findOne(query, Staff.class,STAFF_COLLECTION_NAME);
+		}catch(MongoException e){
+			logger.debug("Mongo Exception : {}",e);
+			throw new MongoException(e.getMessage());
+		}
+	}
 }
