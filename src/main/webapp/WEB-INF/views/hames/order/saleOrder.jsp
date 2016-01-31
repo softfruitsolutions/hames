@@ -33,9 +33,9 @@
 	</h3>
 	<div class="panel panel-default no-margin">
 		<div class="panel-heading">
-			<a href="#payment" class="btn btn-success" data-toggle="modal"><i class="fa fa-save"></i> Process</a>
+			<a href="#payment" class="btn btn-success btn-sm" data-toggle="modal"><i class="fa fa-save"></i> Process</a>
 			<div class="pull-right" id="statusDiv">
-				<a class="btn btn-warning">
+				<a class="btn btn-warning btn-sm">
 					<c:if test="${saleOrder.saleOrderStatus == 'DRAFT'}">
 						DRAFT
 					</c:if>
@@ -270,7 +270,7 @@
 					</div>
 					<div class="col-xs-6">
 						<div class="form-group text-right">
-							<a href="#" class="btn btn-success" onclick="save()"><i class="fa fa-save"></i> Create Order</a>
+							<a href="#" class="btn btn-success btn-sm" onclick="save()"><i class="fa fa-save"></i> Create Order</a>
 						</div>
 					</div>
 				</div>

@@ -1,9 +1,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!-- URL's -->
-<c:url value="/saleorder/view" var="saleOrderUrl" />
+<c:url value="/saleorder/view" var="saleOrderViewUrl" />
 <c:url value="/saleorder/datatable" var="saleOrderDatatableUrl" />
-<c:url value="/saleorder/updateStatus" var="saleOrderUpdateStatusUrl" />
 
 <script src='<c:url value="/resources/hames/order/js/saleorderlist.js" />' type="text/javascript"></script>
 
@@ -14,13 +13,12 @@
 	</h3>
 	
 	<div class="panel panel-default">
-		<%-- <div class="panel-heading">
-			Available Staffs
-			<span class="pull-right">
-				<a class="btn btn-xs btn-info" href="${staffViewUrl }" title="Create Staff "><i class="fa fa-edit"></i> Create Staff </a>
+		<div class="panel-heading">
+			<span class="">
+				<a class="btn btn-xs btn-primary" href="${saleOrderViewUrl }" title="Create Order "><i class="fa fa-edit"></i> Create Order </a>
 			</span>
 			<br/>
-		</div> --%>
+		</div>
 		<div class="panel-body">
 			<table id="datatable" class="table table-striped table-hover dataTable">
 				<thead>

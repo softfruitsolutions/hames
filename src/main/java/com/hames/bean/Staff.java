@@ -20,7 +20,7 @@ public class Staff extends BaseBean {
 	private String temporaryAddress;
 	private StaffStatus status;
 	
-	private String roleId;
+	//private String roleId;
 
 	public String getStaffId() {
 		return staffId;
@@ -82,12 +82,6 @@ public class Staff extends BaseBean {
 	public void setPermanentAddress(String permanentAddress) {
 		this.permanentAddress = permanentAddress;
 	}
-	public String getRoleId() {
-		return roleId;
-	}
-	public void setRoleId(String roleId) {
-		this.roleId = roleId;
-	}
 	public String getTemporaryAddress() {
 		return temporaryAddress;
 	}
@@ -108,7 +102,7 @@ public class Staff extends BaseBean {
 				+ phoneNumber + ", mobileNumber=" + mobileNumber + ", emailId="
 				+ emailId + ", permanentAddress=" + permanentAddress
 				+ ", temporaryAddress=" + temporaryAddress + ", status="
-				+ status + ", roleId=" + roleId + "]";
+				+ status + "]";
 	}
 	
 	

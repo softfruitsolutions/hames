@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.Validator;
 
-import com.hames.bean.RolePermission;
 import com.hames.dao.UserAccountDao;
 import com.hames.exception.RolePermissionException;
 import com.hames.exception.StaffException;
@@ -68,22 +67,15 @@ public class UserAccountServiceImpl extends GenericService implements UserAccoun
 			throw new StaffException("Invalid Staff");
 		}
 		
-		boolean roleExists = rolePermissionService.isRolePermissionExists(userAccount.getRolePermission().getRoleId());
+		boolean roleExists = rolePermissionService.isRolePermissionExists(userAccount.getRoleId());
 		if(!roleExists){
 			logger.debug("Role not found : {}",userAccount.getRolePermission().getRoleId());
 			throw new RolePermissionException("Role doesn't exists.!");
 		}
 		
-		
 		DefaultPasswordService passwordService = new DefaultPasswordService();
 		String encryptedPassword = passwordService.encryptPassword(userAccount.getPassword());
 		userAccount.setPassword(encryptedPassword);
-		
-		/**
-		 * Fetching Role Permission
-		 */
-		RolePermission rolePermission = rolePermissionService.getRoleById(userAccount.getRolePermission().getRoleId());
-		userAccount.setRolePermission(rolePermission);
 		
 		logger.debug("Saving entity : {}, class: {}",userAccount,UserAccount.class);
 		userAccountDao.save(userAccount);

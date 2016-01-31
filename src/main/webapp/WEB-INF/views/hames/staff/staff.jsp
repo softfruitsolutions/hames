@@ -66,14 +66,6 @@
 						<div class="row">
 							<div class="col-md-3">
 								<div class="form-group">
-									<label class="control-label">Role</label>
-									<form:select path="roleId" cssClass="form-control input-sm">
-										<form:options items="${staffRoles }" itemLabel="roleName" itemValue="roleId"/>
-									</form:select>
-								</div>
-							</div>
-							<div class="col-md-3">
-								<div class="form-group">
 									<div class="form-group">
 										<form:label path="city" cssClass="control-label">State/City</form:label>
 										<form:input path="city" cssClass="form-control input-sm" placeholder="State/City" />								 	

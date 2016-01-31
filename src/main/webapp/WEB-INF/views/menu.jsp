@@ -9,23 +9,31 @@
 				<span class="text">Dashboard</span> <span class="menu-hover"></span>
 			</a>
 		</li>
-		<li class='openable'>
-			<a href='#'> 
-				<span class="menu-icon"> <i class="fa fa-inbox fa-lg"></i></span>
-				<span class="text">Order</span><span class="menu-hover"></span>
-			</a>
-			<ul class="submenu">
-				<li class='<c:if test="${menu=='viewsaleorder'}">active</c:if>'>
-					<a href='<c:url value="/saleorder/list" />'><span class="submenu-label"><i class="fa fa-inbox fa-lg"></i> Sale Order</span></a>
-				</li>
-			</ul>
-		</li>
+		<shiro:hasPermission name="order:view">
+			<li class='openable'>
+				<a href='#'> 
+					<span class="menu-icon"> <i class="fa fa-inbox fa-lg"></i></span>
+					<span class="text">Order</span><span class="menu-hover"></span>
+				</a>
+				<shiro:hasPermission name="order:saleorder:view">
+					<ul class="submenu">
+						<li class='<c:if test="${menu=='viewsaleorder'}">active</c:if>'>
+							<a href='<c:url value="/saleorder/list" />'><span class="submenu-label"><i class="fa fa-inbox fa-lg"></i>  Sale Order</span></a>
+						</li>
+					</ul>
+				</shiro:hasPermission>
+			</li>
+		</shiro:hasPermission>
+		
+		<shiro:hasPermission name="party:customer:view">
 		<li class='<c:if test="${menu=='customer'}">active</c:if>'>
 			<a href="<c:url value="/customer/list" />"> 
 				<span class="menu-icon"> <i class="fa fa-user fa-lg"></i></span>
 				<span class="text">Customer</span><span class="menu-hover"></span>
 			</a>
 		</li>
+		</shiro:hasPermission>
+		
 		<shiro:hasPermission name="staff:view">
 		<li class='openable'> <!-- <c:if test="${menu=='staff' || menu=='staffrole'}"> active</c:if>  -->
 			<a href='#'> 
@@ -42,20 +50,26 @@
 		</li>
 		</shiro:hasPermission>
 		
+		<shiro:hasPermission name="admin:view">
 		<li class='openable'> <!-- <c:if test="${menu=='staff' || menu=='staffrole'}"> active</c:if>  -->
 			<a href='#'> 
 				<span class="menu-icon"> <i class="fa fa-user fa-lg"></i></span>
 				<span class="text">Administrator</span><span class="menu-hover"></span>
 			</a>
 			<ul class="submenu">
-				<li class='<c:if test="${menu=='rolepermission'}">active</c:if>'>
-					<a href='<c:url value="/role/list" />'><span class="submenu-label"><i class="fa fa-sitemap"></i> Role</span></a>
-				</li>
-				<li class='<c:if test="${menu=='useraccount'}">active</c:if>'>
-					<a href='<c:url value="/useraccount/view" />'><span class="submenu-label"><i class="fa fa-group"></i> User Account</span></a>
-				</li>
+				<shiro:hasPermission name="admin:rolepermission:view">
+					<li class='<c:if test="${menu=='rolepermission'}">active</c:if>'>
+						<a href='<c:url value="/role/list" />'><span class="submenu-label"><i class="fa fa-sitemap"></i> Role</span></a>
+					</li>
+				</shiro:hasPermission>
+				<shiro:hasPermission name="admin:useraccount:view">
+					<li class='<c:if test="${menu=='useraccount'}">active</c:if>'>
+						<a href='<c:url value="/useraccount/view" />'><span class="submenu-label"><i class="fa fa-group"></i> User Account</span></a>
+					</li>
+				</shiro:hasPermission>
 			</ul>
 		</li>
+		</shiro:hasPermission>
 		
 	</ul>
 </div>

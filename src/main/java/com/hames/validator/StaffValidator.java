@@ -23,10 +23,6 @@ public class StaffValidator implements Validator{
 			errors.rejectValue("lastName", "", "Last Name Required");
 		}
 		
-		if(staff.getRoleId() == null || staff.getRoleId().isEmpty()){
-			errors.rejectValue("roleId", "","Staff Role Required");
-		}
-		
 	}
 
 }

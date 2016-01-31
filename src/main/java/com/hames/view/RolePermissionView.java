@@ -1,5 +1,6 @@
 package com.hames.view;
 
+import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,11 +32,18 @@ public class RolePermissionView extends AbstractView{
 	
 	@RequestMapping("/list")
 	public String view(Model model){
+		if(!SecurityUtils.getSubject().isPermitted("admin:rolepermission:view")){
+			return "error.403";
+		}
 		return "system.role.list";
 	}
 	
 	@RequestMapping("/view")
 	public String view(Model model, @RequestParam(value="id",required=false) String id){
+		
+		if(!SecurityUtils.getSubject().isPermitted("admin:rolepermission:view")){
+			return "error.403";
+		}
 		
 		activeMenu(model, "rolepermission");
 		
@@ -57,6 +65,10 @@ public class RolePermissionView extends AbstractView{
 
 	@RequestMapping(value="/save", method=RequestMethod.POST)
 	public String save(Model model,@ModelAttribute RolePermission rolePermission){
+		
+		if(!SecurityUtils.getSubject().isPermitted("admin:rolepermission:create")){
+			return "error.403";
+		}
 		
 		try{
 			rolePermissionService.saveRolePermission(rolePermission);

@@ -126,7 +126,6 @@
 					 <li class="active">Dashboard</li>	 
 				</ul>
 			</div><!-- /breadcrumb-->
-			<br />
 			<div class="col-xs-12">
 				<jsp:include page="/WEB-INF/views/alertMessages.jsp" />
 			</div>

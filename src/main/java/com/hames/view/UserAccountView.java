@@ -2,6 +2,7 @@ package com.hames.view;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,11 @@ public class UserAccountView extends AbstractView{
 	
 	@RequestMapping("/view")
 	private String view(Model model, @RequestParam(value="username",required=false) String username){
+		
+		if(!SecurityUtils.getSubject().isPermitted("admin:useraccount:view")){
+			return "error.403";
+		}
+		
 		model.addAttribute("menu", "useraccount");
 		
 		if(username == null || username.isEmpty()){
@@ -49,6 +55,11 @@ public class UserAccountView extends AbstractView{
 	
 	@RequestMapping(value="/save",method=RequestMethod.POST)
 	private String save(Model model, @ModelAttribute UserAccount userAccount,HttpSession session){
+		
+		if(!SecurityUtils.getSubject().isPermitted("admin:useraccount:create")){
+			return "error.403";
+		}
+		
 		try{
 			userAccountService.save(userAccount);
 			ModelUtil.addSuccess("User Account saved successfully");

@@ -38,7 +38,8 @@ public class HamesDataStore extends MongoTemplate{
 		query.addCriteria(Criteria.where("_id").is(id));
 		return super.exists(query,collectionName);
 	}
-	
+
+	@SuppressWarnings("unchecked")
 	public DatatableResponse getDatatablePagedResult(DatatableRequest request){
 		
 		logger.debug("Building Datatable");
@@ -47,11 +48,14 @@ public class HamesDataStore extends MongoTemplate{
 		logger.debug("Fetching total no of records in collection : {}",request.getMongoCollectionName());
 		Long totalRecords = getCollection(request.getMongoCollectionName()).count();
 		datatableResponse.setiTotalRecords(totalRecords);
+		datatableResponse.setiTotalDisplayRecords(totalRecords);
 
 		Query query = new Query();
+		query.limit(request.getiDisplayLength());
+		query.skip(request.getiDisplayStart());
 		
-		logger.debug("Fetching all the records with query : {}",query.toString());
-		List results = findAll(request.getClazz(), request.getMongoCollectionName());
+		logger.debug("Fetching records with query : {}",query.toString());
+		List<?> results = find(query,request.getClazz(), request.getMongoCollectionName());
 		datatableResponse.setAaData(results);
 		
 		logger.debug("Datatable response builded successfully for request :{}",request.toString());

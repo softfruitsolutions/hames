@@ -6,12 +6,16 @@ import java.util.UUID;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
 import com.hames.bean.Customer;
 import com.hames.dao.CustomerDao;
 import com.hames.db.GenericDao;
 import com.hames.db.HamesDataStore;
+import com.hames.enums.PartyStatus;
+import com.hames.enums.PartyType;
 import com.hames.util.DatatableRequest;
 import com.hames.util.DatatableResponse;
 
@@ -60,6 +64,13 @@ public class CustomerDaoImpl extends GenericDao implements CustomerDao{
 	@Override
 	public List<Customer> findAllCustomers() {
 		return (List<Customer>) hamesDataStore.findAll(getEntityClass(),COLLECTION_NAME);
+	}
+
+	@Override
+	public Long findCustomerCount() {
+		Query query = new Query();
+		query.addCriteria(Criteria.where("partyType").is("CUSTOMER").and("status").is("ACTIVE_CUSTOMER"));
+		return hamesDataStore.getCollection(COLLECTION_NAME).count(query.getQueryObject());
 	}
 	
 }

@@ -29,7 +29,7 @@ $(document).ready(function() {
 	                        },
 	                    },	       
            			  ],
-        "bFilter" : false,
+        "bFilter" : true,
         "aLengthMenu": [[5, 20, 25, -1], [5, 15, 20, 30]],
 		"iDisplayLength" : 5
     });
