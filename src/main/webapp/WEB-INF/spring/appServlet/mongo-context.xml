@@ -8,7 +8,7 @@
 	</bean>
 	
 	<bean id="mongoUri" class="com.mongodb.MongoURI">
-		  <constructor-arg value="mongodb://admin:HV7eArq4a4hl@127.2.126.130:27017/hames"/>
+		  <constructor-arg value="mongodb://localhost:27017/hames"/>
 	</bean>
 
 	<bean class="com.mongodb.Mongo" id="mongo">

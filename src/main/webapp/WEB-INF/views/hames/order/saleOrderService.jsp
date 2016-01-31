@@ -416,7 +416,7 @@
 					</div>
 					<div class="col-xs-6">
 						<div class="form-group text-right">
-							<c:if test="${saleOrder.payment.paymentStatus == PAID }">
+							<c:if test="${saleOrder.payment.paymentStatus != 'PAID' }">
 								<a onclick="save()" class="btn btn-success btn-sm" ><i class="fa fa-save"></i> Pay</a>
 							</c:if>
 			     			<button type="button" class="btn btn-danger btn-sm" class="close" data-dismiss="modal" aria-hidden="true" onclick="">x Close</button>
