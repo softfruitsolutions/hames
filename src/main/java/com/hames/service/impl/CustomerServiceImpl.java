@@ -79,4 +79,9 @@ public class CustomerServiceImpl extends GenericService implements CustomerServi
 		return customerDao.findAllCustomers();
 	}
 
+	@Override
+	public Long getCustomerCount() {
+		return customerDao.findCustomerCount();
+	}
+
 }

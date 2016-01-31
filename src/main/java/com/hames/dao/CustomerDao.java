@@ -34,4 +34,10 @@ public interface CustomerDao{
 	 */
 	List<Customer> findAllCustomers();
 	
+	/**
+	 * Get Customer Count
+	 * @return
+	 */
+	Long findCustomerCount();
+	
 }

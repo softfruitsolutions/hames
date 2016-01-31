@@ -33,4 +33,10 @@ public interface CustomerService{
 	 * @return
 	 */
 	public List<Customer> getAllCustomers(); 
+	
+	/**
+	 * Get Customer Count
+	 * @return
+	 */
+	public Long getCustomerCount();
 }
