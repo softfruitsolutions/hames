@@ -1,5 +1,6 @@
 package com.hames.view;
 
+import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import com.hames.enums.PartyStatus;
 import com.hames.enums.PartyType;
 import com.hames.exception.ValidationException;
 import com.hames.service.CustomerService;
+import com.hames.system.auth.Permission;
 import com.hames.util.DatatableRequest;
 import com.hames.util.DatatableResponse;
 import com.hames.util.ModelUtil;
@@ -34,12 +36,20 @@ public class CustomerView extends AbstractView {
 	
 	@RequestMapping(value="/list")
 	public String list(Model model){
+		if(!SecurityUtils.getSubject().isPermitted(Permission.VIEW_CUSTOMER.getPermission())){
+			return "error.403";
+		}
 		activeMenu(model, "customer");
 		return "customer.list";
 	}
 	
 	@RequestMapping(value = "/view")
 	public String view(Model model, @RequestParam(value="id",required=false) String id){
+		
+		if(!SecurityUtils.getSubject().isPermitted(Permission.VIEW_CUSTOMER.getPermission())){
+			return "error.403";
+		}
+		
 		activeMenu(model, "customer");
 		
 		Customer customer = null;
@@ -61,6 +71,10 @@ public class CustomerView extends AbstractView {
 	
 	@RequestMapping(value="/save",method=RequestMethod.POST)
 	public String save(Model model,@ModelAttribute Customer customer){
+		
+		if(!SecurityUtils.getSubject().isPermitted(Permission.CREATE_CUSTOMER.getPermission())){
+			return "error.403";
+		}
 		
 		try{
 			customerService.saveCustomer(customer);

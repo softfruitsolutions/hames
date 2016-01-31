@@ -1,5 +1,8 @@
 package com.hames.auth;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -16,6 +19,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 
+import com.hames.bean.RolePermission;
 import com.hames.bean.Staff;
 import com.hames.bean.UserUtil;
 import com.hames.db.HamesDataStore;
@@ -27,7 +31,10 @@ public class HamesRealm extends AuthorizingRealm {
 	private static final Logger logger = LoggerFactory.getLogger(HamesRealm.class);
 	private static final String USER_ACCOUNT_COLLECTION_NAME = "user_account";
 	private static final String STAFF_COLLECTION_NAME = "staff";
+	private static final String ROLE_COLLECTION_NAME = "role_permission";
 
+	private static Set<String> permissions = new LinkedHashSet<String>();
+	
 	private HamesDataStore hamesDataStore;
 	public void setHamesDataStore(HamesDataStore hamesDataStore) {
 		this.hamesDataStore = hamesDataStore;
@@ -39,19 +46,12 @@ public class HamesRealm extends AuthorizingRealm {
 	
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-		System.out.println("Entering authorization info");
-		System.out.println(principals);
-		
 		if (principals == null) {
 			throw new AuthorizationException("PrincipalCollection method argument cannot be null.");
 		}
 		
-		System.out.println("Principals exists");
-		String username = (String) getAvailablePrincipal(principals);
-		UserAccount userAccount = getUserAccount(username);
-		
 		SimpleAuthorizationInfo sai = new SimpleAuthorizationInfo();
-		sai.setStringPermissions(userAccount.getRolePermission().getPermissions());
+		sai.setStringPermissions(permissions);
 		return sai;
 	}
 
@@ -74,6 +74,10 @@ public class HamesRealm extends AuthorizingRealm {
 			logger.debug("Incorrect Password. Authentication failure.");
 			throw new IncorrectCredentialsException("Oops. Incorrect Password. Please try again");
 		}
+		
+		//Fetching Permission
+		RolePermission rolePermission = getRolePermissions(userAccount.getRoleId());
+		setPermissions(rolePermission.getPermissions());
 		
 		UserUtil.staff = getStaff(userAccount.getStaffId());
 		
@@ -106,4 +110,21 @@ public class HamesRealm extends AuthorizingRealm {
 			throw new MongoException(e.getMessage());
 		}
 	}
+	
+	private RolePermission getRolePermissions(String roleId){
+		try{
+			Query query = new Query();
+			query.addCriteria(Criteria.where("roleId").is(roleId));
+			return hamesDataStore.findOne(query, RolePermission.class,ROLE_COLLECTION_NAME);
+		}catch(MongoException e){
+			logger.debug("Mongo Exception : {}",e);
+			throw new MongoException(e.getMessage());
+		}
+	}
+
+	public static void setPermissions(Set<String> permissions) {
+		HamesRealm.permissions = permissions;
+	}
+	
+	
 }

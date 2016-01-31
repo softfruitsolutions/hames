@@ -1,5 +1,6 @@
 package com.hames.view;
 
+import org.apache.shiro.SecurityUtils;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +23,7 @@ import com.hames.exception.PaymentException;
 import com.hames.exception.ValidationException;
 import com.hames.service.CustomerService;
 import com.hames.service.SaleOrderService;
+import com.hames.system.auth.Permission;
 import com.hames.util.DatatableRequest;
 import com.hames.util.DatatableResponse;
 import com.hames.util.ModelUtil;
@@ -39,12 +41,19 @@ public class SaleOrderView extends AbstractView{
 	
 	@RequestMapping("/list")
 	public String list(Model model){
+		if(!SecurityUtils.getSubject().isPermitted(Permission.VIEW_SALE_ORDER.getPermission())){
+			return "error.403";
+		}
 		model.addAttribute("menu", "viewsaleorder");
 		return "sale.order.list";
 	}
 	
 	@RequestMapping("/view")
 	public String view(Model model, @RequestParam(value="id",required=false) String id){
+		
+		if(!SecurityUtils.getSubject().isPermitted(Permission.VIEW_SALE_ORDER.getPermission())){
+			return "error.403";
+		}
 		
 		model.addAttribute("menu", "createsaleorder");
 		
@@ -85,7 +94,9 @@ public class SaleOrderView extends AbstractView{
 
 	@RequestMapping(value="/save",method=RequestMethod.POST)
 	public String save(Model model,@ModelAttribute SaleOrder order){
-		
+		if(!SecurityUtils.getSubject().isPermitted(Permission.CREATE_SALE_ORDER.getPermission())){
+			return "error.403";
+		}
 		try{
 			saleOrderService.saveOrder(order);
 			ModelUtil.addSuccess("Sale Order saved successfully");	
@@ -108,22 +119,6 @@ public class SaleOrderView extends AbstractView{
 	@RequestMapping("/datatable")
 	public @ResponseBody DatatableResponse viewDatatable(@ModelAttribute DatatableRequest datatableRequest){
 		return saleOrderService.getDatatable(datatableRequest);
-	}
-	
-	@RequestMapping("/updatestatus")
-	public String updateOrderStatus(Model model,@RequestParam(value="orderId")String orderId,
-								  				@RequestParam(value="saleorderStatus")SaleOrderStatus saleOrderStatus,
-								  				@RequestParam(value="jobNo")String jobNo){
-		try{
-			saleOrderService.updateOrderStatus(orderId, saleOrderStatus);
-			logger.debug("Sale Order Status updated successfully");
-			ModelUtil.addSuccess(jobNo+" status updated to "+saleOrderStatus);
-		}catch(OrderException e){
-			logger.debug(e.getMessage());
-			ModelUtil.addError(e.getMessage());
-		}
-		
-		return list(model);
 	}
 	
 }

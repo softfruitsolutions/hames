@@ -25,7 +25,7 @@ public class UserAccountValidator implements Validator {
 			errors.rejectValue("password", "", "Password required");
 		}
 		
-		if(userAccount.getRolePermission().getRoleId() == null || userAccount.getRolePermission().getRoleId().isEmpty()){
+		if(userAccount.getRoleId() == null || userAccount.getRoleId().isEmpty()){
 			errors.rejectValue("rolePermission", "", "Role required");
 		}
 		

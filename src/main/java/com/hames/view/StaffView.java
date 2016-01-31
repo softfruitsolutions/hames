@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
-import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,13 +47,20 @@ public class StaffView extends AbstractView{
 	@RequestMapping("/list")
 	public String list(Model model){
 		
+		if(!SecurityUtils.getSubject().isPermitted("staff:view")){
+			return "error.403";
+		}
+		
 		activeMenu(model, "staff");
 		return "staff.list";
 	}
 	
 	@RequestMapping("/view")
-	@RequiresPermissions("staff:view")
 	public String view(Model model, @RequestParam(value="id",required=false) String id){
+		
+		if(!SecurityUtils.getSubject().isPermitted("staff:view")){
+			return "error.403";
+		}
 		
 		activeMenu(model, "staff");
 		
@@ -77,6 +84,10 @@ public class StaffView extends AbstractView{
 	
 	@RequestMapping(value="/save", method=RequestMethod.POST)
 	public String save(Model model,@ModelAttribute Staff staff,BindingResult result){
+		
+		if(!SecurityUtils.getSubject().isPermitted("staff:create")){
+			return "error.403";
+		}
 		
 		try{
 			staffService.saveStaff(staff);

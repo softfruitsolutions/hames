@@ -56,7 +56,7 @@
 							<div class="form-group">
 								<label for="customerName" class="col-lg-2 control-label">Role</label>
 								<div class="col-lg-10">
-									<form:select path="rolePermission.roleId" cssClass="form-control input-sm">
+									<form:select path="roleId" cssClass="form-control input-sm">
 										<form:options items="${rolePermissions }" itemLabel="roleName" itemValue="roleId"/>
 									</form:select>
 								</div><!-- /.col -->
@@ -80,7 +80,7 @@
 									<tr>
 										<td><c:out value="${ua.username }"></c:out></td>
 										<td><c:out value="${ua.staffId }"></c:out></td>
-										<td><c:out value="${ua.rolePermission.roleId }"></c:out></td>
+										<td><c:out value="${ua.roleId }"></c:out></td>
 									</tr>
 								</c:forEach>
 							</tbody>
