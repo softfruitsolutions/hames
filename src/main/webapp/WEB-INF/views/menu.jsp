@@ -16,7 +16,7 @@
 			</a>
 			<ul class="submenu">
 				<li class='<c:if test="${menu=='viewsaleorder'}">active</c:if>'>
-					<a href='<c:url value="/saleorder/list" />'><span class="submenu-label"><i class="fa fa-inbox fa-lg"></i> Sale Order</span></a>
+					<a href='<c:url value="/saleorder/list" />'><span class="submenu-label"><i class="fa fa-inbox fa-lg"></i>  Sale Order</span></a>
 				</li>
 			</ul>
 		</li>
