@@ -1,6 +1,5 @@
 package com.hames.service.impl;
 
-import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,12 +52,7 @@ public class OrderServiceImpl extends GenericService implements OrderService{
 		 * Setting Audit details
 		 * Save Order
 		 */
-		if(order.getOrderId() == null || order.getOrderId().isEmpty()){
-			order.setDateCreated(new DateTime());
-			order.setDateModified(new DateTime());	
-		}else{
-			order.setDateModified(new DateTime());
-		}
+		order.setAuditableDetails(order.getOrderId());
 		
 		logger.debug("Saving entity : {},{}",order.getClass(),order.toString());
 		orderDao.save(order);

@@ -2,7 +2,6 @@ package com.hames.service.impl;
 
 import java.util.List;
 
-import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,15 +47,8 @@ public class CustomerServiceImpl extends GenericService implements CustomerServi
 			throw new ValidationException();
 		}
 		
-		/**
-		 * Setting Audit details
-		 */
-		if(customer.getPartyId() == null || customer.getPartyId().isEmpty()){
-			customer.setDateCreated(new DateTime());
-			customer.setDateModified(new DateTime());	
-		}else{
-			customer.setDateModified(new DateTime());
-		}
+		// Setting Audit details
+		customer.setAuditableDetails(customer.getPartyId());
 		
 		logger.debug("Saving entity : {},{}",getEntityClass(),customer.toString());
 		customerDao.save(customer);

@@ -50,8 +50,10 @@ public class RolePermissionView extends AbstractView{
 		RolePermission rolePermission = null;
 		
 		if(id == null || id.isEmpty()){
-			rolePermission = new RolePermission();
-			rolePermission.setStatus(RolePermissionStatus.ACTIVE_ROLE);
+			if(!model.containsAttribute("rolePermission")){
+				rolePermission = new RolePermission();
+				rolePermission.setStatus(RolePermissionStatus.ACTIVE_ROLE);
+			}
 		}else{
 			rolePermission = rolePermissionService.getRoleById(id);
 		}

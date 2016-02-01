@@ -4,21 +4,21 @@ import org.joda.time.DateTime;
 
 public class BaseBean {
 
-	private Integer staffCreated;
-	private Integer staffModified;
-	private DateTime dateCreated;
-	private DateTime dateModified;
+	public String staffCreated;
+	public String staffModified;
+	public DateTime dateCreated;
+	public DateTime dateModified;
 
-	public Integer getStaffCreated() {
+	public String getStaffCreated() {
 		return staffCreated;
 	}
-	public void setStaffCreated(Integer staffCreated) {
+	public void setStaffCreated(String staffCreated) {
 		this.staffCreated = staffCreated;
 	}
-	public Integer getStaffModified() {
+	public String getStaffModified() {
 		return staffModified;
 	}
-	public void setStaffModified(Integer staffModified) {
+	public void setStaffModified(String staffModified) {
 		this.staffModified = staffModified;
 	}
 	public DateTime getDateCreated() {
@@ -34,6 +34,15 @@ public class BaseBean {
 		this.dateModified = dateModified;
 	}
 	
-	
-	
+	public void setAuditableDetails(String id){
+		if(id == null || id.isEmpty()){
+			setStaffCreated(UserUtil.staff.getStaffId());
+			setStaffModified(UserUtil.staff.getStaffId());
+			setDateCreated(new DateTime());
+			setDateModified(new DateTime());
+		}else{
+			setStaffModified(UserUtil.staff.getStaffId());
+			setDateModified(new DateTime());
+		}
+	}
 }

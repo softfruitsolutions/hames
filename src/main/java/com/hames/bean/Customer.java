@@ -66,6 +66,9 @@ public class Customer extends Party {
 				+ middleName + ", lastName=" + lastName + ", phoneNumber="
 				+ phoneNumber + ", mobileNumber=" + mobileNumber + ", emailId="
 				+ emailId + ", permanentAddress=" + permanentAddress
-				+ ", temporaryAddress=" + temporaryAddress + "]";
+				+ ", temporaryAddress=" + temporaryAddress + ", staffCreated="
+				+ staffCreated + ", staffModified=" + staffModified
+				+ ", dateCreated=" + dateCreated + ", dateModified="
+				+ dateModified + "]";
 	}
 }

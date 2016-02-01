@@ -299,6 +299,13 @@
 						</table>
 					</div>
 				</div>
+				<h5 class="headline">
+					Audit Details
+					<span class="line"></span>
+				</h5>	
+				<div class="row no-margin">
+					<jsp:include page="/WEB-INF/views/hames/audit.jsp" />
+				</div>
 		 </div>
 	</div>
 </div>
