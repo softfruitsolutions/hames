@@ -63,6 +63,9 @@
 							</div><!-- /form-group -->
 						</div>
 					</div>
+					<div class="hide">
+						<jsp:include page="/WEB-INF/views/hames/audit.jsp" />
+					</div>
 				</form:form>
 				<hr />
 				<div class="row">

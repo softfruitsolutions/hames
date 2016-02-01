@@ -2,7 +2,6 @@ package com.hames.service.impl;
 
 import java.util.List;
 
-import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,15 +46,8 @@ public class RolePermissionServiceImpl extends GenericService implements RolePer
 			throw new ValidationException();
 		}
 		
-		/**
-		 * Setting Audit details
-		 */
-		if(rolePermission.getRoleId() == null || rolePermission.getRoleId().isEmpty()){
-			rolePermission.setDateCreated(new DateTime());
-			rolePermission.setDateModified(new DateTime());	
-		}else{
-			rolePermission.setDateModified(new DateTime());
-		}
+		//Setting Auditable Details
+		rolePermission.setAuditableDetails(rolePermission.getRoleId());
 		
 		logger.debug("Saving entity : {},{}",rolePermission.getClass(),rolePermission.toString());
 		rolePermissionDao.save(rolePermission);

@@ -18,7 +18,7 @@
 					<label class="control-label">Staff Created</label>
 					<div class="input-group">
 						<span class="input-group-addon"><i class="fa fa-user"></i></span>
-						<input class="form-control input-sm" type="text" placeholder="Staff Created" readonly>
+						<form:input path="staffCreated" class="form-control input-sm" placeholder="Staff Created"  readonly="true"/>
 					</div>
 				</div>
 			</div>
@@ -27,7 +27,7 @@
 					<label class="control-label">Staff Modified</label>
 					<div class="input-group">
 						<span class="input-group-addon"><i class="fa fa-user"></i></span>
-						<input class="form-control input-sm" type="text" placeholder="Staff Modified" readonly>
+						<form:input path="staffModified" class="form-control input-sm" placeholder="Staff Modified"  readonly="true"/>
 					</div>
 				</div>
 			</div>

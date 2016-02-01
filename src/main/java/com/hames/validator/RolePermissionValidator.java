@@ -23,6 +23,10 @@ public class RolePermissionValidator implements Validator {
 			errors.rejectValue("status", "", "Invalid Status");
 		}
 		
+		if(role.getPermissions() == null || role.getPermissions().size() <= 0){
+			errors.rejectValue("permissions", "", "Permissions required");
+		}
+		
 	}
 
 }

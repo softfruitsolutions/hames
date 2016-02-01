@@ -77,6 +77,9 @@ public class UserAccountServiceImpl extends GenericService implements UserAccoun
 		String encryptedPassword = passwordService.encryptPassword(userAccount.getPassword());
 		userAccount.setPassword(encryptedPassword);
 		
+		//Setting Auditable details
+		userAccount.setAuditableDetails(null);
+		
 		logger.debug("Saving entity : {}, class: {}",userAccount,UserAccount.class);
 		userAccountDao.save(userAccount);
 		logger.debug("Entity saved successfully");

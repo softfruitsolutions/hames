@@ -2,7 +2,6 @@ package com.hames.service.impl;
 
 import java.util.List;
 
-import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,15 +50,8 @@ public class StaffServiceImpl extends GenericService implements StaffService {
 			throw new ValidationException();
 		}
 		
-		/**
-		 * Setting Audit details
-		 */
-		if(staff.getStaffId() == null || staff.getStaffId().isEmpty()){
-			staff.setDateCreated(new DateTime());
-			staff.setDateModified(new DateTime());	
-		}else{
-			staff.setDateModified(new DateTime());
-		}
+		//Setting Audit details
+		staff.setAuditableDetails(staff.getStaffId());
 		
 		logger.debug("Saving entity : {},{}",staff.getClass(),staff.toString());
 		staffDao.save(staff);
