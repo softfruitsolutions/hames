@@ -1,8 +1,13 @@
 package com.hames.bean;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+
 public class ExpenseCategory extends BaseBean{
 	
+	@Id
 	private String categoryId;
+	@Indexed(unique=true)
 	private String categoryName;
 	private String categoryDescription;
 	

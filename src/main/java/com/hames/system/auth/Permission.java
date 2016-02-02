@@ -32,9 +32,15 @@ public enum Permission {
 	 * USER ACCOUNT
 	 */
 	VIEW_USER_ACCOUNT("View User Account","admin:useraccount:view"),
-	CREATE_USER_ACCOUNT("Create User Account","admin:useraccount:create");
+	CREATE_USER_ACCOUNT("Create User Account","admin:useraccount:create"),
 	
-	
+	/**
+	 * EXPENSE MANAGER
+	 */
+	VIEW_EXPENSE_MANAGER("View Expense Manager","expense:manager:view"),
+	CREATE_EXPENSE_MANAGER("Create Expense Manager","expense:manager:create"),
+	VIEW_EXPENSE_CATEGORY("View Expense Category","expense:category:view"),
+	CREATE_EXPENSE_CATEGORY("Create Expense Category","expense:category:create");
 	
 	private String text;
 	private String permission;
