@@ -1,6 +1,6 @@
 package com.hames.bean;
 
-public class UserUtil {
+public class UserContext {
 
 	public static Staff staff;
 }

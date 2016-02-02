@@ -36,12 +36,12 @@ public class BaseBean {
 	
 	public void setAuditableDetails(String id){
 		if(id == null || id.isEmpty()){
-			setStaffCreated(UserUtil.staff.getStaffId());
-			setStaffModified(UserUtil.staff.getStaffId());
+			setStaffCreated(UserContext.staff.getStaffId());
+			setStaffModified(UserContext.staff.getStaffId());
 			setDateCreated(new DateTime());
 			setDateModified(new DateTime());
 		}else{
-			setStaffModified(UserUtil.staff.getStaffId());
+			setStaffModified(UserContext.staff.getStaffId());
 			setDateModified(new DateTime());
 		}
 	}

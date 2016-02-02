@@ -4,17 +4,41 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.joda.time.DateTime;
+
 import com.hames.enums.PaymentStatus;
 
 public class Payment {
 	
+	private String paymentId;
+	private DateTime paymentDate;
 	private BigDecimal totalAmount;
 	private BigDecimal amountPaid;
 	private BigDecimal discountAmount;
 	private BigDecimal balanceDue;
 	private List<PaymentItems> paymentItems;
 	private PaymentStatus paymentStatus;
+	private String paymentNotes;
 	
+	
+	public String getPaymentId() {
+		return paymentId;
+	}
+	public void setPaymentId(String paymentId) {
+		this.paymentId = paymentId;
+	}
+	public DateTime getPaymentDate() {
+		return paymentDate;
+	}
+	public void setPaymentDate(DateTime paymentDate) {
+		this.paymentDate = paymentDate;
+	}
+	public String getPaymentNotes() {
+		return paymentNotes;
+	}
+	public void setPaymentNotes(String paymentNotes) {
+		this.paymentNotes = paymentNotes;
+	}
 	public BigDecimal getTotalAmount() {
 		return totalAmount;
 	}

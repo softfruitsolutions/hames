@@ -15,6 +15,7 @@ import com.hames.bean.Order;
 import com.hames.bean.Payment;
 import com.hames.bean.PaymentItems;
 import com.hames.bean.SaleOrder;
+import com.hames.bean.helper.UUIDHelper;
 import com.hames.dao.SaleOrderDao;
 import com.hames.enums.PaymentItemStatus;
 import com.hames.enums.PaymentItemType;
@@ -116,6 +117,12 @@ public class SaleOrderServiceImpl extends OrderServiceImpl implements SaleOrderS
 		 */
 		Payment payment = saleOrder.getPayment();
 		if(payment != null && payment.getPaymentStatus() != PaymentStatus.PAID){
+			
+			if(payment.getPaymentId() == null || payment.getPaymentId().isEmpty()){
+				payment.setPaymentId(UUIDHelper.getUUID());
+				payment.setPaymentDate(saleOrder.getOrderDate());
+			}
+			
 			BigDecimal amountPaid = new BigDecimal(0);
 			
 			if(payment.getPaymentItems() != null){

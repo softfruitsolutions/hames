@@ -356,6 +356,9 @@
 											<form:hidden path="payment.balanceDue"/>
 										</td>
 									</tr>
+									<form:hidden path="payment.paymentId"/>
+									<form:hidden path="payment.paymentNotes"/>
+									<form:hidden path="payment.paymentDate"/>
 								</tbody>
 							</table>
 						</div>
