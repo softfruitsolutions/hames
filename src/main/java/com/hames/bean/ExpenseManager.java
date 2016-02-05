@@ -2,6 +2,8 @@ package com.hames.bean;
 
 import org.joda.time.DateTime;
 
+import com.hames.enums.ExpenseStatus;
+
 
 public class ExpenseManager extends BaseBean {
 	
@@ -11,6 +13,7 @@ public class ExpenseManager extends BaseBean {
 	private String notes;
 	private Payment payment;
 	private ExpenseCategory expenseCategory;
+	private ExpenseStatus status;
 	
 	public String getExpenseId() {
 		return expenseId;
@@ -47,6 +50,12 @@ public class ExpenseManager extends BaseBean {
 	}
 	public void setExpenseCategory(ExpenseCategory expenseCategory) {
 		this.expenseCategory = expenseCategory;
+	}
+	public ExpenseStatus getStatus() {
+		return status;
+	}
+	public void setStatus(ExpenseStatus status) {
+		this.status = status;
 	}
 	@Override
 	public String toString() {
