@@ -57,12 +57,15 @@
         <put-attribute name="title" value="Sale Order | Hames - Softfruit" />  
         <put-attribute name="body" value="/WEB-INF/views/hames/order/saleOrderService.jsp" />  
     </definition>
-    
+
+    <definition name="expense.manager.list" extends="base.definition">  
+        <put-attribute name="title" value="Expense Manager | Hames - Softfruit" />  
+        <put-attribute name="body" value="/WEB-INF/views/hames/expense/expenseManagerList.jsp" />  
+    </definition>    
     <definition name="expense.manager.view" extends="base.definition">  
         <put-attribute name="title" value="Expense Manager | Hames - Softfruit" />  
         <put-attribute name="body" value="/WEB-INF/views/hames/expense/expenseManager.jsp" />  
     </definition>
-    
     <definition name="expense.category.view" extends="base.definition">  
         <put-attribute name="title" value="Expense Category | Hames - Softfruit" />  
         <put-attribute name="body" value="/WEB-INF/views/hames/expense/expenseCategory.jsp" />  

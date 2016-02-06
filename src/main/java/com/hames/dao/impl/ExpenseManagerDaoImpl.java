@@ -5,6 +5,8 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
 import com.hames.bean.ExpenseManager;
@@ -12,6 +14,8 @@ import com.hames.bean.helper.UUIDHelper;
 import com.hames.dao.ExpenseManagerDao;
 import com.hames.db.GenericDao;
 import com.hames.db.HamesDataStore;
+import com.hames.util.DatatableRequest;
+import com.hames.util.DatatableResponse;
 
 @Repository
 public class ExpenseManagerDaoImpl extends GenericDao implements ExpenseManagerDao {
@@ -44,6 +48,21 @@ public class ExpenseManagerDaoImpl extends GenericDao implements ExpenseManagerD
 	@SuppressWarnings("unchecked")
 	public List<ExpenseManager> findAllExpenses() {
 		return (List<ExpenseManager>) hamesDataStore.findAll(getEntityClass(), COLLECTION_NAME);
+	}
+
+	@Override
+	public DatatableResponse buildDatatable(DatatableRequest request) {
+		request.setClazz(getEntityClass());
+		request.setMongoCollectionName(COLLECTION_NAME);
+		
+		return hamesDataStore.getDatatablePagedResult(request);
+	}
+
+	@Override
+	public ExpenseManager findExpenseById(String id) {
+		Query query = new Query();
+		query.addCriteria(Criteria.where("expenseId").is(id));
+		return (ExpenseManager) hamesDataStore.findOne(query, getEntityClass(),COLLECTION_NAME);
 	}
 
 }

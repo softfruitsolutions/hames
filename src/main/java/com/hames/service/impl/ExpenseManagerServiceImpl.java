@@ -1,7 +1,10 @@
 package com.hames.service.impl;
 
+import java.math.BigDecimal;
+import java.util.Iterator;
 import java.util.List;
 
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +14,21 @@ import org.springframework.validation.Validator;
 import com.hames.bean.ExpenseCategory;
 import com.hames.bean.ExpenseManager;
 import com.hames.bean.Payment;
+import com.hames.bean.PaymentItems;
+import com.hames.bean.helper.UUIDHelper;
 import com.hames.dao.ExpenseCategoryDao;
 import com.hames.dao.ExpenseManagerDao;
+import com.hames.enums.ExpenseStatus;
+import com.hames.enums.PaymentItemStatus;
+import com.hames.enums.PaymentItemType;
+import com.hames.enums.PaymentStatus;
+import com.hames.exception.ExpenseManagerException;
 import com.hames.exception.ValidationException;
 import com.hames.service.ExpenseManagerService;
 import com.hames.service.GenericService;
+import com.hames.util.BigDecimalUtil;
+import com.hames.util.DatatableRequest;
+import com.hames.util.DatatableResponse;
 import com.hames.validator.ExpenseCategoryValidator;
 import com.hames.validator.ExpenseManagerValidator;
 import com.hames.validator.PaymentValidator;
@@ -48,11 +61,20 @@ public class ExpenseManagerServiceImpl extends GenericService implements Expense
 			throw new ValidationException(e.getMessage());
 		}
 		
+		ExpenseCategory ec = expenseCategoryDao.findExpenseCategory(expenseManager.getExpenseCategory().getCategoryId());
+		if(ec == null){
+			logger.debug("Expense category not found. Please contact administrator.!");
+			throw new ExpenseManagerException("Expense category not found.");
+		}
+		expenseManager.setExpenseCategory(ec);
+		
 		//Setting auditable details
 		expenseManager.setAuditableDetails(expenseManager.getExpenseId());
 		
 		//Setting Payment Details
 		processPayment(expenseManager.getPayment());
+		
+		expenseManager.setStatus(ExpenseStatus.ACTIVE);
 		
 		logger.debug("Saving entity : {},{}",expenseManager.getClass(),expenseManager.toString());
 		expenseManagerDao.save(expenseManager);
@@ -61,6 +83,51 @@ public class ExpenseManagerServiceImpl extends GenericService implements Expense
 	}
 	
 	private void processPayment(Payment payment){
+		
+		if(payment.getPaymentItems() != null){
+			Iterator<PaymentItems> piIterator = payment.getPaymentItems().iterator();
+			
+			BigDecimal amountPaid = new BigDecimal(0);
+
+			while(piIterator.hasNext()){
+				PaymentItems item = piIterator.next();
+				
+				if(item.getPaymentAmount() != null && BigDecimalUtil.isGreaterThan(item.getPaymentAmount(), BigDecimal.ZERO)){
+					
+					//Adding Paid Amount
+					amountPaid = amountPaid.add(item.getPaymentAmount());
+					
+					//Setting Payment Item
+					if(item.getPaymentDate() == null){
+						item.setPaymentDate(new DateTime());
+					}
+					
+					item.setPaymentType(PaymentItemType.CASH);
+					item.setPaymentItemStatus(PaymentItemStatus.ACTIVE_PAYMENT_ITEM);
+					if(item.getDescription() == null || item.getDescription().isEmpty()){
+						logger.error("Item description required");
+						throw new ExpenseManagerException("Item description required");
+					}
+					
+				}else{
+					piIterator.remove();
+				}
+			}
+
+			if(!BigDecimalUtil.isEqual(amountPaid, payment.getTotalAmount())){
+				logger.error("Amount paid is not equal to total amount");
+				throw new ExpenseManagerException("Amount paid isn't equal to total amount");
+			}
+			
+			//Setting payment status
+			payment.setPaymentStatus(PaymentStatus.PAID);
+			payment.setPaymentId(UUIDHelper.getUUID());
+			
+		}else{
+			logger.error("Payment Items required");
+			throw new ExpenseManagerException("Payment items required");
+		}
+
 		
 	}
 
@@ -100,6 +167,16 @@ public class ExpenseManagerServiceImpl extends GenericService implements Expense
 	@Override
 	public ExpenseCategory getExpenseCategory(String categoryId) {
 		return expenseCategoryDao.findExpenseCategory(categoryId);
+	}
+
+	@Override
+	public DatatableResponse getDatatable(DatatableRequest request) {
+		return expenseManagerDao.buildDatatable(request);
+	}
+
+	@Override
+	public ExpenseManager getExpense(String id) {
+		return expenseManagerDao.findExpenseById(id);
 	}
 
 }

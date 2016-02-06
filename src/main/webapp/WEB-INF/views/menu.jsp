@@ -18,7 +18,7 @@
 				<ul class="submenu">
 					<shiro:hasPermission name="expense:manager:view">
 						<li class='<c:if test="${menu=='expensemanager'}">active</c:if>'>
-							<a href='<c:url value="/expense/view" />'><span class="submenu-label"><i class="fa fa-folder-o fa-lg"></i>  Manager</span></a>
+							<a href='<c:url value="/expense/list" />'><span class="submenu-label"><i class="fa fa-folder-o fa-lg"></i>  Manager</span></a>
 						</li>
 					</shiro:hasPermission>
 					<shiro:hasPermission name="expense:category:view">

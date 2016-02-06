@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.hames.bean.ExpenseCategory;
 import com.hames.bean.ExpenseManager;
+import com.hames.util.DatatableRequest;
+import com.hames.util.DatatableResponse;
 
 public interface ExpenseManagerService {
 
@@ -13,6 +15,19 @@ public interface ExpenseManagerService {
 	 */
 	public void saveExpense(ExpenseManager expenseManager);
 	
+	/**
+	 * Get Expense from Expense Manager
+	 * @param id
+	 * @return
+	 */
+	public ExpenseManager getExpense(String id);
+	
+	/**
+	 * Datatable Request
+	 * @param request
+	 * @return
+	 */
+	public DatatableResponse getDatatable(DatatableRequest request);
 	
 	
 	//Expense Category

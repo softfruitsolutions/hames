@@ -1,12 +1,14 @@
 package com.hames.bean;
 
 import org.joda.time.DateTime;
+import org.springframework.data.annotation.Id;
 
 import com.hames.enums.ExpenseStatus;
 
 
 public class ExpenseManager extends BaseBean {
 	
+	@Id
 	private String expenseId;
 	private DateTime expenseDate;
 	private String payeeName;

@@ -10,15 +10,19 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hames.bean.ExpenseCategory;
 import com.hames.bean.ExpenseManager;
 import com.hames.bean.Payment;
 import com.hames.bean.PaymentItems;
 import com.hames.enums.ExpenseStatus;
+import com.hames.exception.ExpenseManagerException;
 import com.hames.exception.ValidationException;
 import com.hames.service.ExpenseManagerService;
 import com.hames.system.auth.Permission;
+import com.hames.util.DatatableRequest;
+import com.hames.util.DatatableResponse;
 import com.hames.util.ModelUtil;
 
 @Controller
@@ -28,6 +32,19 @@ public class ExpenseManagerView extends AbstractView{
 	private static final Logger logger = LoggerFactory.getLogger(ExpenseManagerView.class);
 
 	@Autowired private ExpenseManagerService expenseManagerService;
+	
+	public void initExpense(Model model){
+		model.addAttribute("expenseCategories", expenseManagerService.getAllExpenseCategory());
+	}
+	
+	@RequestMapping(value="/list")
+	public String viewExpenseList(Model model){
+		if(!SecurityUtils.getSubject().isPermitted(Permission.VIEW_EXPENSE_MANAGER.getPermission())){
+			return "error.403";
+		}
+		
+		return "expense.manager.list";
+	}
 	
 	/**
 	 * View Expense Manager
@@ -42,24 +59,24 @@ public class ExpenseManagerView extends AbstractView{
 			return "error.403";
 		}
 		
-		ExpenseManager expenseManager = null;
-				
 		if(expenseId == null || expenseId.isEmpty()){
 			if(!model.containsAttribute("expenseManager")){
-				expenseManager = new ExpenseManager();
+				ExpenseManager expenseManager = new ExpenseManager();
 
 				Payment payment = new Payment();
 				payment.addPaymentItems(new PaymentItems());
 				
 				expenseManager.setPayment(payment);
 				expenseManager.setStatus(ExpenseStatus.DRAFT);
+				
+				model.addAttribute("expenseManager", expenseManager);
 			}
 		}else{
-			
+			ExpenseManager expenseManager = expenseManagerService.getExpense(expenseId);
+			model.addAttribute("expenseManager", expenseManager);
 		}
 		
-		model.addAttribute("expenseManager", expenseManager);
-		model.addAttribute("expenseCategories", expenseManagerService.getAllExpenseCategory());
+		initExpense(model);
 		
 		return "expense.manager.view";
 	}
@@ -70,7 +87,9 @@ public class ExpenseManagerView extends AbstractView{
 		payment.addPaymentItems(new PaymentItems());
 		expenseManager.setPayment(payment);
 		
-		return viewExpense(model, expenseManager.getExpenseId());
+		initExpense(model);
+		
+		return "expense.manager.view";
 	}
 	
 	/**
@@ -94,12 +113,25 @@ public class ExpenseManagerView extends AbstractView{
 		}catch (IllegalArgumentException e) {
 			logger.debug(e.getMessage());
 			ModelUtil.addError(e.getMessage());
+		}catch(ExpenseManagerException e){
+			logger.debug(e.getMessage());
+			ModelUtil.addError(e.getMessage());
 		}
 		
 		return viewExpense(model,null);
 	}
 	
+	@RequestMapping(value="/datatable")
+	public @ResponseBody DatatableResponse getDatatable(@ModelAttribute DatatableRequest request){
+		return expenseManagerService.getDatatable(request);
+	}
 	
+	/**
+	 * Expense Category
+	 * @param model
+	 * @param categoryId
+	 * @return
+	 */
 	@RequestMapping(value="/category",method=RequestMethod.GET)
 	public String viewExpenseCategory(Model model,@RequestParam(value="id",required=false) String categoryId){
 	
