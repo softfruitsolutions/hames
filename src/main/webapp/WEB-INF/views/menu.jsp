@@ -4,7 +4,7 @@
 <div class="main-menu">
 	<ul>
 		<li class="">
-			<a href="/hames/"> 
+			<a href="<c:url value="/dashboard" />"> 
 				<span class="menu-icon"> <i class="fa fa-desktop fa-lg"></i></span>
 				<span class="text">Dashboard</span> <span class="menu-hover"></span>
 			</a>
