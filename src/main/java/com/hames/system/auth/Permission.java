@@ -8,6 +8,7 @@ public enum Permission {
 	VIEW_ORDER("View Order","order:view"),
 	VIEW_SALE_ORDER("View Sale Order", "order:saleorder:view"),
 	CREATE_SALE_ORDER("Create Sale Order","order:saleorder:create"),
+	VIEW_SALE_ORDER_PAYMENT("View Sale Order Payment","order:saleorder:payment:view"),
 	
 	/**
 	 * CUSTOMER
