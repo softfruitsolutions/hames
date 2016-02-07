@@ -5,7 +5,7 @@ import org.springframework.data.annotation.Id;
 import com.hames.enums.PartyStatus;
 import com.hames.enums.PartyType;
 
-public class Party extends BaseBean{
+public class Party extends Audit{
 
 	@Id
 	private String partyId;

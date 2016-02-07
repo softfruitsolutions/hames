@@ -3,7 +3,7 @@ package com.hames.bean;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 
-public class ExpenseCategory extends BaseBean{
+public class ExpenseCategory extends Audit{
 	
 	@Id
 	private String categoryId;

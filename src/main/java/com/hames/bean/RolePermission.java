@@ -6,7 +6,7 @@ import org.springframework.data.annotation.Id;
 
 import com.hames.enums.RolePermissionStatus;
 
-public class RolePermission extends BaseBean {
+public class RolePermission extends Audit {
 
 	@Id
 	private String roleId;

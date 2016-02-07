@@ -3,10 +3,10 @@ package com.hames.system.auth;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.index.Indexed;
 
-import com.hames.bean.BaseBean;
+import com.hames.bean.Audit;
 import com.hames.bean.RolePermission;
 
-public class UserAccount extends BaseBean{
+public class UserAccount extends Audit{
 
 	@Indexed(unique=true)
 	private String username;

@@ -6,7 +6,7 @@ import org.springframework.data.annotation.Id;
 import com.hames.enums.ExpenseStatus;
 
 
-public class ExpenseManager extends BaseBean {
+public class ExpenseManager extends Audit {
 	
 	@Id
 	private String expenseId;

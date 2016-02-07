@@ -15,19 +15,21 @@
 		<div class="row">
 			<div class="col-md-3">
 				<div class="form-group">
-					<label class="control-label">Staff Created</label>
+					<label class="control-label">Created By</label>
 					<div class="input-group">
 						<span class="input-group-addon"><i class="fa fa-user"></i></span>
-						<form:input path="staffCreated" class="form-control input-sm" placeholder="Staff Created"  readonly="true"/>
+						<form:hidden path="staffCreated"/>
+						<form:input path="createdByText" class="form-control input-sm" placeholder="Staff Created"  readonly="true"/>
 					</div>
 				</div>
 			</div>
 			<div class="col-md-3">
 				<div class="form-group">
-					<label class="control-label">Staff Modified</label>
+					<label class="control-label">Last Modified By</label>
 					<div class="input-group">
 						<span class="input-group-addon"><i class="fa fa-user"></i></span>
-						<form:input path="staffModified" class="form-control input-sm" placeholder="Staff Modified"  readonly="true"/>
+						<form:hidden path="staffModified"/>
+						<form:input path="lastModifiedByText" class="form-control input-sm" placeholder="Staff Modified"  readonly="true"/>
 					</div>
 				</div>
 			</div>
