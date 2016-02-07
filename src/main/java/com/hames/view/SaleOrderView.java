@@ -62,6 +62,7 @@ public class SaleOrderView extends AbstractView{
 			if(!model.containsAttribute("saleOrder")){
 				
 				saleOrder = new SaleOrder();
+				saleOrder.setJobNo(saleOrderService.getNextJobNo());
 				saleOrder.setOrderDate(new DateTime());
 				saleOrder.setSaleOrderStatus(SaleOrderStatus.DRAFT);
 				saleOrder.setOrderType(OrderType.SALE_ORDER);

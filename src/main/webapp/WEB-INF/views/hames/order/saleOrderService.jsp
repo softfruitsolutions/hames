@@ -1,6 +1,8 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib prefix="joda" uri="http://www.joda.org/joda/time/tags" %>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
+
 
 <!-- URL's -->
 <c:url value="/saleorder/list" var="saleOrderListUrl" />
@@ -97,7 +99,7 @@
 								<tr>
 									<td class="bold">Customer</td>
 									<td>
-										<c:out value="${saleOrder.party.firstName}" />
+										<c:out value="${saleOrder.party.fullName}" />
 										<form:hidden path="partyId"/>
 									</td>
 								</tr>
@@ -143,15 +145,17 @@
 										<form:hidden path="saleOrderStatus"/>
 									</td>
 								</tr>
-								<tr>
-									<td class="bold">Payment Status</td>
-									<td>
-										<b><c:out value="${saleOrder.payment.paymentStatus}" /></b>
-										<div class="pull-right">
-											<a onclick="showPaymentModal()" href="#" class="btn btn-default btn-xs"><i class="fa fa-money"></i></a>
-										</div>
-									</td>
-								</tr>
+								<shiro:hasPermission name="order:saleorder:payment:view">
+									<tr>
+										<td class="bold">Payment Status</td>
+										<td>
+											<b><c:out value="${saleOrder.payment.paymentStatus}" /></b>
+											<div class="pull-right">
+												<a onclick="showPaymentModal()" href="#" class="btn btn-default btn-xs"><i class="fa fa-money"></i></a>
+											</div>
+										</td>
+									</tr>
+								</shiro:hasPermission>
 							</tbody>
 						</table>
 					</div>
@@ -356,6 +360,9 @@
 											<form:hidden path="payment.balanceDue"/>
 										</td>
 									</tr>
+									<form:hidden path="payment.paymentId"/>
+									<form:hidden path="payment.paymentNotes"/>
+									<form:hidden path="payment.paymentDate"/>
 								</tbody>
 							</table>
 						</div>

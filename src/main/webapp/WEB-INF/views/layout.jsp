@@ -43,7 +43,7 @@
 		}
 	</style>
   <body class="">
-	<div id="wrapper" class="preload">
+	<div id="wrapper" class="sidebar-mini preload">
 		<div id="top-nav" class="fixed skin-3">
 			<a href="#" class="brand">
 				<span>HAMES</span>

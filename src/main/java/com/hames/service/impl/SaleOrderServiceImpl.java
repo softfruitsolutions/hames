@@ -9,13 +9,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.Validator;
 
 import com.hames.bean.Order;
 import com.hames.bean.Payment;
 import com.hames.bean.PaymentItems;
 import com.hames.bean.SaleOrder;
+import com.hames.bean.helper.UUIDHelper;
 import com.hames.dao.SaleOrderDao;
+import com.hames.db.Sequence;
+import com.hames.db.SequenceDao;
 import com.hames.enums.PaymentItemStatus;
 import com.hames.enums.PaymentItemType;
 import com.hames.enums.PaymentStatus;
@@ -33,8 +37,8 @@ public class SaleOrderServiceImpl extends OrderServiceImpl implements SaleOrderS
 
 	private static final Logger logger = LoggerFactory.getLogger(SaleOrderServiceImpl.class);
 	
-	@Autowired
-	private SaleOrderDao saleOrderDao;
+	@Autowired private SaleOrderDao saleOrderDao;
+	@Autowired private SequenceDao sequenceDao;
 
 	@Override
 	public Validator getValidator() {
@@ -47,6 +51,7 @@ public class SaleOrderServiceImpl extends OrderServiceImpl implements SaleOrderS
 	}
 	
 	@Override
+	@Transactional
 	public void saveOrder(Order order) {
 	
 		SaleOrder saleOrder = (SaleOrder) order;
@@ -84,6 +89,10 @@ public class SaleOrderServiceImpl extends OrderServiceImpl implements SaleOrderS
 			
 			// Setting Sale Order Status to created
 			saleOrder.setSaleOrderStatus(SaleOrderStatus.CREATED);
+			
+			// Setting and Updating JobNo
+			saleOrder.setJobNo(getNextJobNo());
+			sequenceDao.updateSequence(Sequence.SALE_ORDER_SEQUENCE);
 		}
 	}
 
@@ -116,6 +125,12 @@ public class SaleOrderServiceImpl extends OrderServiceImpl implements SaleOrderS
 		 */
 		Payment payment = saleOrder.getPayment();
 		if(payment != null && payment.getPaymentStatus() != PaymentStatus.PAID){
+			
+			if(payment.getPaymentId() == null || payment.getPaymentId().isEmpty()){
+				payment.setPaymentId(UUIDHelper.getUUID());
+				payment.setPaymentDate(saleOrder.getOrderDate());
+			}
+			
 			BigDecimal amountPaid = new BigDecimal(0);
 			
 			if(payment.getPaymentItems() != null){
@@ -208,6 +223,12 @@ public class SaleOrderServiceImpl extends OrderServiceImpl implements SaleOrderS
 			logger.error("Invalid Sale Order Status. Opeartion Aborted..!");
 			throw new OrderException("Invalid Sale order status.");
 		}
+	}
+
+	@Override
+	public String getNextJobNo() {
+		Long sequenceId = sequenceDao.findNextSequenceId(Sequence.SALE_ORDER_SEQUENCE);
+		return  "A"+sequenceId;
 	}
 
 }

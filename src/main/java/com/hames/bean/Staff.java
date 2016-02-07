@@ -4,7 +4,7 @@ import org.springframework.data.annotation.Id;
 
 import com.hames.enums.StaffStatus;
 
-public class Staff extends BaseBean {
+public class Staff extends Audit {
 	
 	@Id
 	private String staffId;
@@ -93,6 +93,15 @@ public class Staff extends BaseBean {
 	}
 	public void setStatus(StaffStatus status) {
 		this.status = status;
+	}
+	
+	public String getFullName(){
+		if(this.middleName == null || this.middleName.isEmpty()){
+			return this.firstName+" "+this.lastName;	
+		}else{
+			return this.firstName+" "+this.middleName+" "+this.lastName;
+		}
+		
 	}
 	@Override
 	public String toString() {

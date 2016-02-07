@@ -11,7 +11,7 @@ import org.springframework.validation.MapBindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.Validator;
 
-import com.hames.bean.UserUtil;
+import com.hames.bean.UserContext;
 import com.hames.exception.GenericServiceException;
 import com.hames.exception.ValidationException;
 import com.hames.util.ModelUtil;

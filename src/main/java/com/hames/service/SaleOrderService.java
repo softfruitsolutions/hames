@@ -9,4 +9,10 @@ public interface SaleOrderService extends OrderService{
 	 * @param orderId
 	 */
 	public void updateOrderStatus(String orderId,SaleOrderStatus saleOrderStatus);
+	
+	/**
+	 * Get Next Job No
+	 * @return
+	 */
+	public String getNextJobNo();
 }

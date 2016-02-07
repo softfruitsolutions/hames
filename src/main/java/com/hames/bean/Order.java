@@ -6,7 +6,7 @@ import org.springframework.data.annotation.Transient;
 
 import com.hames.enums.OrderType;
 
-public class Order extends BaseBean{
+public class Order extends Audit{
 
 	@Id
 	private String orderId;

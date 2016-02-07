@@ -21,7 +21,7 @@ import org.springframework.data.mongodb.core.query.Query;
 
 import com.hames.bean.RolePermission;
 import com.hames.bean.Staff;
-import com.hames.bean.UserUtil;
+import com.hames.bean.UserContext;
 import com.hames.db.HamesDataStore;
 import com.hames.system.auth.UserAccount;
 import com.mongodb.MongoException;
@@ -79,7 +79,7 @@ public class HamesRealm extends AuthorizingRealm {
 		RolePermission rolePermission = getRolePermissions(userAccount.getRoleId());
 		setPermissions(rolePermission.getPermissions());
 		
-		UserUtil.staff = getStaff(userAccount.getStaffId());
+		UserContext.staff = getStaff(userAccount.getStaffId());
 		
 		return new SimpleAuthenticationInfo(upToken.getUsername(),upToken.getPassword(),getName());
 	}
