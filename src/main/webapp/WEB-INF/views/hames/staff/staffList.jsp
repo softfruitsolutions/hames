@@ -33,6 +33,7 @@ $(document).ready(function() {
         "aLengthMenu": [[5, 20, 25, -1], [5, 15, 20, 30]],
 		"iDisplayLength" : 5
     });
+	
 });
 </script>
 <div class="col-md-12">
