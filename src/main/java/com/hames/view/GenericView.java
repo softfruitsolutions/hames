@@ -12,16 +12,13 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 
-import com.hames.bean.UserContext;
-import com.hames.system.functions.DatePropertyEditor;
+import com.hames.util.peer.DatePropertyEditor;
 
 @Controller
-public abstract class AbstractView {
+public abstract class GenericView {
 
 	public void activeMenu(Model model,String menuName){
 		model.addAttribute("menu", menuName);
-		System.out.println(UserContext.staff);
-		model.addAttribute("staffUtil", UserContext.staff);
 	}
 
 	@InitBinder

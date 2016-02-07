@@ -1,20 +1,16 @@
 package com.hames.service;
 
-import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.validation.MapBindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.Validator;
 
-import com.hames.bean.UserContext;
-import com.hames.exception.GenericServiceException;
 import com.hames.exception.ValidationException;
-import com.hames.util.ModelUtil;
+import com.hames.util.peer.ModelUtil;
 
 public abstract class GenericService{
 	
@@ -41,12 +37,14 @@ public abstract class GenericService{
 		if(getValidator() != null){
 			getValidator().validate(t, errors);
 			if(errors.hasErrors()){
+				StringBuilder errorMessage = new StringBuilder();
 				for(ObjectError oe : errors.getAllErrors()){
 					logger.debug("Error : {} ",oe.getDefaultMessage());
-					ModelUtil.addError(oe.getDefaultMessage());
+					errorMessage.append(oe.getDefaultMessage()).append(",");
 				}
+				errorMessage.delete(errorMessage.length()-1, errorMessage.length());
 				
-				throw new ValidationException();
+				throw new ValidationException(errorMessage.toString());
 			}
 		}
 	}

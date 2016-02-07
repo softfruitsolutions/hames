@@ -1,7 +1,14 @@
-package com.hames.system.functions;
+package com.hames.util.peer;
 
 import java.util.Set;
 
+/**
+ * Util to support JSP related functions. 
+ * Any changes in this must reflect the tld file also
+ * 
+ * @author afilansari
+ *
+ */
 public class FunctionsUtil {
 
 	/**

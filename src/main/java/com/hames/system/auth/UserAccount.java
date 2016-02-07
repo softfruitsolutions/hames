@@ -16,6 +16,9 @@ public class UserAccount extends Audit{
 	private String staffId;
 	private String roleId;
 	
+	private String staffName;
+	private String roleName;
+	
 	@Transient
 	private RolePermission rolePermission;
 	
@@ -49,11 +52,22 @@ public class UserAccount extends Audit{
 	public void setRoleId(String roleId) {
 		this.roleId = roleId;
 	}
-	
+	public String getStaffName() {
+		return staffName;
+	}
+	public void setStaffName(String staffName) {
+		this.staffName = staffName;
+	}
+	public String getRoleName() {
+		return roleName;
+	}
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
+	}
 	@Override
 	public String toString() {
-		return "UserAccount [username=" + username + ", password=" + password
-				+ ", staffId=" + staffId + ", rolePermission=" + rolePermission
+		return "UserAccount [username=" + username + ", password=" + password + ", staffId=" + staffId + ", roleId="
+				+ roleId + ", staffName=" + staffName + ", roleName=" + roleName + ", rolePermission=" + rolePermission
 				+ "]";
 	}
 

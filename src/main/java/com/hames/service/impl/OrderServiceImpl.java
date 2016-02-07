@@ -13,8 +13,8 @@ import com.hames.dao.OrderDao;
 import com.hames.exception.ValidationException;
 import com.hames.service.GenericService;
 import com.hames.service.OrderService;
-import com.hames.util.DatatableRequest;
-import com.hames.util.DatatableResponse;
+import com.hames.util.model.DatatableRequest;
+import com.hames.util.model.DatatableResponse;
 
 @Repository
 public class OrderServiceImpl extends GenericService implements OrderService{

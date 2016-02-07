@@ -13,8 +13,8 @@ import com.hames.dao.CustomerDao;
 import com.hames.exception.ValidationException;
 import com.hames.service.CustomerService;
 import com.hames.service.GenericService;
-import com.hames.util.DatatableRequest;
-import com.hames.util.DatatableResponse;
+import com.hames.util.model.DatatableRequest;
+import com.hames.util.model.DatatableResponse;
 import com.hames.validator.CustomerValidator;
 
 @Service

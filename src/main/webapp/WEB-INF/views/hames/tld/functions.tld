@@ -11,7 +11,7 @@
   			Tests if the specified string contains in list.
   		</description>
         <name>contains</name>
-        <function-class>com.hames.system.functions.FunctionsUtil</function-class>
+        <function-class>com.hames.util.peer.FunctionsUtil</function-class>
         <function-signature>boolean contains(java.util.Set,java.lang.Object)</function-signature>
         <example>
 	      &lt;c:if test="${fn:contains(set, string)}">

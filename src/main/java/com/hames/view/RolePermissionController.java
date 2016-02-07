@@ -1,9 +1,11 @@
 package com.hames.view;
 
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.AuthorizationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -11,41 +13,41 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.hames.bean.RolePermission;
 import com.hames.enums.RolePermissionStatus;
-import com.hames.exception.ValidationException;
 import com.hames.service.RolePermissionService;
 import com.hames.system.auth.Permission;
-import com.hames.util.DatatableRequest;
-import com.hames.util.DatatableResponse;
-import com.hames.util.ModelUtil;
+import com.hames.util.enums.SuccessCode;
+import com.hames.util.model.DatatableRequest;
+import com.hames.util.model.DatatableResponse;
+import com.hames.util.model.JsonResponse;
+import com.hames.util.model.SuccessNode;
 
 @Controller
 @RequestMapping("/role")
-public class RolePermissionView extends AbstractView{
+public class RolePermissionController extends GenericView{
 
-	private static final Logger logger = LoggerFactory.getLogger(RolePermissionView.class);
+	private static final Logger logger = LoggerFactory.getLogger(RolePermissionController.class);
 
 	@Autowired
 	private RolePermissionService rolePermissionService;
 	
 	@RequestMapping("/list")
 	public String view(Model model){
-		if(!SecurityUtils.getSubject().isPermitted("admin:rolepermission:view")){
+		if(!SecurityUtils.getSubject().isPermitted(Permission.VIEW_ROLE_PERMISSION.getPermission())){
 			return "error.403";
 		}
-		return "system.role.list";
+		return "system.role";
 	}
 	
 	@RequestMapping("/view")
 	public String view(Model model, @RequestParam(value="id",required=false) String id){
 		
-		if(!SecurityUtils.getSubject().isPermitted("admin:rolepermission:view")){
+		if(!SecurityUtils.getSubject().isPermitted(Permission.VIEW_ROLE_PERMISSION.getPermission())){
 			return "error.403";
 		}
-		
-		activeMenu(model, "rolepermission");
 		
 		RolePermission rolePermission = null;
 		
@@ -64,28 +66,30 @@ public class RolePermissionView extends AbstractView{
 		
 		return "system.role";
 	}
-
+	
+	@ResponseBody
 	@RequestMapping(value="/save", method=RequestMethod.POST)
-	public String save(Model model,@ModelAttribute RolePermission rolePermission){
+	@ResponseStatus(value=HttpStatus.OK)
+	public JsonResponse save(@ModelAttribute RolePermission rolePermission){
 		
-		if(!SecurityUtils.getSubject().isPermitted("admin:rolepermission:create")){
-			return "error.403";
+		JsonResponse response;
+		
+		if(!SecurityUtils.getSubject().isPermitted(Permission.CREATE_ROLE_PERMISSION.getPermission())){
+			throw new AuthorizationException();
 		}
 		
-		try{
-			rolePermissionService.saveRolePermission(rolePermission);
-			ModelUtil.addSuccess("Role saved successfully");
-		}catch(ValidationException e){
-			logger.debug("Validation errors are present");
-			return view(model, rolePermission.getRoleId());
-		}
+		logger.debug("Saving Role permission : {}",rolePermission.toString());
+		rolePermissionService.saveRolePermission(rolePermission);
+		response = new JsonResponse(Boolean.TRUE,new SuccessNode(SuccessCode.ENTITY_SAVED, "Role saved successfully"));
 		
-		return view(model);
+		return response;
 	}
 	
 	@RequestMapping("/datatable")
 	public @ResponseBody DatatableResponse viewDatatable(@ModelAttribute DatatableRequest datatableRequest){
 		return rolePermissionService.getDatatable(datatableRequest);
 	}
+	
+	
 	
 }

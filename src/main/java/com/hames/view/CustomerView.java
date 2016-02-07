@@ -18,16 +18,16 @@ import com.hames.enums.PartyType;
 import com.hames.exception.ValidationException;
 import com.hames.service.CustomerService;
 import com.hames.system.auth.Permission;
-import com.hames.util.DatatableRequest;
-import com.hames.util.DatatableResponse;
-import com.hames.util.ModelUtil;
+import com.hames.util.model.DatatableRequest;
+import com.hames.util.model.DatatableResponse;
+import com.hames.util.peer.ModelUtil;
 
 /**
  * Handles requests for the application home page.
  */
 @Controller
 @RequestMapping("/customer")
-public class CustomerView extends AbstractView {
+public class CustomerView extends GenericView {
 	
 	private static final Logger logger = LoggerFactory.getLogger(CustomerView.class);
 	

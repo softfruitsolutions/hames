@@ -5,17 +5,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.hames.bean.UserContext;
 import com.hames.service.CustomerService;
 
 @Controller
-public class DashboardView {
+public class DashboardView extends GenericView {
 	
 	@Autowired CustomerService customerService;
 
 	@RequestMapping(value = "/dashboard")
 	public String dashboard(Model model) {
-		model.addAttribute("staffUtil",UserContext.staff);
+		
+		model.addAttribute("menu", "dashboard");
+		
 		model.addAttribute("customerCount", customerService.getCustomerCount());
 		return "dashboard";
 	}

@@ -28,7 +28,7 @@ import com.hames.exception.OrderException;
 import com.hames.exception.PaymentException;
 import com.hames.exception.ValidationException;
 import com.hames.service.SaleOrderService;
-import com.hames.util.BigDecimalUtil;
+import com.hames.util.peer.BigDecimalUtil;
 import com.hames.validator.PaymentValidator;
 import com.hames.validator.SaleOrderValidator;
 

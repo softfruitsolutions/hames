@@ -1,4 +1,4 @@
-package com.hames.util;
+package com.hames.util.model;
 
 public class DatatableRequest {
 	

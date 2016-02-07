@@ -225,7 +225,7 @@
   *display: inline;
   color: #626262;
   outline: none;
-  height: 42px;
+  height: 35px;
   width: 100%;
   *zoom: 1;
 }
@@ -717,7 +717,7 @@
   width: 42px;
   height: 42px;
   color: inherit;
-  line-height: 42px;
+  line-height: 35px;
   position: absolute;
   text-align: center;
   -webkit-transition: all 0.5s ease-out;

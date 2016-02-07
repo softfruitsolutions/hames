@@ -20,11 +20,11 @@ import com.hames.service.RolePermissionService;
 import com.hames.service.StaffService;
 import com.hames.service.UserAccountService;
 import com.hames.system.auth.UserAccount;
-import com.hames.util.ModelUtil;
+import com.hames.util.peer.ModelUtil;
 
 @Controller
 @RequestMapping("/useraccount")
-public class UserAccountView extends AbstractView{
+public class UserAccountView extends GenericView{
 	
 	private static final Logger logger = LoggerFactory.getLogger(UserAccountView.class);
 

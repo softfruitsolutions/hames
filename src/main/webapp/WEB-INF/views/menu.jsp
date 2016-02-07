@@ -1,7 +1,42 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 
-<div class="main-menu">
+<div class="sidebar-left-content nano-content ">
+	<ul class="nav sidebar-menu">
+	   <li class="active">
+	     <a href="<c:url value="/dashboard" />">
+	       <span class="glyphicon glyphicon-home"></span>
+	       <span class="sidebar-title">Dashboard</span>
+	     </a>
+	   </li>
+	   <li>
+	       <a class="accordion-toggle" href="#">
+	         <span class="imoon imoon-settings"></span>
+	         <span class="sidebar-title">Settings</span>
+	         <span class="caret"></span>
+	       </a>
+	       <ul class="nav sub-nav">
+	       	   
+	           <li>
+	           	   <a class="accordion-toggle" href="#">
+	                  <span class="imoon imoon-user3"></span>
+	                  Administrator
+	                  <span class="caret"></span>
+	               </a>
+	               <shiro:hasPermission name="admin:rolepermission:view">	
+		               <ul class="nav sub-nav">
+		               	  <li>
+		                    <a href="<c:url value="/role/view" />"> Role </a>
+		                  </li>
+		               </ul>
+	               </shiro:hasPermission>
+	           </li>
+	       </ul>
+       </li>
+	</ul>
+</div>
+
+<%-- <div class="main-menu">
 	<ul>
 		<li class="">
 			<a href="<c:url value="/dashboard" />"> 
@@ -92,6 +127,6 @@
 		</shiro:hasPermission>
 		
 	</ul>
-</div>
+</div> --%>
 <!-- /main-menu -->
 

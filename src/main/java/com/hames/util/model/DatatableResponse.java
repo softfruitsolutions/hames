@@ -1,4 +1,4 @@
-package com.hames.util;
+package com.hames.util.model;
 
 import java.util.List;
 

@@ -27,13 +27,13 @@ import com.hames.exception.ValidationException;
 import com.hames.service.RolePermissionService;
 import com.hames.service.StaffService;
 import com.hames.system.ReportEngine;
-import com.hames.util.DatatableRequest;
-import com.hames.util.DatatableResponse;
-import com.hames.util.ModelUtil;
+import com.hames.util.model.DatatableRequest;
+import com.hames.util.model.DatatableResponse;
+import com.hames.util.peer.ModelUtil;
 
 @Controller
 @RequestMapping("/staff")
-public class StaffView extends AbstractView{
+public class StaffView extends GenericView{
 
 	private static final Logger logger = LoggerFactory.getLogger(StaffView.class);
 
