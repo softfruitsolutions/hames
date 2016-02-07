@@ -54,7 +54,7 @@
 						<div class="form-group">
 							<label for="jobId" class="col-lg-3 control-label">Job No</label>
 							<div class="col-lg-9">
-								<form:input path="jobNo" cssClass="form-control input-sm" placeholder="Job No" readonly="readonly"/>								 	
+								<form:input path="jobNo" cssClass="form-control input-sm" placeholder="Job No" readonly="true"/>								 	
 							</div><!-- /.col -->
 						</div><!-- /form-group -->
 						<div class="form-group">
