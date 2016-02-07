@@ -60,6 +60,13 @@ public class Customer extends Party {
 	public void setTemporaryAddress(String temporaryAddress) {
 		this.temporaryAddress = temporaryAddress;
 	}
+	public String getFullName(){
+		if(this.middleName == null || this.middleName.isEmpty()){
+			return this.firstName +" "+this.lastName;
+		}else{
+			return this.firstName+" "+this.middleName+" "+this.lastName;
+		}
+	}
 	@Override
 	public String toString() {
 		return "Customer [firstName=" + firstName + ", middleName="

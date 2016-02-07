@@ -99,7 +99,7 @@
 								<tr>
 									<td class="bold">Customer</td>
 									<td>
-										<c:out value="${saleOrder.party.firstName}" />
+										<c:out value="${saleOrder.party.fullName}" />
 										<form:hidden path="partyId"/>
 									</td>
 								</tr>
