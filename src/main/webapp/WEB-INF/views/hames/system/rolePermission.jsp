@@ -21,7 +21,7 @@
 		loadRoleDatatable();	
 	});
 	
-	function ajaxsave(){
+	function save(){
 		var role = $('#rolePermission').serialize();
 		$.ajax({
 			type:'POST',
@@ -32,18 +32,13 @@
 				SuccessAlert.handleSuccess(data);
 				setTimeout(function(){
 					window.location.href='${roleViewUrl}';
-			    },1500);
+			    },1000);
 				
 			},
 			error:function(data){
 				ErrorAlert.handleError(data.responseJSON.message);
 			}
 		});
-	}
-	
-	function save(){
-		$('#rolePermission').serialize();
-		$('#rolePermission').submit();
 	}
 	
 	function loadRoleDatatable(){
@@ -60,7 +55,7 @@
 		                    { mDataProp: 'roleDescription' },
 		                    {
 		                        "mData": 'roleId',
-		                        "bSortable": false,
+		                        "bSortable": false, 
 		                        "mRender": function(data, type, full) {
 		                        	if(${hasCreatePermission}){
 		                        		return '<a href="${roleViewUrl}?id='+data+'" title="Edit"><i class="fa fa-pencil"></i></a> &nbsp';
@@ -101,13 +96,13 @@
 			    <i class="glyphicon glyphicon-refresh"></i>
 			  </a>
 			  <shiro:hasPermission name="admin:rolepermission:create">
-				  <a href="#" class="btn btn-primary" onclick="ajaxsave()">
+				  <a id="roleSaveBtn" href="#" class="btn btn-primary" onclick="save()">
 				    <i class="fa fa-save fa-lg"></i>
 				  </a>
 			  </shiro:hasPermission>
 			</div>
 		  </div>
-		  <form:form modelAttribute="rolePermission" >
+		  <form:form modelAttribute="rolePermission">
 		    <div class="panel-body">
 			    <div class="tab-content">
 			      <div id="tab1" class="tab-pane active">

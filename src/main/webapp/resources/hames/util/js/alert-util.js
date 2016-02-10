@@ -41,7 +41,7 @@ var SuccessAlert = (function () {
 	        type: "success",
 	        stack: Stacks["stack_bar_top"],
 	        width: findWidth("stack_bar_top"),
-	        delay: 1500
+	        delay: 1000
         }); 
 	},
 	this.findWidth = function(noteStack){

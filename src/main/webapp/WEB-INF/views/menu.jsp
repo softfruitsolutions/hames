@@ -23,13 +23,19 @@
 	                  Administrator
 	                  <span class="caret"></span>
 	               </a>
-	               <shiro:hasPermission name="admin:rolepermission:view">	
-		               <ul class="nav sub-nav">
+	               	
+	               <ul class="nav sub-nav">
+	               	  <shiro:hasPermission name="admin:rolepermission:view">
 		               	  <li>
 		                    <a href="<c:url value="/role/view" />"> Role </a>
 		                  </li>
-		               </ul>
-	               </shiro:hasPermission>
+	                  </shiro:hasPermission>
+	                  <shiro:hasPermission name="admin:useraccount:view">
+		                  <li>
+		                    <a href="<c:url value="/useraccount/view" />"> User Account </a>
+		                  </li>
+		              </shiro:hasPermission>
+	               </ul>
 	           </li>
 	       </ul>
        </li>
