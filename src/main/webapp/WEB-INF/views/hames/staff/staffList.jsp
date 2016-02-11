@@ -5,12 +5,12 @@
 <c:url value="/staff/view" var="staffViewUrl" />
 <c:url value="/staff/datatable" var="staffDatatableUrl" />
 
-<script type="text/javascript">
 <c:set var="hasCreatePermission" value="false" />
-<shiro:hasPermission name="admin:rolepermission:create">
+<shiro:hasPermission name="hr:staff:create">
 	<c:set var="hasCreatePermission" value="true" />
 </shiro:hasPermission>
 
+<script type="text/javascript">
 $(document).ready(function() {
 	$('#staffDatatable').dataTable( {
 		"bProcessing" : true,
@@ -57,7 +57,7 @@ $(document).ready(function() {
 		  	 </shiro:hasPermission>
 		  </div>
 		  <div class="panel-body ">
-			<table id="staffDatatable" class="table table-striped table-hover dataTable">
+			<table id="staffDatatable" class="table table-striped table-hover table-condensed dataTable">
 				<thead>
 					<tr>
 		                <th>Staff</th>

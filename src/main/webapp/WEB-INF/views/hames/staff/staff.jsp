@@ -48,6 +48,7 @@
 		  	<div class="btn-group">
 			  	 <a class="btn btn-info" href="${staffListUrl}" title="Back to Available Staffs"><i class="fa fa-reply"></i></a>
 				 <a class="btn btn-info" href="${staffViewUrl}" title="Refresh"><i class="fa fa-refresh"></i></a>
+				 <shiro:hasPermission name="hr:staff:create">
 				 <a class="btn btn-success" onclick="save()">
 					<i class="fa fa-save"></i>
 					<c:if test="${staff.staffId == null }" >
@@ -57,9 +58,10 @@
 						Update
 					</c:if>
 				 </a>
+				 </shiro:hasPermission>
 			</div>
 		  </div>
-		  <form:form modelAttribute="staff" method="POST" action="save">
+		  <form:form modelAttribute="staff" method="POST" action="#">
 		  <div class="panel-body">
 		  	<div class="tab-content">
 				<div id="tab1" class="tab-pane active">

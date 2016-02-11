@@ -44,7 +44,7 @@ public class CustomerServiceImpl extends GenericService implements CustomerServi
 		try{
 			validate(customer);
 		}catch(ValidationException e){
-			throw new ValidationException();
+			throw new ValidationException(e.getMessage());
 		}
 		
 		// Setting Audit details

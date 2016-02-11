@@ -1,6 +1,7 @@
 package com.hames.view;
 
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.AuthorizationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,11 @@ import com.hames.enums.PartyType;
 import com.hames.exception.ValidationException;
 import com.hames.service.CustomerService;
 import com.hames.system.auth.Permission;
+import com.hames.util.enums.SuccessCode;
 import com.hames.util.model.DatatableRequest;
 import com.hames.util.model.DatatableResponse;
+import com.hames.util.model.JsonResponse;
+import com.hames.util.model.SuccessNode;
 import com.hames.util.peer.ModelUtil;
 
 /**
@@ -27,9 +31,9 @@ import com.hames.util.peer.ModelUtil;
  */
 @Controller
 @RequestMapping("/customer")
-public class CustomerView extends GenericView {
+public class CustomerController extends GenericView {
 	
-	private static final Logger logger = LoggerFactory.getLogger(CustomerView.class);
+	private static final Logger logger = LoggerFactory.getLogger(CustomerController.class);
 	
 	@Autowired
 	private CustomerService customerService;
@@ -68,23 +72,21 @@ public class CustomerView extends GenericView {
 		
 		return "customer";
 	}
-	
+
+	@ResponseBody
 	@RequestMapping(value="/save",method=RequestMethod.POST)
-	public String save(Model model,@ModelAttribute Customer customer){
+	public JsonResponse save(Model model,@ModelAttribute Customer customer){
+		
+		JsonResponse response;
 		
 		if(!SecurityUtils.getSubject().isPermitted(Permission.CREATE_CUSTOMER.getPermission())){
-			return "error.403";
+			throw new AuthorizationException();
 		}
 		
-		try{
-			customerService.saveCustomer(customer);
-			ModelUtil.addSuccess("Customer saved successfully");	
-		}catch(ValidationException e){
-			logger.error("Validation errors are present.");
-			return view(model,null);
-		}
+		customerService.saveCustomer(customer);
+		response = new JsonResponse(Boolean.TRUE,new SuccessNode(SuccessCode.ENTITY_SAVED, "Customer saved successfully")); 
 		
-		return list(model);
+		return response;
 	}
 	
 	@RequestMapping("/datatable")
