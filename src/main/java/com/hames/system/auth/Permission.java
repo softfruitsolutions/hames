@@ -19,8 +19,8 @@ public enum Permission {
 	/**
 	 * STAFF
 	 */
-	VIEW_STAFF("View Staff","staff:view"),
-	CREATE_STAFF("Create Staff","staff:create"),
+	VIEW_STAFF("View Staff","hr:staff:view"),
+	CREATE_STAFF("Create Staff","hr:staff:create"),
 	
 	VIEW_ADMINISTRATOR("View Administrator","admin:view"),
 	/**

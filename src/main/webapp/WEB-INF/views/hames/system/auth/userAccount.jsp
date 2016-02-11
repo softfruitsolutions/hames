@@ -9,11 +9,11 @@
 		$('form,input,select,textarea').attr("autocomplete", "off");
 	});
 	function save(){
-		var role = $('#userAccount').serialize();
+		var useraccount = $('#userAccount').serialize();
 		$.ajax({
 			type:'POST',
 			url:'${userAccountSaveUrl}',
-			data:role,
+			data:useraccount,
 	        async: false,
 			success:function(data){
 				SuccessAlert.handleSuccess(data);

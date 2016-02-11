@@ -9,6 +9,25 @@
 	       <span class="sidebar-title">Dashboard</span>
 	     </a>
 	   </li>
+	   <shiro:hasPermission name="hr:staff:view">
+	   <li>
+	   	   <a class="accordion-toggle" href="#">
+	         <span class="imoon imoon-users"></span>
+	         <span class="sidebar-title">Human Resource</span>
+	         <span class="caret"></span>
+	       </a>
+	       <ul class="nav sub-nav">
+	       	 <shiro:hasPermission name="hr:staff:view">
+             <li>
+           	   <a href="<c:url value="/staff/list" />">
+                  <span class="imoon imoon-users2"></span>
+				  Staff
+               </a>
+             </li>
+             </shiro:hasPermission>
+           </ul>
+       </li>
+       </shiro:hasPermission>
 	   <li>
 	       <a class="accordion-toggle" href="#">
 	         <span class="imoon imoon-settings"></span>
@@ -16,7 +35,6 @@
 	         <span class="caret"></span>
 	       </a>
 	       <ul class="nav sub-nav">
-	       	   
 	           <li>
 	           	   <a class="accordion-toggle" href="#">
 	                  <span class="imoon imoon-user3"></span>

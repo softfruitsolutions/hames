@@ -1,46 +1,68 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
+
 
 <!-- URL's -->
 <c:url value="/staff/view" var="staffViewUrl" />
 <c:url value="/staff/list" var="staffListUrl" />
+<c:url value="/staff/save" var="staffSaveUrl" />
 
 <script type="text/javascript">
 	function save(){
-		$('#staff').serialize();
-		$('#staff').submit();
+		var staff = $('#staff').serialize();
+		$.ajax({
+			type:'POST',
+			url:'${staffSaveUrl}',
+			data:staff,
+	        async: false,
+			success:function(data){
+				SuccessAlert.handleSuccess(data);
+				setTimeout(function(){
+					window.location.href='${staffListUrl}';
+			    },1000);
+			},
+			error:function(data){
+				ErrorAlert.handleError(data.responseJSON.message);
+			}
+		});
 	}
 	
 </script>
 
-<div class="col-md-12">
-	<h3 class="headline m-top-md">
-		Staff
-		<span class="line"></span>
-	</h3>
-	<div class="row">
-		<div class="col-md-12 col-sm-12">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<div class="btn-toolbar no-margin">
-						<div class="btn-group">
-							<a class="btn btn-info" href="${staffListUrl}" title="Back to Available Staffs"><i class="fa fa-reply"></i></a>
-							<a class="btn btn-info" href="${staffViewUrl}" title="Refresh"><i class="fa fa-refresh"></i></a>
-							<a class="btn btn-success" onclick="save()">
-								<i class="fa fa-save"></i>
-								<c:if test="${staff.staffId == null }" >
-									Save
-								</c:if>
-								<c:if test="${staff.staffId != null}" >
-									Update
-								</c:if>
-							</a>
-						</div>
-					</div>
-					<!-- <a class="btn btn-info" target="_blank" href="staffReport"><i class="fa fa-print-o"></i> Print</a> -->
-				</div>
-				<div class="panel-body">
-					<form:form modelAttribute="staff" method="POST" action="save">
+<div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-primary panel-border top">
+		  <div class="panel-heading">
+		    <span class="panel-title panel-title hidden-xs"><i class="imoon imoon-user"></i> STAFF</span>
+		    <ul class="nav panel-tabs">
+		      <li class="active">
+		        <a href="#tab1" data-toggle="tab">Create</a>
+		      </li>
+		      <li class="">
+		        <a href="#tab2" data-toggle="tab">Audit</a>
+		      </li>
+		    </ul>
+		  </div>
+		  <div class="panel-menu">
+		  	<div class="btn-group">
+			  	 <a class="btn btn-info" href="${staffListUrl}" title="Back to Available Staffs"><i class="fa fa-reply"></i></a>
+				 <a class="btn btn-info" href="${staffViewUrl}" title="Refresh"><i class="fa fa-refresh"></i></a>
+				 <a class="btn btn-success" onclick="save()">
+					<i class="fa fa-save"></i>
+					<c:if test="${staff.staffId == null }" >
+						Save
+					</c:if>
+					<c:if test="${staff.staffId != null}" >
+						Update
+					</c:if>
+				 </a>
+			</div>
+		  </div>
+		  <form:form modelAttribute="staff" method="POST" action="save">
+		  <div class="panel-body">
+		  	<div class="tab-content">
+				<div id="tab1" class="tab-pane active">
 						<form:hidden path="staffId"/>
 						<div class="row">
 							<div class="col-md-4">
@@ -92,7 +114,7 @@
 							<div class="col-md-3">
 								<div class="form-group">
 									<form:label path="phoneNumber" cssClass="control-label">Phone No</form:label>
-									<form:input path="phoneNumber" cssClass="form-control input-sm" placeholder="Phone No" />								 	
+									<form:input path="phoneNumber" cssClass="form-control" placeholder="Phone No" />								 	
 								</div>
 							</div>
 							<div class="col-md-3">
@@ -100,7 +122,7 @@
 									<label class="control-label">Mobile Number</label>
 									<div class="input-group">
 										<span class="input-group-addon"><i class="fa fa-mobile-phone fa-lg"></i></span>
-										<form:input path="mobileNumber" cssClass="form-control input-sm" placeholder="Mobile No" />								 	
+										<form:input path="mobileNumber" cssClass="form-control" placeholder="Mobile No" />								 	
 									</div>
 								</div>
 							</div>
@@ -109,7 +131,7 @@
 									<label class="control-label">E-mail ID</label>
 									<div class="input-group">
 										<span class="input-group-addon">@</span>
-										<form:input path="emailId" cssClass="form-control input-sm" placeholder="Email Addres" />
+										<form:input path="emailId" cssClass="form-control" placeholder="Email Addres" />
 									</div>
 								</div>
 							</div>
@@ -129,12 +151,13 @@
 							</div>
 						</div>
 						<form:hidden path="status" placeholder="status" />
-						<div class="row no-margin">
-							<jsp:include page="/WEB-INF/views/hames/audit.jsp" />
-						</div>
-					</form:form>
+					</div>
+				<div id="tab2" class="tab-pane">
+					<jsp:include page="/WEB-INF/views/hames/audit.jsp" />
 				</div>
 			</div>
-		</div>	
-	</div><!-- /.col -->
-</div><!-- /.row -->		
+		  </div>
+		  </form:form>
+		</div>
+	</div>
+</div>

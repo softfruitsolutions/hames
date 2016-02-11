@@ -27,7 +27,7 @@
   
   <!-- Theme Javascript -->
   <script src="<c:url value="/resources/absolute/assets/js/utility/utility.js" />"></script>
- <%--  <script src="<c:url value="/resources/absolute/assets/js/demo/demo.js" /> "></script> --%>
+<%--   <script src="<c:url value="/resources/absolute/assets/js/demo/demo.js" /> "></script> --%>  
   <script src="<c:url value="/resources/absolute/assets/js/main.js" /> "></script>
   
   <!-- Datatables CSS -->

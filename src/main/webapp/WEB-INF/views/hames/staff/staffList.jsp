@@ -1,13 +1,18 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 
 <!-- URL's -->
 <c:url value="/staff/view" var="staffViewUrl" />
 <c:url value="/staff/datatable" var="staffDatatableUrl" />
 
 <script type="text/javascript">
+<c:set var="hasCreatePermission" value="false" />
+<shiro:hasPermission name="admin:rolepermission:create">
+	<c:set var="hasCreatePermission" value="true" />
+</shiro:hasPermission>
 
 $(document).ready(function() {
-	$('#datatable').dataTable( {
+	$('#staffDatatable').dataTable( {
 		"bProcessing" : true,
 		"bServerSide" : true,
 		"bPaginate": true,
@@ -16,52 +21,54 @@ $(document).ready(function() {
             aoData.push({ "name": "sortField", "value": "staffId"});
         },
         "aoColumns" : [
-	                    { mDataProp: 'firstName' },
-	                    { mDataProp: 'lastName' },
+	                    { mDataProp: 'fullName' },
+	                    { mDataProp: 'phoneNumber'},
 	                    { mDataProp: 'city' },
 	                    { mDataProp: 'country' },
 	                    {
 	                        "mData": 'staffId',
 	                        "bSortable": false,
 	                        "mRender": function(data, type, full) {
-	                            return '<a href="${staffViewUrl}?id='+data+'" title="Edit"><i class="fa fa-pencil"></i></a> &nbsp'+
-	                            	   '<a href="${staffViewUrl}?id='+data+'" title="Edit"><i class="fa fa-trash-o red"></i></a>';
+	                        	if(${hasCreatePermission}){
+	                        		return '<a href="${staffViewUrl}?id='+data+'" title="Edit"><i class="fa fa-pencil"></i></a> &nbsp';
+	                        	}else{
+	                        		return "";
+	                        	}
 	                        },
 	                    },	       
            			  ],
-        "bFilter" : true,
-        "aLengthMenu": [[5, 20, 25, -1], [5, 15, 20, 30]],
-		"iDisplayLength" : 5
+        "bFilter" : false,
+        "aLengthMenu": [[10, 25, 30, -1], [10, 25, 30, 50]],
+		"iDisplayLength" : 10
     });
 	
 });
 </script>
-<div class="col-md-12">
-	<h3 class="headline m-top-md">
-		Staff
-		<span class="line"></span>
-	</h3>
-	
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			Available Staffs
-			<span class="pull-right">
-				<a class="btn btn-xs btn-info" href="${staffViewUrl }" title="Create Staff "><i class="fa fa-edit"></i> Create Staff </a>
-			</span>
-			<br/>
-		</div>
-		<div class="panel-body">
-			<table id="datatable" class="table table-striped table-hover dataTable">
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-primary panel-border top">
+		  <div class="panel-heading">
+		    <span class="panel-title panel-title hidden-xs"><i class="imoon imoon-users"></i>AVAILABLE STAFFS</span>
+		  </div>
+		  <div class="panel-menu">
+		  	 <shiro:hasPermission name="hr:staff:create">
+		  	 	<a class="btn btn-primary" href="${staffViewUrl }" title="Create Staff "><i class="fa fa-user"></i> Create Staff </a>
+		  	 </shiro:hasPermission>
+		  </div>
+		  <div class="panel-body ">
+			<table id="staffDatatable" class="table table-striped table-hover dataTable">
 				<thead>
 					<tr>
-		                <th>First Name</th>
-		                <th>Last Name</th>
+		                <th>Staff</th>
+		                <th>Phone No</th>
 		                <th>City</th>
 		                <th>Country</th>
 		                <th>Actions</th>
 		            </tr>
 				</thead>
 			</table>
+		  </div>
 		</div>
 	</div>
 </div>
