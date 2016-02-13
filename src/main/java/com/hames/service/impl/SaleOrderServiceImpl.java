@@ -61,7 +61,7 @@ public class SaleOrderServiceImpl extends OrderServiceImpl implements SaleOrderS
 			validate(saleOrder.getPayment(), new PaymentValidator(), Payment.class);
 		}catch(ValidationException e){
 			logger.debug("Validation exceptions are present");
-			throw new ValidationException();
+			throw new ValidationException(e.getMessage());
 		}
 
 		if(saleOrder.getOrderId() == null || saleOrder.getOrderId().isEmpty()){

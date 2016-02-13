@@ -9,6 +9,25 @@
 	       <span class="sidebar-title">Dashboard</span>
 	     </a>
 	   </li>
+	   <shiro:hasPermission name="order:view">
+	   <li>
+	   	   <a class="accordion-toggle" href="#">
+	         <span class="imoon imoon-stack"></span>
+	         <span class="sidebar-title">Order</span>
+	         <span class="caret"></span>
+	       </a>
+	       <ul class="nav sub-nav">
+	       	 <shiro:hasPermission name="order:saleorder:view">
+             <li>
+           	   <a href="<c:url value="/saleorder/" />">
+                  <span class="imoon imoon-drawer2"></span>
+				  Sale
+               </a>
+             </li>
+             </shiro:hasPermission>
+           </ul>
+       </li>
+       </shiro:hasPermission>
 	   <shiro:hasPermission name="party:customer:view">
 	   <li>
 	   	   <a class="accordion-toggle" href="#">

@@ -51,7 +51,7 @@ var SuccessAlert = (function () {
         if (noteStack == "stack_bar_bottom") {
           return "70%";
         } else {
-          return "290px";
+          return "350px";
         }
 	};
 	return this;

@@ -5,13 +5,18 @@
 
 
 <!-- URL's -->
-<c:url value="/saleorder/list" var="saleOrderListUrl" />
+
+<c:url value="/saleorder/" var="saleOrdersUrl" />
+<c:url value="/saleorder/view" var="saleOrderViewUrl" />
+<c:url value="/saleorder/save" var="saleOrderSaveUrl" />
+
 <style type="text/css">
 	.bold{
 		font-weight: bold;
 	}
 </style>
 <script type="text/javascript">
+	var orderId = "${saleOrder.orderId}";
 	var jobNo = "${saleOrder.jobNo}";
 	var saleOrderStatus = "${saleOrder.saleOrderStatus}";
 	
@@ -38,8 +43,23 @@
 	}
 	
 	function save(){
-		$('#saleOrder').serialize();
-		$('#saleOrder').submit();
+		var saleOrder = $('#saleOrder').serialize();
+		$.ajax({
+			type:'POST',
+			url:'${saleOrderSaveUrl}',
+			data:saleOrder,
+	        async: false,
+			success:function(data){
+				SuccessAlert.handleSuccess(data);
+				setTimeout(function(){
+					window.location.href='${saleOrderViewUrl}?id='+orderId;
+			    },1000);
+				
+			},
+			error:function(data){
+				ErrorAlert.handleError(data.responseJSON.message);
+			}
+		});
 	}
 	
 	function showPaymentModal(){
@@ -49,28 +69,30 @@
 		});
 	}
 </script>
-<div class="col-md-12">
-	<h3 class="headline m-top-md">
-		Sale Order : ${saleOrder.jobNo}
-		<span class="line"></span>
-	</h3>
-	<div class="panel panel-default no-margin">
-		<div class="panel-heading">
-			<div class="btn-toolbar no-margin">
-				<div class="btn-group">
-					<a class="btn btn-sm btn-default" href="${saleOrderListUrl}" title="Back to Sale Order's"><i class="fa fa-reply"></i></a>
-				</div>
-				<div class="pull-right">
-					
-				</div>
-				
-			</div>
-		</div>
-		<div class="panel-body">
-			<form:form modelAttribute="saleOrder" method="POST" action="save">
-				<form:hidden path="orderId" />
-				<form:hidden path="orderType" />
-				
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-primary panel-border top">
+		  <div class="panel-heading">
+		    <span class="panel-title panel-title"><i class="imoon imoon-drawer2"></i>SALE ORDER : ${saleOrder.jobNo}</span>
+		    <ul class="nav panel-tabs">
+		      <li class="active">
+		        <a href="#tab1" data-toggle="tab">View</a>
+		      </li>
+		      <li class="">
+		        <a href="#tab2" data-toggle="tab">Audit</a>
+		      </li>
+		    </ul>
+		  </div>
+		  <div class="panel-menu">
+		  	<div class="btn-group">
+		  		<a class="btn btn-sm btn-primary" href="${saleOrdersUrl}" title="Back to Sale Orders"><i class="fa fa-reply"></i></a>
+		  	</div>
+		  </div>
+		  <div class="panel-body ">
+		  	<form:form modelAttribute="saleOrder" method="POST" action="#">
+		  	<div class="tab-content">
+			  <div id="tab1" class="tab-pane active">
 				<div class="row">
 					<div class="col-xs-6">
 						<table class="table table-bordered table-condensed ">
@@ -160,10 +182,9 @@
 						</table>
 					</div>
 				</div>
-				<h5 class="headline">
-					Job Details
-					<span class="line"></span>
-				</h5>
+				<hr />
+				<form:hidden path="orderId" />
+				<form:hidden path="orderType" />
 				<div class="row">
 					<div class="col-xs-4">
 						<table class="table table-bordered table-condensed ">
@@ -303,16 +324,17 @@
 						</table>
 					</div>
 				</div>
-				<h5 class="headline">
-					Audit Details
-					<span class="line"></span>
-				</h5>	
-				<div class="row no-margin">
-					<jsp:include page="/WEB-INF/views/hames/audit.jsp" />
-				</div>
-		 </div>
+			  </div>
+			  <div id="tab2" class="tab-pane">
+			  	<jsp:include page="/WEB-INF/views/hames/audit.jsp" />
+			  </div>
+			</div>
+		  </div>
+		</div>
 	</div>
 </div>
+
+
 
 <!-- 
 	PAYMENT MODAL	
@@ -322,51 +344,103 @@
  		<div class="modal-content" style="width:700px;">
    			<div class="modal-header">
 				<h4>
-					Payments
-					<span class="pull-right"><b><c:out value="${saleOrder.payment.paymentStatus }" /></b></span>
+					<i class="fa fa-money"></i>
+					PAYMENTS
 				</h4>
  			</div>
 	    	<div class="modal-body">
 	    		<div id="bodyContent">
 	    			<div class="row">
-						<div class="col-xs-4">
-							<table class="table table-bordered table-condensed">
-								<tbody>
-									<tr>
-										<td class="bold">Total Amount</td>
-										<td>
-											<c:out value="${saleOrder.payment.totalAmount}" />
-											<form:hidden path="payment.totalAmount"/>
-										</td>
-									</tr>
-									<tr>
-										<td class="bold">Paid Amount</td>
-										<td>
-											<c:out value="${saleOrder.payment.amountPaid}" />
-											<form:hidden path="payment.amountPaid"/>
-										</td>
-									</tr>
-									<tr>
-										<td class="bold">Discount Amount</td>
-										<td>
-											<c:out value="${saleOrder.payment.discountAmount}" />
-											<form:hidden path="payment.discountAmount"/>
-										</td>
-									</tr>
-									<tr>
-										<td class="bold">Balance Due</td>
-										<td>
-											<c:out value="${saleOrder.payment.balanceDue}" />
-											<form:hidden path="payment.balanceDue"/>
-										</td>
-									</tr>
-									<form:hidden path="payment.paymentId"/>
-									<form:hidden path="payment.paymentNotes"/>
-									<form:hidden path="payment.paymentDate"/>
-								</tbody>
+	    				<div class="col-xs-7">
+	    					<c:if test="${saleOrder.payment.paymentStatus != 'PAID' }">
+								<c:forEach items="${saleOrder.payment.paymentItems}" var="paymentItems" varStatus="pStatus">
+									<c:if test="${pStatus.last}">
+										<div class="form-group">
+											<label for="paymentDate" class="col-lg-5 control-label">Payment Date</label>
+											<div class="col-lg-7">
+												<form:input path="payment.paymentItems[${pStatus.index}].paymentDate" cssClass="form-control input-sm " placeholder="Payment Date" data-required="true" />								 	
+											</div><!-- /.col -->
+										</div>
+										<div class="form-group">
+											<label for="paymentAmount" class="col-lg-5 control-label">Payment Amount</label>
+											<div class="col-lg-7">
+												<form:input path="payment.paymentItems[${pStatus.index}].paymentAmount" cssClass="form-control input-sm" placeholder="Payment Amount" data-required="true"/>								 	
+											</div><!-- /.col -->
+										</div>
+										<div class="form-group">
+											<label for="discountAmount" class="col-lg-5 control-label">Discount</label>
+											<div class="col-lg-7">
+												<form:input path="payment.discountAmount" cssClass="form-control input-sm" placeholder="Discount Amount" data-required="true"/>								 	
+											</div><!-- /.col -->
+										</div>
+										<div class="form-group">
+											<label for="jobId" class="col-lg-5 control-label">Payment Description</label>
+											<div class="col-lg-7">
+												<form:textarea path="payment.paymentItems[${pStatus.index}].description" cssClass="form-control input-sm" placeholder="Payment Description" data-required="true"/>								 	
+											</div><!-- /.col -->
+										</div>
+									</c:if>
+								</c:forEach>
+							</c:if>
+	    				</div>
+	    				<div class="col-xs-5">
+							<table class="table table-condensed">
+							  <thead>
+							  	<c:set var="statusTableHeaderColor" value="success" />
+							  	<c:if test="${saleOrder.payment.paymentStatus != 'PAID'}">
+							  		<c:set var="statusTableHeaderColor" value="danger" />
+							  	</c:if>
+							    <tr class="${statusTableHeaderColor }">
+							      <th><c:out value="${saleOrder.payment.paymentStatus }" /></th>
+							      <th></th>
+							    </tr>
+							  </thead>
+							  <tbody>
+							    <tr>
+							      <td>Total Amount</td>
+							      <td style="text-align: right;">
+							      	<b>
+							      		<c:out value="${saleOrder.payment.totalAmount}" />
+										<form:hidden path="payment.totalAmount"/>
+									</b>
+								  </td>
+							    </tr>
+							    <tr>
+							      <td>Amount Paid</td>
+							      <td style="text-align: right;">
+							      	<b>
+							      		<c:out value="${saleOrder.payment.amountPaid}" />
+										<form:hidden path="payment.amountPaid"/>
+							      	</b>
+							      </td>
+							    </tr>
+							    <c:if test="${saleOrder.payment.discountAmount != null}">
+								<tr>
+									<td>Discount Amount</td>
+									<td style="text-align: right;">
+										<b><c:out value="${saleOrder.payment.discountAmount}" /></b>
+									</td>
+								</tr>
+								</c:if>
+							    <tr>
+							      <td>Balance Due</td>
+							      <td style="text-align: right;">
+							      	<b>
+							      		<c:out value="${saleOrder.payment.balanceDue}" />
+										<form:hidden path="payment.balanceDue"/>
+							      	</b>
+							      </td>
+							    </tr>
+							  </tbody>
+							  <form:hidden path="payment.paymentId"/>
+							  <form:hidden path="payment.paymentNotes"/>
+							  <form:hidden path="payment.paymentDate"/>
 							</table>
-						</div>
-						<div class="col-xs-8">
+	    				</div>
+	    			</div>
+	    			<b>Payment Details</b>
+	    			<div class="row">
+						<div class="col-xs-12">
 							<table class="table table-bordered table-condensed table-hover">
 								<thead>
 									<tr>
@@ -394,49 +468,21 @@
 						</div>
 					</div>
 	    		</div>
-	    		<c:if test="${saleOrder.payment.paymentStatus != 'PAID' }">
-	    		<h5 class="headline">
-					Service Bill
-					<span class="line"></span>
-				</h5>
-				<div class="row">
-					<c:forEach items="${saleOrder.payment.paymentItems}" var="paymentItems" varStatus="pStatus">
-						<c:if test="${pStatus.last}">
-							<div class="form-group">
-								<label for="jobId" class="col-lg-3 control-label">Payment Date</label>
-								<div class="col-lg-9">
-									<form:input path="payment.paymentItems[${pStatus.index}].paymentDate" cssClass="form-control input-sm " placeholder="Payment Date" data-required="true" />								 	
-								</div><!-- /.col -->
-							</div>
-							<div class="form-group">
-								<label for="jobId" class="col-lg-3 control-label">Payment Amount</label>
-								<div class="col-lg-9">
-									<form:input path="payment.paymentItems[${pStatus.index}].paymentAmount" cssClass="form-control input-sm" placeholder="Payment Amount" data-required="true"/>								 	
-								</div><!-- /.col -->
-							</div>
-							<div class="form-group">
-								<label for="jobId" class="col-lg-3 control-label">Payment Description</label>
-								<div class="col-lg-9">
-									<form:textarea path="payment.paymentItems[${pStatus.index}].description" cssClass="form-control input-sm" placeholder="Payment Description" data-required="true"/>								 	
-								</div><!-- /.col -->
-							</div>
-						</c:if>
-					</c:forEach>
-				</div>
-				</c:if>
-		    	<hr />
+	    		
+			</div>
+			<div class="modal-footer">
 				<div class="row">
 					<div class="col-xs-6">
 					</div>
 					<div class="col-xs-6">
 						<div class="form-group text-right">
 							<c:if test="${saleOrder.payment.paymentStatus != 'PAID' }">
-								<a onclick="save()" class="btn btn-success btn-sm" ><i class="fa fa-save"></i> Pay</a>
+								<a onclick="save()" class="btn btn-primary" ><i class="fa fa-save"></i> Pay</a>
 							</c:if>
-			     			<button type="button" class="btn btn-danger btn-sm" class="close" data-dismiss="modal" aria-hidden="true" onclick="">x Close</button>
+			     			<button type="button" class="btn btn-danger" class="close" data-dismiss="modal" aria-hidden="true" onclick="">x Close</button>
 						</div>
 					</div>
-				</div>
+				</div>			
 			</div>
 	    </div>
 	 </div>
@@ -455,18 +501,20 @@
 	    	<div class="modal-body">
 	    		<div id="bodyContent">
 	    		</div>
-		    	<hr />
+			</div>
+			<div class="modal-footer">
 				<div class="row">
 					<div class="col-xs-6">
 					</div>
 					<div class="col-xs-6">
 						<div class="form-group text-right">
-							<a onclick="save()" class="btn btn-success btn-sm" ><i class="fa fa-save"></i> Update</a>
-			     			<button type="button" class="btn btn-danger btn-sm" class="close" data-dismiss="modal" aria-hidden="true" onclick="closeStatusUpdateModal()">x Close</button>
-						</div>
+							<a onclick="save()" class="btn btn-primary" ><i class="fa fa-save"></i> Update</a>
+			     			<button type="button" class="btn btn-danger" class="close" data-dismiss="modal" aria-hidden="true" onclick="closeStatusUpdateModal()">x Close</button>
+						</div>		
 					</div>
 				</div>
 			</div>
+			
 	    </div>
 	 </div>
 </div>

@@ -14,6 +14,7 @@
   <!-- Theme CSS -->
   <link rel="stylesheet" type="text/css" href="<c:url value="/resources/absolute/assets/skin/default_skin/css/theme.css" /> ">
   <link rel="stylesheet" type="text/css" href="<c:url value="/resources/absolute/assets/admin-tools/admin-forms/css/admin-forms.css" />">
+  <link rel="stylesheet" type="text/css" href="<c:url value="/resources/absolute/vendor/plugins/magnific/magnific-popup.css" />">
 
   <!-- Favicon -->
   <link rel="shortcut icon" href="<c:url value="/resources/absolute/assets/img/favicon.ico" /> ">
@@ -24,11 +25,13 @@
   <script src="<c:url value="/resources/absolute/vendor/plugins/pnotify/pnotify.js" />" ></script>
   <script src='<c:url value="/resources/hames/js/jquery.maskedinput.min.js" />'  type="text/javascript" ></script>
   <script src='<c:url value="/resources/hames/util/js/alert-util.js" />'  type="text/javascript" ></script>
+  <script src='<c:url value="/resources/hames/util/js/datetime-util.js" />' type="text/javascript"></script>
   
   <!-- Theme Javascript -->
   <script src="<c:url value="/resources/absolute/assets/js/utility/utility.js" />"></script>
-<%--   <script src="<c:url value="/resources/absolute/assets/js/demo/demo.js" /> "></script> --%>  
+  <%-- <script src="<c:url value="/resources/absolute/assets/js/demo/demo.js" /> "></script> --%>  
   <script src="<c:url value="/resources/absolute/assets/js/main.js" /> "></script>
+  <script src="<c:url value="/resources/absolute/vendor/plugins/magnific/jquery.magnific-popup.js" />"></script>
   
   <!-- Datatables CSS -->
   <link rel="stylesheet" type="text/css" href="<c:url value="/resources/absolute/vendor/plugins/datatables/media/css/dataTables.bootstrap.css" />">
