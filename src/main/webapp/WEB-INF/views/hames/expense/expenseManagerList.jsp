@@ -14,6 +14,7 @@
 	        "sAjaxSource": 'datatable',
 	        "fnServerParams": function ( aoData ) {
 	            aoData.push({ "name": "sortField", "value": "expenseDate"});
+	            aoData.push({ "name": "sortDirection", "value": "desc"});
 	        },
 	        "aoColumns" : [
 		                    {

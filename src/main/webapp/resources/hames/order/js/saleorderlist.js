@@ -10,6 +10,7 @@ $(function() {
         "sAjaxSource": 'datatable',
         "fnServerParams": function ( aoData ) {
             aoData.push({ "name": "sortField", "value": "jobNo"});
+            aoData.push({ "name": "sortDirection", "value": "desc"});
         },
         "aoColumns" : [
 	                    { mDataProp: 'jobNo' },

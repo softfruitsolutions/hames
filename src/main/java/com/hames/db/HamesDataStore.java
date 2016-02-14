@@ -5,6 +5,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.authentication.UserCredentials;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -53,6 +54,12 @@ public class HamesDataStore extends MongoTemplate{
 		Query query = new Query();
 		query.limit(request.getiDisplayLength());
 		query.skip(request.getiDisplayStart());
+		
+		if(request.getSortDirection() != null && request.getSortDirection().equals("desc")){
+			query.with(new Sort(Sort.Direction.DESC,request.getSortField()));
+		}else{
+			query.with(new Sort(Sort.Direction.ASC,request.getSortField()));
+		}
 		
 		logger.debug("Fetching records with query : {}",query.toString());
 		List<?> results = find(query,request.getClazz(), request.getMongoCollectionName());

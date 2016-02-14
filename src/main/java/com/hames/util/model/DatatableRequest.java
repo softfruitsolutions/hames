@@ -13,6 +13,9 @@ public class DatatableRequest {
 	 * Hames defined fields
 	 * @return
 	 */
+	private String sortField;
+	private String sortDirection;
+	
 	private Class clazz;
 	private String mongoCollectionName;
 	
@@ -64,12 +67,23 @@ public class DatatableRequest {
 	public void setClazz(Class clazz) {
 		this.clazz = clazz;
 	}
+	public String getSortField() {
+		return sortField;
+	}
+	public void setSortField(String sortField) {
+		this.sortField = sortField;
+	}
+	public String getSortDirection() {
+		return sortDirection;
+	}
+	public void setSortDirection(String sortDirection) {
+		this.sortDirection = sortDirection;
+	}
 	@Override
 	public String toString() {
-		return "DatatableRequest [iDisplayStart=" + iDisplayStart
-				+ ", iDisplayLength=" + iDisplayLength + ", iColumns="
-				+ iColumns + ", sSearch=" + sSearch + ", bRegex=" + bRegex
-				+ ", sEcho=" + sEcho + ", mongoCollectionName="
+		return "DatatableRequest [iDisplayStart=" + iDisplayStart + ", iDisplayLength=" + iDisplayLength + ", iColumns="
+				+ iColumns + ", sSearch=" + sSearch + ", bRegex=" + bRegex + ", sEcho=" + sEcho + ", sortField="
+				+ sortField + ", sortDirection=" + sortDirection + ", clazz=" + clazz + ", mongoCollectionName="
 				+ mongoCollectionName + "]";
 	}
 	
