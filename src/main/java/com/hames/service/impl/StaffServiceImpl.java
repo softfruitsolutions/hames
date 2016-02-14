@@ -12,10 +12,9 @@ import com.hames.bean.Staff;
 import com.hames.dao.StaffDao;
 import com.hames.exception.ValidationException;
 import com.hames.service.GenericService;
-import com.hames.service.RolePermissionService;
 import com.hames.service.StaffService;
-import com.hames.util.DatatableRequest;
-import com.hames.util.DatatableResponse;
+import com.hames.util.model.DatatableRequest;
+import com.hames.util.model.DatatableResponse;
 import com.hames.validator.StaffValidator;
 
 @Service
@@ -23,10 +22,7 @@ public class StaffServiceImpl extends GenericService implements StaffService {
 
 	private static final Logger logger = LoggerFactory.getLogger(StaffServiceImpl.class);
 
-	@Autowired
-	private StaffDao staffDao;
-	@Autowired
-	private RolePermissionService staffRoleService;
+	@Autowired private StaffDao staffDao;
 
 	@Override
 	public Validator getValidator() {
@@ -47,7 +43,7 @@ public class StaffServiceImpl extends GenericService implements StaffService {
 		try{
 			validate(staff);
 		}catch(ValidationException e){
-			throw new ValidationException();
+			throw new ValidationException(e.getMessage());
 		}
 		
 		//Setting Audit details

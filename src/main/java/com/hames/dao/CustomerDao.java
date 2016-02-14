@@ -3,8 +3,8 @@ package com.hames.dao;
 import java.util.List;
 
 import com.hames.bean.Customer;
-import com.hames.util.DatatableRequest;
-import com.hames.util.DatatableResponse;
+import com.hames.util.model.DatatableRequest;
+import com.hames.util.model.DatatableResponse;
 
 public interface CustomerDao{ 
 

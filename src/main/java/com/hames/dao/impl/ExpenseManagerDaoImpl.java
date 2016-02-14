@@ -14,8 +14,8 @@ import com.hames.bean.helper.UUIDHelper;
 import com.hames.dao.ExpenseManagerDao;
 import com.hames.db.GenericDao;
 import com.hames.db.HamesDataStore;
-import com.hames.util.DatatableRequest;
-import com.hames.util.DatatableResponse;
+import com.hames.util.model.DatatableRequest;
+import com.hames.util.model.DatatableResponse;
 
 @Repository
 public class ExpenseManagerDaoImpl extends GenericDao implements ExpenseManagerDao {

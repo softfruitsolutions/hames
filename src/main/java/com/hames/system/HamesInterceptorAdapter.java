@@ -9,7 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.hames.util.ModelUtil;
+import com.hames.bean.UserContext;
+import com.hames.util.peer.ModelUtil;
 
 @Controller
 public class HamesInterceptorAdapter extends HandlerInterceptorAdapter{
@@ -34,6 +35,11 @@ public class HamesInterceptorAdapter extends HandlerInterceptorAdapter{
 		 * Adding messages to ModelView
 		 */
 		ModelUtil.addMessages(modelAndView);
+		
+		//Adding Staff details to Model and View
+		if(modelAndView != null){
+			modelAndView.getModel().put("staffUtil",UserContext.staff);
+		}
 		
 		super.postHandle(request, response, handler, modelAndView);
 	}

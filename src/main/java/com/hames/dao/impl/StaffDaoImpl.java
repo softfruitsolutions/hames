@@ -15,8 +15,8 @@ import com.hames.dao.StaffDao;
 import com.hames.db.GenericDao;
 import com.hames.db.HamesDataStore;
 import com.hames.enums.StaffStatus;
-import com.hames.util.DatatableRequest;
-import com.hames.util.DatatableResponse;
+import com.hames.util.model.DatatableRequest;
+import com.hames.util.model.DatatableResponse;
 
 @Repository
 public class StaffDaoImpl extends GenericDao implements StaffDao {

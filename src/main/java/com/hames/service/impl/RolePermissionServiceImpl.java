@@ -13,8 +13,8 @@ import com.hames.dao.RolePermissionDao;
 import com.hames.exception.ValidationException;
 import com.hames.service.GenericService;
 import com.hames.service.RolePermissionService;
-import com.hames.util.DatatableRequest;
-import com.hames.util.DatatableResponse;
+import com.hames.util.model.DatatableRequest;
+import com.hames.util.model.DatatableResponse;
 import com.hames.validator.RolePermissionValidator;
 
 @Service
@@ -43,7 +43,7 @@ public class RolePermissionServiceImpl extends GenericService implements RolePer
 		try{
 			validate(rolePermission);
 		}catch(ValidationException e){
-			throw new ValidationException();
+			throw new ValidationException(e.getMessage());
 		}
 		
 		//Setting Auditable Details

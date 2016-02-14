@@ -9,6 +9,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
+import com.hames.bean.helper.UUIDHelper;
 import com.hames.dao.UserAccountDao;
 import com.hames.db.GenericDao;
 import com.hames.db.HamesDataStore;
@@ -36,6 +37,9 @@ public class UserAccountDaoImpl extends GenericDao implements UserAccountDao {
 
 	@Override
 	public void save(UserAccount userAccount) {
+		if(!hamesDataStore.exists(userAccount.getAccountId(),COLLECTION_NAME)){
+			userAccount.setAccountId(UUIDHelper.getUUID());
+		}
 		hamesDataStore.save(userAccount,COLLECTION_NAME);
 	}
 

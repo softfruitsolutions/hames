@@ -1,8 +1,8 @@
 package com.hames.service;
 
 import com.hames.bean.Order;
-import com.hames.util.DatatableRequest;
-import com.hames.util.DatatableResponse;
+import com.hames.util.model.DatatableRequest;
+import com.hames.util.model.DatatableResponse;
 
 public interface OrderService {
 

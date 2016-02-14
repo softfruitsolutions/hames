@@ -15,6 +15,8 @@ public class SaleOrderValidator extends OrderValidator implements Validator {
 	
 	@Override
 	public void validate(Object target, Errors errors) {
+
+		super.validate(target, errors);
 		
 		SaleOrder saleOrder = (SaleOrder) target;
 		

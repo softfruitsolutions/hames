@@ -28,7 +28,7 @@ import com.hames.exception.OrderException;
 import com.hames.exception.PaymentException;
 import com.hames.exception.ValidationException;
 import com.hames.service.SaleOrderService;
-import com.hames.util.BigDecimalUtil;
+import com.hames.util.peer.BigDecimalUtil;
 import com.hames.validator.PaymentValidator;
 import com.hames.validator.SaleOrderValidator;
 
@@ -61,7 +61,7 @@ public class SaleOrderServiceImpl extends OrderServiceImpl implements SaleOrderS
 			validate(saleOrder.getPayment(), new PaymentValidator(), Payment.class);
 		}catch(ValidationException e){
 			logger.debug("Validation exceptions are present");
-			throw new ValidationException();
+			throw new ValidationException(e.getMessage());
 		}
 
 		if(saleOrder.getOrderId() == null || saleOrder.getOrderId().isEmpty()){

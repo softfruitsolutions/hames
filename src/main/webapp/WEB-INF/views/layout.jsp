@@ -2,196 +2,153 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
-<html lang="en">
-  
+<html>
 <head>
-    <meta charset="utf-8">
-    <title><tiles:insertAttribute name="title" /></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
+  <!-- Meta, title, CSS, favicons, etc. -->
+  <meta charset="utf-8">
+  <title><tiles:insertAttribute name="title" /></title>
 
-	<!-- HAMES -->
-	<script src='<c:url value="/resources/hames/util/js/datetime-util.js" />' type="text/javascript"></script>
-	
-	<!-- Jquery -->
-	<script src='<c:url value="/resources/endless/js/jquery.min.js" />' type="text/javascript"></script>
-	
-    <!-- Bootstrap core CSS -->
-    <link href='<c:url value="/resources/endless/bootstrap/css/bootstrap.min.css" />' rel="stylesheet">
-	
-	<!-- Font Awesome -->
-	<link href='<c:url value="/resources/endless/css/font-awesome.min.css" />' rel="stylesheet">
-	
-	<!-- Pace -->
-	<link href='<c:url value="/resources/endless/css/pace.css" />' rel="stylesheet">
-	
-	<!-- Color box -->
-	<link href='<c:url value="/resources/endless/css/colorbox/colorbox.css" />' rel="stylesheet">
-	
-	<!-- Morris -->
-	<link href='<c:url value="/resources/endless/css/morris.css" />' rel="stylesheet"/>	
-	
-	<!-- Endless -->
-	<link href='<c:url value="/resources/endless/css/endless.min.css" />' rel="stylesheet">
-	<link href='<c:url value="/resources/endless/css/endless-skin.css" />' rel="stylesheet">
-	
-  </head>
-	<style type="text/css">
-		.form-group{
-			margin-bottom:5px !important;
-		}
-	</style>
-  <body class="">
-	<div id="wrapper" class="sidebar-mini preload">
-		<div id="top-nav" class="fixed skin-3">
-			<a href="#" class="brand">
-				<span>HAMES</span>
-				<span class="text-toggle"> Admin</span>
-			</a><!-- /brand -->					
-			<button type="button" class="navbar-toggle pull-left" id="sidebarToggle">
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<button type="button" class="navbar-toggle pull-left hide-menu" id="menuToggle">
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<ul class="nav-notification clearfix">
-				<li class="profile dropdown">
-					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-						<strong><c:out value="${staffUtil.firstName }"></c:out></strong>
-						<span><i class="fa fa-chevron-down"></i></span>
-					</a>
-					<ul class="dropdown-menu">
-						<li>
-							<a class="clearfix" href="#">
-								<div class="detail">
-									<strong><c:out value="${staffUtil.firstName }"></c:out></strong>
-									<p class="grey"><c:out value="${staffUtil.emailId }"></c:out></p> 
-								</div>
-							</a>
-						</li>
-						<li><a tabindex="-1" href="profile.html" class="main-link"><i class="fa fa-edit fa-lg"></i> Edit profile</a></li>
-						<li><a tabindex="-1" href="gallery.html" class="main-link"><i class="fa fa-picture-o fa-lg"></i> Photo Gallery</a></li>
-						<li><a tabindex="-1" href="#" class="theme-setting"><i class="fa fa-cog fa-lg"></i> Setting</a></li>
-						<li class="divider"></li>
-						<li><a tabindex="-1" class="main-link logoutConfirm_open" href='<c:url value='/logout'></c:url>'><i class="fa fa-lock fa-lg"></i> Log out</a></li>
-					</ul>
-				</li>
-			</ul>
-		</div><!-- /top-nav-->
-		
-		<aside class="fixed skin-6">
-			<div class="sidebar-inner scrollable-sidebar">
-				<div class="size-toggle">
-					<a class="btn btn-sm" id="sizeToggle">
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</a>
-					<a class="btn btn-sm pull-right logoutConfirm_open"  href="#logoutConfirm">
-						<i class="fa fa-power-off"></i>
-					</a>
-				</div><!-- /size-toggle -->	
-				<div class="user-block clearfix">
-					<img src="resources/endless/img/user.jpg" alt="User Avatar">
-					<div class="detail">
-						<strong><c:out value="${staffUtil.firstName }"></c:out></strong>
-						<span class="badge badge-danger m-left-xs bounceIn animation-delay4">4</span>
-						<ul class="list-inline">
-							<li><a href="profile.html">Profile</a></li>
-							<li><a href="inbox.html" class="no-margin">Inbox</a></li>
-						</ul>
-					</div>
-				</div><!-- /user-block -->
-				<div class="search-block">
-					<div class="input-group">
-						<input type="text" class="form-control input-sm" placeholder="search here...">
-						<span class="input-group-btn">
-							<button class="btn btn-default btn-sm" type="button"><i class="fa fa-search"></i></button>
-						</span>
-					</div><!-- /input-group -->
-				</div><!-- /search-block -->
-				<tiles:insertAttribute name="menu" />
-			</div><!-- /sidebar-inner -->
-		</aside>
+  <!-- Font CSS (Via CDN) -->
+  <link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700'>
 
-		<div id="main-container">
-			<div id="breadcrumb">
-				<ul class="breadcrumb">
-					 <li><i class="fa fa-home"></i><a href="index-2.html"> Home</a></li>
-					 <li class="active">Dashboard</li>	 
-				</ul>
-			</div><!-- /breadcrumb-->
-			<div class="col-xs-12">
-				<jsp:include page="/WEB-INF/views/alertMessages.jsp" />
-			</div>
+  <!-- Theme CSS -->
+  <link rel="stylesheet" type="text/css" href="<c:url value="/resources/absolute/assets/skin/default_skin/css/theme.css" /> ">
+  <link rel="stylesheet" type="text/css" href="<c:url value="/resources/absolute/assets/admin-tools/admin-forms/css/admin-forms.css" />">
+  <link rel="stylesheet" type="text/css" href="<c:url value="/resources/absolute/vendor/plugins/magnific/magnific-popup.css" />">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="<c:url value="/resources/absolute/assets/img/favicon.ico" /> ">
+
+   <!-- jQuery -->
+  <script src="<c:url value="/resources/absolute/vendor/jquery/jquery-1.11.1.min.js" />"></script>
+  <script src="<c:url value="/resources/absolute/vendor/jquery/jquery_ui/jquery-ui.min.js" />"></script>
+  <script src="<c:url value="/resources/absolute/vendor/plugins/pnotify/pnotify.js" />" ></script>
+  <script src='<c:url value="/resources/hames/js/jquery.maskedinput.min.js" />'  type="text/javascript" ></script>
+  <script src='<c:url value="/resources/hames/util/js/alert-util.js" />'  type="text/javascript" ></script>
+  <script src='<c:url value="/resources/hames/util/js/datetime-util.js" />' type="text/javascript"></script>
+  
+  <!-- Theme Javascript -->
+  <script src="<c:url value="/resources/absolute/assets/js/utility/utility.js" />"></script>
+  <%-- <script src="<c:url value="/resources/absolute/assets/js/demo/demo.js" /> "></script> --%>  
+  <script src="<c:url value="/resources/absolute/assets/js/main.js" /> "></script>
+  <script src="<c:url value="/resources/absolute/vendor/plugins/magnific/jquery.magnific-popup.js" />"></script>
+  
+  <!-- Datatables CSS -->
+  <link rel="stylesheet" type="text/css" href="<c:url value="/resources/absolute/vendor/plugins/datatables/media/css/dataTables.bootstrap.css" />">
+  <link rel="stylesheet" type="text/css" href="<c:url value="/resources/absolute/vendor/plugins/datatables/media/css/dataTables.plugins.css" />">
+  
+  <!-- Datatables -->
+  <script src="<c:url value="/resources/absolute/vendor/plugins/datatables/media/js/jquery.dataTables.js" />"></script>
+  <script src="<c:url value="/resources/absolute/vendor/plugins/datatables/extensions/TableTools/js/dataTables.tableTools.min.js" />"></script>
+  <script src="<c:url value="/resources/absolute/vendor/plugins/datatables/extensions/ColReorder/js/dataTables.colReorder.min.js" />"></script>
+  <script src="<c:url value="/resources/absolute/vendor/plugins/datatables/media/js/dataTables.bootstrap.js" />"></script>  
+  
+  <!-- Fonts -->
+  <link rel="stylesheet" type="text/css" href="<c:url value="/resources/absolute/assets/fonts/glyphicons-pro/glyphicons-pro.css" />">
+  <link rel="stylesheet" type="text/css" href="<c:url value="/resources/absolute/assets/fonts/icomoon/icomoon.css" />">
+  <link rel="stylesheet" type="text/css" href="<c:url value="/resources/absolute/assets/fonts/iconsweets/iconsweets.css" />">
+  <link rel="stylesheet" type="text/css" href="<c:url value="/resources/absolute/assets/fonts/octicons/octicons.css" />">
+  <link rel="stylesheet" type="text/css" href="<c:url value="/resources/absolute/assets/fonts/stateface/stateface.css" />">
+  <link rel="stylesheet" type="text/css" href="<c:url value="/resources/absolute/assets/skin/default_skin/css/theme.css" />">
+  
+    
+
+  <script type="text/javascript">
+
+	  jQuery(document).ready(function() {
+	
+	    "use strict";
+	
+	    // Init Theme Core    
+	    Core.init();
+	    //Demo.init();
+	
+	  });
+  </script>
+</head>
+
+<body class="sb-top sb-top-sm">
+
+	<!-- Start: Main -->
+  <div id="main">
+
+    <!-- Start: Header -->
+    <header class="navbar navbar-fixed-top navbar-shadow bg-primary">
+
+      <div class="navbar-branding">
+        <a class="navbar-brand" href="<c:url value="/dashboard"/>">
+          <b>Hames</b> Softfruit
+        </a>
+      </div>
+      <ul class="nav navbar-nav navbar-left">
+        <li class="hidden-xs">
+          <a class="request-fullscreen toggle-active" href="#">
+            <span class="ad ad-screen-full fs18"></span>
+          </a>
+        </li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li class="menu-divider hidden-xs">
+          <i class="fa fa-circle"></i>
+        </li>
+        <li class="dropdown menu-merge">
+          <a href="#" class="dropdown-toggle fw600 p15" data-toggle="dropdown"> <img src="<c:url value="/resources/absolute/assets/img/avatars/1.jpg" />" alt="avatar" class="mw30 br64 mr15"> 
+          	<c:out value="${staffUtil.fullName }" />
+            <span class="caret caret-tp hidden-xs"></span>
+          </a>
+          <ul class="dropdown-menu list-group dropdown-persist w250" role="menu">
+            <li class="list-group-item">
+              <a href="<c:url value="/logout" />" class="animated animated-short">
+                <span class="fa fa-power-off"></span><b>Logout</b></a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+    </header>
+    <!-- End: Header -->
+
+    <!-- Start: Sidebar -->
+    <aside id="sidebar_left" class="sidebar-light">
+	  <tiles:insertAttribute name="menu" />
+    </aside>
+    
+    <!-- Start: Content-Wrapper -->
+    <section id="content_wrapper">
+
+      <!-- Start: Topbar -->
+      <header id="topbar" class="hidden">
+        <div class="topbar-left">
+          <ol class="breadcrumb">
+            <li class="crumb-active">
+              <a href="dashboard.html">Dashboard</a>
+            </li>
+            <li class="crumb-icon">
+              <a href="dashboard.html">
+                <span class="glyphicon glyphicon-home"></span>
+              </a>
+            </li>
+            <li class="crumb-link">
+              <a href="dashboard.html">Home</a>
+            </li>
+            <li class="crumb-trail">Dashboard</li>
+          </ol>
+        </div>
+      </header>
+      <!-- End: Topbar -->
+
+      <!-- Begin: Content -->
+      <section id="content" class="animated fadeIn">
 			<tiles:insertAttribute name="body" />
-		</div><!-- /main-container -->
-		<!-- Footer
-		================================================== -->
-		<!-- <footer>
-			<div class="row">
-				<div class="col-sm-6">
-					<span class="footer-brand">
-						<strong class="text-danger">Softfruit</strong> Solutions
-					</span>
-					<p class="no-margin">
-						&copy; 2015 <strong>Softfruit Solutions</strong>. ALL Rights Reserved. 
-					</p>
-				</div>/.col
-			</div>/.row
-		</footer> -->
-		
-	<a href="#" id="scroll-to-top" class="hidden-print"><i class="fa fa-chevron-up"></i></a>
-	
-	
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-	
-	
+      </section>
 
-	<!-- Bootstrap -->
-    <script src='<c:url value="/resources/endless/bootstrap/js/bootstrap.js" />'></script>
-   
-	<!-- Flot -->
-	<%-- <script src='<c:url value="/resources/endless/js/jquery.flot.min.js" />' ></script> --%>
-   
-	<!-- Morris -->
-	<script src='<c:url value="/resources/endless/js/morris.min.js" />'></script>	
-	
-	<!-- Colorbox -->
-	<script src='<c:url value="/resources/endless/js/jquery.colorbox.min.js" />' ></script>	
+    </section>
 
-	<!-- Pace -->
-	<script src='<c:url value="/resources/endless/js/uncompressed/pace.js" />' ></script>
-	
-	<!-- Popup Overlay -->
-	<script src='<c:url value="/resources/endless/js/jquery.popupoverlay.min.js" />' ></script>
-	
-	<!-- Slimscroll -->
-	<script src='<c:url value="/resources/endless/js/jquery.slimscroll.min.js" />' ></script>
-	
-	<!-- Modernizr -->
-	<script src='<c:url value="/resources/endless/js/modernizr.min.js" />' ></script>
-	
-	<!-- Cookie -->
-	<script src='<c:url value="/resources/endless/js/jquery.cookie.min.js" />' ></script>
-	
-	<!-- Endless -->
-	<%-- <script src='<c:url value="/resources/endless/js/endless/endless_dashboard.js" />'></script> --%>
-	<script src='<c:url value="/resources/endless/js/endless/endless.js" />'></script>
-	
-	<!-- Masked Input -->
-	<script src='<c:url value="/resources/endless/js/jquery.maskedinput.min.js" />'  type="text/javascript" ></script>
-	
-	<!-- DataTable JQuery  -->
-	<script src='<c:url value="/resources/endless/js/jquery.dataTables.min.js" />' type="text/javascript" ></script>
-	
-  </body>
+  </div>
+  <!-- End: Main -->
+
+</body>
+
 
 </html>

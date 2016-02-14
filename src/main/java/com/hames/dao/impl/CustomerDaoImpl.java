@@ -16,8 +16,8 @@ import com.hames.db.GenericDao;
 import com.hames.db.HamesDataStore;
 import com.hames.enums.PartyStatus;
 import com.hames.enums.PartyType;
-import com.hames.util.DatatableRequest;
-import com.hames.util.DatatableResponse;
+import com.hames.util.model.DatatableRequest;
+import com.hames.util.model.DatatableResponse;
 
 @Repository
 public class CustomerDaoImpl extends GenericDao implements CustomerDao{

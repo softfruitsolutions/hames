@@ -7,7 +7,7 @@ import org.springframework.validation.Validator;
 
 import com.hames.bean.Payment;
 import com.hames.bean.PaymentItems;
-import com.hames.util.BigDecimalUtil;
+import com.hames.util.peer.BigDecimalUtil;
 
 public class PaymentValidator implements Validator{
 

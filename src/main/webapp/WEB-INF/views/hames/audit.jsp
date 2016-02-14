@@ -10,45 +10,39 @@
 	
 </script>
 
-<div class="panel panel-default">
-	<div class='panel-body collapse in' id="auditable">
-		<div class="row">
-			<div class="col-md-3">
-				<div class="form-group">
-					<label class="control-label">Created By</label>
-					<div class="input-group">
-						<span class="input-group-addon"><i class="fa fa-user"></i></span>
-						<form:hidden path="staffCreated"/>
-						<form:input path="createdByText" class="form-control input-sm" placeholder="Staff Created"  readonly="true"/>
-					</div>
+<div id="auditable">
+	<div class="row">
+		<div class="col-md-6">
+			<div class="form-group">
+				<label class="control-label">Created By</label>
+				<div class="input-group">
+					<span class="input-group-addon"><i class="fa fa-user"></i></span>
+					<form:hidden path="staffCreated"/>
+					<form:input path="createdByText" class="form-control" placeholder="Staff Created"  readonly="true"/>
 				</div>
 			</div>
-			<div class="col-md-3">
-				<div class="form-group">
-					<label class="control-label">Last Modified By</label>
-					<div class="input-group">
-						<span class="input-group-addon"><i class="fa fa-user"></i></span>
-						<form:hidden path="staffModified"/>
-						<form:input path="lastModifiedByText" class="form-control input-sm" placeholder="Staff Modified"  readonly="true"/>
-					</div>
+			<div class="form-group">
+				<label class="control-label">Last Modified By</label>
+				<div class="input-group">
+					<span class="input-group-addon"><i class="fa fa-user"></i></span>
+					<form:hidden path="staffModified"/>
+					<form:input path="lastModifiedByText" class="form-control " placeholder="Staff Modified"  readonly="true"/>
 				</div>
 			</div>
-			<div class="col-md-3">
-				<div class="form-group">
-					<label class="control-label">Date Created</label>
-					<div class="input-group">
-						<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-						<form:input path="dateCreated" cssClass="form-control input-sm" placeholder="Date Created" readonly="true"/>								 	
-					</div>
+		</div>
+		<div class="col-md-6">
+			<div class="form-group">
+				<label class="control-label">Date Created</label>
+				<div class="input-group">
+					<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+					<form:input path="dateCreated" cssClass="form-control" placeholder="Date Created" readonly="true"/>								 	
 				</div>
 			</div>
-			<div class="col-md-3">
-				<div class="form-group">
-					<label class="control-label">Date Modified</label>
-					<div class="input-group">
-						<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-						<form:input path="dateModified" cssClass="form-control input-sm" placeholder="Date Modified" readonly="true"/>
-					</div>
+			<div class="form-group">
+				<label class="control-label">Date Modified</label>
+				<div class="input-group">
+					<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+					<form:input path="dateModified" cssClass="form-control " placeholder="Date Modified" readonly="true"/>
 				</div>
 			</div>
 		</div>

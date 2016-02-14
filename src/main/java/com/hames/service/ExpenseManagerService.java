@@ -4,8 +4,8 @@ import java.util.List;
 
 import com.hames.bean.ExpenseCategory;
 import com.hames.bean.ExpenseManager;
-import com.hames.util.DatatableRequest;
-import com.hames.util.DatatableResponse;
+import com.hames.util.model.DatatableRequest;
+import com.hames.util.model.DatatableResponse;
 
 public interface ExpenseManagerService {
 

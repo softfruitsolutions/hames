@@ -3,13 +3,14 @@
 */
 
 $(function() {
-	$('#datatable').dataTable( {
+	$('#saleorderDatatable').dataTable( {
 		"bProcessing" : true,
 		"bServerSide" : true,
 		"bPaginate": true,
         "sAjaxSource": 'datatable',
         "fnServerParams": function ( aoData ) {
             aoData.push({ "name": "sortField", "value": "jobNo"});
+            aoData.push({ "name": "sortDirection", "value": "desc"});
         },
         "aoColumns" : [
 	                    { mDataProp: 'jobNo' },
@@ -25,7 +26,12 @@ $(function() {
 	                        "mData": 'deliveryDate',
 	                        "bSortable": false,
 	                        "mRender": function(data, type, full) {
-	                            return DateUtil.getDate(data);
+	                        	if(data != null && data != ''){
+	                        		return DateUtil.getDate(data);	
+	                        	}else{
+	                        		return "";
+	                        	}
+	                            
 	                        },
 	                    },	
 	                    { mDataProp: 'saleOrderStatus' },
@@ -38,8 +44,8 @@ $(function() {
 	                    },	  
            			  ],
         "bFilter" : false,
-        "aLengthMenu": [[5, 20, 25, -1], [5, 15, 20, 30]],
-		"iDisplayLength" : 5
+        "aLengthMenu": [[10, 20, 25, -1], [10, 20, 25, 50]],
+		"iDisplayLength" : 10
     });
 });
 	

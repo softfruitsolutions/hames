@@ -1,5 +1,6 @@
 package com.hames.system.auth;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.index.Indexed;
 
@@ -8,6 +9,9 @@ import com.hames.bean.RolePermission;
 
 public class UserAccount extends Audit{
 
+	@Id
+	private String accountId;
+	
 	@Indexed(unique=true)
 	private String username;
 	private String password;
@@ -15,6 +19,9 @@ public class UserAccount extends Audit{
 	@Indexed(unique=true)
 	private String staffId;
 	private String roleId;
+	
+	private String staffName;
+	private String roleName;
 	
 	@Transient
 	private RolePermission rolePermission;
@@ -49,12 +56,29 @@ public class UserAccount extends Audit{
 	public void setRoleId(String roleId) {
 		this.roleId = roleId;
 	}
-	
+	public String getStaffName() {
+		return staffName;
+	}
+	public void setStaffName(String staffName) {
+		this.staffName = staffName;
+	}
+	public String getRoleName() {
+		return roleName;
+	}
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
+	}
+	public String getAccountId() {
+		return accountId;
+	}
+	public void setAccountId(String accountId) {
+		this.accountId = accountId;
+	}
 	@Override
 	public String toString() {
-		return "UserAccount [username=" + username + ", password=" + password
-				+ ", staffId=" + staffId + ", rolePermission=" + rolePermission
-				+ "]";
+		return "UserAccount [accountId=" + accountId + ", username=" + username + ", password=" + password
+				+ ", staffId=" + staffId + ", roleId=" + roleId + ", staffName=" + staffName + ", roleName=" + roleName
+				+ ", rolePermission=" + rolePermission + "]";
 	}
 
 }

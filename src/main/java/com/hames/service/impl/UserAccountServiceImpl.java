@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.Validator;
 
+import com.hames.bean.RolePermission;
+import com.hames.bean.Staff;
 import com.hames.dao.UserAccountDao;
 import com.hames.exception.RolePermissionException;
 import com.hames.exception.StaffException;
@@ -46,7 +48,7 @@ public class UserAccountServiceImpl extends GenericService implements UserAccoun
 			validate(userAccount);
 		}catch(ValidationException e){
 			logger.debug("Validation errors are present while saving the user account. Opeartion aborted");
-			throw new ValidationException();
+			throw new ValidationException(e.getMessage());
 		}
 
 		boolean usernameExists = userAccountDao.isUsernameExists(userAccount.getUsername());
@@ -61,24 +63,28 @@ public class UserAccountServiceImpl extends GenericService implements UserAccoun
 			throw new RolePermissionException("UserAccount already exists for staff");
 		}
 		
-		boolean staffExists = staffService.isStaffExists(userAccount.getStaffId());
-		if(!staffExists){
+		Staff staff = staffService.getStaffById(userAccount.getStaffId());
+		if(staff == null){
 			logger.debug("Staff not found. Aborting operation");
 			throw new StaffException("Invalid Staff");
 		}
 		
-		boolean roleExists = rolePermissionService.isRolePermissionExists(userAccount.getRoleId());
-		if(!roleExists){
+		RolePermission rolePermission = rolePermissionService.getRoleById(userAccount.getRoleId());
+		if(rolePermission == null){
 			logger.debug("Role not found : {}",userAccount.getRolePermission().getRoleId());
 			throw new RolePermissionException("Role doesn't exists.!");
 		}
 		
-		DefaultPasswordService passwordService = new DefaultPasswordService();
-		String encryptedPassword = passwordService.encryptPassword(userAccount.getPassword());
-		userAccount.setPassword(encryptedPassword);
+		if(userAccount.getAccountId() == null || userAccount.getAccountId().isEmpty()){
+			DefaultPasswordService passwordService = new DefaultPasswordService();
+			String encryptedPassword = passwordService.encryptPassword(userAccount.getPassword());
+			userAccount.setPassword(encryptedPassword);
+		}
 		
-		//Setting Auditable details
-		userAccount.setAuditableDetails(null);
+		//Setting details
+		userAccount.setStaffName(staff.getFullName());
+		userAccount.setRoleName(rolePermission.getRoleName());
+		userAccount.setAuditableDetails(userAccount.getAccountId());
 		
 		logger.debug("Saving entity : {}, class: {}",userAccount,UserAccount.class);
 		userAccountDao.save(userAccount);
