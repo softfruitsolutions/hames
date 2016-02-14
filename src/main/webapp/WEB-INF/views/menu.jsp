@@ -28,6 +28,33 @@
            </ul>
        </li>
        </shiro:hasPermission>
+       <shiro:hasPermission name="expense:manager:view">
+	   <li>
+	   	   <a class="accordion-toggle" href="#">
+	         <span class="glyphicon glyphicon-tags"></span>
+	         <span class="sidebar-title">Expense</span>
+	         <span class="caret"></span>
+	       </a>
+	       <ul class="nav sub-nav">
+	       	 <shiro:hasPermission name="expense:manager:view">
+             <li>
+           	   <a href="<c:url value="/expense/list" />">
+                  <span class="fa fa-folder"></span>
+				  Manager
+               </a>
+             </li>
+             </shiro:hasPermission>
+             <shiro:hasPermission name="expense:category:view">
+             <li>
+           	   <a href="<c:url value="/expense/category" />">
+                  <span class="fa fa-folder-o"></span>
+				  Category
+               </a>
+             </li>
+             </shiro:hasPermission>
+           </ul>
+       </li>
+       </shiro:hasPermission>
 	   <shiro:hasPermission name="party:customer:view">
 	   <li>
 	   	   <a class="accordion-toggle" href="#">
