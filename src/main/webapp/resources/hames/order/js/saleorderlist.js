@@ -3,6 +3,10 @@
 */
 
 $(function() {
+	loadDatatable();
+});
+
+function loadDatatable(){
 	$('#saleorderDatatable').dataTable( {
 		"bProcessing" : true,
 		"bServerSide" : true,
@@ -11,6 +15,9 @@ $(function() {
         "fnServerParams": function ( aoData ) {
             aoData.push({ "name": "sortField", "value": "jobNo"});
             aoData.push({ "name": "sortDirection", "value": "desc"});
+            
+            var saleOrderCriteria = $('#saleOrderCriteria').serialize();
+            //aoData.push({ "name": "criteria", "value": saleOrderCriteria});
         },
         "aoColumns" : [
 	                    { mDataProp: 'jobNo' },
@@ -47,6 +54,6 @@ $(function() {
         "aLengthMenu": [[10, 20, 25, -1], [10, 20, 25, 50]],
 		"iDisplayLength" : 10
     });
-});
-	
+}
+
 	

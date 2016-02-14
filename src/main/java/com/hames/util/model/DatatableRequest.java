@@ -13,9 +13,9 @@ public class DatatableRequest {
 	 * Hames defined fields
 	 * @return
 	 */
+	private QueryCriteria criteria;
 	private String sortField;
 	private String sortDirection;
-	
 	private Class clazz;
 	private String mongoCollectionName;
 	
@@ -78,6 +78,12 @@ public class DatatableRequest {
 	}
 	public void setSortDirection(String sortDirection) {
 		this.sortDirection = sortDirection;
+	}
+	public QueryCriteria getCriteria() {
+		return criteria;
+	}
+	public void setCriteria(QueryCriteria criteria) {
+		this.criteria = criteria;
 	}
 	@Override
 	public String toString() {

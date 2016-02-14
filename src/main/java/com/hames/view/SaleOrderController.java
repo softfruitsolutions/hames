@@ -24,6 +24,7 @@ import com.hames.enums.OrderType;
 import com.hames.enums.SaleOrderStatus;
 import com.hames.exception.OrderException;
 import com.hames.exception.PaymentException;
+import com.hames.order.model.SaleOrderCriteria;
 import com.hames.service.CustomerService;
 import com.hames.service.SaleOrderService;
 import com.hames.system.auth.Permission;
@@ -51,6 +52,8 @@ public class SaleOrderController extends GenericView{
 		if(!SecurityUtils.getSubject().isPermitted(Permission.VIEW_SALE_ORDER.getPermission())){
 			return "error.403";
 		}
+		
+		model.addAttribute("saleOrderCriteria", new SaleOrderCriteria());
 		model.addAttribute("menu", "viewsaleorder");
 		return "sale.order.list";
 	}
