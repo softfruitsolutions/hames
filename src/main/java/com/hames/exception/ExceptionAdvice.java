@@ -46,4 +46,15 @@ public class ExceptionAdvice {
 		return response;
 	}
 	
+	@ResponseBody
+	@ExceptionHandler(StaffException.class)
+	@ResponseStatus(value=HttpStatus.UNPROCESSABLE_ENTITY)
+	private JsonResponse handleStaffException(Exception e){
+		logger.debug("Staff Exception : {}",e);
+		JsonResponse response = new JsonResponse();
+		response.setStatus(Boolean.FALSE);
+		response.setMessage(new ErrorNode(ErrorCode.VALIDATION_ERROR,HttpStatus.UNPROCESSABLE_ENTITY.toString(),e.getMessage()));
+		return response;
+	}
+	
 }

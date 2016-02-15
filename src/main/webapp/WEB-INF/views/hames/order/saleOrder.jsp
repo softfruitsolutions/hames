@@ -107,6 +107,14 @@
 						</div>
 						<div class="col-xs-5">
 							<div class="form-group">
+								<label for="staffConcerned" class="col-lg-4 control-label">Staff Concerned</label>
+								<div class="col-lg-8">
+									<form:select path="staffConcerned" cssClass="form-control input-sm">
+										<form:options items="${staffs }" itemLabel="fullName" itemValue="staffId"/>
+									</form:select>
+								</div><!-- /.col -->
+							</div><!-- /form-group -->
+							<div class="form-group">
 								<label for="createdDate" class="col-lg-4 control-label">Order Date</label>
 								<div class="col-lg-8">
 									<form:input path="orderDate" cssClass="form-control input-sm"  type="text"/>

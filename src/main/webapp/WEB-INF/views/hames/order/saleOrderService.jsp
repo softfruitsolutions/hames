@@ -125,6 +125,13 @@
 										<form:hidden path="partyId"/>
 									</td>
 								</tr>
+								<tr>
+									<td class="bold">Staff Concerned</td>
+									<td>
+										<c:out value="${saleOrder.staffConcernedText}" />
+										<form:hidden path="staffConcerned"/>
+									</td>
+								</tr>
 							</tbody>
 						</table>
 					</div>

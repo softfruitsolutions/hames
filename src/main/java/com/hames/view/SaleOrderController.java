@@ -27,6 +27,7 @@ import com.hames.exception.PaymentException;
 import com.hames.order.model.SaleOrderSearchCriteria;
 import com.hames.service.CustomerService;
 import com.hames.service.SaleOrderService;
+import com.hames.service.StaffService;
 import com.hames.system.auth.Permission;
 import com.hames.util.enums.ErrorCode;
 import com.hames.util.enums.SuccessCode;
@@ -42,10 +43,9 @@ public class SaleOrderController extends GenericView{
 	
 	private static final Logger logger = LoggerFactory.getLogger(SaleOrderController.class);
 
-	@Autowired
-	private SaleOrderService saleOrderService;
-	@Autowired
-	private CustomerService customerService;
+	@Autowired private SaleOrderService saleOrderService;
+	@Autowired private CustomerService customerService;
+	@Autowired private StaffService staffService;
 	
 	@RequestMapping("")
 	public String list(Model model){
@@ -101,6 +101,7 @@ public class SaleOrderController extends GenericView{
 		}
 		
 		model.addAttribute("customers", customerService.getAllCustomers());
+		model.addAttribute("staffs", staffService.getAllActiveStaffs());
 		return "sale.order";
 	}
 

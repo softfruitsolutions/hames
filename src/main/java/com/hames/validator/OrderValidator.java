@@ -18,16 +18,20 @@ public class OrderValidator implements Validator{
 		
 		Order order = (Order) target;
 		
+		if(order.getStaffConcerned() == null || order.getStaffConcerned().isEmpty()){
+			errors.rejectValue("staffConcerned", "","Staff concerned required");
+		}
+		
 		if(order.getPartyId() == null || order.getPartyId().isEmpty()){
-			errors.rejectValue("partyId", "", "Party Required");
+			errors.rejectValue("partyId", "", "Party required");
 		}
 		
 		if(order.getOrderDate() == null){
-			errors.rejectValue("orderDate", "","Order Date Required");
+			errors.rejectValue("orderDate", "","Order date required");
 		}
 		
 		if(order.getDeliveryDate() == null){
-			errors.rejectValue("deliveryDate", "","Delivery Date Required");
+			errors.rejectValue("deliveryDate", "","Delivery date required");
 			return;
 		}
 		
