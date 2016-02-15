@@ -8,9 +8,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import com.hames.bean.SaleOrder;
 import com.hames.util.model.QueryCriteria;
 
-public class SaleOrderCriteria extends SaleOrder implements QueryCriteria {
-	
-	
+public class SaleOrderSearchCriteria extends SaleOrder implements QueryCriteria {
 	
 	@Override
 	public Criteria queryCriteria() {

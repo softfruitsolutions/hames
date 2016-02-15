@@ -27,6 +27,7 @@
 		                <th>Job Name</th>
 		                <th>Order Date</th>
 		                <th>Delivery Date</th>
+		                <th>Payment Status</th>
 		                <th>Job Status</th>
 		                <th>Actions</th>
 		            </tr>
@@ -41,19 +42,19 @@
 		    <span class="panel-title panel-title hidden-xs"><i class="imoon imoon-search"></i>FILTER ORDERS</span>
 		  </div>
 		  <div class="panel-body well">
-		  	<form:form modelAttribute="saleOrderCriteria">
+		  	<form:form modelAttribute="saleOrderSearchCriteria" action="#">
 		  	<div class="admin-form">
 		  		<div class="section mb15">
 	              <label class="field prepend-icon" for="order-id">
 	              	<form:input path="jobNo" placeholder="Order Job No" cssClass="gui-input" />
-	                <label class="field-icon" for="order-id">
+	                <label class="field-icon" for="">
 	                  <i class="fa fa-tag"></i>
 	                </label>
 	              </label>
 	            </div>
 	            <hr class="short" />
 	            <div class="section">
-	                <button type="button" class="btn btn-default btn-sm ph25" onclick="loadDatatable()">Search</button>
+	                <a href="#" class="btn btn-default btn-sm ph25" onclick="reloadDatatable()">Search</a>
 	            </div>
 		  	</div>
 		  	</form:form>

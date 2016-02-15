@@ -24,7 +24,7 @@ import com.hames.enums.OrderType;
 import com.hames.enums.SaleOrderStatus;
 import com.hames.exception.OrderException;
 import com.hames.exception.PaymentException;
-import com.hames.order.model.SaleOrderCriteria;
+import com.hames.order.model.SaleOrderSearchCriteria;
 import com.hames.service.CustomerService;
 import com.hames.service.SaleOrderService;
 import com.hames.system.auth.Permission;
@@ -53,8 +53,9 @@ public class SaleOrderController extends GenericView{
 			return "error.403";
 		}
 		
-		model.addAttribute("saleOrderCriteria", new SaleOrderCriteria());
+		model.addAttribute("saleOrderSearchCriteria", new SaleOrderSearchCriteria());
 		model.addAttribute("menu", "viewsaleorder");
+		
 		return "sale.order.list";
 	}
 	
@@ -141,7 +142,8 @@ public class SaleOrderController extends GenericView{
 	}
 	
 	@RequestMapping("/datatable")
-	public @ResponseBody DatatableResponse viewDatatable(@ModelAttribute DatatableRequest datatableRequest){
+	public @ResponseBody DatatableResponse viewDatatable(@ModelAttribute SaleOrderSearchCriteria criteria, DatatableRequest datatableRequest){
+		datatableRequest.setCriteria(criteria);
 		return saleOrderService.getDatatable(datatableRequest);
 	}
 	
