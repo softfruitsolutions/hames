@@ -18,5 +18,12 @@ public interface UserAccountService {
 	 */
 	public List<UserAccount> getUserAccounts();
 	
+	/**
+	 * Get User Accounts. Load all fields. Eg: Staff, Role etc..
+	 * @param loadAll
+	 * @return
+	 */
+	public List<UserAccount> getUserAccounts(Boolean allDataRequired);
+	
 
 }

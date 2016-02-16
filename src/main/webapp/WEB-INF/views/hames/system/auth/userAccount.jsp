@@ -117,9 +117,9 @@
 			  <tbody>
 			 	<c:forEach items="${userAccounts }" var="ua">
 					<tr>
-						<td><c:out value="${ua.staffName }"></c:out></td>
+						<td><c:out value="${ua.staff.fullName }"></c:out></td>
 						<td><c:out value="${ua.username }"></c:out></td>
-						<td><c:out value="${ua.roleName }"></c:out></td>
+						<td><c:out value="${ua.rolePermission.roleName}"></c:out></td>
 						<td></td>
 					</tr>
 				</c:forEach>
