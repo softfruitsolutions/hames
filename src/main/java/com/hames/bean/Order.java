@@ -14,6 +14,8 @@ public class Order extends Audit{
 	private DateTime deliveryDate;
 	private DateTime orderDate;
 	private OrderType orderType;
+	private String staffConcerned;
+	private String staffConcernedText;
 	
 	private Payment payment; 
 	
@@ -62,11 +64,23 @@ public class Order extends Audit{
 	public void setParty(Party party) {
 		this.party = party;
 	}
+	public String getStaffConcerned() {
+		return staffConcerned;
+	}
+	public void setStaffConcerned(String staffConcerned) {
+		this.staffConcerned = staffConcerned;
+	}
+	public String getStaffConcernedText() {
+		return staffConcernedText;
+	}
+	public void setStaffConcernedText(String staffConcernedText) {
+		this.staffConcernedText = staffConcernedText;
+	}
 	@Override
 	public String toString() {
-		return "Order [orderId=" + orderId + ", partyId=" + partyId
-				+ ", deliveryDate=" + deliveryDate + ", orderDate=" + orderDate
-				+ ", orderType=" + orderType + ", payment=" + payment + "]";
+		return "Order [orderId=" + orderId + ", partyId=" + partyId + ", deliveryDate=" + deliveryDate + ", orderDate="
+				+ orderDate + ", orderType=" + orderType + ", staffConcerned=" + staffConcerned
+				+ ", staffConcernedText=" + staffConcernedText + ", payment=" + payment + ", party=" + party + "]";
 	}
 	
 }

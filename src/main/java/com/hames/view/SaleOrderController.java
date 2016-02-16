@@ -24,8 +24,10 @@ import com.hames.enums.OrderType;
 import com.hames.enums.SaleOrderStatus;
 import com.hames.exception.OrderException;
 import com.hames.exception.PaymentException;
+import com.hames.order.model.SaleOrderSearchCriteria;
 import com.hames.service.CustomerService;
 import com.hames.service.SaleOrderService;
+import com.hames.service.StaffService;
 import com.hames.system.auth.Permission;
 import com.hames.util.enums.ErrorCode;
 import com.hames.util.enums.SuccessCode;
@@ -41,17 +43,19 @@ public class SaleOrderController extends GenericView{
 	
 	private static final Logger logger = LoggerFactory.getLogger(SaleOrderController.class);
 
-	@Autowired
-	private SaleOrderService saleOrderService;
-	@Autowired
-	private CustomerService customerService;
+	@Autowired private SaleOrderService saleOrderService;
+	@Autowired private CustomerService customerService;
+	@Autowired private StaffService staffService;
 	
 	@RequestMapping("")
 	public String list(Model model){
 		if(!SecurityUtils.getSubject().isPermitted(Permission.VIEW_SALE_ORDER.getPermission())){
 			return "error.403";
 		}
+		
+		model.addAttribute("saleOrderSearchCriteria", new SaleOrderSearchCriteria());
 		model.addAttribute("menu", "viewsaleorder");
+		
 		return "sale.order.list";
 	}
 	
@@ -97,6 +101,7 @@ public class SaleOrderController extends GenericView{
 		}
 		
 		model.addAttribute("customers", customerService.getAllCustomers());
+		model.addAttribute("staffs", staffService.getAllActiveStaffs());
 		return "sale.order";
 	}
 
@@ -138,7 +143,8 @@ public class SaleOrderController extends GenericView{
 	}
 	
 	@RequestMapping("/datatable")
-	public @ResponseBody DatatableResponse viewDatatable(@ModelAttribute DatatableRequest datatableRequest){
+	public @ResponseBody DatatableResponse viewDatatable(@ModelAttribute SaleOrderSearchCriteria criteria, DatatableRequest datatableRequest){
+		datatableRequest.setCriteria(criteria);
 		return saleOrderService.getDatatable(datatableRequest);
 	}
 	

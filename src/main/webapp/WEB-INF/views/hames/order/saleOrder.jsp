@@ -59,6 +59,7 @@
 		  </div>
 		  <div class="panel-menu">
 		  	<div class="btn-group">
+		  		<a href="${saleOrdersUrl}" class="btn btn-info"><i class="fa fa-reply"></i></a>
 		  		<a href="#" onclick="save()" class="btn btn-primary" data-toggle="modal"><i class="glyphicon glyphicon-floppy-save"></i> Save</a>
 		  	</div>
 		  	<div class="pull-right">
@@ -106,6 +107,14 @@
 							</div><!-- /form-group -->
 						</div>
 						<div class="col-xs-5">
+							<div class="form-group">
+								<label for="staffConcerned" class="col-lg-4 control-label">Staff Concerned</label>
+								<div class="col-lg-8">
+									<form:select path="staffConcerned" cssClass="form-control input-sm">
+										<form:options items="${staffs }" itemLabel="fullName" itemValue="staffId"/>
+									</form:select>
+								</div><!-- /.col -->
+							</div><!-- /form-group -->
 							<div class="form-group">
 								<label for="createdDate" class="col-lg-4 control-label">Order Date</label>
 								<div class="col-lg-8">

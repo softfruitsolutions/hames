@@ -16,6 +16,7 @@ import com.hames.bean.Order;
 import com.hames.bean.Payment;
 import com.hames.bean.PaymentItems;
 import com.hames.bean.SaleOrder;
+import com.hames.bean.Staff;
 import com.hames.bean.helper.UUIDHelper;
 import com.hames.dao.SaleOrderDao;
 import com.hames.db.Sequence;
@@ -26,8 +27,10 @@ import com.hames.enums.PaymentStatus;
 import com.hames.enums.SaleOrderStatus;
 import com.hames.exception.OrderException;
 import com.hames.exception.PaymentException;
+import com.hames.exception.StaffException;
 import com.hames.exception.ValidationException;
 import com.hames.service.SaleOrderService;
+import com.hames.service.StaffService;
 import com.hames.util.peer.BigDecimalUtil;
 import com.hames.validator.PaymentValidator;
 import com.hames.validator.SaleOrderValidator;
@@ -39,6 +42,7 @@ public class SaleOrderServiceImpl extends OrderServiceImpl implements SaleOrderS
 	
 	@Autowired private SaleOrderDao saleOrderDao;
 	@Autowired private SequenceDao sequenceDao;
+	@Autowired private StaffService staffService;
 
 	@Override
 	public Validator getValidator() {
@@ -78,11 +82,20 @@ public class SaleOrderServiceImpl extends OrderServiceImpl implements SaleOrderS
 		
 		if(saleOrder.getSaleOrderStatus() == SaleOrderStatus.DRAFT){
 			
+			logger.debug("Checking sale order job no exists : {}",saleOrder.getJobNo());
 			// Checking Order Job No already exists
 			Boolean isJobNoExists = saleOrderDao.isJobNoExists(saleOrder.getJobNo());
 			if(isJobNoExists){
+				logger.debug("Job no already exists. Opeartion aborted.!");
 				throw new OrderException("Job No already exists");
 			}
+			
+			Staff staffConcerned = staffService.getStaffById(saleOrder.getStaffConcerned());
+			if(staffConcerned == null){
+				throw new StaffException("Staff not found");
+			}
+			saleOrder.setStaffConcernedText(staffConcerned.getFullName());
+			
 			
 			// Process Payment 
 			processPayment(saleOrder);

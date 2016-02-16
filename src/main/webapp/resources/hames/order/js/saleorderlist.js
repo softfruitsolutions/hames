@@ -3,11 +3,21 @@
 */
 
 $(function() {
-	$('#saleorderDatatable').dataTable( {
+	loadDatatable();
+});
+
+var saleOrderDatatable;
+var saleOrderCriteria;
+function loadDatatable(){
+	
+	saleOrderCriteria = $('#saleOrderSearchCriteria').serialize();
+	console.log(saleOrderCriteria);
+	
+	saleOrderDatatable = $('#saleorderDatatable').dataTable( {
 		"bProcessing" : true,
 		"bServerSide" : true,
 		"bPaginate": true,
-        "sAjaxSource": 'datatable',
+        "sAjaxSource": 'datatable?'+saleOrderCriteria,
         "fnServerParams": function ( aoData ) {
             aoData.push({ "name": "sortField", "value": "jobNo"});
             aoData.push({ "name": "sortDirection", "value": "desc"});
@@ -34,6 +44,7 @@ $(function() {
 	                            
 	                        },
 	                    },	
+	                    { mDataProp: 'payment.paymentStatus' },
 	                    { mDataProp: 'saleOrderStatus' },
 	                    {
 	                        "mData": 'orderId',
@@ -45,8 +56,16 @@ $(function() {
            			  ],
         "bFilter" : false,
         "aLengthMenu": [[10, 20, 25, -1], [10, 20, 25, 50]],
-		"iDisplayLength" : 10
+		"iDisplayLength" : 10,
+		"buttons": [
+		          'colvis',
+		          'excel',
+		          'print'
+		      ],
     });
-});
-	
-	
+}
+
+function reloadDatatable(){
+	saleOrderCriteria = $('#saleOrderSearchCriteria').serialize();
+	saleOrderDatatable.fnReloadAjax('datatable?'+saleOrderCriteria);
+}	

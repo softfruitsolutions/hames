@@ -4,7 +4,7 @@ import com.hames.enums.SaleOrderStatus;
 
 public class SaleOrder extends Order{
 
-	private String jobNo;
+	public String jobNo;
 	private String jobName;
 	private String jobDescription;
 	private String paper;

@@ -9,6 +9,7 @@
   <title><tiles:insertAttribute name="title" /></title>
 
   <!-- Font CSS (Via CDN) -->
+  
   <link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700'>
 
   <!-- Theme CSS -->
@@ -42,6 +43,7 @@
   <script src="<c:url value="/resources/absolute/vendor/plugins/datatables/extensions/TableTools/js/dataTables.tableTools.min.js" />"></script>
   <script src="<c:url value="/resources/absolute/vendor/plugins/datatables/extensions/ColReorder/js/dataTables.colReorder.min.js" />"></script>
   <script src="<c:url value="/resources/absolute/vendor/plugins/datatables/media/js/dataTables.bootstrap.js" />"></script>  
+  <script src="<c:url value="/resources/absolute/vendor/plugins/datatables/media/js/fnReloadAjax.js" />" ></script>
   
   <!-- Fonts -->
   <link rel="stylesheet" type="text/css" href="<c:url value="/resources/absolute/assets/fonts/glyphicons-pro/glyphicons-pro.css" />">
