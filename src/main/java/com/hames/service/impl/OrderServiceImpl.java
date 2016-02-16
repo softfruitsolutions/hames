@@ -8,8 +8,10 @@ import org.springframework.validation.Validator;
 
 import com.hames.bean.Customer;
 import com.hames.bean.Order;
+import com.hames.bean.Staff;
 import com.hames.dao.CustomerDao;
 import com.hames.dao.OrderDao;
+import com.hames.dao.StaffDao;
 import com.hames.exception.ValidationException;
 import com.hames.service.GenericService;
 import com.hames.service.OrderService;
@@ -21,10 +23,9 @@ public class OrderServiceImpl extends GenericService implements OrderService{
 
 	private static final Logger logger = LoggerFactory.getLogger(OrderServiceImpl.class);
 	
-	@Autowired
-	private OrderDao orderDao;
-	@Autowired
-	private CustomerDao customerDao;
+	@Autowired private OrderDao orderDao;
+	@Autowired private CustomerDao customerDao;
+	@Autowired private StaffDao staffDao;
 
 	@Override
 	public Validator getValidator() {
@@ -74,6 +75,10 @@ public class OrderServiceImpl extends GenericService implements OrderService{
 		 */
 		Customer customer = customerDao.findByCustomerId(order.getPartyId());
 		order.setParty(customer);
+		
+		//Setting Staff Concerned details
+		Staff staffConcerned = staffDao.findByStaffId(order.getStaffConcerned());
+		order.setStaffConcernedText(staffConcerned.getFullName());
 		
 		return (T) order;
 	}
