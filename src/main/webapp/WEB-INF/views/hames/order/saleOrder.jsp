@@ -59,6 +59,7 @@
 		  </div>
 		  <div class="panel-menu">
 		  	<div class="btn-group">
+		  		<a href="${saleOrdersUrl}" class="btn btn-info"><i class="fa fa-reply"></i></a>
 		  		<a href="#" onclick="save()" class="btn btn-primary" data-toggle="modal"><i class="glyphicon glyphicon-floppy-save"></i> Save</a>
 		  	</div>
 		  	<div class="pull-right">
