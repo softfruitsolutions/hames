@@ -12,8 +12,8 @@ import org.springframework.stereotype.Repository;
 import com.hames.bean.ExpenseCategory;
 import com.hames.bean.helper.UUIDHelper;
 import com.hames.dao.ExpenseCategoryDao;
-import com.hames.db.GenericDao;
-import com.hames.db.HamesDataStore;
+import com.hames.mongo.GenericDao;
+import com.hames.mongo.HamesDataStore;
 
 @Repository
 public class ExpenseCategoryDaoImpl extends GenericDao implements ExpenseCategoryDao {

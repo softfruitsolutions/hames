@@ -1,24 +1,45 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	xmlns:mongo="http://www.springframework.org/schema/data/mongo"	
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo.xsd
+						http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 	
 	<bean id="userCredentials" class="org.springframework.data.authentication.UserCredentials">
 	    <constructor-arg name="username" value="admin" />
 	    <constructor-arg name="password" value="soft#123!" />
 	</bean>
 	
-	<bean id="mongoUri" class="com.mongodb.MongoURI">
+	<bean id="mongoClientUri" class="com.mongodb.MongoClientURI">
 		  <constructor-arg value="mongodb://localhost:27017/hames"/>
 	</bean>
 
-	<bean class="com.mongodb.Mongo" id="mongo">
-	    <constructor-arg ref="mongoUri" />
-	</bean>
- 
-	<bean id="hamesDataStore" class="com.hames.db.HamesDataStore">
-		<constructor-arg name="mongo" ref="mongo" />
-		<constructor-arg name="databaseName" value="hames" />
-		<constructor-arg name="userCredentials" ref="userCredentials" />
+ 	<bean class="org.springframework.data.mongodb.core.SimpleMongoDbFactory" id="mongoDbFactory">
+ 		<constructor-arg ref="mongoClientUri" />
+ 	</bean>
+ 	
+ 	<!--Mongo Converter Mappings -->
+ 	<mongo:mapping-converter id="mappingConverter"> 
+	    <mongo:custom-converters>
+	    	<mongo:converter>
+	    		<bean class="com.hames.mongo.converters.DoubleToBigDecimalConverter" />
+	    	</mongo:converter>
+	    	<mongo:converter>
+	    		<bean class="com.hames.mongo.converters.BigDecimalToDoubleConverter" />
+	    	</mongo:converter>
+	    </mongo:custom-converters>
+	</mongo:mapping-converter>
+	
+	<bean id="hamesDataStore" class="com.hames.mongo.HamesDataStore">
+		<constructor-arg ref="mongoDbFactory"/>
+		<constructor-arg name="mongoConverter" ref="mappingConverter"/>
+		<property name="writeConcern">
+	        <util:constant static-field="com.mongodb.WriteConcern.FSYNC_SAFE"/>
+	    </property>
+	    <property name="writeResultChecking">
+	        <util:constant static-field="org.springframework.data.mongodb.core.WriteResultChecking.EXCEPTION"/>
+	    </property>
 	</bean>
 	
 	<!-- Use this post processor to translate any MongoExceptions thrown in @Repository annotated classes -->

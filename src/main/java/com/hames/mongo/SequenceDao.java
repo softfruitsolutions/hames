@@ -1,4 +1,4 @@
-package com.hames.db;
+package com.hames.mongo;
 
 import java.util.HashMap;
 import java.util.Iterator;

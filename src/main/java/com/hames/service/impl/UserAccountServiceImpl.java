@@ -27,9 +27,12 @@ public class UserAccountServiceImpl extends GenericService implements UserAccoun
 
 	private static final Logger logger = LoggerFactory.getLogger(UserAccountServiceImpl.class);
 
-	@Autowired private UserAccountDao userAccountDao;
-	@Autowired private StaffService staffService;
-	@Autowired private RolePermissionService rolePermissionService;
+	@Autowired
+	private UserAccountDao userAccountDao;
+	@Autowired
+	private StaffService staffService;
+	@Autowired
+	private RolePermissionService rolePermissionService;
 	
 	@Override
 	public Validator getValidator() {
@@ -82,8 +85,6 @@ public class UserAccountServiceImpl extends GenericService implements UserAccoun
 		}
 		
 		//Setting details
-		userAccount.setStaffName(staff.getFullName());
-		userAccount.setRoleName(rolePermission.getRoleName());
 		userAccount.setAuditableDetails(userAccount.getAccountId());
 		
 		logger.debug("Saving entity : {}, class: {}",userAccount,UserAccount.class);
@@ -94,6 +95,21 @@ public class UserAccountServiceImpl extends GenericService implements UserAccoun
 	@Override
 	public List<UserAccount> getUserAccounts() {
 		return userAccountDao.getUserAccounts();
+	}
+
+	@Override
+	public List<UserAccount> getUserAccounts(Boolean allDataRequired) {
+		List<UserAccount> userAccounts = userAccountDao.getUserAccounts();
+		
+		if(allDataRequired){
+			if(userAccounts != null && !userAccounts.isEmpty()){
+				for (UserAccount ua : userAccounts) {
+					ua.setStaff(staffService.getStaffById(ua.getStaffId()));
+					ua.setRolePermission(rolePermissionService.getRoleById(ua.getRoleId()));
+				}
+			}
+		}
+		return userAccounts;
 	}
 
 }

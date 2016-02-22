@@ -22,7 +22,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import com.hames.bean.RolePermission;
 import com.hames.bean.Staff;
 import com.hames.bean.UserContext;
-import com.hames.db.HamesDataStore;
+import com.hames.mongo.HamesDataStore;
 import com.hames.system.auth.UserAccount;
 import com.mongodb.MongoException;
 

@@ -12,9 +12,9 @@ import org.springframework.stereotype.Repository;
 
 import com.hames.bean.RolePermission;
 import com.hames.dao.RolePermissionDao;
-import com.hames.db.GenericDao;
-import com.hames.db.HamesDataStore;
 import com.hames.enums.RolePermissionStatus;
+import com.hames.mongo.GenericDao;
+import com.hames.mongo.HamesDataStore;
 import com.hames.util.model.DatatableRequest;
 import com.hames.util.model.DatatableResponse;
 

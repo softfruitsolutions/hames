@@ -12,10 +12,10 @@ import org.springframework.stereotype.Repository;
 
 import com.hames.bean.Customer;
 import com.hames.dao.CustomerDao;
-import com.hames.db.GenericDao;
-import com.hames.db.HamesDataStore;
 import com.hames.enums.PartyStatus;
 import com.hames.enums.PartyType;
+import com.hames.mongo.GenericDao;
+import com.hames.mongo.HamesDataStore;
 import com.hames.util.model.DatatableRequest;
 import com.hames.util.model.DatatableResponse;
 

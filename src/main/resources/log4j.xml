@@ -12,7 +12,7 @@
 	
 	<!-- Application Loggers -->
 	<logger name="com.hames">
-		<level value="debug" />
+		<level value="error" />
 	</logger>
 	
 	<!-- 3rdparty Loggers -->
