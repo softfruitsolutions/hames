@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.hames.bean.Order;
 import com.hames.dao.OrderDao;
-import com.hames.db.GenericDao;
-import com.hames.db.HamesDataStore;
+import com.hames.mongo.GenericDao;
+import com.hames.mongo.HamesDataStore;
 import com.hames.util.model.DatatableRequest;
 import com.hames.util.model.DatatableResponse;
 

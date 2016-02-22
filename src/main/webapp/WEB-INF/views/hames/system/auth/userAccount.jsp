@@ -63,13 +63,13 @@
 							<div class="form-group">
 								<label class="col-lg-3 control-label">Username</label>
 								<div class="col-lg-7">
-									<form:input path="username" cssClass="form-control input-sm" placeholder="Username" value=""/>
+									<form:input path="username" cssClass="form-control input-sm" placeholder="Username" autocomplete="off"/>
 								</div><!-- /.col -->
 							</div>
 							<div class="form-group">
 								<label class="col-lg-3 control-label">Password</label>
 								<div class="col-lg-7">
-									<form:password path="password" cssClass="form-control input-sm" placeholder="Password" value=""/>
+									<form:password path="password" cssClass="form-control input-sm" placeholder="Password" autocomplete="off"/>
 								</div><!-- /.col -->
 							</div>
 							<div class="form-group">

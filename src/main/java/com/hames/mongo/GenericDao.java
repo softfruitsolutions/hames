@@ -1,4 +1,4 @@
-package com.hames.db;
+package com.hames.mongo;
 
 public abstract class GenericDao {
 

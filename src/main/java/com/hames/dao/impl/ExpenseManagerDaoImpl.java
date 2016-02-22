@@ -12,8 +12,8 @@ import org.springframework.stereotype.Repository;
 import com.hames.bean.ExpenseManager;
 import com.hames.bean.helper.UUIDHelper;
 import com.hames.dao.ExpenseManagerDao;
-import com.hames.db.GenericDao;
-import com.hames.db.HamesDataStore;
+import com.hames.mongo.GenericDao;
+import com.hames.mongo.HamesDataStore;
 import com.hames.util.model.DatatableRequest;
 import com.hames.util.model.DatatableResponse;
 

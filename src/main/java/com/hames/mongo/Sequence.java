@@ -1,4 +1,4 @@
-package com.hames.db;
+package com.hames.mongo;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.stereotype.Component;

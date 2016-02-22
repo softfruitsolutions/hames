@@ -1,14 +1,17 @@
-package com.hames.db;
+package com.hames.mongo;
 
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.authentication.UserCredentials;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.mongodb.MongoDbFactory;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.convert.MongoConverter;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.stereotype.Component;
 
 import com.hames.util.model.DatatableRequest;
 import com.hames.util.model.DatatableResponse;
@@ -20,7 +23,7 @@ import com.mongodb.Mongo;
  *  
  * @author afilansari
  */
-
+@Component
 public class HamesDataStore extends MongoTemplate{
 	
 	private static final Logger logger = LoggerFactory.getLogger(HamesDataStore.class);
@@ -30,9 +33,11 @@ public class HamesDataStore extends MongoTemplate{
 		super(mongo, databaseName);
 	}
 	
-	public HamesDataStore(Mongo mongo, String databaseName,UserCredentials userCredentials) {
-		super(mongo, databaseName, userCredentials);
+	@Autowired
+	public HamesDataStore(MongoDbFactory mongoDbFactory, MongoConverter mongoConverter){
+		super(mongoDbFactory, mongoConverter);
 	}
+	
 
 	public boolean exists(String id,String collectionName){
 		Query query = new Query();
