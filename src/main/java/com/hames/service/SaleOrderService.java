@@ -1,6 +1,7 @@
 package com.hames.service;
 
 import com.hames.enums.SaleOrderStatus;
+import com.hames.report.ReportManager;
 
 public interface SaleOrderService extends OrderService{
 
@@ -15,4 +16,10 @@ public interface SaleOrderService extends OrderService{
 	 * @return
 	 */
 	public String getNextJobNo();
+	
+	/**
+	 * Generate Sale Report.
+	 * @return
+	 */
+	public ReportManager generateSaleReport();
 }

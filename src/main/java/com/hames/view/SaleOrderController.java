@@ -148,4 +148,14 @@ public class SaleOrderController extends GenericView{
 		return saleOrderService.getDatatable(datatableRequest);
 	}
 	
+	
+	@RequestMapping("/report")
+	public String getSaleReport(Model model){
+		if(!SecurityUtils.getSubject().isPermitted(Permission.VIEW_SALE_ORDER_REPORT.getPermission())){
+			throw new AuthorizationException();
+		}
+		
+		model.addAttribute("saleReport", saleOrderService.generateSaleReport());
+		return "sale.order.report";
+	}
 }
