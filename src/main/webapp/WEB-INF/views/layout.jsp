@@ -77,9 +77,9 @@
     <!-- Start: Header -->
     <header class="navbar navbar-fixed-top navbar-shadow bg-primary">
 
-      <div class="navbar-branding">
+      <div class=""><!-- navbar-branding  -->
         <a class="navbar-brand" href="<c:url value="/dashboard"/>">
-          <b>Hames</b> Softfruit
+          <b>Al Qariya</b> Printing
         </a>
       </div>
       <ul class="nav navbar-nav navbar-left">
