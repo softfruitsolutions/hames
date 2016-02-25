@@ -58,7 +58,7 @@
 		  	  	</tbody>
 		  	  	<tfoot>
 		  	  		<tr class="primary">
-		  	  			<td class="textBold 15px">Total</td>
+		  	  			<td class="textBold 15px">Total in OMR</td>
 		  	  			<td></td>
 		  	  			<td class="textAlignRight textBold " style="font-size : 15px;"><c:out value="${saleReport.values.get('totalAmount') }" /></td>
 		  	  			<td class="textAlignRight textBold " style="font-size : 15px;"><c:out value="${saleReport.values.get('amountPaid') }" /></td>

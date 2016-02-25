@@ -41,6 +41,10 @@
 		$('#balance').val(balanceDue);
 	}
 	
+	$(function(){
+		$("form#saleOrder #partyId").select2();
+	});
+	
 </script>
 
 <div class="row">
@@ -99,11 +103,11 @@
 							</div><!-- /form-group -->
 							<div class="form-group">
 								<label for="customerName" class="col-lg-3 control-label">Customer</label>
-								<div class="col-lg-9">
-									<form:select path="partyId" cssClass="form-control input-sm">
-										<form:options items="${customers }" itemLabel="fullName" itemValue="partyId"/>
-									</form:select>
-								</div><!-- /.col -->
+		                        <div class="col-lg-9">
+		                        	<form:select path="partyId" cssClass="form-control input-sm">
+		                        		<form:options items="${customers }" itemLabel="fullName" itemValue="partyId"/>
+		                        	</form:select>
+		                        </div>
 							</div><!-- /form-group -->
 						</div>
 						<div class="col-xs-5">

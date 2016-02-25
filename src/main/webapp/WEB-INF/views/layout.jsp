@@ -52,6 +52,7 @@
   <link rel="stylesheet" type="text/css" href="<c:url value="/resources/absolute/assets/fonts/octicons/octicons.css" />">
   <link rel="stylesheet" type="text/css" href="<c:url value="/resources/absolute/assets/fonts/stateface/stateface.css" />">
   <link rel="stylesheet" type="text/css" href="<c:url value="/resources/absolute/assets/skin/default_skin/css/theme.css" />">
+  <link rel="stylesheet" type="text/css" href="<c:url value="/resources/absolute/vendor/plugins/select2/css/core.css" />">
   
     
 
@@ -150,6 +151,8 @@
   </div>
   <!-- End: Main -->
 
+  <!-- Load Javascript at bottom increases the page load speed. -->
+  <script src="<c:url value="/resources/absolute/vendor/plugins/select2/select2.min.js" />" ></script>
 </body>
 
 
