@@ -26,7 +26,7 @@
              </li>
              <li>
            	   <a href="<c:url value="/saleorder/report" />">
-                  <span class="imoon imoon-drawer2"></span>
+                  <span class="glyphicons glyphicons-notes"></span>
 				  Sale Report
                </a>
              </li>
