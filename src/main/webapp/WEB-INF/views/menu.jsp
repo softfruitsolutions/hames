@@ -24,6 +24,12 @@
 				  Sale
                </a>
              </li>
+             <li>
+           	   <a href="<c:url value="/saleorder/report" />">
+                  <span class="glyphicons glyphicons-notes"></span>
+				  Sale Report
+               </a>
+             </li>
              </shiro:hasPermission>
            </ul>
        </li>

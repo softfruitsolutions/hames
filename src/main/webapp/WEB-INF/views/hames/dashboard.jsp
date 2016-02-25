@@ -28,4 +28,17 @@ $(function(){
 			</div>
 		</div>	
 	</div>
+	<div class="col-sm-3">
+       <div class="panel bg-primary light of-h mb10">
+         <div class="pn pl20 p12">
+           <div class="icon-bg p5">
+             <i class="icon-shopping-cart2"></i>
+           </div>
+           <h2 class="mt15 lh15">
+             <b><c:out value="${saleOrderCount}" /></b>
+           </h2>
+           <h5 class="text-muted">ORDERS</h5>
+         </div>
+       </div>
+     </div>
 </div>

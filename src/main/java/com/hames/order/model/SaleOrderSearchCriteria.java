@@ -12,12 +12,9 @@ public class SaleOrderSearchCriteria extends SaleOrder implements QueryCriteria 
 	
 	@Override
 	public Criteria queryCriteria() {
-		List<Criteria> andCriterias = new ArrayList<Criteria>();
 		
-		if(getJobNo() != null && !getJobNo().isEmpty()){
-			andCriterias.add(Criteria.where("jobNo").is(getJobNo()));
-		}
-		
+		List<Criteria> andCriterias = buildCriteria();
+
 		if(andCriterias == null || andCriterias.size() <= 0){
 			return null;
 		}else{
@@ -27,7 +24,24 @@ public class SaleOrderSearchCriteria extends SaleOrder implements QueryCriteria 
 	}
 	
 	@Override
-	public void buildCriteria(){
+	public List<Criteria> buildCriteria(){
+		
+		List<Criteria> andCriterias = new ArrayList<Criteria>();
+		
+		if(getJobNo() != null && !getJobNo().isEmpty()){
+			andCriterias.add(Criteria.where("jobNo").is(getJobNo()));
+		}
+		if(getSaleOrderStatus() != null){
+			andCriterias.add(Criteria.where("saleOrderStatus").is(getSaleOrderStatus()));
+		}
+		
+		if(getPayment() != null){
+			if(getPayment().getPaymentStatus() != null){
+				andCriterias.add(Criteria.where("payment.paymentStatus").is(getPayment().getPaymentStatus()));
+			}
+		}
+		
+		return andCriterias;
 		
 	}
 

@@ -58,9 +58,11 @@ public class HamesDataStore extends MongoTemplate{
 
 		logger.debug("Building Query");
 		Query query = new Query();
+		
 		if(request.getCriteria() != null && request.getCriteria().queryCriteria() != null){
-			query.addCriteria(request.getCriteria().queryCriteria());	
+			query.addCriteria(request.getCriteria().queryCriteria());
 		}
+		
 		query.limit(request.getiDisplayLength());
 		query.skip(request.getiDisplayStart());
 		

@@ -1,7 +1,12 @@
 package com.hames.service.impl;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.EnumUtils;
 import org.joda.time.DateTime;
@@ -29,11 +34,15 @@ import com.hames.exception.StaffException;
 import com.hames.exception.ValidationException;
 import com.hames.mongo.Sequence;
 import com.hames.mongo.SequenceDao;
+import com.hames.report.ReportManager;
 import com.hames.service.SaleOrderService;
 import com.hames.service.StaffService;
 import com.hames.util.peer.BigDecimalUtil;
+import com.hames.util.peer.DateTimeUtil;
 import com.hames.validator.PaymentValidator;
 import com.hames.validator.SaleOrderValidator;
+import com.mongodb.AggregationOutput;
+import com.mongodb.DBObject;
 
 @Repository
 public class SaleOrderServiceImpl extends OrderServiceImpl implements SaleOrderService {
@@ -242,6 +251,59 @@ public class SaleOrderServiceImpl extends OrderServiceImpl implements SaleOrderS
 	public String getNextJobNo() {
 		Long sequenceId = sequenceDao.findNextSequenceId(Sequence.SALE_ORDER_SEQUENCE);
 		return  "A"+sequenceId;
+	}
+
+	@Override
+	public ReportManager generateSaleReport() {
+		
+		List<Map<String,Object>> datas = new ArrayList<Map<String,Object>>();
+		AggregationOutput output = saleOrderDao.getSaleReport();
+		
+		//Calculation Fields
+		BigDecimal totalAmount = new BigDecimal(0);
+		BigDecimal amountPaid = new BigDecimal(0);
+		BigDecimal balanceDue = new BigDecimal(0);
+		BigDecimal discountAmount = new BigDecimal(0);
+		
+		//Buidling Map dataset from aggregation output
+		for (DBObject resultSet : output.results()) {
+			Map<String, Object> data = new HashMap<String, Object>();
+			for (String	key : resultSet.keySet()) {
+				
+				if(resultSet.get(key) instanceof Date){
+					data.put(key, new DateTime(resultSet.get(key)).toString(DateTimeUtil.getDefaultDateFormat()));
+				}else{
+					data.put(key, resultSet.get(key));
+				}
+				
+				if(key.equals("totalAmount")){
+					totalAmount = totalAmount.add(new BigDecimal(resultSet.get(key).toString()));
+				}
+				if(key.equals("amountPaid")){
+					amountPaid = amountPaid.add(new BigDecimal(resultSet.get(key).toString()));
+				}
+				if(key.equals("discountAmount")){
+					discountAmount = discountAmount.add(new BigDecimal(resultSet.get(key).toString()));
+				}
+				if(key.equals("balanceDue")){
+					balanceDue = balanceDue.add(new BigDecimal(resultSet.get(key).toString()));
+				}
+			}
+			datas.add(data);
+		}
+		
+		Map<String, Object> values = new HashMap<String, Object>();
+		values.put("totalAmount", totalAmount);
+		values.put("amountPaid", amountPaid);
+		values.put("discountAmount", discountAmount);
+		values.put("balanceDue", balanceDue);
+		
+		return new ReportManager(values, datas);
+	}
+
+	@Override
+	public Long getSaleOrderCount() {
+		return saleOrderDao.findSaleOrderCount();
 	}
 
 }
