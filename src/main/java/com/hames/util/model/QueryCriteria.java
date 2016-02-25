@@ -1,5 +1,7 @@
 package com.hames.util.model;
 
+import java.util.List;
+
 import org.springframework.data.mongodb.core.query.Criteria;
 
 public interface QueryCriteria {
@@ -11,7 +13,8 @@ public interface QueryCriteria {
 	public Criteria queryCriteria();
 
 	/**
-	 * Building Criteria
+	 * Building Criteria (and,or,in) and returns List<Criteria>
+	 * @return List<Crteria>
 	 */
-	public void buildCriteria();
+	public List<Criteria> buildCriteria();
 }

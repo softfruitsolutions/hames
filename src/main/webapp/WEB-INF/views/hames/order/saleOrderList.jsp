@@ -57,10 +57,31 @@
 	              </label>
 	            </div>
 	            <hr class="short" />
-	            <div class="section">
-	                <a href="#" class="btn btn-default btn-sm ph25" onclick="reloadDatatable()">Search</a>
-	            </div>
-		  	</div>
+	        </div>
+            <div class="row">
+            	<div class="col-xs-6">
+		            <div class="form-group">
+						<label class="control-label">Job Status</label>
+						<form:select path="saleOrderStatus" cssClass="form-control input-sm">
+							<option value="">--</option>
+		              		<form:options items="${orderJobStatus}" itemLabel="value"/>
+		              	</form:select>								 	
+					</div>
+				</div>
+	            <div class="col-xs-6">
+		            <div class="form-group">
+						<label class="control-label">Payment Status</label>
+						<form:select path="payment.paymentStatus" cssClass="form-control input-sm" placeholder="Payment">
+							<option value="">--</option>
+		              		<form:options items="${orderPaymentStatus}" itemLabel="value"/>
+		              	</form:select>								 	
+					</div>
+				</div>
+			</div>
+			<hr class="short" />
+            <div class="section">
+                <a href="#" class="btn btn-default btn-sm ph25" onclick="reloadDatatable()">Search</a>
+            </div>
 		  	</form:form>
 		  </div>
 		</div>

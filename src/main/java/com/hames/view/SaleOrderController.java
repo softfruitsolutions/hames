@@ -21,6 +21,7 @@ import com.hames.bean.Payment;
 import com.hames.bean.PaymentItems;
 import com.hames.bean.SaleOrder;
 import com.hames.enums.OrderType;
+import com.hames.enums.PaymentStatus;
 import com.hames.enums.SaleOrderStatus;
 import com.hames.exception.OrderException;
 import com.hames.exception.PaymentException;
@@ -54,6 +55,8 @@ public class SaleOrderController extends GenericView{
 		}
 		
 		model.addAttribute("saleOrderSearchCriteria", new SaleOrderSearchCriteria());
+		model.addAttribute("orderJobStatus", SaleOrderStatus.values());
+		model.addAttribute("orderPaymentStatus", PaymentStatus.values());
 		model.addAttribute("menu", "viewsaleorder");
 		
 		return "sale.order.list";
@@ -144,7 +147,10 @@ public class SaleOrderController extends GenericView{
 	
 	@RequestMapping("/datatable")
 	public @ResponseBody DatatableResponse viewDatatable(@ModelAttribute SaleOrderSearchCriteria criteria, DatatableRequest datatableRequest){
-		datatableRequest.setCriteria(criteria);
+		//Setting Criteria to datatable request
+		if(criteria != null){
+			datatableRequest.setCriteria(criteria);
+		}
 		return saleOrderService.getDatatable(datatableRequest);
 	}
 	

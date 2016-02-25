@@ -10,14 +10,11 @@ var saleOrderDatatable;
 var saleOrderCriteria;
 function loadDatatable(){
 	
-	saleOrderCriteria = $('#saleOrderSearchCriteria').serialize();
-	console.log(saleOrderCriteria);
-	
 	saleOrderDatatable = $('#saleorderDatatable').dataTable( {
 		"bProcessing" : true,
 		"bServerSide" : true,
 		"bPaginate": true,
-        "sAjaxSource": 'datatable?'+saleOrderCriteria,
+        "sAjaxSource": 'datatable',
         "fnServerParams": function ( aoData ) {
             aoData.push({ "name": "sortField", "value": "jobNo"});
             aoData.push({ "name": "sortDirection", "value": "desc"});
