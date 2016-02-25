@@ -301,4 +301,9 @@ public class SaleOrderServiceImpl extends OrderServiceImpl implements SaleOrderS
 		return new ReportManager(values, datas);
 	}
 
+	@Override
+	public Long getSaleOrderCount() {
+		return saleOrderDao.findSaleOrderCount();
+	}
+
 }

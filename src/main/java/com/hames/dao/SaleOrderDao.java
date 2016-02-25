@@ -26,4 +26,9 @@ public interface SaleOrderDao extends OrderDao{
 	 */
 	public AggregationOutput getSaleReport();
 	
+	/**
+	 * Find Sale Order Count
+	 * @return
+	 */
+	public Long findSaleOrderCount();
 }

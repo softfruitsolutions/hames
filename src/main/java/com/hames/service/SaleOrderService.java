@@ -22,4 +22,12 @@ public interface SaleOrderService extends OrderService{
 	 * @return
 	 */
 	public ReportManager generateSaleReport();
+	
+	/**
+	 * Get Sale Order Count
+	 * Exclude cancelled orders.
+	 *  
+	 * @return
+	 */
+	public Long getSaleOrderCount();
 }

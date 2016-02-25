@@ -12,7 +12,9 @@ import org.springframework.stereotype.Repository;
 import com.hames.bean.SaleOrder;
 import com.hames.dao.SaleOrderDao;
 import com.hames.enums.OrderType;
+import com.hames.enums.SaleOrderStatus;
 import com.hames.mongo.MongoOperators;
+import com.hames.order.model.SaleOrderSearchCriteria;
 import com.mongodb.AggregationOutput;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
@@ -78,6 +80,11 @@ public class SaleOrderDaoImpl extends OrderDaoImpl implements SaleOrderDao{
 		pipeline.add(sort);
 		
 		return hamesDataStore.getCollection(COLLECTION_NAME).aggregate(pipeline);
+	}
+
+	@Override
+	public Long findSaleOrderCount() {
+		return hamesDataStore.count(null, COLLECTION_NAME);
 	}
 
 }
