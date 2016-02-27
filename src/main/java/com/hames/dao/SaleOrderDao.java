@@ -1,8 +1,10 @@
 package com.hames.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import com.hames.bean.SaleOrder;
-import com.hames.report.ReportManager;
-import com.mongodb.AggregationOutput;
+import com.hames.order.model.SaleOrderReport;
 
 public interface SaleOrderDao extends OrderDao{
 
@@ -21,10 +23,10 @@ public interface SaleOrderDao extends OrderDao{
 	public SaleOrder findByOrderId(String orderId);
 	
 	/**
-	 * Get Report Manager based on criteria
+	 * Get Report Response based on criteria
 	 * @return
 	 */
-	public AggregationOutput getSaleReport();
+	public List<Map<String,Object>> getSaleReport(SaleOrderReport saleOrderReport);
 	
 	/**
 	 * Find Sale Order Count

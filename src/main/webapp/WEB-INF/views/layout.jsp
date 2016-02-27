@@ -26,8 +26,12 @@
   <script src="<c:url value="/resources/absolute/vendor/plugins/pnotify/pnotify.js" />" ></script>
   <script src='<c:url value="/resources/hames/js/jquery.maskedinput.min.js" />'  type="text/javascript" ></script>
   <script src='<c:url value="/resources/hames/util/js/alert-util.js" />'  type="text/javascript" ></script>
+  <script src='<c:url value="/resources/hames/util/js/util.js" />'  type="text/javascript" ></script>
   <script src='<c:url value="/resources/hames/util/js/datetime-util.js" />' type="text/javascript"></script>
+  <script src="<c:url value="/resources/absolute/vendor/plugins/moment/moment.min.js" />"></script>
+  <script src="<c:url value="/resources/absolute/vendor/plugins/datepicker/js/bootstrap-datetimepicker.js" />"></script>
   
+    
   <!-- Theme Javascript -->
   <script src="<c:url value="/resources/absolute/assets/js/utility/utility.js" />"></script>
   <%-- <script src="<c:url value="/resources/absolute/assets/js/demo/demo.js" /> "></script> --%>  
@@ -52,7 +56,9 @@
   <link rel="stylesheet" type="text/css" href="<c:url value="/resources/absolute/assets/fonts/octicons/octicons.css" />">
   <link rel="stylesheet" type="text/css" href="<c:url value="/resources/absolute/assets/fonts/stateface/stateface.css" />">
   <link rel="stylesheet" type="text/css" href="<c:url value="/resources/absolute/assets/skin/default_skin/css/theme.css" />">
-  
+  <link rel="stylesheet" type="text/css" href="<c:url value="/resources/absolute/vendor/plugins/select2/css/core.css" />">
+  <link rel="stylesheet" type="text/css" href="<c:url value="/resources/absolute/vendor/plugins/daterange/daterangepicker.css" />">
+  <link rel="stylesheet" type="text/css" href="<c:url value="/resources/absolute/vendor/plugins/datepicker/css/bootstrap-datetimepicker.css" />">
     
 
   <script type="text/javascript">
@@ -150,6 +156,15 @@
   </div>
   <!-- End: Main -->
 
+  <!-- Load Javascript at bottom increases the page load speed. -->
+  <script src="<c:url value="/resources/absolute/vendor/plugins/select2/select2.min.js" />" ></script>
+  <script type="text/javascript">
+  	$(".datepicker").datetimepicker({
+  		format : "DD/MM/YYYY",
+        pickTime: false,
+  	});
+  </script>
+  
 </body>
 
 

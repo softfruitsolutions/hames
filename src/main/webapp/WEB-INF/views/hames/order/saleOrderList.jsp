@@ -18,8 +18,8 @@
 		  <shiro:hasPermission name="order:saleorder:create">
 		  <div class="panel-menu">
 		  	<div class="btn-group">
-		     <a class="btn btn-info" href="${saleOrderListUrl }" title="Refresh "><i class="fa fa-refresh"></i></a>
-		  	 <a class="btn btn-primary" href="${saleOrderViewUrl }" title="Create Order "><i class="fa fa-edit"></i> Create Order </a>
+		     <a class="btn btn-info btn-sm" href="${saleOrderListUrl }" title="Refresh "><i class="fa fa-refresh"></i></a>
+		  	 <a class="btn btn-primary btn-sm" href="${saleOrderViewUrl }" title="Create Order "><i class="fa fa-edit"></i> Create Order </a>
 		  	</div>
 		  </div>
 		  </shiro:hasPermission>
