@@ -1,10 +1,12 @@
 package com.hames.dao.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import org.springframework.data.domain.Sort;
-import org.springframework.data.mongodb.core.aggregation.SortOperation;
+import org.joda.time.DateTime;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
@@ -12,11 +14,9 @@ import org.springframework.stereotype.Repository;
 import com.hames.bean.SaleOrder;
 import com.hames.dao.SaleOrderDao;
 import com.hames.enums.OrderType;
-import com.hames.enums.SaleOrderStatus;
-import com.hames.mongo.MongoOperators;
-import com.hames.order.model.SaleOrderSearchCriteria;
+import com.hames.order.model.SaleOrderReport;
+import com.hames.util.peer.DateTimeUtil;
 import com.mongodb.AggregationOutput;
-import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 
 @Repository
@@ -40,46 +40,33 @@ public class SaleOrderDaoImpl extends OrderDaoImpl implements SaleOrderDao{
 		return (SaleOrder) hamesDataStore.findById(orderId, getEntityClass(),COLLECTION_NAME);
 	}
 
-	/*db.order.aggregate(
-		    [
-		        
-		        {
-		          $group : {
-		              _id : "$orderDate",
-		              orderDate : {$min : "$orderDate"},
-		              orders : {$sum : 1},
-		              amountPaid : {$sum : "$payment.totalAmount"},
-		              discountAmount: {$sum : "$payment.discountAmount"}
-		          }
-		        },
-		        { 
-		          $sort: {orderDate: 1}
-		        }
-		    ]
-		)
-	*/
-	
 	@Override
-	public AggregationOutput getSaleReport() {
+	public List<Map<String,Object>> getSaleReport(SaleOrderReport saleOrderReport) {
 		
-		DBObject groupFields = new BasicDBObject();
-		groupFields.put(MongoOperators.ID, "$orderDate");
-		groupFields.put("ordersCount", new BasicDBObject(MongoOperators.SUM,1));
-		groupFields.put("amountPaid", new BasicDBObject(MongoOperators.SUM, "$payment.amountPaid"));
-		groupFields.put("discountAmount", new BasicDBObject(MongoOperators.SUM,"$payment.discountAmount"));
-		groupFields.put("balanceDue", new BasicDBObject(MongoOperators.SUM,"$payment.balanceDue"));
-		groupFields.put("totalAmount", new BasicDBObject(MongoOperators.SUM, "$payment.totalAmount"));
-		DBObject group = new BasicDBObject(MongoOperators.GROUP, groupFields);
+		System.out.println(saleOrderReport.getPipeline());
 		
-		DBObject sortFields = new BasicDBObject();
-		sortFields.put(MongoOperators.ID,1);
-		DBObject sort = new BasicDBObject(MongoOperators.SORT,sortFields);
+		AggregationOutput output = hamesDataStore.getCollection(COLLECTION_NAME).aggregate(saleOrderReport.getPipeline()); 
 		
-		List<DBObject> pipeline = new ArrayList<DBObject>();
-		pipeline.add(group);
-		pipeline.add(sort);
+		List<Map<String,Object>> datas = new ArrayList<Map<String,Object>>();
+		/**
+		 * Mapping the aggregation output resultset
+		 */
+		for (DBObject resultSet : output.results()) {
+			Map<String, Object> data = new HashMap<String, Object>();
+			for (String	key : resultSet.keySet()) {
+				
+				//Converting to DateTime format result is an instaceof @java.util.Date
+				if(resultSet.get(key) instanceof Date){
+					data.put(key, new DateTime(resultSet.get(key)).toString(DateTimeUtil.getDefaultDateFormat()));
+				}else{
+					data.put(key, resultSet.get(key));
+				}
+				
+			}
+			datas.add(data);
+		}
 		
-		return hamesDataStore.getCollection(COLLECTION_NAME).aggregate(pipeline);
+		return datas;
 	}
 
 	@Override

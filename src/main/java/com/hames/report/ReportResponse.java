@@ -3,14 +3,16 @@ package com.hames.report;
 import java.util.List;
 import java.util.Map;
 
-public class ReportManager {
+import org.springframework.data.annotation.Transient;
+
+public class ReportResponse {
 	
-	//Contains any specific values related to data's. It can be
+	//Contains any specific values related to datas. It can be
 	//either summed values or generic values;
-	private Map<String,Object> values;
-	private List<Map<String,Object>> datas;
+	@Transient private Map<String,Object> values;
+	@Transient private List<Map<String,Object>> datas;
 	
-	public ReportManager(Map<String, Object> values, List<Map<String, Object>> datas) {
+	public ReportResponse(Map<String, Object> values, List<Map<String, Object>> datas) {
 		this.values = values;
 		this.datas = datas;
 	}

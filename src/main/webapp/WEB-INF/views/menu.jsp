@@ -27,7 +27,7 @@
              </shiro:hasPermission>
              <shiro:hasPermission name="order:saleorder:report:view">
              <li>
-           	   <a href="<c:url value="/saleorder/report" />">
+           	   <a href="<c:url value="/report/saleorder" />">
                   <span class="glyphicons glyphicons-notes"></span>
 				  Sale Report
                </a>

@@ -1,7 +1,8 @@
 package com.hames.service;
 
 import com.hames.enums.SaleOrderStatus;
-import com.hames.report.ReportManager;
+import com.hames.report.ReportRequest;
+import com.hames.report.ReportResponse;
 
 public interface SaleOrderService extends OrderService{
 
@@ -21,7 +22,7 @@ public interface SaleOrderService extends OrderService{
 	 * Generate Sale Report.
 	 * @return
 	 */
-	public ReportManager generateSaleReport();
+	public ReportResponse generateSaleReport(ReportRequest reportRequest);
 	
 	/**
 	 * Get Sale Order Count
