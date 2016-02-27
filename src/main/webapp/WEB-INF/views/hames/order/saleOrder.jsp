@@ -10,6 +10,12 @@
 	$(function(){
 		$('#orderDate').mask("99/99/9999");
 		$('#deliveryDate').mask("99/99/9999");
+		$("#orderDate").on("dp.change", function (e) {
+            $('#deliveryDate').data("DateTimePicker").setMinDate(e.date);
+        });
+        $("#deliveryDate").on("dp.change", function (e) {
+            $('#orderDate').data("DateTimePicker").setMaxDate(e.date);
+        });
 	});
 	
 	function save(){
@@ -63,8 +69,8 @@
 		  </div>
 		  <div class="panel-menu">
 		  	<div class="btn-group">
-		  		<a href="${saleOrdersUrl}" class="btn btn-info"><i class="fa fa-reply"></i></a>
-		  		<a href="#" onclick="save()" class="btn btn-primary" data-toggle="modal"><i class="glyphicon glyphicon-floppy-save"></i> Save</a>
+		  		<a href="${saleOrdersUrl}" class="btn btn-info btn-sm"><i class="fa fa-reply"></i></a>
+		  		<a href="#" onclick="save()" class="btn btn-primary btn-sm" data-toggle="modal"><i class="glyphicon glyphicon-floppy-save"></i> Save</a>
 		  	</div>
 		  	<div class="pull-right">
 		  		<a class="btn btn-warning">
@@ -122,13 +128,13 @@
 							<div class="form-group">
 								<label for="createdDate" class="col-lg-4 control-label">Order Date</label>
 								<div class="col-lg-8">
-									<form:input path="orderDate" cssClass="form-control input-sm"  type="text"/>
+									<form:input path="orderDate" cssClass="form-control input-sm datepicker"  type="text"/>
 								</div>
 							</div><!-- /form-group -->
 							<div class="form-group">
 								<label for="deliveryDate" class="col-lg-4 control-label">Delivery Date</label>
 								<div class="col-lg-8">
-									<form:input path="deliveryDate" cssClass="form-control input-sm"  type="text"/>
+									<form:input path="deliveryDate" cssClass="form-control input-sm datepicker"  type="text"/>
 								</div><!-- /.col -->
 							</div><!-- /form-group -->
 						</div>

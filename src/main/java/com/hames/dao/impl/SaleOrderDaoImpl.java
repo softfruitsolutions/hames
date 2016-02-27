@@ -43,8 +43,6 @@ public class SaleOrderDaoImpl extends OrderDaoImpl implements SaleOrderDao{
 	@Override
 	public List<Map<String,Object>> getSaleReport(SaleOrderReport saleOrderReport) {
 		
-		System.out.println(saleOrderReport.getPipeline());
-		
 		AggregationOutput output = hamesDataStore.getCollection(COLLECTION_NAME).aggregate(saleOrderReport.getPipeline()); 
 		
 		List<Map<String,Object>> datas = new ArrayList<Map<String,Object>>();
