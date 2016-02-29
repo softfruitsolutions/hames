@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import com.hames.bean.Customer;
 import com.hames.bean.Payment;
 import com.hames.bean.PaymentItems;
 import com.hames.bean.SaleOrder;
@@ -93,6 +94,7 @@ public class SaleOrderController extends GenericView{
 				saleOrder.setPayment(payment);
 				
 				model.addAttribute("saleOrder", saleOrder);
+				model.addAttribute("customer", new Customer());
 			}
 		}else{
 			saleOrder = saleOrderService.getOrderById(id);

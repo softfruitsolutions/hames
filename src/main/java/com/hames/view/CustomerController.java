@@ -1,5 +1,8 @@
 package com.hames.view;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.AuthorizationException;
 import org.slf4j.Logger;
@@ -16,7 +19,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.hames.bean.Customer;
 import com.hames.enums.PartyStatus;
 import com.hames.enums.PartyType;
-import com.hames.exception.ValidationException;
 import com.hames.service.CustomerService;
 import com.hames.system.auth.Permission;
 import com.hames.util.enums.SuccessCode;
@@ -24,7 +26,6 @@ import com.hames.util.model.DatatableRequest;
 import com.hames.util.model.DatatableResponse;
 import com.hames.util.model.JsonResponse;
 import com.hames.util.model.SuccessNode;
-import com.hames.util.peer.ModelUtil;
 
 /**
  * Handles requests for the application home page.
@@ -92,5 +93,19 @@ public class CustomerController extends GenericView {
 	@RequestMapping("/datatable")
 	public @ResponseBody DatatableResponse viewDatatable(@ModelAttribute DatatableRequest datatableRequest){
 		return customerService.getDatatable(datatableRequest);
+	}
+
+	@ResponseBody
+	@RequestMapping("/all")
+	public JsonResponse getAllActiveCustomers(){
+		
+		JsonResponse jsonResponse = new JsonResponse();
+		jsonResponse.setStatus(Boolean.TRUE);
+		
+		Map<String,Object> responseMap = new HashMap<String, Object>();
+		responseMap.put("customers", customerService.getActiveCustomers());
+		jsonResponse.setDatas(responseMap);
+		
+		return jsonResponse;
 	}
 }

@@ -108,7 +108,7 @@
 								<label class="control-label">E-mail ID</label>
 								<div class="input-group">
 									<span class="input-group-addon">@</span>
-									<form:input path="emailId" cssClass="form-control" placeholder="Email Addres" />
+									<form:input path="emailId" cssClass="form-control" placeholder="Email Address" />
 								</div>
 							</div>
 						</div>

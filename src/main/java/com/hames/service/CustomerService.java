@@ -35,6 +35,12 @@ public interface CustomerService{
 	public List<Customer> getAllCustomers(); 
 	
 	/**
+	 * Get Active Customers
+	 * @return
+	 */
+	public List<Customer> getActiveCustomers();
+	
+	/**
 	 * Get Customer Count
 	 * @return
 	 */

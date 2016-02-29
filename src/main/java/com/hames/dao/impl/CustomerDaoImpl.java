@@ -12,8 +12,6 @@ import org.springframework.stereotype.Repository;
 
 import com.hames.bean.Customer;
 import com.hames.dao.CustomerDao;
-import com.hames.enums.PartyStatus;
-import com.hames.enums.PartyType;
 import com.hames.mongo.GenericDao;
 import com.hames.mongo.HamesDataStore;
 import com.hames.util.model.DatatableRequest;
@@ -63,6 +61,8 @@ public class CustomerDaoImpl extends GenericDao implements CustomerDao{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Customer> findAllCustomers() {
+		Query query = new Query();
+		query.addCriteria(Criteria.where("partyType").is("CUSTOMER"));
 		return (List<Customer>) hamesDataStore.findAll(getEntityClass(),COLLECTION_NAME);
 	}
 
@@ -71,6 +71,14 @@ public class CustomerDaoImpl extends GenericDao implements CustomerDao{
 		Query query = new Query();
 		query.addCriteria(Criteria.where("partyType").is("CUSTOMER").and("status").is("ACTIVE_CUSTOMER"));
 		return hamesDataStore.getCollection(COLLECTION_NAME).count(query.getQueryObject());
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Customer> findActiveCustomers() {
+		Query query = new Query();
+		query.addCriteria(Criteria.where("partyType").is("CUSTOMER").and("status").is("ACTIVE_CUSTOMER"));
+		return (List<Customer>) hamesDataStore.find(query, getEntityClass(),COLLECTION_NAME);
 	}
 	
 }

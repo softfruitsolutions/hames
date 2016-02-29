@@ -76,4 +76,9 @@ public class CustomerServiceImpl extends GenericService implements CustomerServi
 		return customerDao.findCustomerCount();
 	}
 
+	@Override
+	public List<Customer> getActiveCustomers() {
+		return customerDao.findActiveCustomers();
+	}
+
 }

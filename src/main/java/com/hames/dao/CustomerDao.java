@@ -32,7 +32,13 @@ public interface CustomerDao{
 	 * Find All Customers
 	 * @return
 	 */
-	List<Customer> findAllCustomers();
+	public List<Customer> findAllCustomers();
+	
+	/**
+	 * Find Active Customers
+	 * @return
+	 */
+	public List<Customer> findActiveCustomers();
 	
 	/**
 	 * Get Customer Count
