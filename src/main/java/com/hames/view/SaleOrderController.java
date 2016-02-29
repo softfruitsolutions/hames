@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import com.hames.bean.Payment;
 import com.hames.bean.PaymentItems;
 import com.hames.bean.SaleOrder;
+import com.hames.bean.UserContext;
 import com.hames.enums.OrderType;
 import com.hames.enums.PaymentStatus;
 import com.hames.enums.SaleOrderStatus;
@@ -80,6 +81,7 @@ public class SaleOrderController extends GenericView{
 				saleOrder.setOrderDate(new DateTime());
 				saleOrder.setSaleOrderStatus(SaleOrderStatus.DRAFT);
 				saleOrder.setOrderType(OrderType.SALE_ORDER);
+				saleOrder.setStaffConcerned(UserContext.staff.getStaffId());
 				
 				/**
 				 * Setting Payment to Sale Order
