@@ -77,7 +77,7 @@ public class OrderServiceImpl extends GenericService implements OrderService{
 		order.setParty(customer);
 		
 		//Setting Staff Concerned details
-		Staff staffConcerned = staffDao.findByStaffId(order.getStaffConcerned());
+		Staff staffConcerned = staffDao.findById(order.getStaffConcerned());
 		order.setStaffConcernedText(staffConcerned.getFullName());
 		
 		return (T) order;

@@ -20,7 +20,7 @@ import com.hames.validator.StaffValidator;
 @Service
 public class StaffServiceImpl extends GenericService implements StaffService {
 
-	private static final Logger logger = LoggerFactory.getLogger(StaffServiceImpl.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(StaffServiceImpl.class);
 
 	@Autowired private StaffDao staffDao;
 
@@ -49,29 +49,27 @@ public class StaffServiceImpl extends GenericService implements StaffService {
 		//Setting Audit details
 		staff.setAuditableDetails(staff.getStaffId());
 		
-		logger.debug("Saving entity : {},{}",staff.getClass(),staff.toString());
 		staffDao.save(staff);
-		logger.debug("Entity saved successfully");
 	}
 
 	@Override
 	public Staff getStaffById(String staffId) {
-		return staffDao.findByStaffId(staffId);
+		return staffDao.findById(staffId);
 	}
 
 	@Override
 	public DatatableResponse getDatatable(DatatableRequest request) {
-		return staffDao.buildDatatable(request);
+		return staffDao.getPagedDatatable(request);
 	}
 
 	@Override
 	public List<Staff> getAllStaffs() {
-		return staffDao.findAllStaffs();
+		return staffDao.findAll();
 	}
 
 	@Override
 	public boolean isStaffExists(String staffId) {
-		return staffDao.isStaffExists(staffId);
+		return staffDao.isExists(staffId);
 	}
 
 	@Override
