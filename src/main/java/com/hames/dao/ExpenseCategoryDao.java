@@ -1,40 +1,14 @@
 package com.hames.dao;
 
-import java.util.List;
-
 import com.hames.bean.ExpenseCategory;
+import com.hames.mongo.GenericDao;
 
-public interface ExpenseCategoryDao {
+public interface ExpenseCategoryDao extends GenericDao<ExpenseCategory> {
 	
 	/**
-	 * Save Expense Category
-	 * @param expenseCategory
-	 */
-	void save(ExpenseCategory expenseCategory);
-
-	/**
-	 * Find Expense Category
-	 * @param id
-	 * @return
-	 */
-	ExpenseCategory findExpenseCategory(String id);
-	
-	/**
-	 * Find all Expense Category
-	 * @return
-	 */
-	List<ExpenseCategory> findAllExpenseCategory();
-
-	/**
-	 * Is Category Exists
-	 * @param categoryId
-	 * @return
-	 */
-	boolean isCategoryExistsById(String categoryId);
-	/**
-	 * Is Category Exists
+	 * Is a category exists by name
 	 * @param categoryName
 	 * @return
 	 */
-	boolean isCategoryExistsByName(String categoryName);
+	boolean isExistsByName(String categoryName);
 }

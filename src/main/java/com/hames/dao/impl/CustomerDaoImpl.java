@@ -1,71 +1,25 @@
 package com.hames.dao.impl;
 
 import java.util.List;
-import java.util.UUID;
 
-import javax.annotation.PostConstruct;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
 import com.hames.bean.Customer;
 import com.hames.dao.CustomerDao;
-import com.hames.mongo.GenericDao;
-import com.hames.mongo.HamesDataStore;
-import com.hames.util.model.DatatableRequest;
-import com.hames.util.model.DatatableResponse;
+import com.hames.mongo.GenericDaoImpl;
 
 @Repository
-public class CustomerDaoImpl extends GenericDao implements CustomerDao{
+public class CustomerDaoImpl extends GenericDaoImpl<Customer> implements CustomerDao{
 
 	private static final String COLLECTION_NAME = "party";
-	
-	@Autowired
-	private HamesDataStore hamesDataStore;
-	
-	@PostConstruct
-	public void createCollection() {
-		if(!hamesDataStore.collectionExists(COLLECTION_NAME)){
-			hamesDataStore.createCollection(COLLECTION_NAME);
-		}
+
+	@Override
+	public String getCollectionName() {
+		return COLLECTION_NAME;
 	}
 	
-	@Override
-	public Class<?> getEntityClass() {
-		return Customer.class;
-	}
-
-	@Override
-	public void save(Customer customer) {
-		if(!hamesDataStore.exists(customer.getPartyId(),COLLECTION_NAME)){
-			customer.setPartyId(UUID.randomUUID().toString());
-		}
-		hamesDataStore.save(customer,COLLECTION_NAME);
-	}
-
-	@Override
-	public Customer findByCustomerId(String customerId) {
-		return (Customer) hamesDataStore.findById(customerId,getEntityClass(),COLLECTION_NAME);
-	}
-
-	@Override
-	public DatatableResponse buildDatatable(DatatableRequest request) {
-		request.setClazz(getEntityClass());
-		request.setMongoCollectionName(COLLECTION_NAME);
-		
-		return hamesDataStore.getDatatablePagedResult(request);
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<Customer> findAllCustomers() {
-		Query query = new Query();
-		query.addCriteria(Criteria.where("partyType").is("CUSTOMER"));
-		return (List<Customer>) hamesDataStore.findAll(getEntityClass(),COLLECTION_NAME);
-	}
-
 	@Override
 	public Long findCustomerCount() {
 		Query query = new Query();
@@ -73,12 +27,11 @@ public class CustomerDaoImpl extends GenericDao implements CustomerDao{
 		return hamesDataStore.getCollection(COLLECTION_NAME).count(query.getQueryObject());
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<Customer> findActiveCustomers() {
 		Query query = new Query();
 		query.addCriteria(Criteria.where("partyType").is("CUSTOMER").and("status").is("ACTIVE_CUSTOMER"));
-		return (List<Customer>) hamesDataStore.find(query, getEntityClass(),COLLECTION_NAME);
+		return (List<Customer>) hamesDataStore.find(query, Customer.class, COLLECTION_NAME);
 	}
 	
 }

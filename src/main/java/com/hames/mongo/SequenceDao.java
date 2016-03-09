@@ -14,19 +14,16 @@ import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class SequenceDao extends GenericDao {
+public class SequenceDao extends GenericDaoImpl<Sequence> {
 
-	@Autowired private HamesDataStore hamesDataStore;
-	
 	private static final String COLLECTION_NAME = "sequence";
-	
 	private static Map<String,Long> sequenceMap;
 
 	@Override
-	public Class<?> getEntityClass() {
-		return Sequence.class;
+	public String getCollectionName() {
+		return COLLECTION_NAME;
 	}
-	
+
 	private Map<String,Long> getSequenceMap(){
 		sequenceMap = new HashMap<String, Long>();
 		sequenceMap.put("sale_order", 100L);
@@ -34,42 +31,38 @@ public class SequenceDao extends GenericDao {
 	}
 	
 	@PostConstruct
-	private void createCollectionAndSequence(){
-		if(!hamesDataStore.collectionExists(COLLECTION_NAME)){
-			hamesDataStore.createCollection(COLLECTION_NAME);
-			loadSequenceMap();
-		}else{
-			loadSequenceMap();
-		}
-	}
-
-	@SuppressWarnings("rawtypes")
-	private void loadSequenceMap(){
-	    Iterator it = getSequenceMap().entrySet().iterator();
+	private void sequenceChecker(){
+		Iterator it = getSequenceMap().entrySet().iterator();
 	    while(it.hasNext()){
 			Map.Entry entry = (Map.Entry)it.next();
-			if(!hamesDataStore.exists(entry.getKey().toString(), COLLECTION_NAME)){
+			if(!hamesDataStore.exists(entry.getKey().toString(), getCollectionName())){
 				Sequence sequence = new Sequence(entry.getKey().toString(), (Long) entry.getValue());
-				createSequence(sequence);
+				hamesDataStore.insert(sequence, COLLECTION_NAME);
 			}
 	    }
 	}
 
-	private void createSequence(Sequence sequence){
-		hamesDataStore.insert(sequence, COLLECTION_NAME);
-	}
-	
+	/**
+	 * Finding next sequence id using key
+	 * @param key
+	 * @return
+	 */
 	public Long findNextSequenceId(String key){
 		
 		//Building query
 		Query query = new Query();
 		query.addCriteria(Criteria.where("_id").is(key));
 		
-		Sequence sequence = (Sequence) hamesDataStore.findOne(query, getEntityClass(), COLLECTION_NAME);
+		Sequence sequence = (Sequence) hamesDataStore.findOne(query, Sequence.class, COLLECTION_NAME);
 		
 		return sequence.getSequence();
 	}
 	
+	/**
+	 * Updating sequence details
+	 * @param key
+	 * @return
+	 */
 	public Long updateSequence(String key){
 		
 		//Building query
@@ -89,4 +82,3 @@ public class SequenceDao extends GenericDao {
 	}
 
 }
-

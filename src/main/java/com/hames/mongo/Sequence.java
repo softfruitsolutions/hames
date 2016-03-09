@@ -1,13 +1,13 @@
 package com.hames.mongo;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.stereotype.Component;
 
 @Component
+@Document(collection="sequence")
 public class Sequence {
 	
-	public static final String SALE_ORDER_SEQUENCE = "sale_order";
-
 	@Id
 	private String sequenceName;
 	private Long sequence;
