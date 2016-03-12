@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
 import com.hames.bean.helper.UUIDHelper;
@@ -41,8 +42,7 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
 	
 	@Override
 	public void save(T t) {
-		LOGGER.debug("Setting Id. If not present, based on annotation @Id");
-		setId(t);
+		//setId(t);
 		LOGGER.debug("Saving a document of entity: {} with data: {}", t.getClass(),t.toString());
 		hamesDataStore.save(t,getCollectionName());		
 	}
@@ -58,6 +58,18 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
 	@Override
 	public List<T> findAll() {
 		return hamesDataStore.findAll((Class<T>) entityClass, getCollectionName());
+	}
+	
+	@Override
+	@SuppressWarnings("unchecked")
+	public T findByQuery(Query query) {
+		return (T) hamesDataStore.findOne(query, entityClass.getClass(),getCollectionName());
+	}
+	
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<T> findAllByQuery(Query query) {
+		return (List<T>) hamesDataStore.find(query, entityClass.getClass(),getCollectionName());
 	}
 	
 	@Override
