@@ -94,12 +94,12 @@ public class UserAccountServiceImpl extends GenericService implements UserAccoun
 
 	@Override
 	public List<UserAccount> getUserAccounts() {
-		return userAccountDao.getUserAccounts();
+		return userAccountDao.findAll();
 	}
 
 	@Override
 	public List<UserAccount> getUserAccounts(Boolean allDataRequired) {
-		List<UserAccount> userAccounts = userAccountDao.getUserAccounts();
+		List<UserAccount> userAccounts = userAccountDao.findAll();
 		
 		if(allDataRequired){
 			if(userAccounts != null && !userAccounts.isEmpty()){

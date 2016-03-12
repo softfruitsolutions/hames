@@ -117,7 +117,7 @@ public class SaleOrderServiceImpl extends OrderServiceImpl implements SaleOrderS
 
 	public void updateOrder(SaleOrder saleOrder){
 		
-		SaleOrder so = saleOrderDao.findByOrderId(saleOrder.getOrderId());
+		SaleOrder so = (SaleOrder) saleOrderDao.findById(saleOrder.getOrderId());
 		if(so == null){
 			logger.error("Sale Order doesn't exists. Please contact Administrator");
 			throw new OrderException("Sale Order doesn't exists");
@@ -225,7 +225,7 @@ public class SaleOrderServiceImpl extends OrderServiceImpl implements SaleOrderS
 	public void updateOrderStatus(String orderId,SaleOrderStatus saleOrderStatus) {
 		logger.debug("Updating Sale Order status for Order ID : {}",orderId);
 		logger.debug("Checking whether Order exists");
-		Boolean orderExists = saleOrderDao.orderExists(orderId);
+		Boolean orderExists = saleOrderDao.isExists(orderId);
 		if(!orderExists){
 			logger.error("Sale Order doesn't exists. Please contact Administrator");
 			throw new OrderException("Sale Order doesn't exists");
@@ -233,7 +233,7 @@ public class SaleOrderServiceImpl extends OrderServiceImpl implements SaleOrderS
 		
 		if(EnumUtils.isValidEnum(SaleOrderStatus.class, saleOrderStatus.getValue())){
 			logger.debug("Fetching sale order with id :{}",orderId);
-			SaleOrder saleOrder = saleOrderDao.findByOrderId(orderId);
+			SaleOrder saleOrder = (SaleOrder) saleOrderDao.findById(orderId);
 			logger.debug("Setting status to sale order");
 			saleOrder.setSaleOrderStatus(saleOrderStatus);
 			saleOrderDao.save(saleOrder);

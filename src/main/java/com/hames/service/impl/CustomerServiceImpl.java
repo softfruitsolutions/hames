@@ -58,17 +58,17 @@ public class CustomerServiceImpl extends GenericService implements CustomerServi
 
 	@Override
 	public Customer getCustomerById(String customerId) {
-		return customerDao.findByCustomerId(customerId);
+		return customerDao.findById(customerId);
 	}
 
 	@Override
 	public DatatableResponse getDatatable(DatatableRequest request) {
-		return customerDao.buildDatatable(request);
+		return customerDao.getPagedDatatable(request);
 	}
 
 	@Override
 	public List<Customer> getAllCustomers() {
-		return customerDao.findAllCustomers();
+		return customerDao.findAll();
 	}
 
 	@Override

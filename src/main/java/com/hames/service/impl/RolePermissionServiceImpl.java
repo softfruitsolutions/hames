@@ -56,17 +56,17 @@ public class RolePermissionServiceImpl extends GenericService implements RolePer
 
 	@Override
 	public RolePermission getRoleById(String roleId) {
-		return rolePermissionDao.findByRoleId(roleId);
+		return rolePermissionDao.findById(roleId);
 	}
 
 	@Override
 	public DatatableResponse getDatatable(DatatableRequest request) {
-		return rolePermissionDao.buildDatatable(request);
+		return rolePermissionDao.getPagedDatatable(request);
 	}
 
 	@Override
 	public List<RolePermission> getAllRolePermissions() {
-		return rolePermissionDao.findAllRolePermissions();
+		return rolePermissionDao.findAll();
 	}
 
 	@Override
@@ -76,7 +76,7 @@ public class RolePermissionServiceImpl extends GenericService implements RolePer
 
 	@Override
 	public boolean isRolePermissionExists(String roleId) {
-		return rolePermissionDao.isRolePermissionExists(roleId);
+		return rolePermissionDao.isExists(roleId);
 	}
 
 }

@@ -1,5 +1,6 @@
 package com.hames.mongo;
 
+import java.lang.reflect.Field;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -7,8 +8,10 @@ import javax.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.annotation.Id;
 import org.springframework.stereotype.Repository;
 
+import com.hames.bean.helper.UUIDHelper;
 import com.hames.util.model.DatatableRequest;
 import com.hames.util.model.DatatableResponse;
 
@@ -38,6 +41,8 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
 	
 	@Override
 	public void save(T t) {
+		LOGGER.debug("Setting Id. If not present, based on annotation @Id");
+		setId(t);
 		LOGGER.debug("Saving a document of entity: {} with data: {}", t.getClass(),t.toString());
 		hamesDataStore.save(t,getCollectionName());		
 	}
@@ -67,4 +72,28 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
 		request.setMongoCollectionName(getCollectionName());
 		return hamesDataStore.getDatatablePagedResult(request);
 	}
+	
+	/**
+	 * A private method to set id based on annotation {@link Id}
+	 * @param T t
+	 */
+	private void setId(T t){
+		for (Field field : t.getClass().getDeclaredFields()) {
+			//Checking @Id annotation is present
+			if(field.isAnnotationPresent(Id.class)){
+				field.setAccessible(Boolean.TRUE);
+				try {
+					Object fieldValue = field.get(t);
+					if(fieldValue == null){
+						field.set(t, UUIDHelper.getUUID());
+					}
+				} catch (IllegalArgumentException e) {
+					LOGGER.error("No such field : {} found.",field);
+				} catch (IllegalAccessException e) {
+					LOGGER.error("Field : {} is not accesible. Either change the modifier to access the field");
+				}
+			}
+		}
+	}
+	
 }

@@ -11,6 +11,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
+import com.hames.bean.SaleOrder;
 import com.hames.dao.SaleOrderDao;
 import com.hames.enums.OrderType;
 import com.hames.order.model.SaleOrderReport;
@@ -19,7 +20,7 @@ import com.mongodb.AggregationOutput;
 import com.mongodb.DBObject;
 
 @Repository
-public class SaleOrderDaoImpl extends OrderDaoImpl implements SaleOrderDao{
+public class SaleOrderDaoImpl extends OrderDaoImpl<SaleOrder> implements SaleOrderDao{
 
 	@Override
 	public boolean isJobNoExists(String jobNo) {

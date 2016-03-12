@@ -62,18 +62,18 @@ public class OrderServiceImpl extends GenericService implements OrderService{
 
 	@Override
 	public DatatableResponse getDatatable(DatatableRequest request) {
-		return orderDao.buildDatatable(request);
+		return orderDao.getPagedDatatable(request);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public <T> T getOrderById(String orderId) {
-		Order order = orderDao.findByOrderId(orderId);
+		Order order = (Order) orderDao.findById(orderId);
 		/* 
 		 * Setting Party to Object
 		 * TODO
 		 */
-		Customer customer = customerDao.findByCustomerId(order.getPartyId());
+		Customer customer = customerDao.findById(order.getPartyId());
 		order.setParty(customer);
 		
 		//Setting Staff Concerned details

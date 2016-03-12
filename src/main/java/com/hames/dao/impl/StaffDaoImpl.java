@@ -22,10 +22,9 @@ public class StaffDaoImpl extends GenericDaoImpl<Staff> implements StaffDao {
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
 	public List<Staff> findAllActiveStaffs() {
 		Query query = new Query();
 		query.addCriteria(Criteria.where("status").is(StaffStatus.ACTIVE_STAFF));
-		return (List<Staff>) hamesDataStore.find(query, entityClass.getClass(), COLLECTION_NAME);
+		return (List<Staff>) findAllByQuery(query);
 	}
 }

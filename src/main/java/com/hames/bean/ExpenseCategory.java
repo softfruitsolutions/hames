@@ -7,10 +7,12 @@ public class ExpenseCategory extends Audit{
 	
 	@Id
 	private String categoryId;
+	
 	@Indexed(unique=true)
 	private String categoryName;
 	private String categoryDescription;
 	
+	@Id
 	public String getCategoryId() {
 		return categoryId;
 	}

@@ -2,6 +2,7 @@ package com.hames.mongo;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
@@ -14,7 +15,7 @@ import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class SequenceDao extends GenericDaoImpl<Sequence> {
+public class SequenceDao{
 
 	private static final String COLLECTION_NAME = "sequence";
 	private static Map<String,Long> sequenceMap;

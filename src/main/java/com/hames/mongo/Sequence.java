@@ -37,4 +37,6 @@ public class Sequence {
 		return "Sequence [sequenceName=" + sequenceName + ", sequence="
 				+ sequence + "]";
 	}
+	
+	public static final String SALE_ORDER_SEQUENCE = "sale_order";
 }

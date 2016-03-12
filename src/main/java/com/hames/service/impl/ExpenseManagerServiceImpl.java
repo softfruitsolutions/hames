@@ -61,7 +61,7 @@ public class ExpenseManagerServiceImpl extends GenericService implements Expense
 			throw new ValidationException(e.getMessage());
 		}
 		
-		ExpenseCategory ec = expenseCategoryDao.findExpenseCategory(expenseManager.getExpenseCategory().getCategoryId());
+		ExpenseCategory ec = expenseCategoryDao.findById(expenseManager.getExpenseCategory().getCategoryId());
 		if(ec == null){
 			logger.debug("Expense category not found. Please contact administrator.!");
 			throw new ExpenseManagerException("Expense category not found.");
@@ -143,7 +143,7 @@ public class ExpenseManagerServiceImpl extends GenericService implements Expense
 		
 		//Checking CategoryName already exists
 		if(expenseCategory.getCategoryId() == null || expenseCategory.getCategoryId().isEmpty()){
-			boolean isExists = expenseCategoryDao.isCategoryExistsByName(expenseCategory.getCategoryName());
+			boolean isExists = expenseCategoryDao.isExistsByName(expenseCategory.getCategoryName());
 			if(isExists){
 				logger.debug("Expense Category already exists.");
 				throw new IllegalArgumentException("Expense Category already exists.");
@@ -161,22 +161,22 @@ public class ExpenseManagerServiceImpl extends GenericService implements Expense
 
 	@Override
 	public List<ExpenseCategory> getAllExpenseCategory() {
-		return expenseCategoryDao.findAllExpenseCategory();
+		return expenseCategoryDao.findAll();
 	}
 
 	@Override
 	public ExpenseCategory getExpenseCategory(String categoryId) {
-		return expenseCategoryDao.findExpenseCategory(categoryId);
+		return expenseCategoryDao.findById(categoryId);
 	}
 
 	@Override
 	public DatatableResponse getDatatable(DatatableRequest request) {
-		return expenseManagerDao.buildDatatable(request);
+		return expenseManagerDao.getPagedDatatable(request);
 	}
 
 	@Override
 	public ExpenseManager getExpense(String id) {
-		return expenseManagerDao.findExpenseById(id);
+		return expenseManagerDao.findById(id);
 	}
 
 }
