@@ -1,5 +1,8 @@
 package com.hames.inventory.dao;
 
-public interface ProductDao {
+import com.hames.inventory.model.Product;
+import com.hames.mongo.GenericDao;
+
+public interface ProductDao extends GenericDao<Product>{
 
 }
