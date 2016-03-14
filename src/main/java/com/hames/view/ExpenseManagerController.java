@@ -193,7 +193,7 @@ public class ExpenseManagerController extends GenericView{
 	@ExceptionHandler(IllegalArgumentException.class)
 	@ResponseStatus(value=HttpStatus.UNPROCESSABLE_ENTITY)
 	private JsonResponse handleIllegalArgumentException(Exception e){
-		logger.debug("Illegal Argument exception. {}",e);
+		logger.error("Illegal Argument exception. {}",e);
 		JsonResponse response = new JsonResponse();
 		response.setStatus(Boolean.FALSE);
 		response.setMessage(new ErrorNode(ErrorCode.VALIDATION_ERROR, HttpStatus.UNPROCESSABLE_ENTITY.toString(),e.getMessage()));
