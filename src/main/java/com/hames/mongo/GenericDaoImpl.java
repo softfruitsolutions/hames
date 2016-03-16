@@ -13,7 +13,6 @@ import org.springframework.core.GenericTypeResolver;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
-import org.springframework.util.ClassUtils;
 
 import com.hames.bean.helper.UUIDHelper;
 import com.hames.util.model.DatatableRequest;
@@ -36,6 +35,7 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
 	 */
 	public abstract String getCollectionName();
 	
+	@SuppressWarnings("unchecked")
 	public GenericDaoImpl() {
 		this.entityClass = (Class<T>) GenericTypeResolver.resolveTypeArgument(getClass(), GenericDaoImpl.class);
 	}
@@ -49,10 +49,11 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
 	
 	
 	@Override
-	public void save(T t) {
-		setId(t);
+	public String save(T t) {
+		String id = setAndGetId(t);
 		LOGGER.debug("Saving a document of entity: {} with data: {}", t.getClass(),t.toString());
-		hamesDataStore.save(t,getCollectionName());		
+		hamesDataStore.save(t,getCollectionName());
+		return id;
 	}
 
 	@Override
@@ -93,16 +94,18 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
 	 * A private method to set id based on annotation {@link Id}
 	 * @param T t
 	 */
-	private void setId(T t){
+	private String setAndGetId(T t){
 		for (Field field : ClassUtil.getAllFields(new ArrayList<Field>(), t.getClass())) {
 			//Checking @Id annotation is present
 			if(field.isAnnotationPresent(Id.class)){
 				field.setAccessible(Boolean.TRUE);
 				try {
 					String fieldValue = (String) field.get(t);
+					String id = UUIDHelper.getUUID();
 					if(fieldValue == null || fieldValue.isEmpty()){
-						field.set(t, UUIDHelper.getUUID());
+						field.set(t, id);
 					}
+					return id;
 				} catch (IllegalArgumentException e) {
 					LOGGER.error("No such field : {} found.",field);
 				} catch (IllegalAccessException e) {
@@ -110,6 +113,7 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
 				}
 			}
 		}
+		return null;
 	}
 	
 }

@@ -16,6 +16,6 @@ public interface UserAccountDao extends GenericDao<UserAccount> {
 	 * @param staffId
 	 * @return
 	 */
-	public boolean checkUserAccountExistsForStaff(String staffId);
+	public boolean checkUAExistsForStaff(String staffId);
 
 }

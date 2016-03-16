@@ -10,17 +10,14 @@ import org.springframework.validation.Validator;
 
 import com.hames.bean.RolePermission;
 import com.hames.dao.RolePermissionDao;
-import com.hames.exception.ValidationException;
-import com.hames.service.GenericService;
+import com.hames.service.GenericServiceImpl;
 import com.hames.service.RolePermissionService;
-import com.hames.util.model.DatatableRequest;
-import com.hames.util.model.DatatableResponse;
 import com.hames.validator.RolePermissionValidator;
 
 @Service
-public class RolePermissionServiceImpl extends GenericService implements RolePermissionService {
+public class RolePermissionServiceImpl extends GenericServiceImpl<RolePermission> implements RolePermissionService {
 
-	private static final Logger logger = LoggerFactory.getLogger(RolePermissionServiceImpl.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(RolePermissionServiceImpl.class);
 
 	@Autowired
 	private RolePermissionDao rolePermissionDao;
@@ -31,42 +28,11 @@ public class RolePermissionServiceImpl extends GenericService implements RolePer
 	}
 
 	@Override
-	public Class<?> getEntityClass() {
-		return RolePermission.class;
-	}
-	
-	@Override
-	public void saveRolePermission(RolePermission rolePermission) {
-		/**
-		 * Validating Role
-		 */
-		try{
-			validate(rolePermission);
-		}catch(ValidationException e){
-			throw new ValidationException(e.getMessage());
-		}
+	public String save(RolePermission rolePermission) {
 		
 		//Setting Auditable Details
 		rolePermission.setAuditableDetails(rolePermission.getRoleId());
-		
-		logger.debug("Saving entity : {},{}",rolePermission.getClass(),rolePermission.toString());
-		rolePermissionDao.save(rolePermission);
-		logger.debug("Entity saved successfully");
-	}
-
-	@Override
-	public RolePermission getRoleById(String roleId) {
-		return rolePermissionDao.findById(roleId);
-	}
-
-	@Override
-	public DatatableResponse getDatatable(DatatableRequest request) {
-		return rolePermissionDao.getPagedDatatable(request);
-	}
-
-	@Override
-	public List<RolePermission> getAllRolePermissions() {
-		return rolePermissionDao.findAll();
+		return super.save(rolePermission);
 	}
 
 	@Override
@@ -74,9 +40,5 @@ public class RolePermissionServiceImpl extends GenericService implements RolePer
 		return rolePermissionDao.findActiveRolePermissions();
 	}
 
-	@Override
-	public boolean isRolePermissionExists(String roleId) {
-		return rolePermissionDao.isExists(roleId);
-	}
 
 }

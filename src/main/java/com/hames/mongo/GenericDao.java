@@ -18,7 +18,7 @@ public interface GenericDao<T> {
 	 * Save an object
 	 * @param t
 	 */
-	public void save(T t);
+	public String save(T t);
 
 	/**
 	 * Find By Id

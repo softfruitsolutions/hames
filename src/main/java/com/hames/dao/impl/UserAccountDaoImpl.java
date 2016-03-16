@@ -26,7 +26,7 @@ public class UserAccountDaoImpl extends GenericDaoImpl<UserAccount> implements U
 	}
 
 	@Override
-	public boolean checkUserAccountExistsForStaff(String staffId) {
+	public boolean checkUAExistsForStaff(String staffId) {
 		Query query = new Query();
 		query.addCriteria(Criteria.where("staffId").is(staffId));
 		return hamesDataStore.exists(query, getCollectionName());
