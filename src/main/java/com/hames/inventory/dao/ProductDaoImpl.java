@@ -1,9 +1,12 @@
 package com.hames.inventory.dao;
 
+import org.springframework.stereotype.Repository;
+
 import com.hames.inventory.model.Product;
 import com.hames.mongo.GenericDaoImpl;
 
-public class ProductDaoImpl extends GenericDaoImpl<Product>{
+@Repository
+public class ProductDaoImpl extends GenericDaoImpl<Product> implements ProductDao{
 
 	private static final String COLLECTION_NAME = "product"; 
 	

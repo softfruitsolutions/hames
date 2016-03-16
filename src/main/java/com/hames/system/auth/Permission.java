@@ -42,7 +42,13 @@ public enum Permission {
 	VIEW_EXPENSE_MANAGER("View Expense Manager","expense:manager:view"),
 	CREATE_EXPENSE_MANAGER("Create Expense Manager","expense:manager:create"),
 	VIEW_EXPENSE_CATEGORY("View Expense Category","expense:category:view"),
-	CREATE_EXPENSE_CATEGORY("Create Expense Category","expense:category:create");
+	CREATE_EXPENSE_CATEGORY("Create Expense Category","expense:category:create"),
+	
+	/**
+	 * INVENTORY - PRODUCT
+	 */
+	VIEW_PRODUCT("View Product","inventory:product:view"),
+	CREATE_PRODUCT("Create Product","inventory:product:create");
 	
 	private String text;
 	private String permission;

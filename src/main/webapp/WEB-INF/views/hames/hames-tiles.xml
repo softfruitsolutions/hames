@@ -70,4 +70,14 @@
         <put-attribute name="title" value="Expense Category | Hames - Softfruit" />  
         <put-attribute name="body" value="/WEB-INF/views/hames/expense/expenseCategory.jsp" />  
     </definition>
+    
+    <definition name="inventory.product.create" extends="base.definition">  
+        <put-attribute name="title" value="Product | Hames - Softfruit" />  
+        <put-attribute name="body" value="/WEB-INF/views/hames/inventory/createProduct.jsp" />  
+    </definition>
+    <definition name="inventory.product.view" extends="base.definition">  
+        <put-attribute name="title" value="Products | Hames - Softfruit" />  
+        <put-attribute name="body" value="/WEB-INF/views/hames/inventory/viewProduct.jsp" />  
+    </definition>
+    
 </tiles-definitions>  
