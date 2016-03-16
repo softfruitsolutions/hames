@@ -2,7 +2,6 @@ package com.hames.service.impl;
 
 import java.math.BigDecimal;
 import java.util.Iterator;
-import java.util.List;
 
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
@@ -17,29 +16,23 @@ import com.hames.bean.Payment;
 import com.hames.bean.PaymentItems;
 import com.hames.bean.helper.UUIDHelper;
 import com.hames.dao.ExpenseCategoryDao;
-import com.hames.dao.ExpenseManagerDao;
 import com.hames.enums.ExpenseStatus;
 import com.hames.enums.PaymentItemStatus;
 import com.hames.enums.PaymentItemType;
 import com.hames.enums.PaymentStatus;
 import com.hames.exception.ExpenseManagerException;
-import com.hames.exception.ValidationException;
 import com.hames.service.ExpenseManagerService;
-import com.hames.service.GenericService;
-import com.hames.util.model.DatatableRequest;
-import com.hames.util.model.DatatableResponse;
+import com.hames.service.GenericServiceImpl;
 import com.hames.util.peer.BigDecimalUtil;
-import com.hames.validator.ExpenseCategoryValidator;
 import com.hames.validator.ExpenseManagerValidator;
-import com.hames.validator.PaymentValidator;
 
 @Service
-public class ExpenseManagerServiceImpl extends GenericService implements ExpenseManagerService{
+public class ExpenseManagerServiceImpl extends GenericServiceImpl<ExpenseManager> implements ExpenseManagerService{
 
 	private static final Logger logger = LoggerFactory.getLogger(ExpenseManagerServiceImpl.class);
 
-	@Autowired private ExpenseManagerDao expenseManagerDao;
-	@Autowired private ExpenseCategoryDao expenseCategoryDao;
+	@Autowired
+	private ExpenseCategoryDao expenseCategoryDao;
 	
 	@Override
 	public Validator getValidator() {
@@ -47,19 +40,9 @@ public class ExpenseManagerServiceImpl extends GenericService implements Expense
 	}
 
 	@Override
-	public Class<?> getEntityClass() {
-		return ExpenseManager.class;
-	}
-	
-	@Override
-	public void saveExpense(ExpenseManager expenseManager) {
-		try{
-			validate(expenseManager);
-			validate(expenseManager.getPayment(), new PaymentValidator(), Payment.class);
-		}catch(ValidationException e){
-			logger.debug(e.getMessage());
-			throw new ValidationException(e.getMessage());
-		}
+	public String save(ExpenseManager expenseManager) {
+		//Validating Expense Manager
+		validate(expenseManager);
 		
 		ExpenseCategory ec = expenseCategoryDao.findById(expenseManager.getExpenseCategory().getCategoryId());
 		if(ec == null){
@@ -67,19 +50,13 @@ public class ExpenseManagerServiceImpl extends GenericService implements Expense
 			throw new ExpenseManagerException("Expense category not found.");
 		}
 		expenseManager.setExpenseCategory(ec);
-		
-		//Setting auditable details
 		expenseManager.setAuditableDetails(expenseManager.getExpenseId());
+		expenseManager.setStatus(ExpenseStatus.ACTIVE);
 		
 		//Setting Payment Details
 		processPayment(expenseManager.getPayment());
 		
-		expenseManager.setStatus(ExpenseStatus.ACTIVE);
-		
-		logger.debug("Saving entity : {},{}",expenseManager.getClass(),expenseManager.toString());
-		expenseManagerDao.save(expenseManager);
-		logger.debug("Entity saved successfully");
-		
+		return super.save(expenseManager);
 	}
 	
 	private void processPayment(Payment payment){
@@ -129,54 +106,6 @@ public class ExpenseManagerServiceImpl extends GenericService implements Expense
 		}
 
 		
-	}
-
-	@Override
-	public void saveExpenseCategory(ExpenseCategory expenseCategory) {
-		logger.debug("Saving Expense Category");
-		try{
-			validate(expenseCategory, new ExpenseCategoryValidator(), ExpenseCategory.class);
-		}catch(ValidationException e){
-			logger.debug(e.getMessage());
-			throw new ValidationException(e.getMessage());
-		}
-		
-		//Checking CategoryName already exists
-		if(expenseCategory.getCategoryId() == null || expenseCategory.getCategoryId().isEmpty()){
-			boolean isExists = expenseCategoryDao.isExistsByName(expenseCategory.getCategoryName());
-			if(isExists){
-				logger.debug("Expense Category already exists.");
-				throw new IllegalArgumentException("Expense Category already exists.");
-			}
-		}
-		
-		//Setting Auditable details
-		expenseCategory.setAuditableDetails(expenseCategory.getCategoryId());
-		
-		logger.debug("Saving entity : {},{}",expenseCategory.getClass(),expenseCategory.toString());
-		expenseCategoryDao.save(expenseCategory);
-		logger.debug("Entity saved successfully");
-		
-	}
-
-	@Override
-	public List<ExpenseCategory> getAllExpenseCategory() {
-		return expenseCategoryDao.findAll();
-	}
-
-	@Override
-	public ExpenseCategory getExpenseCategory(String categoryId) {
-		return expenseCategoryDao.findById(categoryId);
-	}
-
-	@Override
-	public DatatableResponse getDatatable(DatatableRequest request) {
-		return expenseManagerDao.getPagedDatatable(request);
-	}
-
-	@Override
-	public ExpenseManager getExpense(String id) {
-		return expenseManagerDao.findById(id);
 	}
 
 }

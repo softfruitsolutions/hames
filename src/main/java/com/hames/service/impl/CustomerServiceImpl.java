@@ -30,6 +30,8 @@ public class CustomerServiceImpl extends GenericServiceImpl<Customer> implements
 
 	@Override
 	public String save(Customer customer) {
+		//Validating customer
+		validate(customer);
 		
 		// Setting Audit details
 		customer.setAuditableDetails(customer.getPartyId());

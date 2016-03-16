@@ -39,7 +39,9 @@ public class UserAccountServiceImpl extends GenericServiceImpl<UserAccount> impl
 
 	@Override
 	public String save(UserAccount userAccount) {
-
+		//Validating user account
+		validate(userAccount);
+		
 		if(userAccountDao.isUsernameExists(userAccount.getUsername())){
 			logger.debug("Username already present. Opeartion Aborted");
 			throw new RolePermissionException("Someone already has that username. Try another?");
@@ -57,7 +59,7 @@ public class UserAccountServiceImpl extends GenericServiceImpl<UserAccount> impl
 			throw new StaffException("Invalid Staff");
 		}
 		
-		if(rolePermissionService.isExists(userAccount.getRoleId())){
+		if(!rolePermissionService.isExists(userAccount.getRoleId())){
 			logger.debug("Role not found : {}",userAccount.getRolePermission().getRoleId());
 			throw new RolePermissionException("Role doesn't exists.!");
 		}
@@ -83,7 +85,7 @@ public class UserAccountServiceImpl extends GenericServiceImpl<UserAccount> impl
 				ua.setRolePermission(rolePermissionService.getById(ua.getRoleId()));
 			}
 		}
-		return userAccountDao.findAll();
+		return userAccounts;
 	}
 
 }

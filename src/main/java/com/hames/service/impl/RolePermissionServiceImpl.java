@@ -29,6 +29,8 @@ public class RolePermissionServiceImpl extends GenericServiceImpl<RolePermission
 
 	@Override
 	public String save(RolePermission rolePermission) {
+		//Validating Role Permission
+		validate(rolePermission);
 		
 		//Setting Auditable Details
 		rolePermission.setAuditableDetails(rolePermission.getRoleId());

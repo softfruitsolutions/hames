@@ -22,6 +22,7 @@ import com.hames.bean.Payment;
 import com.hames.bean.PaymentItems;
 import com.hames.enums.ExpenseStatus;
 import com.hames.exception.ExpenseManagerException;
+import com.hames.service.ExpenseCategoryService;
 import com.hames.service.ExpenseManagerService;
 import com.hames.system.auth.Permission;
 import com.hames.util.enums.ErrorCode;
@@ -38,10 +39,13 @@ public class ExpenseManagerController extends GenericView{
 
 	private static final Logger logger = LoggerFactory.getLogger(ExpenseManagerController.class);
 
-	@Autowired private ExpenseManagerService expenseManagerService;
+	@Autowired
+	private ExpenseManagerService expenseManagerService;
+	@Autowired
+	private ExpenseCategoryService expenseCategoryService;
 	
 	public void initExpense(Model model){
-		model.addAttribute("expenseCategories", expenseManagerService.getAllExpenseCategory());
+		model.addAttribute("expenseCategories", expenseCategoryService.getAll());
 	}
 	
 	@RequestMapping(value="/list")
@@ -79,7 +83,7 @@ public class ExpenseManagerController extends GenericView{
 				model.addAttribute("expenseManager", expenseManager);
 			}
 		}else{
-			ExpenseManager expenseManager = expenseManagerService.getExpense(expenseId);
+			ExpenseManager expenseManager = expenseManagerService.getById(expenseId);
 			model.addAttribute("expenseManager", expenseManager);
 		}
 		
@@ -116,7 +120,7 @@ public class ExpenseManagerController extends GenericView{
 			throw new AuthorizationException();
 		}
 		
-		expenseManagerService.saveExpense(expenseManager);
+		expenseManagerService.save(expenseManager);
 		response = new JsonResponse(Boolean.TRUE, new SuccessNode(SuccessCode.ENTITY_SAVED, "Expense saved successfully"));
 		
 		return response;
@@ -156,11 +160,11 @@ public class ExpenseManagerController extends GenericView{
 		if(categoryId == null || categoryId.isEmpty()){
 			expenseCategory = new ExpenseCategory();
 		}else{
-			expenseCategory = expenseManagerService.getExpenseCategory(categoryId);
+			expenseCategory = expenseCategoryService.getById(categoryId);
 		}
 		
 		model.addAttribute("expenseCategory",expenseCategory);		
-		model.addAttribute("expenseCategories", expenseManagerService.getAllExpenseCategory());
+		model.addAttribute("expenseCategories", expenseCategoryService.getAll());
 		
 		return "expense.category.view";
 	}
@@ -183,7 +187,7 @@ public class ExpenseManagerController extends GenericView{
 			throw new AuthorizationException();
 		}
 		
-		expenseManagerService.saveExpenseCategory(expenseCategory);
+		expenseCategoryService.save(expenseCategory);
 		response = new JsonResponse(Boolean.TRUE, new SuccessNode(SuccessCode.ENTITY_SAVED, "Expense category saved successfully"));
 
 		return response;

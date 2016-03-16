@@ -34,7 +34,6 @@ public abstract class GenericServiceImpl<T> implements GenericService<T> {
 	@Override
 	public String save(T t) {
 		LOGGER.debug("Saving entity class : {} with value : {}",t.getClass(),t.toString());
-		validate(t);
 		return genericDao.save(t);
 	}
 
@@ -60,13 +59,33 @@ public abstract class GenericServiceImpl<T> implements GenericService<T> {
 		return genericDao.isExists(id);
 	}
 	
+	/**
+	 * Validate via getValidator
+	 * @param t
+	 */
 	public void validate(T t){
 		LOGGER.debug("Validating class:{}",t.getClass());
+		doValidate(t, getValidator());
+	}
+
+	/**
+	 * Validate via Validator Class
+	 * @param <K>
+	 * @param t
+	 */
+	public <K> void validate(Object object,Validator validator){
+		LOGGER.debug("Validating class:{}",object.getClass());
+		doValidate(object, validator);
+	}
+
+	
+	public void doValidate(Object object, Validator validator){
+
 		Map<String, String> errorMap = new HashMap<String, String>();
-		MapBindingResult errors = new MapBindingResult(errorMap, t.getClass().getName());
+		MapBindingResult errors = new MapBindingResult(errorMap, object.getClass().getName());
 		
-		if(getValidator() != null){
-			getValidator().validate(t, errors);
+		if(validator != null){
+			validator.validate(object, errors);
 			if(errors.hasErrors()){
 				StringBuilder errorMessage = new StringBuilder();
 				for(ObjectError oe : errors.getAllErrors()){
@@ -80,24 +99,4 @@ public abstract class GenericServiceImpl<T> implements GenericService<T> {
 		}
 	}
 	
-	/*public void validate(T t,Validator validator,Class<T> clazz){
-		LOGGER.debug("Validating {} class",t.getClass());
-		Map<String, String> errorMap = new HashMap<String, String>();
-		MapBindingResult errors = new MapBindingResult(errorMap, clazz.getName());
-		
-		if(getValidator() != null){
-			validator.validate(t, errors);
-			if(errors.hasErrors()){
-				StringBuilder errorMessage = new StringBuilder();
-				for(ObjectError oe : errors.getAllErrors()){
-					LOGGER.debug("Error : {} ",oe.getDefaultMessage());
-					errorMessage.append(oe.getDefaultMessage()).append(",");
-				}
-				errorMessage.delete(errorMessage.length()-1, errorMessage.length());
-				
-				throw new ValidationException(errorMessage.toString());
-			}
-		}
-	}*/
-
 }

@@ -97,7 +97,7 @@ public class SaleOrderController extends GenericView{
 				model.addAttribute("customer", new Customer());
 			}
 		}else{
-			saleOrder = saleOrderService.getOrderById(id);
+			saleOrder = saleOrderService.getById(id);
 			
 			PaymentItems paymentItem = new PaymentItems();
 			paymentItem.setPaymentDate(new DateTime());
@@ -107,7 +107,7 @@ public class SaleOrderController extends GenericView{
 			return "sale.order.service";
 		}
 		
-		model.addAttribute("customers", customerService.getAllCustomers());
+		model.addAttribute("customers", customerService.getAll());
 		model.addAttribute("staffs", staffService.getAllActiveStaffs());
 		return "sale.order";
 	}
@@ -121,7 +121,7 @@ public class SaleOrderController extends GenericView{
 			throw new AuthorizationException();
 		}
 		
-		saleOrderService.saveOrder(order);
+		saleOrderService.save(order);
 		response = new JsonResponse(Boolean.TRUE,new SuccessNode(SuccessCode.ENTITY_SAVED, "Order saved successfully"));
 		
 		return response;

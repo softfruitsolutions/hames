@@ -30,6 +30,9 @@ public class StaffServiceImpl extends GenericServiceImpl<Staff> implements Staff
 	@Override
 	public String save(Staff staff) {
 		
+		//Validating Staff
+		validate(staff);
+		
 		//Setting Audit details
 		staff.setAuditableDetails(staff.getStaffId());
 		

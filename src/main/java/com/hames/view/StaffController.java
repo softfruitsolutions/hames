@@ -76,7 +76,7 @@ public class StaffController extends GenericView{
 				model.addAttribute("staff", staff);
 			}
 		}else{
-			staff = staffService.getStaffById(id);
+			staff = staffService.getById(id);
 			model.addAttribute("staff", staff);
 		}
 		
@@ -95,7 +95,7 @@ public class StaffController extends GenericView{
 			throw new AuthorizationException();
 		}
 		
-		staffService.saveStaff(staff);
+		staffService.save(staff);
 		response = new JsonResponse(Boolean.TRUE,new SuccessNode(SuccessCode.ENTITY_SAVED, "Staff saved successfully"));
 		
 		return response;
@@ -117,7 +117,7 @@ public class StaffController extends GenericView{
 	public void downloadReport(Model model,HttpServletResponse response){
 		
 		logger.debug("Building Staff Report");
-		List<Staff> staffs = staffService.getAllStaffs();
+		List<Staff> staffs = staffService.getAll();
 		JRDataSource dataSource = new JRBeanCollectionDataSource(staffs);
 		reportEngine.renderReport(response,dataSource, "staff.jrxml", null);
 		logger.debug("Staff Report rendered succesfully");

@@ -34,7 +34,7 @@ import com.hames.util.model.SuccessNode;
 @RequestMapping("/customer")
 public class CustomerController extends GenericView {
 	
-	private static final Logger logger = LoggerFactory.getLogger(CustomerController.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(CustomerController.class);
 	
 	@Autowired
 	private CustomerService customerService;
@@ -65,7 +65,7 @@ public class CustomerController extends GenericView {
 				model.addAttribute("customer", customer);
 			}
 		}else{
-			customer = customerService.getCustomerById(id);
+			customer = customerService.getById(id);
 			model.addAttribute("customer", customer);
 		}
 		
@@ -84,7 +84,7 @@ public class CustomerController extends GenericView {
 			throw new AuthorizationException();
 		}
 		
-		customerService.saveCustomer(customer);
+		customerService.save(customer);
 		response = new JsonResponse(Boolean.TRUE,new SuccessNode(SuccessCode.ENTITY_SAVED, "Customer saved successfully")); 
 		
 		return response;
