@@ -33,7 +33,7 @@ public class RolePermissionServiceImpl extends GenericServiceImpl<RolePermission
 		validate(rolePermission);
 		
 		//Setting Auditable Details
-		rolePermission.setAuditableDetails(rolePermission.getRoleId());
+		rolePermission.setAudit(rolePermission.getRoleId());
 		return super.save(rolePermission);
 	}
 

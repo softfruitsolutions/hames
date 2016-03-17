@@ -50,7 +50,7 @@ public class ExpenseManagerServiceImpl extends GenericServiceImpl<ExpenseManager
 			throw new ExpenseManagerException("Expense category not found.");
 		}
 		expenseManager.setExpenseCategory(ec);
-		expenseManager.setAuditableDetails(expenseManager.getExpenseId());
+		expenseManager.setAudit(expenseManager.getExpenseId());
 		expenseManager.setStatus(ExpenseStatus.ACTIVE);
 		
 		//Setting Payment Details

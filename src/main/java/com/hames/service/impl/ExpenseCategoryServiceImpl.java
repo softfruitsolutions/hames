@@ -39,7 +39,7 @@ public class ExpenseCategoryServiceImpl extends GenericServiceImpl<ExpenseCatego
 		}
 		
 		//Setting Auditable details
-		expenseCategory.setAuditableDetails(expenseCategory.getCategoryId());
+		expenseCategory.setAudit(expenseCategory.getCategoryId());
 		
 		return super.save(expenseCategory);
 	}

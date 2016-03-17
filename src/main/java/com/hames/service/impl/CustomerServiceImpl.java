@@ -34,7 +34,7 @@ public class CustomerServiceImpl extends GenericServiceImpl<Customer> implements
 		validate(customer);
 		
 		// Setting Audit details
-		customer.setAuditableDetails(customer.getPartyId());
+		customer.setAudit(customer.getPartyId());
 		return super.save(customer);
 	}
 

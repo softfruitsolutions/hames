@@ -76,7 +76,7 @@ public class SaleOrderServiceImpl extends OrderServiceImpl<SaleOrder> implements
 		}
 		
 		//Setting auditable details
-		saleOrder.setAuditableDetails(saleOrder.getOrderId());
+		saleOrder.setAudit(saleOrder.getOrderId());
 		
 		return super.save(saleOrder);
 	}

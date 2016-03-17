@@ -34,7 +34,7 @@ public class StaffServiceImpl extends GenericServiceImpl<Staff> implements Staff
 		validate(staff);
 		
 		//Setting Audit details
-		staff.setAuditableDetails(staff.getStaffId());
+		staff.setAudit(staff.getStaffId());
 		
 		return super.save(staff);
 	}

@@ -71,7 +71,7 @@ public class UserAccountServiceImpl extends GenericServiceImpl<UserAccount> impl
 		}
 		
 		//Setting details
-		userAccount.setAuditableDetails(userAccount.getAccountId());
+		userAccount.setAudit(userAccount.getAccountId());
 		
 		return super.save(userAccount);
 	}

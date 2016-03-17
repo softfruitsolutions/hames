@@ -56,18 +56,22 @@ public class Audit {
 		this.lastModifiedByText = lastModifiedByText;
 	}
 	
-	public void setAuditableDetails(String id){
+	public Audit setAudit(String id){
 		if(id == null || id.isEmpty()){
-			setStaffCreated(UserContext.staff.getStaffId());
-			setStaffModified(UserContext.staff.getStaffId());
-			setCreatedByText(UserContext.staff.getFullName());
-			setLastModifiedByText(UserContext.staff.getFullName());
-			setDateCreated(new DateTime());
-			setDateModified(new DateTime());
+			this.staffCreated = UserContext.staff.getStaffId();
+			this.staffModified = UserContext.staff.getStaffId();
+			this.createdByText = UserContext.staff.getFullName();
+			this.lastModifiedByText = UserContext.staff.getFullName();
+			
+			this.dateCreated = new DateTime();
+			this.dateModified = new DateTime();
 		}else{
-			setStaffModified(UserContext.staff.getStaffId());
-			setLastModifiedByText(UserContext.staff.getFullName());
-			setDateModified(new DateTime());
+			this.staffModified = UserContext.staff.getStaffId();
+			this.lastModifiedByText = UserContext.staff.getFullName();
+			
+			this.dateModified = new DateTime();
 		}
+		return this;
 	}
+	
 }

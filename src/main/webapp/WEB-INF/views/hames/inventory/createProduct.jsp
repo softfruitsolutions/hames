@@ -2,6 +2,38 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 
+<!-- URL's -->
+<c:url value="/inventory/product/save" var="productSaveUrl" />
+
+<script type="text/javascript">
+
+	/* GLOBAL VARIABLES */
+	var SAVE_PRODUCT_URL = '${productSaveUrl}';
+	
+	/**
+	 * Save a product
+	 */
+	function save(){
+		var product = $('#product').serialize();
+		$.ajax({
+			type:'POST',
+			url:SAVE_PRODUCT_URL, 
+			data:product,
+	        async: false,
+			success:function(data){
+				SuccessAlert.handleSuccess(data);
+				setTimeout(function(){
+					window.location.href=VIEW_SALE_ORDER_LIST;
+			    },1000);
+				
+			},
+			error:function(data){
+				ErrorAlert.handleError(data.responseJSON.message);
+			}
+		});
+	}
+</script>
+
 <div class="row">
 	<div class="col-md-12">
 		<div class="panel panel-primary panel-border top">
@@ -67,7 +99,7 @@
 			                        	</form:select>
 									   <span class="input-group-btn">
 									        <button class="btn btn-primary light btn-sm" type="button" onclick="Customer.showModal()">
-									        	<i class="glyphicons glyphicons-user_add"></i>
+									        	<i class="glyphicons glyphicons-folder_new"></i>
 									        </button>
 									   </span>
 									</div>
