@@ -1,19 +1,17 @@
 package com.hames.inventory.enums;
 
-public enum UnitOfMeasure {
+public enum ProductStatus {
 
-	NOS("Nos"),
-	KG("Kg"),
-	EACH("Each");
+	ACTIVE("Active"),
+	IN_ACTIVE("Inactive");
 	
 	private String text;
 	
-	private UnitOfMeasure(String text) {
+	ProductStatus(String text) {
 		this.text = text;
 	}
 
 	public String getText() {
 		return text;
 	}
-	
 }

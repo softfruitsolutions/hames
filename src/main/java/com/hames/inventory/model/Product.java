@@ -3,6 +3,7 @@ package com.hames.inventory.model;
 import org.springframework.data.annotation.Id;
 
 import com.hames.bean.Audit;
+import com.hames.inventory.enums.ProductStatus;
 import com.hames.inventory.enums.ProductType;
 import com.hames.inventory.enums.UnitOfMeasure;
 
@@ -16,6 +17,7 @@ public class Product{
 	private ProductType productType;
 	private String productDescription;
 	private UnitOfMeasure uom;
+	private ProductStatus productStatus;
 	private Audit audit;
 	
 	public String getProductId() {
@@ -65,6 +67,12 @@ public class Product{
 	}
 	public void setAudit(Audit audit) {
 		this.audit = audit;
+	}
+	public ProductStatus getProductStatus() {
+		return productStatus;
+	}
+	public void setProductStatus(ProductStatus productStatus) {
+		this.productStatus = productStatus;
 	}
 	
 	@Override

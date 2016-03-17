@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.hames.inventory.enums.ProductStatus;
 import com.hames.inventory.enums.ProductType;
 import com.hames.inventory.enums.UnitOfMeasure;
+import com.hames.inventory.model.Product;
 import com.hames.inventory.service.ProductService;
 import com.hames.system.auth.Permission;
 import com.hames.view.GenericView;
@@ -49,8 +51,10 @@ public class ProductController extends GenericView {
 			return "error.403";
 		}
 		
-		model.addAttribute("productType", ProductType.values());
+		model.addAttribute("productTypes", ProductType.values());
 		model.addAttribute("uom", UnitOfMeasure.values());
+		model.addAttribute("product", new Product());
+		model.addAttribute("productStatus", ProductStatus.values());
 		
 		return "inventory.product.create";
 	}
