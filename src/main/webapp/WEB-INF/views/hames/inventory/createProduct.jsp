@@ -98,7 +98,7 @@
 			                        		<%-- <form:options items="${customers }" itemLabel="fullName" itemValue="partyId"/> --%>
 			                        	</form:select>
 									   <span class="input-group-btn">
-									        <button class="btn btn-primary light btn-sm" type="button" onclick="Customer.showModal()">
+									        <button class="btn btn-primary btn-sm" type="button" onclick="Customer.showModal()">
 									        	<i class="glyphicons glyphicons-folder_new"></i>
 									        </button>
 									   </span>
