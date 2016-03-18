@@ -3,21 +3,21 @@ package com.hames.inventory.service;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.Validator;
 
-import com.hames.inventory.model.ProductCategory;
-import com.hames.inventory.validator.ProductCategoryValidator;
+import com.hames.inventory.model.ProductGroup;
+import com.hames.inventory.validator.ProductGroupValidator;
 import com.hames.service.GenericServiceImpl;
 
 @Service
-public class ProductCategoryServiceImpl extends GenericServiceImpl<ProductCategory> implements ProductCategoryService{
+public class ProductGroupServiceImpl extends GenericServiceImpl<ProductGroup> implements ProductGroupService{
 
 	@Override
 	public Validator getValidator() {
-		return new ProductCategoryValidator();
+		return new ProductGroupValidator();
 	}
 
 	@Override
-	public String save(ProductCategory t) {
-		//Validate category
+	public String save(ProductGroup t) {
+		//Validate group
 		validate(t);
 		
 		//Setting audit details

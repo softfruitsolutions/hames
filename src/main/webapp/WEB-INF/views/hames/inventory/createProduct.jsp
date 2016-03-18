@@ -91,14 +91,14 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="productCategory" class="col-lg-3 control-label">Product Category</label>
+								<label for="productGroup" class="col-lg-3 control-label">Product Group</label>
 		                        <div class="col-lg-9">
 									<div class="input-group">
-										<form:select path="productCategory" cssClass="form-control input-sm">
+										<form:select path="productGroup" cssClass="form-control input-sm">
 			                        		<%-- <form:options items="${customers }" itemLabel="fullName" itemValue="partyId"/> --%>
 			                        	</form:select>
 									   <span class="input-group-btn">
-									        <button class="btn btn-primary btn-sm" type="button" onclick="Customer.showModal()">
+									        <button class="btn btn-primary btn-sm" type="button" onclick="ProductGroup.showModal()">
 									        	<i class="glyphicons glyphicons-folder_new"></i>
 									        </button>
 									   </span>
@@ -140,5 +140,32 @@
 		  </form:form>
 		</div>
 	</div>
-	
+</div>
+
+<!-- 
+	PRODUCT GROUP MODAL 
+ -->
+<div class="modal fade in" id="productGroupModal" aria-hidden="false">
+	<div class="modal-dialog">
+ 		<div class="modal-content">
+	    	<div class="modal-body">
+	    		<div id="bodyContent">
+	    			<jsp:include page="/WEB-INF/views/hames/inventory/createProductGroup.jsp" />
+	    		</div>
+			</div>
+			<div class="modal-footer">
+				<div class="row">
+					<div class="col-xs-6">
+					</div>
+					<div class="col-xs-6">
+						<div class="form-group text-right">
+							<button type="button" class="btn btn-success btn-sm" onclick="saveProductGroup()"><i class="fa fa-save"></i> Save</button>
+			     			<button type="button" class="btn btn-danger btn-sm" class="close" data-dismiss="modal">x Close</button>
+						</div>		
+					</div>
+				</div>
+			</div>
+			
+	    </div>
+	 </div>
 </div>

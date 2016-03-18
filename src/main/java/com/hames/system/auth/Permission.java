@@ -48,7 +48,9 @@ public enum Permission {
 	 * INVENTORY - PRODUCT
 	 */
 	VIEW_PRODUCT("View Product","inventory:product:view"),
-	CREATE_PRODUCT("Create Product","inventory:product:create");
+	CREATE_PRODUCT("Create Product","inventory:product:create"),
+	CREATE_PRODUCT_CATEGORY("Create Product Group","inventory:group:create");
+	
 	
 	private String text;
 	private String permission;

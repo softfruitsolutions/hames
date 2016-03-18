@@ -13,7 +13,7 @@ public class Product{
 	private String productId;
 	private String productCode;
 	private String productName;
-	private String productCategory;
+	private String productGroup;
 	private ProductType productType;
 	private String productDescription;
 	private UnitOfMeasure uom;
@@ -38,11 +38,11 @@ public class Product{
 	public void setProductName(String productName) {
 		this.productName = productName;
 	}
-	public String getProductCategory() {
-		return productCategory;
+	public String getProductGroup() {
+		return productGroup;
 	}
-	public void setProductCategory(String productCategory) {
-		this.productCategory = productCategory;
+	public void setProductGroup(String productGroup) {
+		this.productGroup = productGroup;
 	}
 	public ProductType getProductType() {
 		return productType;

@@ -1,4 +1,4 @@
-package com.hames.inventory.view;
+package com.hames.inventory.controller;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.AuthorizationException;
@@ -17,7 +17,7 @@ import com.hames.inventory.enums.ProductStatus;
 import com.hames.inventory.enums.ProductType;
 import com.hames.inventory.enums.UnitOfMeasure;
 import com.hames.inventory.model.Product;
-import com.hames.inventory.model.ProductCategory;
+import com.hames.inventory.model.ProductGroup;
 import com.hames.inventory.service.ProductService;
 import com.hames.system.auth.Permission;
 import com.hames.util.enums.SuccessCode;
@@ -67,7 +67,7 @@ public class ProductController extends GenericView {
 		model.addAttribute("productStatus", ProductStatus.values());
 		
 		model.addAttribute("product", new Product());
-		model.addAttribute("productCategory", new ProductCategory());
+		model.addAttribute("productGroup", new ProductGroup());
 		
 		return "inventory.product.create";
 	}
