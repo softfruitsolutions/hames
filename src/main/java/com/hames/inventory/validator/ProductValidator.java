@@ -28,8 +28,8 @@ public class ProductValidator implements Validator {
 			errors.rejectValue("productName", "", "Product name required");
 		}
 		
-		if(product.getProductCategory() == null || product.getProductCategory().isEmpty()){
-			errors.rejectValue("productCategory", "", "Product category required");
+		if(product.getProductGroup() == null || product.getProductGroup().isEmpty()){
+			errors.rejectValue("productGroup", "", "Product group required");
 		}
 		
 		if(!EnumUtils.isValidEnum(ProductType.class, product.getProductType().name())){

@@ -10,14 +10,16 @@ public class Sequence {
 	
 	@Id
 	private String sequenceName;
+	private String sequenceCode;
 	private Long sequence;
 	
 	public Sequence() {
 	}
 	
-	public Sequence(String sequenceName, Long sequence) {
+	public Sequence(String sequenceName, String sequenceCode, Long sequence) {
 		this.sequenceName = sequenceName;
 		this.sequence = sequence;
+		this.sequenceCode = sequenceCode;
 	}
 	
 	public String getSequenceName() {
@@ -32,6 +34,13 @@ public class Sequence {
 	public void setSequence(Long sequence) {
 		this.sequence = sequence;
 	}
+	public String getSequenceCode() {
+		return sequenceCode;
+	}
+	public void setSequenceCode(String sequenceCode) {
+		this.sequenceCode = sequenceCode;
+	}
+
 	@Override
 	public String toString() {
 		return "Sequence [sequenceName=" + sequenceName + ", sequence="

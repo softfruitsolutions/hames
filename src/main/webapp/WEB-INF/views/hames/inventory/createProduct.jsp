@@ -3,12 +3,15 @@
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 
 <!-- URL's -->
+<c:url value="/inventory/product/view" var="productViewUrl" />
+<c:url value="/inventory/product/create" var="productCreateUrl" />
 <c:url value="/inventory/product/save" var="productSaveUrl" />
 <c:url value="/inventory/product/group/all" var="productGroupGetUrl" />
 
 <script type="text/javascript">
 
 	/* GLOBAL VARIABLES */
+	var VIEW_PRODUCT_URL = '${productViewUrl}';
 	var SAVE_PRODUCT_URL = '${productSaveUrl}';
 	var GET_PRODUCT_GROUP_URL = '${productGroupGetUrl}';
 	
@@ -25,7 +28,7 @@
 			success:function(data){
 				SuccessAlert.handleSuccess(data);
 				setTimeout(function(){
-					window.location.href=VIEW_SALE_ORDER_LIST;
+					window.location.href=VIEW_PRODUCT_URL;
 			    },1000);
 				
 			},
@@ -57,7 +60,7 @@
 	<div class="col-md-12">
 		<div class="panel panel-primary panel-border top">
 		  <div class="panel-heading">
-		    <span class="panel-title panel-title hidden-xs"><i class="imoon imoon-drawer2"></i>PRODUCT</span>
+		    <span class="panel-title panel-title hidden-xs"><i class="octicon octicon-package"></i> PRODUCT</span>
 		     <ul class="nav panel-tabs">
 		      <li class="active">
 		        <a href="#tab1" data-toggle="tab">Create</a>
@@ -69,7 +72,8 @@
 		  </div>
 		  <div class="panel-menu">
 		  	<div class="btn-group">
-				<a class="btn btn-info btn-sm" href="${sa}" title="Refresh"><i class="fa fa-refresh"></i></a>
+		  		<a class="btn btn-info btn-sm" href="${productViewUrl}" title="Back to Products"><i class="fa fa-arrow-left"></i></a>
+				<a class="btn btn-info btn-sm" href="${productCreateUrl}" title="Refresh"><i class="fa fa-refresh"></i></a>
 				<shiro:hasPermission name="inventory:product:create">
 				<a class="btn btn-primary btn-sm" onclick="save()">
 					<i class="fa fa-save"></i>
@@ -88,11 +92,12 @@
 		  	<div class="tab-content">
 				<div id="tab1" class="tab-pane active">
 					<div class="row">
+						<form:hidden path="productId"/>
 						<div class="col-xs-6">
 							<div class="form-group">
 								<label for="jobId" class="col-lg-3 control-label">Product Code</label>
 								<div class="col-lg-9">
-									<form:input path="productCode" cssClass="form-control input-sm" placeholder="Product Code"/>								 	
+									<form:input path="productCode" cssClass="form-control input-sm" placeholder="Product Code" readonly="true"/>								 	
 								</div><!-- /.col -->
 							</div><!-- /form-group -->
 							<div class="form-group">

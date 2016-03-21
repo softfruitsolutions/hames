@@ -22,6 +22,8 @@ import com.hames.inventory.service.ProductGroupService;
 import com.hames.inventory.service.ProductService;
 import com.hames.system.auth.Permission;
 import com.hames.util.enums.SuccessCode;
+import com.hames.util.model.DatatableRequest;
+import com.hames.util.model.DatatableResponse;
 import com.hames.util.model.JsonResponse;
 import com.hames.util.model.SuccessNode;
 import com.hames.view.GenericView;
@@ -49,13 +51,7 @@ public class ProductController extends GenericView {
 	
 	@RequestMapping(value="/{id}",method=RequestMethod.GET)
 	public String get(Model model,@PathVariable(value="id") String id){
-		
-		if(!SecurityUtils.getSubject().isPermitted(Permission.CREATE_PRODUCT.getPermission())){
-			return "error.403";
-		}
-		
-		model.addAttribute("product", productService.getById(id));
-		return null;
+		return create(model, id);
 	}
 	
 	@RequestMapping(value="/create",method=RequestMethod.GET)
@@ -70,7 +66,14 @@ public class ProductController extends GenericView {
 		model.addAttribute("uom", UnitOfMeasure.values());
 		model.addAttribute("productStatus", ProductStatus.values());
 		
-		model.addAttribute("product", new Product());
+		Product product = new Product();
+		if(id == null || id.isEmpty()){
+			product.setProductCode(productService.getNextProductCode());
+		}else{
+			product = productService.getById(id);
+		}
+		
+		model.addAttribute("product", product);
 		model.addAttribute("productGroup", new ProductGroup());
 		
 		return "inventory.product.create";
@@ -94,5 +97,10 @@ public class ProductController extends GenericView {
 		LOGGER.debug("Product entity saved successfully. Sending back JSON Response.");
 		jsonResponse = new JsonResponse(Boolean.TRUE,new SuccessNode(SuccessCode.ENTITY_SAVED, "Product saved successfully"));
 		return jsonResponse;
+	}
+	
+	@RequestMapping("/datatable")
+	public @ResponseBody DatatableResponse viewDatatable(@ModelAttribute DatatableRequest datatableRequest){
+		return productService.getDatatable(datatableRequest);
 	}
 }

@@ -1,7 +1,8 @@
 package com.hames.mongo;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
@@ -16,29 +17,26 @@ import org.springframework.stereotype.Repository;
 public class SequenceDao extends GenericDaoImpl<Sequence>{
 
 	private static final String COLLECTION_NAME = "sequence";
-	private static Map<String,Long> sequenceMap;
 
 	@Override
 	public String getCollectionName() {
 		return COLLECTION_NAME;
 	}
 
-	private Map<String,Long> getSequenceMap(){
-		sequenceMap = new HashMap<String, Long>();
-		sequenceMap.put("sale_order", 100L);
-		return sequenceMap;
+	private List<Sequence> getSequences(){
+		List<Sequence> sequences = new ArrayList<Sequence>();
+		sequences.add(new Sequence("sale_order","A",100L));
+		sequences.add(new Sequence("product","P",100L));
+		return sequences;
 	}
 	
 	@PostConstruct
 	private void sequenceChecker(){
-		Iterator it = getSequenceMap().entrySet().iterator();
-	    while(it.hasNext()){
-			Map.Entry entry = (Map.Entry)it.next();
-			if(!isExists(entry.getKey().toString())){
-				Sequence sequence = new Sequence(entry.getKey().toString(), (Long) entry.getValue());
+		for (Sequence sequence : getSequences()) {
+			if(!isExists(sequence.getSequenceName())){
 				hamesDataStore.insert(sequence, COLLECTION_NAME);
-			}
-	    }
+    		}
+		}
 	}
 
 	/**
