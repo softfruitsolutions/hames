@@ -24,7 +24,7 @@
 			$('#productGroupModal').modal('hide');
 		};
 		this.postCreate = function(){
-			//setCustomerValues(null);
+			setGroupValues();
 			this.hideModal();
 		};
 		return this;

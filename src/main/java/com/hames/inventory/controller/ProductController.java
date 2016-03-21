@@ -18,6 +18,7 @@ import com.hames.inventory.enums.ProductType;
 import com.hames.inventory.enums.UnitOfMeasure;
 import com.hames.inventory.model.Product;
 import com.hames.inventory.model.ProductGroup;
+import com.hames.inventory.service.ProductGroupService;
 import com.hames.inventory.service.ProductService;
 import com.hames.system.auth.Permission;
 import com.hames.util.enums.SuccessCode;
@@ -33,6 +34,8 @@ public class ProductController extends GenericView {
 
 	@Autowired
 	private ProductService productService;
+	@Autowired
+	private ProductGroupService productGroupService; 
 	
 	@RequestMapping(value="/view",method=RequestMethod.GET)
 	public String view(Model model){
@@ -62,6 +65,7 @@ public class ProductController extends GenericView {
 			return "error.403";
 		}
 		
+		model.addAttribute("productGroups", productGroupService.getAll());
 		model.addAttribute("productTypes", ProductType.values());
 		model.addAttribute("uom", UnitOfMeasure.values());
 		model.addAttribute("productStatus", ProductStatus.values());

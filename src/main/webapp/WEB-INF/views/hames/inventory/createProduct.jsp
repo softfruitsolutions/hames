@@ -4,11 +4,13 @@
 
 <!-- URL's -->
 <c:url value="/inventory/product/save" var="productSaveUrl" />
+<c:url value="/inventory/product/group/all" var="productGroupGetUrl" />
 
 <script type="text/javascript">
 
 	/* GLOBAL VARIABLES */
 	var SAVE_PRODUCT_URL = '${productSaveUrl}';
+	var GET_PRODUCT_GROUP_URL = '${productGroupGetUrl}';
 	
 	/**
 	 * Save a product
@@ -29,6 +31,23 @@
 			},
 			error:function(data){
 				ErrorAlert.handleError(data.responseJSON.message);
+			}
+		});
+	}
+	
+	function setGroupValues(){
+		$.ajax({
+			type:'GET',
+			url:GET_PRODUCT_GROUP_URL, 
+			success:function(data){
+				$("#productGroup").empty();
+				$.each(data, function (i, item){
+					 $("<option value='" + item.productGroupId + "'>" + item.productGroupName + "</option>").appendTo("#productGroup");
+				});
+			       
+			},
+			error:function(data){
+				alert("Some error occured. Please contact administrator");
 			}
 		});
 	}
@@ -95,7 +114,7 @@
 		                        <div class="col-lg-9">
 									<div class="input-group">
 										<form:select path="productGroup" cssClass="form-control input-sm">
-			                        		<%-- <form:options items="${customers }" itemLabel="fullName" itemValue="partyId"/> --%>
+			                        		<form:options items="${productGroups}" itemLabel="productGroupName" itemValue="productGroupId"/>
 			                        	</form:select>
 									   <span class="input-group-btn">
 									        <button class="btn btn-primary btn-sm" type="button" onclick="ProductGroup.showModal()">

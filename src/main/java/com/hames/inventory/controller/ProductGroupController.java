@@ -1,5 +1,7 @@
 package com.hames.inventory.controller;
 
+import java.util.List;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.AuthorizationException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hames.inventory.model.ProductGroup;
 import com.hames.inventory.service.ProductGroupService;
@@ -23,6 +26,7 @@ public class ProductGroupController extends GenericView{
 	@Autowired
 	private ProductGroupService productGroupService;
 	
+	@ResponseBody
 	@RequestMapping(value="/save",method=RequestMethod.POST)
 	public JsonResponse save(@ModelAttribute ProductGroup productGroup){
 		JsonResponse jsonResponse;
@@ -34,4 +38,10 @@ public class ProductGroupController extends GenericView{
 		return jsonResponse;
 	}
 	
+	
+	@ResponseBody
+	@RequestMapping(value="/all",method=RequestMethod.GET)
+	public List<ProductGroup> getAll(){
+		return productGroupService.getAll();
+	}
 }
