@@ -57,7 +57,7 @@ public class RolePermissionController extends GenericView{
 				rolePermission.setStatus(RolePermissionStatus.ACTIVE_ROLE);
 			}
 		}else{
-			rolePermission = rolePermissionService.getRoleById(id);
+			rolePermission = rolePermissionService.getById(id);
 		}
 		
 		model.addAttribute("rolePermission", rolePermission);
@@ -79,7 +79,7 @@ public class RolePermissionController extends GenericView{
 		}
 		
 		logger.debug("Saving Role permission : {}",rolePermission.toString());
-		rolePermissionService.saveRolePermission(rolePermission);
+		rolePermissionService.save(rolePermission);
 		response = new JsonResponse(Boolean.TRUE,new SuccessNode(SuccessCode.ENTITY_SAVED, "Role saved successfully"));
 		
 		return response;

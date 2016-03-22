@@ -54,7 +54,7 @@ public class UserAccountController extends GenericView{
 			}
 			model.addAttribute("staffs", staffService.getAllActiveStaffs());
 			model.addAttribute("rolePermissions", rolePermissionService.getActiveRolePermissions());
-			model.addAttribute("userAccounts", userAccountService.getUserAccounts(Boolean.TRUE));
+			model.addAttribute("userAccounts", userAccountService.getAll());
 		}
 		
 		return "system.auth.useraccount";

@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import com.hames.bean.Customer;
 import com.hames.bean.Payment;
 import com.hames.bean.PaymentItems;
 import com.hames.bean.SaleOrder;
+import com.hames.bean.UserContext;
 import com.hames.enums.OrderType;
 import com.hames.enums.PaymentStatus;
 import com.hames.enums.SaleOrderStatus;
@@ -80,6 +82,7 @@ public class SaleOrderController extends GenericView{
 				saleOrder.setOrderDate(new DateTime());
 				saleOrder.setSaleOrderStatus(SaleOrderStatus.DRAFT);
 				saleOrder.setOrderType(OrderType.SALE_ORDER);
+				saleOrder.setStaffConcerned(UserContext.staff.getStaffId());
 				
 				/**
 				 * Setting Payment to Sale Order
@@ -91,9 +94,10 @@ public class SaleOrderController extends GenericView{
 				saleOrder.setPayment(payment);
 				
 				model.addAttribute("saleOrder", saleOrder);
+				model.addAttribute("customer", new Customer());
 			}
 		}else{
-			saleOrder = saleOrderService.getOrderById(id);
+			saleOrder = saleOrderService.getById(id);
 			
 			PaymentItems paymentItem = new PaymentItems();
 			paymentItem.setPaymentDate(new DateTime());
@@ -103,7 +107,7 @@ public class SaleOrderController extends GenericView{
 			return "sale.order.service";
 		}
 		
-		model.addAttribute("customers", customerService.getAllCustomers());
+		model.addAttribute("customers", customerService.getAll());
 		model.addAttribute("staffs", staffService.getAllActiveStaffs());
 		return "sale.order";
 	}
@@ -117,7 +121,7 @@ public class SaleOrderController extends GenericView{
 			throw new AuthorizationException();
 		}
 		
-		saleOrderService.saveOrder(order);
+		saleOrderService.save(order);
 		response = new JsonResponse(Boolean.TRUE,new SuccessNode(SuccessCode.ENTITY_SAVED, "Order saved successfully"));
 		
 		return response;

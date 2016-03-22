@@ -20,24 +20,13 @@ import com.mongodb.AggregationOutput;
 import com.mongodb.DBObject;
 
 @Repository
-public class SaleOrderDaoImpl extends OrderDaoImpl implements SaleOrderDao{
+public class SaleOrderDaoImpl extends OrderDaoImpl<SaleOrder> implements SaleOrderDao{
 
-	@Override
-	public Class<?> getEntityClass() {
-		return SaleOrder.class;
-	}
-	
 	@Override
 	public boolean isJobNoExists(String jobNo) {
 		Query query = new Query();
 		query.addCriteria(Criteria.where("orderType").is(OrderType.SALE_ORDER).and("jobNo").is(jobNo));
 		return hamesDataStore.exists(query, COLLECTION_NAME);
-	}
-
-	@Override
-	@SuppressWarnings("unchecked")
-	public SaleOrder findByOrderId(String orderId) {
-		return (SaleOrder) hamesDataStore.findById(orderId, getEntityClass(),COLLECTION_NAME);
 	}
 
 	@Override

@@ -10,15 +10,12 @@ import org.springframework.validation.Validator;
 
 import com.hames.bean.Customer;
 import com.hames.dao.CustomerDao;
-import com.hames.exception.ValidationException;
 import com.hames.service.CustomerService;
-import com.hames.service.GenericService;
-import com.hames.util.model.DatatableRequest;
-import com.hames.util.model.DatatableResponse;
+import com.hames.service.GenericServiceImpl;
 import com.hames.validator.CustomerValidator;
 
 @Service
-public class CustomerServiceImpl extends GenericService implements CustomerService{
+public class CustomerServiceImpl extends GenericServiceImpl<Customer> implements CustomerService{
 
 	private static final Logger logger = LoggerFactory.getLogger(CustomerServiceImpl.class);
 
@@ -30,50 +27,25 @@ public class CustomerServiceImpl extends GenericService implements CustomerServi
 		return new CustomerValidator();
 	}
 
-	@Override
-	public Class<?> getEntityClass() {
-		return Customer.class;
-	}
 
 	@Override
-	public void saveCustomer(Customer customer) {
-		
-		/**
-		 * validating Staff
-		 */
-		try{
-			validate(customer);
-		}catch(ValidationException e){
-			throw new ValidationException(e.getMessage());
-		}
+	public String save(Customer customer) {
+		//Validating customer
+		validate(customer);
 		
 		// Setting Audit details
-		customer.setAuditableDetails(customer.getPartyId());
-		
-		logger.debug("Saving entity : {},{}",getEntityClass(),customer.toString());
-		customerDao.save(customer);
-		logger.debug("Entity saved successfully");
-		
-	}
-
-	@Override
-	public Customer getCustomerById(String customerId) {
-		return customerDao.findByCustomerId(customerId);
-	}
-
-	@Override
-	public DatatableResponse getDatatable(DatatableRequest request) {
-		return customerDao.buildDatatable(request);
-	}
-
-	@Override
-	public List<Customer> getAllCustomers() {
-		return customerDao.findAllCustomers();
+		customer.setAudit(customer.getPartyId());
+		return super.save(customer);
 	}
 
 	@Override
 	public Long getCustomerCount() {
 		return customerDao.findCustomerCount();
+	}
+
+	@Override
+	public List<Customer> getActiveCustomers() {
+		return customerDao.findActiveCustomers();
 	}
 
 }

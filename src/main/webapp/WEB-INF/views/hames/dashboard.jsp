@@ -11,8 +11,17 @@ $(function(){
 		}
 	});
 });
-		
 </script>
+<style type="text/css">
+	.logo {
+    	position: relative;
+	}
+	.logo img {
+	    position: absolute;
+	    bottom: 0px;
+	    right: 0px;
+	}
+</style>
 
 <div class="row">
 	<div class="col-sm-3">
@@ -42,3 +51,10 @@ $(function(){
        </div>
      </div>
 </div>
+<br /><br /><br /><br /><br /><br /><br /><br />
+<div class="row">
+	<c:url value="/resources/images/logo.PNG" var="logoIMG"/>
+	<img src= "${logoIMG }" width="20%" height="20%" class="pull-right"/>
+</div>
+
+

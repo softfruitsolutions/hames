@@ -2,55 +2,18 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
+<!-- URL's  -->
 <c:url value="/saleorder/" var="saleOrdersUrl" />
 <c:url value="/saleorder/save" var="saleOrderSaveUrl" />
+<c:url value="/customer/all" var="getCustomers" />
 
+<script src='<c:url value="/resources/hames/order/js/saleorder.js" />' type="text/javascript"></script>
 <script type="text/javascript">
-
-	$(function(){
-		$('#orderDate').mask("99/99/9999");
-		$('#deliveryDate').mask("99/99/9999");
-		$("#orderDate").on("dp.change", function (e) {
-            $('#deliveryDate').data("DateTimePicker").setMinDate(e.date);
-        });
-        $("#deliveryDate").on("dp.change", function (e) {
-            $('#orderDate').data("DateTimePicker").setMaxDate(e.date);
-        });
-	});
-	
-	function save(){
-		var saleOrder = $('#saleOrder').serialize();
-		$.ajax({
-			type:'POST',
-			url:'${saleOrderSaveUrl}',
-			data:saleOrder,
-	        async: false,
-			success:function(data){
-				SuccessAlert.handleSuccess(data);
-				setTimeout(function(){
-					window.location.href='${saleOrdersUrl}';
-			    },1000);
-				
-			},
-			error:function(data){
-				ErrorAlert.handleError(data.responseJSON.message);
-			}
-		});
-	}
-	
-	function calculateBalanceDue(){
-		var totalAmount = $('#payment\\.totalAmount').val();
-		var discountAmount = $('#payment\\.discountAmount').val() == null ? 0 : $('#payment\\.discountAmount').val();
-		var paymentAmount = $('#payment\\.paymentItems0\\.paymentAmount').val() == null ? 0 : $('#payment\\.paymentItems0\\.paymentAmount').val();
-		
-		var balanceDue = totalAmount - discountAmount - paymentAmount;
-		$('#balance').val(balanceDue);
-	}
-	
-	$(function(){
-		$("form#saleOrder #partyId").select2();
-	});
-	
+<!--
+//-->
+	var GET_CUSTOMERS = '${getCustomers}';
+	var VIEW_SALE_ORDER_LIST = '${saleOrdersUrl}';
+	var SAVE_SALE_ORDER = '${saleOrderSaveUrl}';
 </script>
 
 <div class="row">
@@ -71,13 +34,6 @@
 		  	<div class="btn-group">
 		  		<a href="${saleOrdersUrl}" class="btn btn-info btn-sm"><i class="fa fa-reply"></i></a>
 		  		<a href="#" onclick="save()" class="btn btn-primary btn-sm" data-toggle="modal"><i class="glyphicon glyphicon-floppy-save"></i> Save</a>
-		  	</div>
-		  	<div class="pull-right">
-		  		<a class="btn btn-warning">
-					<c:if test="${saleOrder.saleOrderStatus == 'DRAFT'}">
-						DRAFT
-					</c:if>
-				</a>
 		  	</div>
 		  </div>
 		  <form:form modelAttribute="saleOrder" method="POST" action="#">
@@ -110,9 +66,16 @@
 							<div class="form-group">
 								<label for="customerName" class="col-lg-3 control-label">Customer</label>
 		                        <div class="col-lg-9">
-		                        	<form:select path="partyId" cssClass="form-control input-sm">
-		                        		<form:options items="${customers }" itemLabel="fullName" itemValue="partyId"/>
-		                        	</form:select>
+									<div class="input-group">
+										<form:select path="partyId" cssClass="form-control input-sm">
+			                        		<form:options items="${customers }" itemLabel="fullName" itemValue="partyId"/>
+			                        	</form:select>
+									   <span class="input-group-btn">
+									        <button class="btn btn-primary light" type="button" style="height: 34px;" onclick="Customer.showModal()">
+									        	<i class="glyphicons glyphicons-user_add" style="top:-4px;"></i>
+									        </button>
+									   </span>
+									</div>
 		                        </div>
 							</div><!-- /form-group -->
 						</div>
@@ -303,4 +266,34 @@
 </div>
 
 
+<!-- 
+	CUSTOMER MODAL 
+ -->
+<div class="modal fade in" id="customerModal" aria-hidden="false">
+	<div class="modal-dialog">
+ 		<div class="modal-content">
+   			<!-- <div class="modal-header">
+				<h4>CUSTOMER</h4>
+ 			</div> -->
+	    	<div class="modal-body">
+	    		<div id="bodyContent">
+	    			<jsp:include page="/WEB-INF/views/hames/party/simpleCustomerForm.jsp" />
+	    		</div>
+			</div>
+			<div class="modal-footer">
+				<div class="row">
+					<div class="col-xs-6">
+					</div>
+					<div class="col-xs-6">
+						<div class="form-group text-right">
+							<button type="button" class="btn btn-success btn-sm" onclick="saveCustomer()"><i class="fa fa-save"></i> Save</button>
+			     			<button type="button" class="btn btn-danger btn-sm" class="close" data-dismiss="modal">x Close</button>
+						</div>		
+					</div>
+				</div>
+			</div>
+			
+	    </div>
+	 </div>
+</div>
 

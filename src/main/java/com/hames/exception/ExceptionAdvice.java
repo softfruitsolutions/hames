@@ -28,7 +28,7 @@ public class ExceptionAdvice {
 	@ExceptionHandler(ValidationException.class)
 	@ResponseStatus(value=HttpStatus.UNPROCESSABLE_ENTITY)
 	private JsonResponse handleValidationException(Exception e){
-		logger.debug("Validation exception are presents while processing entity");
+		logger.error("Validation exception are presents while processing entity",e);
 		JsonResponse response = new JsonResponse();
 		response.setStatus(Boolean.FALSE);
 		response.setMessage(new ErrorNode(ErrorCode.VALIDATION_ERROR,HttpStatus.UNPROCESSABLE_ENTITY.toString(),e.getMessage()));

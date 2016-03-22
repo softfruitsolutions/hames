@@ -9,13 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.Validator;
 
-import com.hames.bean.RolePermission;
 import com.hames.bean.Staff;
 import com.hames.dao.UserAccountDao;
 import com.hames.exception.RolePermissionException;
 import com.hames.exception.StaffException;
-import com.hames.exception.ValidationException;
-import com.hames.service.GenericService;
+import com.hames.service.GenericServiceImpl;
 import com.hames.service.RolePermissionService;
 import com.hames.service.StaffService;
 import com.hames.service.UserAccountService;
@@ -23,7 +21,7 @@ import com.hames.system.auth.UserAccount;
 import com.hames.validator.UserAccountValidator;
 
 @Service
-public class UserAccountServiceImpl extends GenericService implements UserAccountService {
+public class UserAccountServiceImpl extends GenericServiceImpl<UserAccount> implements UserAccountService {
 
 	private static final Logger logger = LoggerFactory.getLogger(UserAccountServiceImpl.class);
 
@@ -40,40 +38,28 @@ public class UserAccountServiceImpl extends GenericService implements UserAccoun
 	}
 
 	@Override
-	public Class<?> getEntityClass() {
-		return UserAccount.class;
-	}
-
-	@Override
-	public void save(UserAccount userAccount) {
+	public String save(UserAccount userAccount) {
+		//Validating user account
+		validate(userAccount);
 		
-		try{
-			validate(userAccount);
-		}catch(ValidationException e){
-			logger.debug("Validation errors are present while saving the user account. Opeartion aborted");
-			throw new ValidationException(e.getMessage());
-		}
-
-		boolean usernameExists = userAccountDao.isUsernameExists(userAccount.getUsername());
-		if(usernameExists){
+		if(userAccountDao.isUsernameExists(userAccount.getUsername())){
 			logger.debug("Username already present. Opeartion Aborted");
 			throw new RolePermissionException("Someone already has that username. Try another?");
 		}
 		
-		boolean staffExistsInUA = userAccountDao.checkUserAccountExistsForStaff(userAccount.getStaffId());
-		if(staffExistsInUA){
+		if(userAccountDao.checkUAExistsForStaff(userAccount.getStaffId())){
 			logger.debug("UserAccount already exists for staff. Opeartion Aborted");
 			throw new RolePermissionException("UserAccount already exists for staff");
 		}
 		
-		Staff staff = staffService.getStaffById(userAccount.getStaffId());
+		//TODO Check staff status. in-active staff can't apply role
+		Staff staff = staffService.getById(userAccount.getStaffId());
 		if(staff == null){
 			logger.debug("Staff not found. Aborting operation");
 			throw new StaffException("Invalid Staff");
 		}
 		
-		RolePermission rolePermission = rolePermissionService.getRoleById(userAccount.getRoleId());
-		if(rolePermission == null){
+		if(!rolePermissionService.isExists(userAccount.getRoleId())){
 			logger.debug("Role not found : {}",userAccount.getRolePermission().getRoleId());
 			throw new RolePermissionException("Role doesn't exists.!");
 		}
@@ -85,28 +71,18 @@ public class UserAccountServiceImpl extends GenericService implements UserAccoun
 		}
 		
 		//Setting details
-		userAccount.setAuditableDetails(userAccount.getAccountId());
+		userAccount.setAudit(userAccount.getAccountId());
 		
-		logger.debug("Saving entity : {}, class: {}",userAccount,UserAccount.class);
-		userAccountDao.save(userAccount);
-		logger.debug("Entity saved successfully");
+		return super.save(userAccount);
 	}
 
 	@Override
-	public List<UserAccount> getUserAccounts() {
-		return userAccountDao.getUserAccounts();
-	}
-
-	@Override
-	public List<UserAccount> getUserAccounts(Boolean allDataRequired) {
-		List<UserAccount> userAccounts = userAccountDao.getUserAccounts();
-		
-		if(allDataRequired){
-			if(userAccounts != null && !userAccounts.isEmpty()){
-				for (UserAccount ua : userAccounts) {
-					ua.setStaff(staffService.getStaffById(ua.getStaffId()));
-					ua.setRolePermission(rolePermissionService.getRoleById(ua.getRoleId()));
-				}
+	public List<UserAccount> getAll() {
+		List<UserAccount> userAccounts = userAccountDao.findAll();
+		if(userAccounts != null && !userAccounts.isEmpty()){
+			for (UserAccount ua : userAccounts) {
+				ua.setStaff(staffService.getById(ua.getStaffId()));
+				ua.setRolePermission(rolePermissionService.getById(ua.getRoleId()));
 			}
 		}
 		return userAccounts;

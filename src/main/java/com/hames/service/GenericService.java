@@ -1,71 +1,43 @@
 package com.hames.service;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.validation.MapBindingResult;
-import org.springframework.validation.ObjectError;
-import org.springframework.validation.Validator;
+import com.hames.util.model.DatatableRequest;
+import com.hames.util.model.DatatableResponse;
 
-import com.hames.exception.ValidationException;
-
-public abstract class GenericService{
-	
-	private static final Logger logger = LoggerFactory.getLogger(GenericService.class);
-
-	/**
-	 * Get Validator
-	 * @return
-	 */
-	public abstract Validator getValidator();
+public interface GenericService<T> {
 	
 	/**
-	 * Get Entity Class
+	 * Save an entity
 	 * @return
 	 */
-	public abstract Class<?> getEntityClass();
+	public String save(T t);
 	
+	/**
+	 * Get by id
+	 * @param id
+	 * @return
+	 */
+	public T getById(String id);
 	
-	public <T> void validate(T t){
-		logger.debug("Validating {} class",t.getClass());
-		Map<String, String> errorMap = new HashMap<String, String>();
-		MapBindingResult errors = new MapBindingResult(errorMap, getEntityClass().getName());
-		
-		if(getValidator() != null){
-			getValidator().validate(t, errors);
-			if(errors.hasErrors()){
-				StringBuilder errorMessage = new StringBuilder();
-				for(ObjectError oe : errors.getAllErrors()){
-					logger.debug("Error : {} ",oe.getDefaultMessage());
-					errorMessage.append(oe.getDefaultMessage()).append(",");
-				}
-				errorMessage.delete(errorMessage.length()-1, errorMessage.length());
-				
-				throw new ValidationException(errorMessage.toString());
-			}
-		}
-	}
+	/**
+	 * Get all
+	 * @return
+	 */
+	public List<T> getAll();
 	
-	public <T> void validate(T t,Validator validator,Class<T> clazz){
-		logger.debug("Validating {} class",t.getClass());
-		Map<String, String> errorMap = new HashMap<String, String>();
-		MapBindingResult errors = new MapBindingResult(errorMap, clazz.getName());
-		
-		if(getValidator() != null){
-			validator.validate(t, errors);
-			if(errors.hasErrors()){
-				StringBuilder errorMessage = new StringBuilder();
-				for(ObjectError oe : errors.getAllErrors()){
-					logger.debug("Error : {} ",oe.getDefaultMessage());
-					errorMessage.append(oe.getDefaultMessage()).append(",");
-				}
-				errorMessage.delete(errorMessage.length()-1, errorMessage.length());
-				
-				throw new ValidationException(errorMessage.toString());
-			}
-		}
-	}
+	/**
+	 * Is Exists
+	 * @param id
+	 * @return
+	 */
+	public Boolean isExists(String id);
 	
+	/**
+	 * Get datatable from datatable request
+	 * @param request
+	 * @return
+	 */
+	public DatatableResponse getDatatable(DatatableRequest request);
+ 		
 }

@@ -1,34 +1,21 @@
 package com.hames.dao;
 
-import java.util.List;
-
+import com.hames.mongo.GenericDao;
 import com.hames.system.auth.UserAccount;
 
-public interface UserAccountDao {
+public interface UserAccountDao extends GenericDao<UserAccount> {
 	
 	/**
-	 * Save User Account
-	 * @param userAccount
-	 */
-	void save(UserAccount userAccount);
-	
-	/**
-	 * Get User Accounts
+	 * Is username exists
 	 * @return
 	 */
-	List<UserAccount> getUserAccounts();
-	
-	/**
-	 * Is Username exists
-	 * @return
-	 */
-	boolean isUsernameExists(String username);
+	public boolean isUsernameExists(String username);
 	
 	/**
 	 * Check an User account exists for Staff
 	 * @param staffId
 	 * @return
 	 */
-	boolean checkUserAccountExistsForStaff(String staffId);
+	public boolean checkUAExistsForStaff(String staffId);
 
 }

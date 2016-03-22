@@ -1,12 +1,12 @@
 package com.hames.mongo;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.FindAndModifyOptions;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -14,62 +14,52 @@ import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class SequenceDao extends GenericDao {
+public class SequenceDao extends GenericDaoImpl<Sequence>{
 
-	@Autowired private HamesDataStore hamesDataStore;
-	
 	private static final String COLLECTION_NAME = "sequence";
-	
-	private static Map<String,Long> sequenceMap;
 
 	@Override
-	public Class<?> getEntityClass() {
-		return Sequence.class;
+	public String getCollectionName() {
+		return COLLECTION_NAME;
 	}
-	
-	private Map<String,Long> getSequenceMap(){
-		sequenceMap = new HashMap<String, Long>();
-		sequenceMap.put("sale_order", 100L);
-		return sequenceMap;
+
+	private List<Sequence> getSequences(){
+		List<Sequence> sequences = new ArrayList<Sequence>();
+		sequences.add(new Sequence("sale_order","A",100L));
+		sequences.add(new Sequence("product","P",100L));
+		return sequences;
 	}
 	
 	@PostConstruct
-	private void createCollectionAndSequence(){
-		if(!hamesDataStore.collectionExists(COLLECTION_NAME)){
-			hamesDataStore.createCollection(COLLECTION_NAME);
-			loadSequenceMap();
-		}else{
-			loadSequenceMap();
+	private void sequenceChecker(){
+		for (Sequence sequence : getSequences()) {
+			if(!isExists(sequence.getSequenceName())){
+				hamesDataStore.insert(sequence, COLLECTION_NAME);
+    		}
 		}
 	}
 
-	@SuppressWarnings("rawtypes")
-	private void loadSequenceMap(){
-	    Iterator it = getSequenceMap().entrySet().iterator();
-	    while(it.hasNext()){
-			Map.Entry entry = (Map.Entry)it.next();
-			if(!hamesDataStore.exists(entry.getKey().toString(), COLLECTION_NAME)){
-				Sequence sequence = new Sequence(entry.getKey().toString(), (Long) entry.getValue());
-				createSequence(sequence);
-			}
-	    }
-	}
-
-	private void createSequence(Sequence sequence){
-		hamesDataStore.insert(sequence, COLLECTION_NAME);
-	}
-	
+	/**
+	 * Finding next sequence id using key
+	 * @param key
+	 * @return
+	 */
 	public Long findNextSequenceId(String key){
 		
 		//Building query
 		Query query = new Query();
 		query.addCriteria(Criteria.where("_id").is(key));
 		
-		Sequence sequence = (Sequence) hamesDataStore.findOne(query, getEntityClass(), COLLECTION_NAME);
+		Sequence sequence = findByQuery(query);
 		
 		return sequence.getSequence();
 	}
 	
+	/**
+	 * Updating sequence details
+	 * @param key
+	 * @return
+	 */
 	public Long updateSequence(String key){
 		
 		//Building query
@@ -89,4 +79,3 @@ public class SequenceDao extends GenericDao {
 	}
 
 }
-

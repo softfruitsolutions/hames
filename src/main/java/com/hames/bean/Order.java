@@ -18,8 +18,10 @@ public class Order extends Audit{
 	
 	private Payment payment; 
 	
-	@Transient private Party party;
-	@Transient private String staffConcernedText;
+	@Transient
+	private Party party;
+	@Transient
+	private String staffConcernedText;
 	
 	public String getOrderId() {
 		return orderId;

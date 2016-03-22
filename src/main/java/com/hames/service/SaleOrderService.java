@@ -1,10 +1,11 @@
 package com.hames.service;
 
+import com.hames.bean.SaleOrder;
 import com.hames.enums.SaleOrderStatus;
 import com.hames.report.ReportRequest;
 import com.hames.report.ReportResponse;
 
-public interface SaleOrderService extends OrderService{
+public interface SaleOrderService extends OrderService<SaleOrder>{
 
 	/**
 	 * Update Order Status

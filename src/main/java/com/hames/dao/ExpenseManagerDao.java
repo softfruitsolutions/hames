@@ -1,36 +1,8 @@
 package com.hames.dao;
 
-import java.util.List;
-
 import com.hames.bean.ExpenseManager;
-import com.hames.util.model.DatatableRequest;
-import com.hames.util.model.DatatableResponse;
+import com.hames.mongo.GenericDao;
 
-public interface ExpenseManagerDao {
+public interface ExpenseManagerDao extends GenericDao<ExpenseManager> {
 
-	/**
-	 * Save Expense 
-	 * @param expense
-	 */
-	void save(ExpenseManager expenseManager);
-	
-	/**
-	 * Find Expense Id
-	 * @param id
-	 * @return
-	 */
-	ExpenseManager findExpenseById(String id);
-	
-	/**
-	 * Find all Expenses
-	 * @return
-	 */
-	List<ExpenseManager> findAllExpenses();
-	
-	/**
-	 * Build Datatable
-	 * @param request
-	 * @return
-	 */
-	DatatableResponse buildDatatable(DatatableRequest request);
 }
