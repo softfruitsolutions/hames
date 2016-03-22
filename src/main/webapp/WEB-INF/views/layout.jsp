@@ -101,7 +101,7 @@
           <i class="fa fa-circle"></i>
         </li>
         <li class="dropdown menu-merge">
-          <a href="#" class="dropdown-toggle fw600 p15" data-toggle="dropdown"> <img src="<c:url value="/resources/absolute/assets/img/avatars/1.jpg" />" alt="avatar" class="mw30 br64 mr15"> 
+          <a href="#" class="dropdown-toggle fw600 p15" data-toggle="dropdown"> <img src="<c:url value="/resources/images/main_logo.PNG" />" alt="avatar" class="mw30 br64 mr15"> 
           	<c:out value="${staffUtil.fullName }" />
             <span class="caret caret-tp hidden-xs"></span>
           </a>

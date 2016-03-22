@@ -12,7 +12,7 @@
 	   <shiro:hasPermission name="inventory:product:view">
 	   <li>
 	   	   <a class="accordion-toggle" href="#">
-	         <span class="imoon imoon-stack"></span>
+	         <span class="imoon imoon-paragraph-center2"></span>
 	         <span class="sidebar-title">Inventory</span>
 	         <span class="caret"></span>
 	       </a>
@@ -20,7 +20,7 @@
 	       	 <shiro:hasPermission name="inventory:product:view">
              <li>
            	   <a href="<c:url value="/inventory/product/view" />">
-                  <span class="imoon imoon-drawer2"></span>
+                  <span class="octicon octicon-package "></span>
 				  Product
                </a>
              </li>
