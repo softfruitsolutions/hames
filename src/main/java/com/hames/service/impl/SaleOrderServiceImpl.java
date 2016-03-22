@@ -14,7 +14,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.Validator;
 
-import com.hames.bean.Customer;
 import com.hames.bean.Payment;
 import com.hames.bean.PaymentItems;
 import com.hames.bean.SaleOrder;
@@ -33,6 +32,7 @@ import com.hames.mongo.Sequence;
 import com.hames.mongo.SequenceDao;
 import com.hames.order.model.SaleOrderReport;
 import com.hames.order.model.SaleOrderSearchCriteria;
+import com.hames.party.model.Customer;
 import com.hames.report.ReportRequest;
 import com.hames.report.ReportResponse;
 import com.hames.service.SaleOrderService;

@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.hames.bean.Customer;
 import com.hames.enums.PartyStatus;
 import com.hames.enums.PartyType;
+import com.hames.party.model.Customer;
 import com.hames.service.CustomerService;
 import com.hames.system.auth.Permission;
 import com.hames.util.enums.SuccessCode;

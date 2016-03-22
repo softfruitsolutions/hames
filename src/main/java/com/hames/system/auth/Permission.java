@@ -12,10 +12,12 @@ public enum Permission {
 	VIEW_SALE_ORDER_REPORT("View Sale Order Report","order:saleorder:report:view"),
 	
 	/**
-	 * CUSTOMER
+	 * PARTY
 	 */
 	VIEW_CUSTOMER("View Customer", "party:customer:view"),
 	CREATE_CUSTOMER("Create Customer", "party:customer:create"),
+	VIEW_SUPPLIER("View Supplier","party:supplier:type:view"),
+	CREATE_SUPPLIER("Create Supplier","party:supplier:type:create"),
 	
 	/**
 	 * STAFF

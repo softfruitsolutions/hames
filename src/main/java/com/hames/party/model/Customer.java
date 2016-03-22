@@ -1,4 +1,4 @@
-package com.hames.bean;
+package com.hames.party.model;
 
 public class Customer extends Party {
 

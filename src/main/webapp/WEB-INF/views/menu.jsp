@@ -98,6 +98,21 @@
                </a>
              </li>
              </shiro:hasPermission>
+             <li>
+           	   <a class="accordion-toggle" href="#">
+                  <span class="imoon imoon-user3"></span>
+                  Supplier
+                  <span class="caret"></span>
+               </a>
+               	
+               <ul class="nav sub-nav">
+                  <shiro:hasPermission name="party:supplier:type:view">
+	                  <li>
+	                    <a href="<c:url value="/party/supplier/type/create" />"> Supplier Type </a>
+	                  </li>
+	              </shiro:hasPermission>
+               </ul>
+	         </li>
            </ul>
        </li>
        </shiro:hasPermission>
