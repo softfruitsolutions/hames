@@ -18,6 +18,8 @@ import com.hames.party.model.SupplierType;
 import com.hames.party.service.SupplierTypeService;
 import com.hames.system.auth.Permission;
 import com.hames.util.enums.SuccessCode;
+import com.hames.util.model.DatatableRequest;
+import com.hames.util.model.DatatableResponse;
 import com.hames.util.model.JsonResponse;
 import com.hames.util.model.SuccessNode;
 import com.hames.view.GenericView;
@@ -79,5 +81,10 @@ public class SupplierTypeController extends GenericView{
 		
 		JsonResponse response = new JsonResponse(Boolean.TRUE,new SuccessNode(SuccessCode.ENTITY_SAVED, "Supplier type saved successfully"));
 		return response;
+	}
+	
+	@RequestMapping(value="/datatable",method=RequestMethod.GET)
+	public @ResponseBody DatatableResponse getDataTable(@ModelAttribute DatatableRequest request){
+		return supplierTypeService.getDatatable(request);
 	}
 }

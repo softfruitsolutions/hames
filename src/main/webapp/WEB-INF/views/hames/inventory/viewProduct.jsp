@@ -7,7 +7,7 @@
 <c:url value="/inventory/product/datatable" var="productDatatableUrl" />
 
 <c:set var="hasCreatePermission" value="false" />
-<shiro:hasPermission name="party:customer:create">
+<shiro:hasPermission name="inventory:product:create">
 	<c:set var="hasCreatePermission" value="true" />
 </shiro:hasPermission>
 

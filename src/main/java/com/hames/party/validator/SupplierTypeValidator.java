@@ -16,7 +16,7 @@ public class SupplierTypeValidator implements Validator{
 
 	@Override
 	public void validate(Object target, Errors errors) {
-		SupplierType type = new SupplierType();
+		SupplierType type = (SupplierType) target;
 		
 		if(type.getTypeName() == null || type.getTypeName().isEmpty()){
 			errors.rejectValue("typeName", "", "Type name required");
