@@ -106,6 +106,11 @@
                </a>
                	
                <ul class="nav sub-nav">
+               	  <shiro:hasPermission name="party:supplier:view">
+	                  <li>
+	                    <a href="<c:url value="/party/supplier/view" />"> Supplier</a>
+	                  </li>
+	              </shiro:hasPermission>
                   <shiro:hasPermission name="party:supplier:type:view">
 	                  <li>
 	                    <a href="<c:url value="/party/supplier/type/create" />"> Supplier Type </a>

@@ -36,7 +36,7 @@ public class SupplierTypeController extends GenericView{
 	@RequestMapping(value="/view",method=RequestMethod.GET)
 	public String view(Model model){
 		
-		if(!SecurityUtils.getSubject().isPermitted(Permission.VIEW_SUPPLIER.getPermission())){
+		if(!SecurityUtils.getSubject().isPermitted(Permission.VIEW_SUPPLIER_TYPE.getPermission())){
 			return "error.403";
 		}
 		
@@ -51,7 +51,7 @@ public class SupplierTypeController extends GenericView{
 	@RequestMapping(value="/create",method=RequestMethod.GET)
 	public String create(Model model, String id){
 		
-		if(!SecurityUtils.getSubject().isPermitted(Permission.CREATE_SUPPLIER.getPermission())){
+		if(!SecurityUtils.getSubject().isPermitted(Permission.CREATE_SUPPLIER_TYPE.getPermission())){
 			return "error.403";
 		}
 		

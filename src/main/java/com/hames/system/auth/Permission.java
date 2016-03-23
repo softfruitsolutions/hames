@@ -16,8 +16,10 @@ public enum Permission {
 	 */
 	VIEW_CUSTOMER("View Customer", "party:customer:view"),
 	CREATE_CUSTOMER("Create Customer", "party:customer:create"),
-	VIEW_SUPPLIER("View Supplier","party:supplier:type:view"),
-	CREATE_SUPPLIER("Create Supplier","party:supplier:type:create"),
+	VIEW_SUPPLIER("View Supplier","party:supplier:view"),
+	CREATE_SUPPLIER("Create Supplier","party:supplier:create"),
+	VIEW_SUPPLIER_TYPE("View Supplier","party:supplier:type:view"),
+	CREATE_SUPPLIER_TYPE("Create Supplier","party:supplier:type:create"),
 	
 	/**
 	 * STAFF
