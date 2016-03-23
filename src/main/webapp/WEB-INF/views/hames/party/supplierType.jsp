@@ -133,7 +133,7 @@
 					</div>
 				</div>
 				<div id="tab2" class="tab-pane">
-					<%-- <jsp:include page="/WEB-INF/views/hames/audit.jsp" /> --%>
+					<jsp:include page="/WEB-INF/views/hames/system/audit2.jsp" />
 				</div>
 			</div>
 		  </div>

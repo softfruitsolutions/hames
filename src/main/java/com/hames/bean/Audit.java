@@ -74,4 +74,11 @@ public class Audit {
 		return this;
 	}
 	
+	@Override
+	public String toString() {
+		return "Audit [staffService=" + staffService + ", staffCreated=" + staffCreated + ", staffModified="
+				+ staffModified + ", dateCreated=" + dateCreated + ", dateModified=" + dateModified + ", createdByText="
+				+ createdByText + ", lastModifiedByText=" + lastModifiedByText + "]";
+	}
+	
 }

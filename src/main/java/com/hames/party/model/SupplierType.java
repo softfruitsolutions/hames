@@ -41,8 +41,11 @@ public class SupplierType {
 	public Audit getAudit() {
 		return audit;
 	}
+	public void setAudit(Audit audit) {
+		this.audit = audit;
+	}
 	public void setAudit() {
-		this.audit = new Audit().setAudit(this.typeId);
+		this.audit = getAudit().setAudit(this.typeId);
 	}
 	
 	@Override
