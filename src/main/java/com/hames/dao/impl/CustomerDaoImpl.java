@@ -6,9 +6,9 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
-import com.hames.bean.Customer;
 import com.hames.dao.CustomerDao;
 import com.hames.mongo.GenericDaoImpl;
+import com.hames.party.model.Customer;
 
 @Repository
 public class CustomerDaoImpl extends GenericDaoImpl<Customer> implements CustomerDao{

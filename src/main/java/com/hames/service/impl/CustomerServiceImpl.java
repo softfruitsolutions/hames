@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.Validator;
 
-import com.hames.bean.Customer;
 import com.hames.dao.CustomerDao;
+import com.hames.party.model.Customer;
 import com.hames.service.CustomerService;
 import com.hames.service.GenericServiceImpl;
 import com.hames.validator.CustomerValidator;

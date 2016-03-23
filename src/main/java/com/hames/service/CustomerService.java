@@ -2,7 +2,7 @@ package com.hames.service;
 
 import java.util.List;
 
-import com.hames.bean.Customer;
+import com.hames.party.model.Customer;
 
 public interface CustomerService extends GenericService<Customer>{
 

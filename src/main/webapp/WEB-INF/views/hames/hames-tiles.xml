@@ -72,12 +72,18 @@
     </definition>
     
     <definition name="inventory.product.create" extends="base.definition">  
-        <put-attribute name="title" value="Product | Hames - Softfruit" />  
+        <put-attribute name="title" value="Create Product | Hames - Softfruit" />  
         <put-attribute name="body" value="/WEB-INF/views/hames/inventory/createProduct.jsp" />  
     </definition>
     <definition name="inventory.product.view" extends="base.definition">  
         <put-attribute name="title" value="Products | Hames - Softfruit" />  
         <put-attribute name="body" value="/WEB-INF/views/hames/inventory/viewProduct.jsp" />  
+    </definition>
+    
+    <!-- PARTY -->
+    <definition name="party.supplier.type" extends="base.definition">  
+        <put-attribute name="title" value="Supplier Type | Hames - Softfruit" />  
+        <put-attribute name="body" value="/WEB-INF/views/hames/party/supplierType.jsp" />  
     </definition>
     
 </tiles-definitions>  

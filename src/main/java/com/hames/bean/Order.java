@@ -5,6 +5,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 
 import com.hames.enums.OrderType;
+import com.hames.party.model.Party;
 
 public class Order extends Audit{
 

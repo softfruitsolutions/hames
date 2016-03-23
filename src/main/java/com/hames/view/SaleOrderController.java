@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import com.hames.bean.Customer;
 import com.hames.bean.Payment;
 import com.hames.bean.PaymentItems;
 import com.hames.bean.SaleOrder;
@@ -28,6 +27,7 @@ import com.hames.enums.SaleOrderStatus;
 import com.hames.exception.OrderException;
 import com.hames.exception.PaymentException;
 import com.hames.order.model.SaleOrderSearchCriteria;
+import com.hames.party.model.Customer;
 import com.hames.service.CustomerService;
 import com.hames.service.SaleOrderService;
 import com.hames.service.StaffService;

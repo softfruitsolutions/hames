@@ -1,7 +1,8 @@
-package com.hames.bean;
+package com.hames.party.model;
 
 import org.springframework.data.annotation.Id;
 
+import com.hames.bean.Audit;
 import com.hames.enums.PartyStatus;
 import com.hames.enums.PartyType;
 

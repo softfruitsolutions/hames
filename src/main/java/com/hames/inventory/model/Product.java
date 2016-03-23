@@ -65,8 +65,11 @@ public class Product{
 	public Audit getAudit() {
 		return audit;
 	}
+	public void setAudit(Audit audit) {
+		this.audit = audit;
+	}
 	public void setAudit() {
-		this.audit = new Audit().setAudit(this.productId);
+		this.audit = getAudit().setAudit(this.productId);
 	}
 	public ProductStatus getProductStatus() {
 		return productStatus;
