@@ -15,17 +15,21 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hames.enums.PartyStatus;
 import com.hames.enums.PartyType;
+import com.hames.party.model.PartySearchCriteria;
 import com.hames.party.model.Supplier;
 import com.hames.party.service.SupplierService;
 import com.hames.party.service.SupplierTypeService;
 import com.hames.system.auth.Permission;
 import com.hames.util.enums.SuccessCode;
+import com.hames.util.model.DatatableRequest;
+import com.hames.util.model.DatatableResponse;
 import com.hames.util.model.JsonResponse;
 import com.hames.util.model.SuccessNode;
+import com.hames.view.GenericView;
 
 @Controller
 @RequestMapping(value="/party/supplier")
-public class SupplierController {
+public class SupplierController extends GenericView {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(SupplierController.class);
 
@@ -51,6 +55,7 @@ public class SupplierController {
 	
 	@RequestMapping(value="/create",method=RequestMethod.GET)
 	public String create(Model model, String id){
+		
 		if(!SecurityUtils.getSubject().isPermitted(Permission.CREATE_SUPPLIER.getPermission())){
 			return "error.403";
 		}
@@ -83,5 +88,15 @@ public class SupplierController {
 		
 		JsonResponse response = new JsonResponse(Boolean.TRUE,new SuccessNode(SuccessCode.ENTITY_SAVED, "Supplier saved successfully"));
 		return response;
+	}
+	
+	@RequestMapping(value="/datatable",method=RequestMethod.GET)
+	public @ResponseBody DatatableResponse getDataTable(@ModelAttribute DatatableRequest request){
+		
+		PartySearchCriteria criteria = new PartySearchCriteria();
+		criteria.setPartyType(PartyType.SUPPLIER);
+		request.setCriteria(criteria);
+		
+		return supplierService.getDatatable(request);
 	}
 }

@@ -4,13 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.joda.time.DateTime;
-import org.springframework.data.mongodb.core.mapreduce.GroupBy;
 import org.springframework.data.mongodb.core.query.Criteria;
 
 import com.hames.bean.SaleOrder;
 import com.hames.report.ReportPeriod;
 import com.hames.util.model.QueryCriteria;
-import com.mongodb.GroupCommand;
 
 /**
  * Sale Order Search Criteria

@@ -3,7 +3,7 @@ package com.hames.party.model;
 public class Supplier extends Party {
 
 	public String name;				//Specify Supplier Name
-	public SupplierType type;
+	public String type;
 	public String address;
 	public String contactNo;
 	public String emailId;
@@ -16,10 +16,10 @@ public class Supplier extends Party {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public SupplierType getType() {
+	public String getType() {
 		return type;
 	}
-	public void setType(SupplierType type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 	public String getAddress() {

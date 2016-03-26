@@ -2,8 +2,8 @@ package com.hames.enums;
 
 public enum PartyStatus {
 	
-	ACTIVE_CUSTOMER("Active Party"),
-	INACTIVE_CUSTOMER("Inactive Party");
+	ACTIVE_PARTY("Active Party"),
+	INACTIVE_PARTY("Inactive Party");
 	
 	private String text;
 	

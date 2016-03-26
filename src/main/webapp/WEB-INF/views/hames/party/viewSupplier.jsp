@@ -28,6 +28,9 @@
 			},
 			"aoColumns" : [
 			               {mDataProp : 'name'},
+			               {mDataProp : 'contactNo'},
+			               {mDataProp : 'status'},
+			               {mDataProp : 'address'},
 			               {
 			            	   "mData" : 'partyId' ,
 			            	   "bSortable" : false,
@@ -63,11 +66,10 @@
 			<table id="supplierDatatable" class="table table-striped table-hover table-condensed dataTable">
 				<thead>
 					<tr>
-						<th>Product Code</th>
-						<th>Product Name</th>
-						<th>Product Type</th>
-						<th>Product Group</th>
-						<th>UOM</th>
+						<th>Supplier Name</th>
+						<th>Contact No </th>
+						<th>Status</th>
+						<th>Address</th>
 						<th>Action</th>
 		            </tr>
 				</thead>

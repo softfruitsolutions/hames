@@ -4,11 +4,13 @@
 
 <!-- URL's -->
 <c:url value="/party/supplier/view" var="supplierViewUrl" />
+<c:url value="/party/supplier/create" var="supplierCreateUrl" />
 <c:url value="/party/supplier/save" var="supplierSaveUrl" />
 
 <script type="text/javascript">
 	function save(){
 		var supplier = $('#supplier').serialize();
+		console.log(supplier);
 		$.ajax({
 			type:'POST',
 			url:'${supplierSaveUrl}',
@@ -43,8 +45,9 @@
 		  </div>
 		  <div class="panel-menu">
 		  	<div class="btn-group">
-				<a class="btn btn-info btn-sm" href="${supplierTypeUrl}" title="Refresh"><i class="fa fa-refresh"></i></a>
-				<shiro:hasPermission name="party:supplier:type:create">
+		  		<a href="${supplierViewUrl}" class="btn btn-info btn-sm"><i class="fa fa-reply"></i></a>
+				<a class="btn btn-info btn-sm" href="${supplierCreateUrl}" title="Refresh"><i class="fa fa-refresh"></i></a>
+				<shiro:hasPermission name="party:supplier:create">
 				<a class="btn btn-primary btn-sm" onclick="save()">
 					<i class="fa fa-save"></i>
 					<c:if test="${supplier.partyId == null }" >
@@ -87,13 +90,13 @@
 										<form:options items="${supplierStatus}" itemLabel="text"/>
 									</form:select>
 								</div>								 	
-							</div>
+							</div> 
 							<div class="form-group">
 								<form:label path="address" cssClass="col-xs-3 control-label">Supplier Address</form:label>
 								<div class="col-xs-9">
 									<form:textarea path="address" cssClass="form-control input-sm" placeholder="Supplier Address"/>
 								</div>								 	
-							</div>
+							</div> 
 						</div>
 						
 						<div class="col-xs-6">
