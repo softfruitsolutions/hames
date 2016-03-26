@@ -41,6 +41,16 @@
         <put-attribute name="body" value="/WEB-INF/views/hames/party/customerList.jsp" />  
     </definition>  
  	
+ 	<!-- ORDER -->
+ 	<definition name="order.purchase.view" extends="base.definition">  
+        <put-attribute name="title" value="Purchase Order | Hames - Softfruit" />  
+        <put-attribute name="body" value="/WEB-INF/views/hames/order/purchase/viewPurchaseOrder.jsp" />  
+    </definition>
+    <definition name="order.purchase.create" extends="base.definition">  
+        <put-attribute name="title" value="Create Purchase Order | Hames - Softfruit" />  
+        <put-attribute name="body" value="/WEB-INF/views/hames/order/purchase/createPurchaseOrder.jsp" />  
+    </definition>
+    
  	<definition name="sale.order.list" extends="base.definition">  
         <put-attribute name="title" value="Sale Order | Hames - Softfruit" />  
         <put-attribute name="body" value="/WEB-INF/views/hames/order/saleOrderList.jsp" />  

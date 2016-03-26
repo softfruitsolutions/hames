@@ -10,6 +10,8 @@ public enum Permission {
 	CREATE_SALE_ORDER("Create Sale Order","order:saleorder:create"),
 	VIEW_SALE_ORDER_PAYMENT("View Sale Order Payment","order:saleorder:payment:view"),
 	VIEW_SALE_ORDER_REPORT("View Sale Order Report","order:saleorder:report:view"),
+	VIEW_PURCHASE_ORDER("View Purchase Order","order:purchase:view"),
+	CREATE_PURCHASE_ORDER("Create Purchase Order","order:purchase:create"),
 	
 	/**
 	 * PARTY
