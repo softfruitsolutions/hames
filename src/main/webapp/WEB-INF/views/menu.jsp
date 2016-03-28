@@ -36,20 +36,43 @@
 	         <span class="caret"></span>
 	       </a>
 	       <ul class="nav sub-nav">
-	       	 <shiro:hasPermission name="order:saleorder:view">
+	       	 <shiro:hasPermission name="order:purchase:view">
              <li>
-           	   <a href="<c:url value="/saleorder/" />">
-                  <span class="imoon imoon-drawer2"></span>
-				  Sale
+               <a class="accordion-toggle" href="#">
+                  <span class="glyphicons glyphicons-shopping_cart"></span>
+                  Purchase
+                  <span class="caret"></span>
                </a>
+               <ul class="nav sub-nav">
+               	  <shiro:hasPermission name="order:purchase:view">
+	                  <li>
+	                    <a href="<c:url value="/order/purchase/view" />"> Purchase Order</a>
+	                  </li>
+	              </shiro:hasPermission>
+               </ul>
              </li>
              </shiro:hasPermission>
-             <shiro:hasPermission name="order:saleorder:report:view">
+	       	 <shiro:hasPermission name="order:saleorder:view">
              <li>
-           	   <a href="<c:url value="/report/saleorder" />">
-                  <span class="glyphicons glyphicons-notes"></span>
-				  Sale Report
+               <a class="accordion-toggle" href="#">
+                  <span class="glyphicons glyphicons-shopping_bag"></span>
+                  Sale
+                  <span class="caret"></span>
                </a>
+               <ul class="nav sub-nav">
+               	  <shiro:hasPermission name="order:saleorder:view">
+	                  <li>
+	                    <a href="<c:url value="/saleorder/" />"> Sale Order</a>
+	                  </li>
+	              </shiro:hasPermission>
+	              <shiro:hasPermission name="order:saleorder:report:view">
+		             <li>
+		           	   <a href="<c:url value="/report/saleorder" />">
+						  Sale Report
+		               </a>
+		             </li>
+	             </shiro:hasPermission>
+               </ul>
              </li>
              </shiro:hasPermission>
            </ul>

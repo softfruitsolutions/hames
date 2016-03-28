@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.hames.enums.PartyStatus;
 import com.hames.enums.PartyType;
 import com.hames.party.model.Customer;
+import com.hames.party.model.PartySearchCriteria;
 import com.hames.service.CustomerService;
 import com.hames.system.auth.Permission;
 import com.hames.util.enums.SuccessCode;
@@ -92,6 +93,10 @@ public class CustomerController extends GenericView {
 	
 	@RequestMapping("/datatable")
 	public @ResponseBody DatatableResponse viewDatatable(@ModelAttribute DatatableRequest datatableRequest){
+		PartySearchCriteria criteria = new PartySearchCriteria();
+		criteria.setPartyType(PartyType.CUSTOMER);
+		datatableRequest.setCriteria(criteria);
+		
 		return customerService.getDatatable(datatableRequest);
 	}
 

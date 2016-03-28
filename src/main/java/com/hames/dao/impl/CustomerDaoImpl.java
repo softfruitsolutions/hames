@@ -7,6 +7,8 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
 import com.hames.dao.CustomerDao;
+import com.hames.enums.PartyStatus;
+import com.hames.enums.PartyType;
 import com.hames.mongo.GenericDaoImpl;
 import com.hames.party.model.Customer;
 
@@ -23,14 +25,14 @@ public class CustomerDaoImpl extends GenericDaoImpl<Customer> implements Custome
 	@Override
 	public Long findCustomerCount() {
 		Query query = new Query();
-		query.addCriteria(Criteria.where("partyType").is("CUSTOMER").and("status").is("ACTIVE_CUSTOMER"));
+		query.addCriteria(Criteria.where("partyType").is("CUSTOMER").and("status").is("ACTIVE_PARTY"));
 		return hamesDataStore.getCollection(COLLECTION_NAME).count(query.getQueryObject());
 	}
 
 	@Override
 	public List<Customer> findActiveCustomers() {
 		Query query = new Query();
-		query.addCriteria(Criteria.where("partyType").is("CUSTOMER").and("status").is("ACTIVE_CUSTOMER"));
+		query.addCriteria(Criteria.where("partyType").is(PartyType.CUSTOMER).and("status").is(PartyStatus.ACTIVE_PARTY));
 		return (List<Customer>) hamesDataStore.find(query, Customer.class, COLLECTION_NAME);
 	}
 	

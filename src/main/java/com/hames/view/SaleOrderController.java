@@ -107,7 +107,7 @@ public class SaleOrderController extends GenericView{
 			return "sale.order.service";
 		}
 		
-		model.addAttribute("customers", customerService.getAll());
+		model.addAttribute("customers", customerService.getActiveCustomers());
 		model.addAttribute("staffs", staffService.getAllActiveStaffs());
 		return "sale.order";
 	}

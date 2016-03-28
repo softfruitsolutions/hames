@@ -7,6 +7,9 @@
 <c:url value="/saleorder/view" var="saleOrderViewUrl" />
 <c:url value="/saleorder/datatable" var="saleOrderDatatableUrl" />
 
+<script type="text/javascript">
+	var SALEORDER_DATATABLE_URL = '${saleOrderDatatableUrl}';
+</script>
 <script src='<c:url value="/resources/hames/order/js/saleorderlist.js" />' type="text/javascript"></script>
 
 <div class="row">

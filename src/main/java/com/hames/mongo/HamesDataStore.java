@@ -53,7 +53,7 @@ public class HamesDataStore extends MongoTemplate{
 		
 		logger.debug("Fetching total no of records in collection : {}",request.getMongoCollectionName());
 		Long totalRecords = getCollection(request.getMongoCollectionName()).count();
-		datatableResponse.setiTotalRecords(totalRecords);
+		//datatableResponse.setiTotalRecords(totalRecords);
 		
 
 		logger.debug("Building Query");
@@ -61,7 +61,6 @@ public class HamesDataStore extends MongoTemplate{
 		
 		if(request.getCriteria() != null && request.getCriteria().queryCriteria() != null){
 			query.addCriteria(request.getCriteria().queryCriteria());
-			System.out.println(query.toString());
 		}
 		
 		query.limit(request.getiDisplayLength());

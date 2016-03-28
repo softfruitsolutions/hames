@@ -14,7 +14,7 @@ function loadDatatable(){
 		"bProcessing" : true,
 		"bServerSide" : true,
 		"bPaginate": true,
-        "sAjaxSource": 'datatable',
+        "sAjaxSource": SALEORDER_DATATABLE_URL,
         "fnServerParams": function ( aoData ) {
             aoData.push({ "name": "sortField", "value": "jobNo"});
             aoData.push({ "name": "sortDirection", "value": "desc"});
@@ -64,5 +64,5 @@ function loadDatatable(){
 
 function reloadDatatable(){
 	saleOrderCriteria = $('#saleOrderSearchCriteria').serialize();
-	saleOrderDatatable.fnReloadAjax('datatable?'+saleOrderCriteria);
+	saleOrderDatatable.fnReloadAjax(SALEORDER_DATATABLE_URL+'?'+saleOrderCriteria);
 }	
