@@ -14,5 +14,14 @@ public class PriceListServiceImpl extends GenericServiceImpl<PriceList> implemen
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+	public String save(PriceList t) {
+		//Setting audit
+		t.setAudit();
+		
+		System.out.println(t.toString());
+		return "";//super.save(t);
+	}
 
 }

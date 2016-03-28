@@ -55,7 +55,13 @@ public enum Permission {
 	 */
 	VIEW_PRODUCT("View Product","inventory:product:view"),
 	CREATE_PRODUCT("Create Product","inventory:product:create"),
-	CREATE_PRODUCT_CATEGORY("Create Product Group","inventory:group:create");
+	CREATE_PRODUCT_CATEGORY("Create Product Group","inventory:group:create"),
+	
+	/**
+	 * INVENTORY - PRICELIST
+	 */
+	VIEW_PRICELIST("View Price List","inventory:pricelist:view"),
+	CREATE_PRICELIST("Create Price List","inventory:pricelist:create");
 	
 	
 	private String text;

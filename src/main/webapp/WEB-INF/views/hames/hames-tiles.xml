@@ -81,6 +81,7 @@
         <put-attribute name="body" value="/WEB-INF/views/hames/expense/expenseCategory.jsp" />  
     </definition>
     
+    <!-- INVENTORY  -->
     <definition name="inventory.product.create" extends="base.definition">  
         <put-attribute name="title" value="Create Product | Hames - Softfruit" />  
         <put-attribute name="body" value="/WEB-INF/views/hames/inventory/createProduct.jsp" />  
@@ -88,6 +89,14 @@
     <definition name="inventory.product.view" extends="base.definition">  
         <put-attribute name="title" value="Products | Hames - Softfruit" />  
         <put-attribute name="body" value="/WEB-INF/views/hames/inventory/viewProduct.jsp" />  
+    </definition>
+    <definition name="inventory.pricelist.view" extends="base.definition">  
+        <put-attribute name="title" value="PriceList | Hames - Softfruit" />  
+        <put-attribute name="body" value="/WEB-INF/views/hames/inventory/viewPriceList.jsp" />  
+    </definition>
+    <definition name="inventory.pricelist.create" extends="base.definition">  
+        <put-attribute name="title" value="Create Price List | Hames - Softfruit" />  
+        <put-attribute name="body" value="/WEB-INF/views/hames/inventory/createPriceList.jsp" />  
     </definition>
     
     <!-- PARTY -->

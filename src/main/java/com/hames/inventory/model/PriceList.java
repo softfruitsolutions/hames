@@ -4,6 +4,9 @@ import java.util.List;
 
 import org.springframework.data.annotation.Id;
 
+import com.hames.bean.Audit;
+import com.hames.inventory.enums.PriceListStatus;
+
 public class PriceList {
 
 	@Id
@@ -12,6 +15,8 @@ public class PriceList {
 	private String priceListDescription;
 	private Boolean isDefault;
 	private List<PriceListLines> priceListLines;
+	private PriceListStatus status;
+	private Audit audit;
 	
 	public String getPriceListId() {
 		return priceListId;
@@ -43,10 +48,27 @@ public class PriceList {
 	public void setPriceListLines(List<PriceListLines> priceListLines) {
 		this.priceListLines = priceListLines;
 	}
+	public PriceListStatus getStatus() {
+		return status;
+	}
+	public void setStatus(PriceListStatus status) {
+		this.status = status;
+	}
+	public Audit getAudit() {
+		return audit;
+	}
+	public void setAudit() {
+		this.audit = getAudit().setAudit(this.priceListId);
+	}
+	
+	public void setAudit(Audit audit) {
+		this.audit = audit;
+	}
 	@Override
 	public String toString() {
 		return "PriceList [priceListId=" + priceListId + ", priceListName=" + priceListName + ", priceListDescription="
-				+ priceListDescription + ", isDefault=" + isDefault + "]";
+				+ priceListDescription + ", isDefault=" + isDefault + ", priceListLines=" + priceListLines + ", status="
+				+ status + "]";
 	}
 	
 }

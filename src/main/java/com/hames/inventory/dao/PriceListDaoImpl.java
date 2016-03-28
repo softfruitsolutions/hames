@@ -8,10 +8,10 @@ import com.hames.mongo.GenericDaoImpl;
 @Repository
 public class PriceListDaoImpl extends GenericDaoImpl<PriceList> implements PriceListDao {
 
+	private final static String COLLECTION_NAME = "pricelist";
 	@Override
 	public String getCollectionName() {
-		// TODO Auto-generated method stub
-		return null;
+		return COLLECTION_NAME;
 	}
 
 }

@@ -17,6 +17,7 @@
 	         <span class="caret"></span>
 	       </a>
 	       <ul class="nav sub-nav">
+	       
 	       	 <shiro:hasPermission name="inventory:product:view">
              <li>
            	   <a href="<c:url value="/inventory/product/view" />">
@@ -25,6 +26,22 @@
                </a>
              </li>
              </shiro:hasPermission>
+           
+             <li>
+               <a class="accordion-toggle" href="#">
+                  <span class="glyphicons glyphicons-settings"></span>
+                  Settings
+                  <span class="caret"></span>
+               </a>
+               <ul class="nav sub-nav">
+               	  <shiro:hasPermission name="inventory:pricelist:view">
+	                  <li>
+	                    <a href="<c:url value="/inventory/pricelist/view" />"> Price List</a>
+	                  </li>
+	              </shiro:hasPermission>
+               </ul>
+             </li>
+             
            </ul>
        </li>
        </shiro:hasPermission>
